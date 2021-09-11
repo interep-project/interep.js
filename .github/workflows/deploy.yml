@@ -23,7 +23,7 @@ jobs:
             - name: Github Pages
               uses: crazy-max/ghaction-github-pages@v2.5.0
               with:
-                  build_dir: /gh-pages
+                  build_dir: gh-pages
                   jekyll: false
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
