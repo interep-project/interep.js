@@ -1,0 +1,29 @@
+name: deploy
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    gh-pages:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Use Node.js 14.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 14.x
+
+            - run: yarn --frozen-lockfile && yarn gh-pages
+
+            - name: Github Pages
+              uses: crazy-max/ghaction-github-pages@v2.5.0
+              with:
+                  build_dir: /gh-pages
+                  jekyll: false
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

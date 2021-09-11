@@ -1,0 +1,44 @@
+{
+    "name": "@interrep/semethid",
+    "version": "0.7.0",
+    "description": "A simple JS library to create Semaphore identity by deriving the EdDSA keys from an Ethereum account.",
+    "main": "dist/semethid.node.js",
+    "exports": {
+        "import": "./dist/semethid.mjs",
+        "require": "./dist/semethid.node.js"
+    },
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/",
+        "src/",
+        "LICENSE",
+        "README.md"
+    ],
+    "repository": "git@github.com:InterRep/interrep.js.git",
+    "homepage": "https://github.com/InterRep/interrep.js",
+    "author": {
+        "name": "Omar Desogus",
+        "email": "me@cedoor.dev",
+        "url": "https://cedoor.dev"
+    },
+    "license": "MIT",
+    "scripts": {
+        "build:watch": "rollup -c rollup.config.ts -w",
+        "build": "rimraf dist && rollup -c rollup.config.ts",
+        "gh-pages": "cd demo && yarn && yarn build",
+        "prepublishOnly": "yarn build"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "circomlib": "^0.5.3",
+        "js-sha256": "^0.9.0"
+    },
+    "devDependencies": {
+        "rimraf": "^3.0.2",
+        "rollup": "^2.56.2",
+        "rollup-plugin-typescript2": "^0.30.0",
+        "snarkjs": "^0.4.7"
+    }
+}

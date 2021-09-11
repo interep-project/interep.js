@@ -1,0 +1,55 @@
+{
+    "name": "@interrep/monorepo-js",
+    "description": "A monorepo of InterRep JavaScript libraries.",
+    "license": "MIT",
+    "repository": "git@github.com:InterRep/interrep.js.git",
+    "homepage": "https://github.com/InterRep/interrep.js",
+    "private": true,
+    "scripts": {
+        "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+        "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx",
+        "test": "jest --coverage",
+        "test:watch": "jest --coverage --watch",
+        "install": "yarn bootstrap && yarn build",
+        "bootstrap": "lerna bootstrap --no-ci",
+        "build": "lerna run build",
+        "build:watch": "lerna run --parallel build:watch -- -- --watch",
+        "gh-pages": "lerna run gh-pages",
+        "publish:fp": "lerna publish from-package",
+        "commit": "cz",
+        "precommit": "lint-staged"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^13.1.0",
+        "@commitlint/config-conventional": "^13.1.0",
+        "@types/jest": "^27.0.1",
+        "@types/node": "^16.6.1",
+        "@typescript-eslint/eslint-plugin": "^4.29.3",
+        "@typescript-eslint/parser": "^4.29.3",
+        "commitizen": "^4.2.4",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^7.2.0",
+        "eslint-config-airbnb": "18.2.1",
+        "eslint-config-airbnb-typescript": "^14.0.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jest": "^24.4.0",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-react": "^7.21.5",
+        "eslint-plugin-react-hooks": "^1.7.0",
+        "jest": "^27.1.1",
+        "jest-config": "^27.1.0",
+        "lerna": "^4.0.0",
+        "lint-staged": "^11.1.2",
+        "prettier": "^2.3.2",
+        "ts-jest": "^27.0.5",
+        "ts-node": "^10.2.0",
+        "tslib": "^2.3.1",
+        "typescript": "^4.4.3"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    }
+}
