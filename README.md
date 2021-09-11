@@ -25,6 +25,7 @@
   <th>Package</th>
   <th>Version</th>
   <th>Downloads</th>
+  <th>Demo</th>
   <tbody>
     <tr>
       <td>
@@ -40,6 +41,12 @@
         <!-- Downloads -->
         <a href="https://npmjs.org/package/@interrep/semethid">
           <img src="https://img.shields.io/npm/dm/@interrep/semethid.svg?style=flat-square" alt="Downloads" />
+        </a>
+      </td>
+      <td>
+        <!-- Downloads -->
+        <a href="https://js.interrep.link/semethid/">
+            js.interrep.link/semethid
         </a>
       </td>
     </tr>
