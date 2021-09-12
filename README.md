@@ -24,16 +24,32 @@
     <a href="https://prettier.io/">
         <img alt="Code style prettier" src="https://img.shields.io/badge/code%20style-prettier-f8bc45?style=flat-square&logo=prettier">
     </a>
-    <img alt="Repository top language" src="https://img.shields.io/github/languages/top/InterRep/interrep.js?style=flat-square&logo=typescript">
+    <a href="https://lerna.js.org/">
+        <img alt="Lerna" src="https://img.shields.io/badge/maintained%20with-lerna-8f6899.svg?style=flat-square">
+    </a>
 </p>
 
+<div align="center">
+    <h4>
+        <a href="https://github.com/InterRep/interrep.js/blob/main/CONTRIBUTING.md">
+            👥 Contributing
+        </a>
+        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        <a href="https://github.com/InterRep/interrep.js/blob/main/code_of_conduct.md">
+            🤝 Code of conduct
+        </a>
+    </h4>
+</div>
+
+___
+
+## 📦 Packages
 
 <table>
   <th>Package</th>
   <th>Version</th>
   <th>Downloads</th>
   <th>Size</th>
-  <th>Docs</th>
   <th>Demo</th>
   <tbody>
     <tr>
@@ -61,9 +77,6 @@
         </a>
       </td>
       <td>
-        <!-- Docs -->
-      </td>
-      <td>
         <!-- Demo -->
         <a href="https://js.interrep.link/semethid/">
             js.interrep.link/semethid
@@ -73,4 +86,23 @@
   <tbody>
 </table>
 
+## 🛠 Install
 
+Clone this repository and install the dependencies:
+
+```bash
+$ git clone https://github.com/InterRep/interrep.js.git
+$ cd interrep.js && yarn
+```
+
+## 📜 Usage
+
+```bash
+$ yarn lint # Lint all packages.
+$ yarn test # Test all packages (with common coverage).
+$ yarn build # Create a JS build for each package.
+$ yarn gh-pages # Create a new gh-page build for each package (where a demo exists).
+$ yarn lerna publish from-package # Publish packages on npm.
+```
+
+You can see the other npm scripts in the `package.json` file.
