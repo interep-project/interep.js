@@ -10,6 +10,7 @@
         "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx",
         "test": "jest --coverage",
         "test:watch": "jest --coverage --watch",
+        "test:prod": "yarn lint && yarn test",
         "install": "yarn bootstrap && yarn build",
         "bootstrap": "lerna bootstrap --no-ci",
         "build": "lerna run build",

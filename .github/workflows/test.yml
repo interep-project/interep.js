@@ -1,15 +1,17 @@
-name: deploy
+name: test
 
 on:
     push:
         branches:
             - main
+            - dev
     pull_request:
         branches:
             - main
+            - dev
 
 jobs:
-    gh-pages:
+    test:
         runs-on: ubuntu-latest
 
         steps:
@@ -20,12 +22,10 @@ jobs:
               with:
                   node-version: 14.x
 
-            - run: yarn --frozen-lockfile && yarn gh-pages
+            - run: yarn --frozen-lockfile
+            - run: yarn test:prod
 
-            - name: Github Pages
-              uses: crazy-max/ghaction-github-pages@v2.5.0
+            - name: Coveralls
+              uses: coverallsapp/github-action@master
               with:
-                  build_dir: gh-pages
-                  jekyll: false
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
