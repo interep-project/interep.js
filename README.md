@@ -37,23 +37,25 @@
   <tbody>
     <tr>
       <td>
-      @interrep/semethid
+        <a href="https://github.com/InterRep/interrep.js/tree/main/packages/semethid" target="_blank">
+          @interrep/semethid
+        </a>
       </td>
       <td>
         <!-- NPM version -->
-        <a href="https://npmjs.org/package/@interrep/semethid">
+        <a href="https://npmjs.org/package/@interrep/semethid" target="_blank">
           <img src="https://img.shields.io/npm/v/@interrep/semethid.svg?style=flat-square" alt="NPM version" />
         </a>
       </td>
       <td>
         <!-- Downloads -->
-        <a href="https://npmjs.org/package/@interrep/semethid">
+        <a href="https://npmjs.org/package/@interrep/semethid" target="_blank">
           <img src="https://img.shields.io/npm/dm/@interrep/semethid.svg?style=flat-square" alt="Downloads" />
         </a>
       </td>
       <td>
         <!-- Demo -->
-        <a href="https://js.interrep.link/semethid/">
+        <a href="https://js.interrep.link/semethid/" target="_blank">
             js.interrep.link/semethid
         </a>
       </td>
