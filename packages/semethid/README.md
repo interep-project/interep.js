@@ -35,11 +35,11 @@
             🕹 Demo
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://github.com/InterRep/interrep.js/blob/main/CONTRIBUTING.md">
+        <a href="https://docs.interrep.link/contributing">
             👥 Contributing
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://github.com/InterRep/interrep.js/blob/main/code_of_conduct.md">
+        <a href="https://docs.interrep.link/code-of-conduct">
             🤝 Code of conduct
         </a>
     </h4>
