@@ -9,10 +9,11 @@ export default function getAllReputations(provider: Provider): string[] {
         throw new Error(`Provider '${provider}' is not supported`)
     }
 
-    return [
-        ...twitterCriteria.reputations.map(
-            (reputation) => `${provider.toUpperCase()}_${reputation.name.toUpperCase()}`
-        ),
-        `${provider.toUpperCase()}_NOT_SUFFICIENT`
-    ]
+    const reputations = twitterCriteria.reputations.map(
+        (reputation) => `${provider.toUpperCase()}_${reputation.name.toUpperCase()}`
+    )
+
+    reputations.push(`${provider.toUpperCase()}_NOT_SUFFICIENT`)
+
+    return reputations
 }
