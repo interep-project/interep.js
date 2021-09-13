@@ -1,11 +1,11 @@
 import twitterCriteria from "./criteria/twitter"
-import { ParameterValue, Provider, Reputation } from "./types/criteria"
+import { Provider, Reputation } from "./types/criteria"
 import { TwitterParameters } from "./types/platformParameters"
 
 /**
  *
  */
-export default function getReputation(provider: Provider, paramaters: TwitterParameters): Reputation | null {
+export default function getReputation(provider: Provider, paramaters: TwitterParameters): Reputation {
     if (provider !== "twitter") {
         throw new Error(`Provider '${provider}' is not supported`)
     }
@@ -32,21 +32,23 @@ export default function getReputation(provider: Provider, paramaters: TwitterPar
 
     for (const reputation of twitterCriteria.reputations) {
         for (const rule of reputation.rules) {
-            const parameterValue = paramaters[rule.parameter as keyof TwitterParameters] as ParameterValue
+            const parameterValue = paramaters[rule.parameter as keyof TwitterParameters]
 
-            if (typeof rule.value !== "object") {
-                if (parameterValue === rule.value) {
+            if (parameterValue !== undefined) {
+                if (typeof rule.value !== "object") {
+                    if (parameterValue === rule.value) {
+                        return reputation.name
+                    }
+                } else if (
+                    (rule.value.max !== undefined || rule.value.min !== undefined) &&
+                    (rule.value.max === undefined || parameterValue <= rule.value.max) &&
+                    (rule.value.min === undefined || parameterValue >= rule.value.min)
+                ) {
                     return reputation.name
                 }
-            } else if (
-                (rule.value.max !== undefined || rule.value.min !== undefined) &&
-                (rule.value.max === undefined || parameterValue <= rule.value.max) &&
-                (rule.value.min === undefined || parameterValue >= rule.value.min)
-            ) {
-                return reputation.name
             }
         }
     }
 
-    return null
+    return "not-sufficient"
 }

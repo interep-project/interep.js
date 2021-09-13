@@ -4,10 +4,8 @@ export default {
     provider: "twitter",
     parameters: [
         { name: "followers", type: "number" },
-        { name: "tweets", type: "number" },
         { name: "botometerOverallScore", type: "number" },
-        { name: "verifiedProfile", type: "boolean" },
-        { name: "defaultProfilePicture", type: "boolean" }
+        { name: "verifiedProfile", type: "boolean" }
     ],
     reputations: [
         {
@@ -43,7 +41,7 @@ export default {
                 {
                     parameter: "botometerOverallScore",
                     value: {
-                        max: 2
+                        max: 1.5
                     }
                 }
             ]
@@ -52,18 +50,16 @@ export default {
             name: "bronze",
             rules: [
                 {
-                    parameter: "defaultProfilePicture",
-                    value: false
-                },
-                {
                     parameter: "followers",
                     value: {
-                        max: 2
+                        min: 500
                     }
                 },
                 {
-                    parameter: "tweets",
-                    value: 0
+                    parameter: "botometerOverallScore",
+                    value: {
+                        max: 2
+                    }
                 }
             ]
         }
