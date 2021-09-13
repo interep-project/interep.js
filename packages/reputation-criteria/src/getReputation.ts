@@ -5,7 +5,7 @@ import { TwitterParameters } from "./types/platformParameters"
 /**
  *
  */
-export default function getReputation(provider: Provider, paramaters: TwitterParameters): string {
+export default function getReputation(provider: Provider, paramaters: TwitterParameters): Reputation {
     if (provider !== "twitter") {
         throw new Error(`Provider '${provider}' is not supported`)
     }
