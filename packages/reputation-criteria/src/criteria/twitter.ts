@@ -9,7 +9,7 @@ export default {
     ],
     reputations: [
         {
-            name: "gold",
+            name: "GOLD",
             rules: [
                 {
                     parameter: "verifiedProfile",
@@ -30,7 +30,7 @@ export default {
             ]
         },
         {
-            name: "silver",
+            name: "SILVER",
             rules: [
                 {
                     parameter: "followers",
@@ -47,7 +47,7 @@ export default {
             ]
         },
         {
-            name: "bronze",
+            name: "BRONZE",
             rules: [
                 {
                     parameter: "followers",

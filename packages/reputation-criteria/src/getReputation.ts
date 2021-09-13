@@ -1,5 +1,5 @@
 import twitterCriteria from "./criteria/twitter"
-import { Provider } from "./types/criteria"
+import { Provider, Reputation } from "./types/criteria"
 import { TwitterParameters } from "./types/platformParameters"
 
 /**
@@ -37,18 +37,18 @@ export default function getReputation(provider: Provider, paramaters: TwitterPar
             if (parameterValue !== undefined) {
                 if (typeof rule.value !== "object") {
                     if (parameterValue === rule.value) {
-                        return `${provider.toUpperCase()}_${reputation.name.toUpperCase()}`
+                        return reputation.name
                     }
                 } else if (
                     (rule.value.max !== undefined || rule.value.min !== undefined) &&
                     (rule.value.max === undefined || parameterValue <= rule.value.max) &&
                     (rule.value.min === undefined || parameterValue >= rule.value.min)
                 ) {
-                    return `${provider.toUpperCase()}_${reputation.name.toUpperCase()}`
+                    return reputation.name
                 }
             }
         }
     }
 
-    return `${provider.toUpperCase()}_NOT_SUFFICIENT`
+    return Reputation.NOT_SUFFICIENT
 }

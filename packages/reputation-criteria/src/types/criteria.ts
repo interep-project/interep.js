@@ -6,7 +6,13 @@ export type ParameterValue = number | boolean | { max?: number; min?: number }
 
 export type Parameters = { name: ParameterName; type: ParameterType }[]
 
-export type Reputation = "gold" | "silver" | "bronze" | "not-sufficient"
+export enum Reputation {
+    GOLD = "GOLD",
+    SILVER = "SILVER",
+    BRONZE = "BRONZE",
+    NOT_SUFFICIENT = "NOT_SUFFICIENT"
+}
+
 export type Rule = { parameter: ParameterName; value: ParameterValue }
 
 export type Reputations = {
