@@ -84,5 +84,4 @@ import getReputation from "@interrep/reputation-criteria"
 const reputation = getReputation("twitter", { tweets: 0 })
 
 console.log(reputation) // "bronze"
-*/
 ```
