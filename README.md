@@ -46,44 +46,71 @@ ___
 ## 📦 Packages
 
 <table>
-  <th>Package</th>
-  <th>Version</th>
-  <th>Downloads</th>
-  <th>Size</th>
-  <th>Demo</th>
-  <tbody>
-    <tr>
-      <td>
-        <a href="https://github.com/InterRep/interrep.js/tree/main/packages/semethid">
-          @interrep/semethid
-        </a>
-      </td>
-      <td>
-        <!-- NPM version -->
-        <a href="https://npmjs.org/package/@interrep/semethid">
-          <img src="https://img.shields.io/npm/v/@interrep/semethid.svg?style=flat-square" alt="NPM version" />
-        </a>
-      </td>
-      <td>
-        <!-- Downloads -->
-        <a href="https://npmjs.org/package/@interrep/semethid">
-          <img src="https://img.shields.io/npm/dm/@interrep/semethid.svg?style=flat-square" alt="Downloads" />
-        </a>
-      </td>
-      <td>
-        <!-- Size -->
-        <a href="https://bundlephobia.com/package/@interrep/semethid">
-          <img src="https://img.shields.io/bundlephobia/minzip/@interrep/semethid" alt="npm bundle size (scoped)" />
-        </a>
-      </td>
-      <td>
-        <!-- Demo -->
-        <a href="https://js.interrep.link/semethid/">
-            js.interrep.link/semethid
-        </a>
-      </td>
-    </tr>
-  <tbody>
+    <th>Package</th>
+    <th>Version</th>
+    <th>Downloads</th>
+    <th>Size</th>
+    <th>Demo</th>
+    <tbody>
+        <tr>
+            <td>
+                <a href="https://github.com/InterRep/interrep.js/tree/main/packages/semethid">
+                    @interrep/semethid
+                </a>
+            </td>
+            <td>
+                <!-- NPM version -->
+                <a href="https://npmjs.org/package/@interrep/semethid">
+                    <img src="https://img.shields.io/npm/v/@interrep/semethid.svg?style=flat-square" alt="NPM version" />
+                </a>
+            </td>
+            <td>
+                <!-- Downloads -->
+                <a href="https://npmjs.org/package/@interrep/semethid">
+                    <img src="https://img.shields.io/npm/dm/@interrep/semethid.svg?style=flat-square" alt="Downloads" />
+                </a>
+            </td>
+            <td>
+                <!-- Size -->
+                <a href="https://bundlephobia.com/package/@interrep/semethid">
+                    <img src="https://img.shields.io/bundlephobia/minzip/@interrep/semethid" alt="npm bundle size (scoped)" />
+                </a>
+            </td>
+            <td>
+                <!-- Demo -->
+                <a href="https://js.interrep.link/semethid/">
+                    js.interrep.link/semethid
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://github.com/InterRep/interrep.js/tree/main/packages/reputation-criteria">
+                    @interrep/reputation-criteria
+                </a>
+            </td>
+            <td>
+                <!-- NPM version -->
+                <a href="https://npmjs.org/package/@interrep/reputation-criteria">
+                    <img src="https://img.shields.io/npm/v/@interrep/reputation-criteria.svg?style=flat-square" alt="NPM version" />
+                </a>
+            </td>
+            <td>
+                <!-- Downloads -->
+                <a href="https://npmjs.org/package/@interrep/reputation-criteria">
+                    <img src="https://img.shields.io/npm/dm/@interrep/reputation-criteria.svg?style=flat-square" alt="Downloads" />
+                </a>
+            </td>
+            <td>
+                <!-- Size -->
+                <a href="https://bundlephobia.com/package/@interrep/reputation-criteria">
+                    <img src="https://img.shields.io/bundlephobia/minzip/@interrep/reputation-criteria" alt="npm bundle size (scoped)" />
+                </a>
+            </td>
+            <td>
+            </td>
+        </tr>
+    <tbody>
 </table>
 
 ## 🛠 Install
