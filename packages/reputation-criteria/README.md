@@ -39,6 +39,10 @@
         <a href="https://docs.interrep.link/code-of-conduct">
             🤝 Code of conduct
         </a>
+        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        <a href="https://t.me/interrep">
+            🗣️ Chat &amp; Support
+        </a>
     </h4>
 </div>
 
