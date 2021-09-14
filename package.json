@@ -16,7 +16,7 @@
         "build": "lerna run build",
         "build:watch": "lerna run --parallel build:watch -- -- --watch",
         "gh-pages": "lerna run --scope @interrep/semethid gh-pages",
-        "publish:fp": "lerna publish from-package",
+        "publish:fp": "yarn test:prod && lerna publish from-package",
         "commit": "cz",
         "precommit": "lint-staged"
     },
