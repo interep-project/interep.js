@@ -3,10 +3,7 @@ name: deploy
 on:
     push:
         branches:
-            - main
-    pull_request:
-        branches:
-            - main
+            - deploy
 
 jobs:
     gh-pages:
