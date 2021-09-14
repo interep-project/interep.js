@@ -2,7 +2,7 @@ import { sha256 as _sha256 } from "js-sha256"
 import { eddsa } from "circomlib"
 
 /**
- * Return an hexadecimal sha256 hash of the message passed as parameter.
+ * Returns an hexadecimal sha256 hash of the message passed as parameter.
  * @param message Message to hash.
  * @returns The hexadecimal hash of the message.
  */
@@ -14,12 +14,17 @@ function sha256(message: string): string {
     return hash.hex()
 }
 
+/**
+ * Converts a hexadecimal string to a big number.
+ * @param hex The hexadecimal string.
+ * @returns The big number.
+ */
 function hexToBigInt(hex: string) {
     return BigInt(`0x${hex}`)
 }
 
 /**
- * Create a Semaphore identity by deriving the EdDSA keys from a signed message.
+ * Creates a Semaphore identity by deriving the EdDSA keys from a signed message.
  * @param sign The function to sign the message.
  * @param groupId The group id of the message.
  * @param nonce The nonce of the message.
