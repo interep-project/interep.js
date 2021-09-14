@@ -76,12 +76,32 @@ or [JSDelivr](https://www.jsdelivr.com/):
 
 ## 📜 Usage
 
-\# **getReputation**(provider: _Provider_, parameters: _TwitterParameters_): _Reputation_ | null
+\# **calculateReputation**(provider: _Provider_, parameters: _TwitterParameters_): _ReputationLevel_
 
 ```typescript
-import getReputation from "@interrep/reputation-criteria"
+import { calculateReputation, Provider } from "@interrep/reputation-criteria"
 
-const reputation = getReputation("twitter", { tweets: 0 })
+const reputation = calculateReputation(Provider.TWITTER, { followers: 7000 })
 
-console.log(reputation) // "bronze"
+console.log(reputation) // "GOLD"
+```
+
+\# **getReputationLevels**(provider?: _Provider_): _ReputationLevel[]_
+
+```typescript
+import { getReputationLevels, Provider } from "@interrep/reputation-criteria"
+
+const reputationLevels = getReputationLevels(Provider.TWITTER)
+
+console.log(reputationLevels) // ["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"]
+```
+
+\# **getProviders**(): _Provider[]_
+
+```typescript
+import { getProviders } from "@interrep/reputation-criteria"
+
+const providers = getProviders()
+
+console.log(providers) // ["twitter"]
 ```

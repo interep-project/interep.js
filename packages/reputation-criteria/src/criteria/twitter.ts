@@ -7,7 +7,7 @@ export default {
         { name: "botometerOverallScore", type: "number" },
         { name: "verifiedProfile", type: "boolean" }
     ],
-    reputations: [
+    reputationLevels: [
         {
             name: "GOLD",
             rules: [

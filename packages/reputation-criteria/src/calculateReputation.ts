@@ -1,12 +1,16 @@
 import twitterCriteria from "./criteria/twitter"
-import { Provider, Reputation } from "./types/criteria"
+import { Provider, ReputationLevel } from "./types/criteria"
 import { TwitterParameters } from "./types/platformParameters"
+import getProviders from "./getProviders"
 
 /**
- *
+ * Returns the reputation based on the paramaters.
+ * @param provider The provider.
+ * @param paramaters The provider parameters to check.
+ * @returns The reputation level found.
  */
-export default function getReputation(provider: Provider, paramaters: TwitterParameters): Reputation {
-    if (provider !== "twitter") {
+export default function calculateReputation(provider: Provider, paramaters: TwitterParameters): ReputationLevel {
+    if (!getProviders().includes(provider)) {
         throw new Error(`Provider '${provider}' is not supported`)
     }
 
@@ -30,7 +34,7 @@ export default function getReputation(provider: Provider, paramaters: TwitterPar
         }
     }
 
-    for (const reputation of twitterCriteria.reputations) {
+    for (const reputation of twitterCriteria.reputationLevels) {
         for (const rule of reputation.rules) {
             const parameterValue = paramaters[rule.parameter as keyof TwitterParameters]
 
@@ -50,5 +54,5 @@ export default function getReputation(provider: Provider, paramaters: TwitterPar
         }
     }
 
-    return Reputation.NOT_SUFFICIENT
+    return ReputationLevel.NOT_SUFFICIENT
 }
