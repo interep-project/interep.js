@@ -1,32 +1,35 @@
 import twitterCriteria from "./criteria/twitter"
-import { Provider, ReputationLevel } from "./types/criteria"
-import { TwitterParameters } from "./types/platformParameters"
-import getProviders from "./getProviders"
+import githubCriteria from "./criteria/github"
+import { Platform, ReputationLevel } from "./types/criteria"
+import { PlatformParameters } from "./types/platformParameters"
+import getPlatforms from "./getPlatforms"
 
 /**
  * Returns the reputation based on the paramaters.
- * @param provider The provider.
- * @param paramaters The provider parameters to check.
+ * @param platform The platform.
+ * @param paramaters The platform parameters to check.
  * @returns The reputation level found.
  */
-export default function calculateReputation(provider: Provider, paramaters: TwitterParameters): ReputationLevel {
-    if (!getProviders().includes(provider)) {
-        throw new Error(`Provider '${provider}' is not supported`)
+export default function calculateReputation(platform: Platform, paramaters: PlatformParameters): ReputationLevel {
+    if (!getPlatforms().includes(platform)) {
+        throw new Error(`Platform '${platform}' is not supported`)
     }
 
-    const twitterParameterNames = twitterCriteria.parameters.map((parameter: any) => parameter.name)
-    const twitterParameterTypes = twitterCriteria.parameters.map((parameter: any) => parameter.type)
+    const criteria = platform === "twitter" ? twitterCriteria : githubCriteria
+
+    const platformParameterNames = criteria.parameters.map((parameter: any) => parameter.name)
+    const platformParameterTypes = criteria.parameters.map((parameter: any) => parameter.type)
 
     for (const parameterName in paramaters) {
         if (Object.prototype.hasOwnProperty.call(paramaters, parameterName)) {
-            const parameterIndex = twitterParameterNames.indexOf(parameterName)
+            const parameterIndex = platformParameterNames.indexOf(parameterName)
 
             if (parameterIndex === -1) {
                 throw new Error(`Parameter '${parameterName}' is not supported`)
             }
 
-            const paramaterValue = paramaters[parameterName as keyof TwitterParameters]
-            const expectedType = twitterParameterTypes[parameterIndex]
+            const paramaterValue = paramaters[parameterName as keyof PlatformParameters]
+            const expectedType = platformParameterTypes[parameterIndex]
 
             if (typeof paramaterValue !== expectedType) {
                 throw new TypeError(`Parameter '${parameterName}' is not a ${expectedType}`)
@@ -34,9 +37,9 @@ export default function calculateReputation(provider: Provider, paramaters: Twit
         }
     }
 
-    for (const reputation of twitterCriteria.reputationLevels) {
+    for (const reputation of criteria.reputationLevels) {
         for (const rule of reputation.rules) {
-            const parameterValue = paramaters[rule.parameter as keyof TwitterParameters]
+            const parameterValue = paramaters[rule.parameter as keyof PlatformParameters]
 
             if (parameterValue !== undefined) {
                 if (typeof rule.value !== "object") {

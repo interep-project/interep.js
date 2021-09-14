@@ -1,10 +1,10 @@
 import { Criteria } from "../types/criteria"
 
 export default {
-    platform: "twitter",
+    platform: "github",
     parameters: [
         { name: "followers", type: "number" },
-        { name: "botometerOverallScore", type: "number" },
+        { name: "receivedStars", type: "number" },
         { name: "verifiedProfile", type: "boolean" }
     ],
     reputationLevels: [
@@ -12,19 +12,15 @@ export default {
             name: "GOLD",
             rules: [
                 {
-                    parameter: "verifiedProfile",
-                    value: true
-                },
-                {
                     parameter: "followers",
                     value: {
-                        min: 7000
+                        min: 500
                     }
                 },
                 {
-                    parameter: "botometerOverallScore",
+                    parameter: "receivedStars",
                     value: {
-                        max: 1
+                        min: 200
                     }
                 }
             ]
@@ -35,13 +31,13 @@ export default {
                 {
                     parameter: "followers",
                     value: {
-                        min: 2000
+                        min: 100
                     }
                 },
                 {
-                    parameter: "botometerOverallScore",
+                    parameter: "receivedStars",
                     value: {
-                        max: 1.5
+                        min: 80
                     }
                 }
             ]
@@ -50,15 +46,19 @@ export default {
             name: "BRONZE",
             rules: [
                 {
+                    parameter: "verifiedProfile",
+                    value: true
+                },
+                {
                     parameter: "followers",
                     value: {
-                        min: 500
+                        min: 50
                     }
                 },
                 {
-                    parameter: "botometerOverallScore",
+                    parameter: "receivedStars",
                     value: {
-                        max: 2
+                        min: 40
                     }
                 }
             ]

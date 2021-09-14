@@ -1,5 +1,6 @@
-export enum Provider {
-    TWITTER = "twitter"
+export enum Platform {
+    TWITTER = "twitter",
+    GITHUB = "github"
 }
 
 export type ParameterName = string
@@ -23,7 +24,7 @@ export type ReputationLevels = {
 }[]
 
 export type Criteria = {
-    provider: Provider
+    platform: Platform
     parameters: Parameters
     reputationLevels: ReputationLevels
 }

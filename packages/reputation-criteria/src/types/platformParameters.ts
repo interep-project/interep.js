@@ -3,3 +3,11 @@ export type TwitterParameters = {
     botometerOverallScore?: number
     verifiedProfile?: boolean
 }
+
+export type GithubParameters = {
+    followers?: number
+    receivedStars?: number
+    verifiedProfile?: boolean
+}
+
+export type PlatformParameters = TwitterParameters | GithubParameters

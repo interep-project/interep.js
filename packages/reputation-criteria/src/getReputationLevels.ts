@@ -1,20 +1,20 @@
 import twitterCriteria from "./criteria/twitter"
-import { Provider, ReputationLevel } from "./types/criteria"
-import getProviders from "./getProviders"
+import { Platform, ReputationLevel } from "./types/criteria"
+import getPlatforms from "./getPlatforms"
 
 /**
- * Returns all possible reputation levels of a provider or
+ * Returns all possible reputation levels of a platform or
  * all existing reputation levels.
- * @param provider The provider.
+ * @param platform The platform.
  * @returns A list of reputation levels.
  */
-export default function getReputationLevels(provider?: Provider): ReputationLevel[] {
-    if (provider === undefined) {
+export default function getReputationLevels(platform?: Platform): ReputationLevel[] {
+    if (platform === undefined) {
         return Object.values(ReputationLevel)
     }
 
-    if (!getProviders().includes(provider)) {
-        throw new Error(`Provider '${provider}' is not supported`)
+    if (!getPlatforms().includes(platform)) {
+        throw new Error(`Platform '${platform}' is not supported`)
     }
 
     const reputationLevels = twitterCriteria.reputationLevels.map((reputation) => reputation.name)
