@@ -86,5 +86,4 @@ function sign(message: string): Promise<string> {
 }
 
 const identity: Identity = await semethid(sign, "groupId")
-*/
 ```
