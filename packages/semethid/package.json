@@ -1,6 +1,6 @@
 {
     "name": "@interrep/semethid",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "description": "A simple JS library to create Semaphore identity by deriving the EdDSA keys from an Ethereum account.",
     "main": "dist/semethid.node.js",
     "exports": {
