@@ -26,17 +26,17 @@ function hexToBigInt(hex: string) {
 /**
  * Creates a Semaphore identity by deriving the EdDSA keys from a signed message.
  * @param sign The function to sign the message.
- * @param groupId The group id of the message.
+ * @param web2Provider The InterRep Web2 provider of the message (e.g. twitter).
  * @param nonce The nonce of the message.
  * @returns A Semaphore identity.
  */
 export default async function semethid(
     sign: (message: string) => Promise<string>,
-    groupId: string,
+    web2Provider: string,
     nonce = 0
 ): Promise<any> {
     const message = await sign(
-        `Sign this message to generate a Semaphore identity for the group ${groupId} with key nonce: ${nonce}.`
+        `Sign this message to generate your ${web2Provider} Semaphore identity with key nonce: ${nonce}.`
     )
     const messageHash = sha256(message)
     const privKey = Buffer.from(messageHash, "hex")
