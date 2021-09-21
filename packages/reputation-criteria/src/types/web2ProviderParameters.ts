@@ -10,4 +10,4 @@ export type GithubParameters = {
     verifiedProfile?: boolean
 }
 
-export type PlatformParameters = TwitterParameters | GithubParameters
+export type Web2ProviderParameters = TwitterParameters | GithubParameters
