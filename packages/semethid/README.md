@@ -69,7 +69,7 @@ yarn add @interrep/semethid
 
 ## 📜 Usage
 
-\# **semethid**(sign: _(message: string) => Promise\<string\>_, groupId: _string_, nonce?: _number_): _Identity_
+\# **semethid**(sign: _(message: string) => Promise\<string\>_, web2Provider: _string_, nonce?: _number_): _Identity_
 
 ```typescript
 import semethid from "@interrep/semethid"
@@ -85,5 +85,5 @@ function sign(message: string): Promise<string> {
     return signer.signMessage(message)
 }
 
-const identity: Identity = await semethid(sign, "groupId")
+const identity: Identity = await semethid(sign, "twitter")
 ```
