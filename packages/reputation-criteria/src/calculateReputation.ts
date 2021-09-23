@@ -1,6 +1,7 @@
 import twitterCriteria from "./criteria/twitter"
 import githubCriteria from "./criteria/github"
-import { Web2Provider, ReputationLevel } from "./types/criteria"
+import redditCriteria from "./criteria/reddit"
+import { Web2Provider, ReputationLevel, Criteria } from "./types/criteria"
 import { Web2ProviderParameters } from "./types/web2ProviderParameters"
 import getWeb2Providers from "./getWeb2Providers"
 
@@ -18,7 +19,15 @@ export default function calculateReputation(
         throw new Error(`Web2 provider '${web2Provider}' is not supported`)
     }
 
-    const criteria = web2Provider === "twitter" ? twitterCriteria : githubCriteria
+    let criteria: Criteria
+
+    if (web2Provider === Web2Provider.TWITTER) {
+        criteria = twitterCriteria
+    } else if (web2Provider === Web2Provider.GITHUB) {
+        criteria = githubCriteria
+    } else {
+        criteria = redditCriteria
+    }
 
     const providerParameterNames = criteria.parameters.map((parameter: any) => parameter.name)
     const providerParameterTypes = criteria.parameters.map((parameter: any) => parameter.type)

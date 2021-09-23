@@ -10,4 +10,11 @@ export type GithubParameters = {
     proPlan?: boolean
 }
 
-export type Web2ProviderParameters = TwitterParameters | GithubParameters
+export type RedditParameters = {
+    premiumSubscription?: boolean
+    karma?: number
+    coins?: number
+    linkedIdentities?: number
+}
+
+export type Web2ProviderParameters = TwitterParameters | GithubParameters | RedditParameters

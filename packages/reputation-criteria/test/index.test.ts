@@ -5,7 +5,7 @@ describe("InterRep reputation criteria", () => {
         it("Should return all the existing supported Web2 providers", () => {
             const expectedValue = getWeb2Providers()
 
-            expect(expectedValue).toStrictEqual(["twitter", "github"])
+            expect(expectedValue).toStrictEqual(["twitter", "github", "reddit"])
         })
     })
 
@@ -60,6 +60,12 @@ describe("InterRep reputation criteria", () => {
             expect(expectedValue).toBe("GOLD")
         })
 
+        it("Should return a 'GOLD' Reddit reputation", () => {
+            const expectedValue = calculateReputation(Web2Provider.REDDIT, { premiumSubscription: true })
+
+            expect(expectedValue).toBe("GOLD")
+        })
+
         it("Should return a 'SILVER' Twitter reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.TWITTER, { botometerOverallScore: 1.5 })
 
@@ -68,6 +74,12 @@ describe("InterRep reputation criteria", () => {
 
         it("Should return a 'SILVER' Github reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.GITHUB, { receivedStars: 80 })
+
+            expect(expectedValue).toBe("SILVER")
+        })
+
+        it("Should return a 'SILVER' Reddit reputation", () => {
+            const expectedValue = calculateReputation(Web2Provider.REDDIT, { linkedIdentities: 2 })
 
             expect(expectedValue).toBe("SILVER")
         })
@@ -84,6 +96,12 @@ describe("InterRep reputation criteria", () => {
             expect(expectedValue).toBe("BRONZE")
         })
 
+        it("Should return a 'BRONZE' Reddit reputation", () => {
+            const expectedValue = calculateReputation(Web2Provider.REDDIT, { coins: 500 })
+
+            expect(expectedValue).toBe("BRONZE")
+        })
+
         it("Should return a 'NOT_SUFFICIENT' Twitter reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.TWITTER, { followers: 1 })
 
@@ -92,6 +110,12 @@ describe("InterRep reputation criteria", () => {
 
         it("Should return a 'NOT_SUFFICIENT' Github reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.GITHUB, { followers: 1 })
+
+            expect(expectedValue).toBe("NOT_SUFFICIENT")
+        })
+
+        it("Should return a 'NOT_SUFFICIENT' Reddit reputation", () => {
+            const expectedValue = calculateReputation(Web2Provider.REDDIT, { karma: 100 })
 
             expect(expectedValue).toBe("NOT_SUFFICIENT")
         })
