@@ -80,32 +80,32 @@ or [JSDelivr](https://www.jsdelivr.com/):
 
 ## 📜 Usage
 
-\# **calculateReputation**(platform: _Platform_, parameters: _TwitterParameters_): _ReputationLevel_
+\# **calculateReputation**(web2Provider: _Web2Provider_, parameters: _TwitterParameters_): _ReputationLevel_
 
 ```typescript
-import { calculateReputation, Platform } from "@interrep/reputation-criteria"
+import { calculateReputation, Web2Provider } from "@interrep/reputation-criteria"
 
-const reputation = calculateReputation(Platform.TWITTER, { followers: 7000 })
+const reputation = calculateReputation(Web2Provider.TWITTER, { followers: 7000 })
 
 console.log(reputation) // "GOLD"
 ```
 
-\# **getReputationLevels**(platform?: _Platform_): _ReputationLevel[]_
+\# **getReputationLevels**(web2Provider?: _Web2Provider_): _ReputationLevel[]_
 
 ```typescript
-import { getReputationLevels, Platform } from "@interrep/reputation-criteria"
+import { getReputationLevels, Web2Provider } from "@interrep/reputation-criteria"
 
-const reputationLevels = getReputationLevels(Platform.GITHUB)
+const reputationLevels = getReputationLevels(Web2Provider.GITHUB)
 
 console.log(reputationLevels) // ["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"]
 ```
 
-\# **getPlatforms**(): _Platform[]_
+\# **getWeb2Providers**(): _Web2Provider[]_
 
 ```typescript
-import { getPlatforms } from "@interrep/reputation-criteria"
+import { getWeb2Providers } from "@interrep/reputation-criteria"
 
-const platforms = getPlatforms()
+const web2Providers = getWeb2Providers()
 
-console.log(platforms) // ["twitter", "github"]
+console.log(web2Providers) // ["twitter", "github", "reddit"]
 ```
