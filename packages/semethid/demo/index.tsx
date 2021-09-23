@@ -88,7 +88,7 @@ function App() {
     const [provider, setProvider] = React.useState<any>()
     const [account, setAccount] = React.useState<string>("")
     const [semaphoreIdentity, setSemaphoreIdentity] = React.useState<any>()
-    const [groupId, setGroupId] = React.useState<string>("")
+    const [web2Provider, setWeb2Provider] = React.useState<string>("")
     const [activeStep, setActiveStep] = React.useState(0)
 
     React.useEffect(() => {
@@ -143,7 +143,10 @@ function App() {
     async function createSemaphoreIdentity() {
         const ethersProvider = new ethers.providers.Web3Provider(provider)
         const signer = ethersProvider.getSigner()
-        const newSemaphoreIdentity = (await semethid((message: string) => signer.signMessage(message), groupId)) as any
+        const newSemaphoreIdentity = (await semethid(
+            (message: string) => signer.signMessage(message),
+            web2Provider
+        )) as any
 
         newSemaphoreIdentity.identityTrapdoor = cutString(newSemaphoreIdentity.identityTrapdoor.toString())
         newSemaphoreIdentity.identityNullifier = cutString(newSemaphoreIdentity.identityNullifier.toString())
@@ -175,20 +178,20 @@ function App() {
                         </StepContent>
                     </Step>
                     <Step>
-                        <StepLabel>Enter the group id</StepLabel>
+                        <StepLabel>Enter the Web2 provider</StepLabel>
                         <StepContent style={{ width: 400 }}>
                             <Paper component="form" className={classes.inputPaper}>
                                 <InputBase
                                     className={classes.input}
-                                    placeholder="Group id"
-                                    onChange={(event) => setGroupId(event.target.value)}
-                                    value={groupId}
+                                    placeholder="Twitter"
+                                    onChange={(event) => setWeb2Provider(event.target.value)}
+                                    value={web2Provider}
                                 />
                                 <Divider className={classes.divider} orientation="vertical" />
                                 <IconButton
                                     onClick={() => handleNext()}
                                     className={classes.iconButton}
-                                    disabled={!groupId}
+                                    disabled={!web2Provider}
                                     color="secondary"
                                 >
                                     <CheckIcon />
