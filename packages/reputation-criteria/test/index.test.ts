@@ -79,7 +79,7 @@ describe("InterRep reputation criteria", () => {
         })
 
         it("Should return a 'BRONZE' Github reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.GITHUB, { verifiedProfile: true })
+            const expectedValue = calculateReputation(Web2Provider.GITHUB, { proPlan: true })
 
             expect(expectedValue).toBe("BRONZE")
         })

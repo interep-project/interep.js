@@ -5,7 +5,7 @@ export default {
     parameters: [
         { name: "followers", type: "number" },
         { name: "receivedStars", type: "number" },
-        { name: "verifiedProfile", type: "boolean" }
+        { name: "proPlan", type: "boolean" }
     ],
     reputationLevels: [
         {
@@ -46,7 +46,7 @@ export default {
             name: "BRONZE",
             rules: [
                 {
-                    parameter: "verifiedProfile",
+                    parameter: "proPlan",
                     value: true
                 },
                 {

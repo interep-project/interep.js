@@ -7,7 +7,7 @@ export type TwitterParameters = {
 export type GithubParameters = {
     followers?: number
     receivedStars?: number
-    verifiedProfile?: boolean
+    proPlan?: boolean
 }
 
 export type Web2ProviderParameters = TwitterParameters | GithubParameters
