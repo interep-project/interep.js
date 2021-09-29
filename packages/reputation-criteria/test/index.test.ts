@@ -5,7 +5,7 @@ describe("InterRep reputation criteria", () => {
         it("Should return all the existing supported Web2 providers", () => {
             const expectedValue = getWeb2Providers()
 
-            expect(expectedValue).toStrictEqual(["twitter", "github", "reddit"])
+            expect(expectedValue).toStrictEqual(["twitter", "github", "reddit", "poap"])
         })
     })
 
@@ -66,6 +66,12 @@ describe("InterRep reputation criteria", () => {
             expect(expectedValue).toBe("GOLD")
         })
 
+        it("Should return a 'GOLD' Poap reputation", () => {
+            const expectedValue = calculateReputation(Web2Provider.POAP, { tokens: 6 })
+
+            expect(expectedValue).toBe("GOLD")
+        })
+
         it("Should return a 'SILVER' Twitter reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.TWITTER, { botometerOverallScore: 1.5 })
 
@@ -80,6 +86,12 @@ describe("InterRep reputation criteria", () => {
 
         it("Should return a 'SILVER' Reddit reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.REDDIT, { linkedIdentities: 2 })
+
+            expect(expectedValue).toBe("SILVER")
+        })
+
+        it("Should return a 'SILVER' Poap reputation", () => {
+            const expectedValue = calculateReputation(Web2Provider.POAP, { tokens: 4 })
 
             expect(expectedValue).toBe("SILVER")
         })
@@ -102,6 +114,12 @@ describe("InterRep reputation criteria", () => {
             expect(expectedValue).toBe("BRONZE")
         })
 
+        it("Should return a 'BRONZE' Poap reputation", () => {
+            const expectedValue = calculateReputation(Web2Provider.POAP, { tokens: 1 })
+
+            expect(expectedValue).toBe("BRONZE")
+        })
+
         it("Should return a 'NOT_SUFFICIENT' Twitter reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.TWITTER, { followers: 1 })
 
@@ -116,6 +134,12 @@ describe("InterRep reputation criteria", () => {
 
         it("Should return a 'NOT_SUFFICIENT' Reddit reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.REDDIT, { karma: 100 })
+
+            expect(expectedValue).toBe("NOT_SUFFICIENT")
+        })
+
+        it("Should return a 'NOT_SUFFICIENT' Poap reputation", () => {
+            const expectedValue = calculateReputation(Web2Provider.POAP, { tokens: 0 })
 
             expect(expectedValue).toBe("NOT_SUFFICIENT")
         })

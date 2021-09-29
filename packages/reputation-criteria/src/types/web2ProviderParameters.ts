@@ -17,4 +17,8 @@ export type RedditParameters = {
     linkedIdentities?: number
 }
 
-export type Web2ProviderParameters = TwitterParameters | GithubParameters | RedditParameters
+export type PoapParameters = {
+    tokens?: number
+}
+
+export type Web2ProviderParameters = TwitterParameters | GithubParameters | RedditParameters | PoapParameters

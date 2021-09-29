@@ -1,6 +1,7 @@
 import twitterCriteria from "./criteria/twitter"
 import githubCriteria from "./criteria/github"
 import redditCriteria from "./criteria/reddit"
+import poapCriteria from "./criteria/poap"
 import { Web2Provider, ReputationLevel, Criteria } from "./types/criteria"
 import { Web2ProviderParameters } from "./types/web2ProviderParameters"
 import getWeb2Providers from "./getWeb2Providers"
@@ -25,8 +26,10 @@ export default function calculateReputation(
         criteria = twitterCriteria
     } else if (web2Provider === Web2Provider.GITHUB) {
         criteria = githubCriteria
-    } else {
+    } else if (web2Provider === Web2Provider.REDDIT) {
         criteria = redditCriteria
+    } else {
+        criteria = poapCriteria
     }
 
     const providerParameterNames = criteria.parameters.map((parameter: any) => parameter.name)

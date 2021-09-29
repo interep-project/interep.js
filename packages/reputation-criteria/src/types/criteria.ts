@@ -1,7 +1,8 @@
 export enum Web2Provider {
     TWITTER = "twitter",
     GITHUB = "github",
-    REDDIT = "reddit"
+    REDDIT = "reddit",
+    POAP = "poap"
 }
 
 export type ParameterName = string
