@@ -1,7 +1,7 @@
 import { Criteria } from "../types/criteria"
 
 export default {
-    web2Provider: "github",
+    provider: "github",
     parameters: [
         { name: "followers", type: "number" },
         { name: "receivedStars", type: "number" },

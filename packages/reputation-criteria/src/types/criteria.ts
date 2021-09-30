@@ -1,9 +1,14 @@
 export enum Web2Provider {
     TWITTER = "twitter",
     GITHUB = "github",
-    REDDIT = "reddit",
+    REDDIT = "reddit"
+}
+
+export enum Web3Provider {
     POAP = "poap"
 }
+
+export type Provider = Web2Provider | Web3Provider
 
 export type ParameterName = string
 export type ParameterType = "number" | "boolean"
@@ -26,7 +31,7 @@ export type ReputationLevels = {
 }[]
 
 export type Criteria = {
-    web2Provider: Web2Provider
+    provider: Provider
     parameters: Parameters
     reputationLevels: ReputationLevels
 }

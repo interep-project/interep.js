@@ -21,4 +21,4 @@ export type PoapParameters = {
     tokens?: number
 }
 
-export type Web2ProviderParameters = TwitterParameters | GithubParameters | RedditParameters | PoapParameters
+export type ProviderParameters = TwitterParameters | GithubParameters | RedditParameters | PoapParameters

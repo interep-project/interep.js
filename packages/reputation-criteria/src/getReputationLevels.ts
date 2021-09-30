@@ -1,21 +1,21 @@
 import twitterCriteria from "./criteria/twitter"
-import { Web2Provider, ReputationLevel } from "./types/criteria"
-import getWeb2Providers from "./getWeb2Providers"
+import { Provider, ReputationLevel } from "./types/criteria"
+import getProviders from "./getProviders"
 
 /**
- * Returns all possible reputation levels of a Web2 provider or
+ * Returns all possible reputation levels of a provider or
  * all existing reputation levels. It is important to return
  * this value in order of importante (GOLD, SILVER, BRONZE, ...).
- * @param web2provider The Web2 provider.
+ * @param provider The provider.
  * @returns A list of reputation levels.
  */
-export default function getReputationLevels(web2Provider?: Web2Provider): ReputationLevel[] {
-    if (web2Provider === undefined) {
+export default function getReputationLevels(provider?: Provider): ReputationLevel[] {
+    if (provider === undefined) {
         return Object.values(ReputationLevel)
     }
 
-    if (!getWeb2Providers().includes(web2Provider)) {
-        throw new Error(`Web2 provider '${web2Provider}' is not supported`)
+    if (!getProviders().includes(provider)) {
+        throw new Error(`Provider '${provider}' is not supported`)
     }
 
     const reputationLevels = twitterCriteria.reputationLevels.map((reputation) => reputation.name)

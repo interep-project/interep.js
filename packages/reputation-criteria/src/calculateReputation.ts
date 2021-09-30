@@ -2,31 +2,28 @@ import twitterCriteria from "./criteria/twitter"
 import githubCriteria from "./criteria/github"
 import redditCriteria from "./criteria/reddit"
 import poapCriteria from "./criteria/poap"
-import { Web2Provider, ReputationLevel, Criteria } from "./types/criteria"
-import { Web2ProviderParameters } from "./types/web2ProviderParameters"
-import getWeb2Providers from "./getWeb2Providers"
+import { Provider, ReputationLevel, Criteria, Web2Provider } from "./types/criteria"
+import { ProviderParameters } from "./types/providerParameters"
+import getProviders from "./getProviders"
 
 /**
  * Returns the reputation based on the paramaters.
- * @param web2Provider The Web2 provider.
- * @param paramaters The Web2 provider parameters to check.
+ * @param provider The provider.
+ * @param paramaters The provider parameters to check.
  * @returns The reputation level found.
  */
-export default function calculateReputation(
-    web2Provider: Web2Provider,
-    paramaters: Web2ProviderParameters
-): ReputationLevel {
-    if (!getWeb2Providers().includes(web2Provider)) {
-        throw new Error(`Web2 provider '${web2Provider}' is not supported`)
+export default function calculateReputation(provider: Provider, paramaters: ProviderParameters): ReputationLevel {
+    if (!getProviders().includes(provider)) {
+        throw new Error(`Provider '${provider}' is not supported`)
     }
 
     let criteria: Criteria
 
-    if (web2Provider === Web2Provider.TWITTER) {
+    if (provider === Web2Provider.TWITTER) {
         criteria = twitterCriteria
-    } else if (web2Provider === Web2Provider.GITHUB) {
+    } else if (provider === Web2Provider.GITHUB) {
         criteria = githubCriteria
-    } else if (web2Provider === Web2Provider.REDDIT) {
+    } else if (provider === Web2Provider.REDDIT) {
         criteria = redditCriteria
     } else {
         criteria = poapCriteria
@@ -43,7 +40,7 @@ export default function calculateReputation(
                 throw new Error(`Parameter '${parameterName}' is not supported`)
             }
 
-            const paramaterValue = paramaters[parameterName as keyof Web2ProviderParameters]
+            const paramaterValue = paramaters[parameterName as keyof ProviderParameters]
             const expectedType = providerParameterTypes[parameterIndex]
 
             if (typeof paramaterValue !== expectedType) {
@@ -54,7 +51,7 @@ export default function calculateReputation(
 
     for (const reputation of criteria.reputationLevels) {
         for (const rule of reputation.rules) {
-            const parameterValue = paramaters[rule.parameter as keyof Web2ProviderParameters]
+            const parameterValue = paramaters[rule.parameter as keyof ProviderParameters]
 
             if (parameterValue !== undefined) {
                 if (typeof rule.value !== "object") {

@@ -1,7 +1,7 @@
 import { Criteria } from "../types/criteria"
 
 export default {
-    web2Provider: "reddit",
+    provider: "reddit",
     parameters: [
         { name: "premiumSubscription", type: "boolean" },
         { name: "karma", type: "number" },

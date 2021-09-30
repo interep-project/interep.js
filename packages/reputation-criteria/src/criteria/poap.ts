@@ -1,7 +1,7 @@
 import { Criteria } from "../types/criteria"
 
 export default {
-    web2Provider: "poap",
+    provider: "poap",
     parameters: [{ name: "tokens", type: "number" }],
     reputationLevels: [
         {

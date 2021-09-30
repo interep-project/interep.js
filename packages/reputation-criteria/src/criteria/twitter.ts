@@ -1,7 +1,7 @@
 import { Criteria } from "../types/criteria"
 
 export default {
-    web2Provider: "twitter",
+    provider: "twitter",
     parameters: [
         { name: "followers", type: "number" },
         { name: "botometerOverallScore", type: "number" },
