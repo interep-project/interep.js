@@ -1,6 +1,6 @@
 {
     "name": "@interrep/reputation-criteria",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "description": "Definitions and utility functions of InterRep reputation criteria.",
     "iife": "dist/index.js",
     "unpkg": "dist/index.min.js",
