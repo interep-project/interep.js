@@ -1,34 +1,33 @@
-import twitterCriteria from "./criteria/twitter"
 import githubCriteria from "./criteria/github"
 import redditCriteria from "./criteria/reddit"
-import poapCriteria from "./criteria/poap"
-import { Provider, ReputationLevel, Criteria, Web2Provider } from "./types/criteria"
-import { ProviderParameters } from "./types/providerParameters"
+import twitterCriteria from "./criteria/twitter"
 import getProviders from "./getProviders"
+import { Criteria, ReputationLevel, Web2Provider } from "./types/criteria"
+import { ProviderParameters } from "./types/providerParameters"
 
 /**
  * Returns the reputation based on the paramaters.
- * @param provider The provider.
+ * @param web2Provider The provider.
  * @param paramaters The provider parameters to check.
  * @returns The reputation level found.
  */
-export default function calculateReputation(provider: Provider, paramaters: ProviderParameters): ReputationLevel {
-    if (!getProviders().includes(provider)) {
-        throw new Error(`Provider '${provider}' is not supported`)
+export default function calculateReputation(
+    web2Provider: Web2Provider,
+    paramaters: ProviderParameters
+): ReputationLevel {
+    if (!getProviders().includes(web2Provider)) {
+        throw new Error(`Provider '${web2Provider}' is not supported`)
     }
 
     let criteria: Criteria
 
-    if (provider === Web2Provider.TWITTER) {
+    if (web2Provider === Web2Provider.TWITTER) {
         criteria = twitterCriteria
-    } else if (provider === Web2Provider.GITHUB) {
+    } else if (web2Provider === Web2Provider.GITHUB) {
         criteria = githubCriteria
-    } else if (provider === Web2Provider.REDDIT) {
-        criteria = redditCriteria
     } else {
-        criteria = poapCriteria
+        criteria = redditCriteria
     }
-
     const providerParameterNames = criteria.parameters.map((parameter: any) => parameter.name)
     const providerParameterTypes = criteria.parameters.map((parameter: any) => parameter.type)
 

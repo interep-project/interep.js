@@ -1,11 +1,11 @@
-import { calculateReputation, getProviders, getReputationLevels, Web2Provider, Web3Provider } from "../src"
+import { calculateReputation, getProviders, getReputationLevels, Web2Provider } from "../src"
 
 describe("InterRep reputation criteria", () => {
     describe("Get all providers", () => {
         it("Should return all the existing supported providers", () => {
             const expectedValue = getProviders()
 
-            expect(expectedValue).toStrictEqual(["twitter", "github", "reddit", "poap"])
+            expect(expectedValue).toStrictEqual(["twitter", "github", "reddit"])
         })
     })
 
@@ -22,14 +22,20 @@ describe("InterRep reputation criteria", () => {
             expect(fun).toThrow("Provider 'facebook' is not supported")
         })
 
-        it("Should return a list of all available reputation levels for a Web2 provider", () => {
+        it("Should return a list of all available Twitter reputation levels", () => {
             const expectedValue = getReputationLevels(Web2Provider.TWITTER)
 
             expect(expectedValue).toStrictEqual(["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"])
         })
 
-        it("Should return a list of all available reputation levels for a Web3 provider", () => {
-            const expectedValue = getReputationLevels(Web3Provider.POAP)
+        it("Should return a list of all available Github reputation levels", () => {
+            const expectedValue = getReputationLevels(Web2Provider.GITHUB)
+
+            expect(expectedValue).toStrictEqual(["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"])
+        })
+
+        it("Should return a list of all available Reddit reputation levels", () => {
+            const expectedValue = getReputationLevels(Web2Provider.REDDIT)
 
             expect(expectedValue).toStrictEqual(["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"])
         })
@@ -72,12 +78,6 @@ describe("InterRep reputation criteria", () => {
             expect(expectedValue).toBe("GOLD")
         })
 
-        it("Should return a 'GOLD' Poap reputation", () => {
-            const expectedValue = calculateReputation(Web3Provider.POAP, { tokens: 6 })
-
-            expect(expectedValue).toBe("GOLD")
-        })
-
         it("Should return a 'SILVER' Twitter reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.TWITTER, { botometerOverallScore: 1.5 })
 
@@ -92,12 +92,6 @@ describe("InterRep reputation criteria", () => {
 
         it("Should return a 'SILVER' Reddit reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.REDDIT, { linkedIdentities: 2 })
-
-            expect(expectedValue).toBe("SILVER")
-        })
-
-        it("Should return a 'SILVER' Poap reputation", () => {
-            const expectedValue = calculateReputation(Web3Provider.POAP, { tokens: 4 })
 
             expect(expectedValue).toBe("SILVER")
         })
@@ -120,12 +114,6 @@ describe("InterRep reputation criteria", () => {
             expect(expectedValue).toBe("BRONZE")
         })
 
-        it("Should return a 'BRONZE' Poap reputation", () => {
-            const expectedValue = calculateReputation(Web3Provider.POAP, { tokens: 1 })
-
-            expect(expectedValue).toBe("BRONZE")
-        })
-
         it("Should return a 'NOT_SUFFICIENT' Twitter reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.TWITTER, { followers: 1 })
 
@@ -140,12 +128,6 @@ describe("InterRep reputation criteria", () => {
 
         it("Should return a 'NOT_SUFFICIENT' Reddit reputation", () => {
             const expectedValue = calculateReputation(Web2Provider.REDDIT, { karma: 100 })
-
-            expect(expectedValue).toBe("NOT_SUFFICIENT")
-        })
-
-        it("Should return a 'NOT_SUFFICIENT' Poap reputation", () => {
-            const expectedValue = calculateReputation(Web3Provider.POAP, { tokens: 0 })
 
             expect(expectedValue).toBe("NOT_SUFFICIENT")
         })
