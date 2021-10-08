@@ -107,5 +107,5 @@ import { getWeb2Providers } from "@interrep/reputation-criteria"
 
 const web2Providers = getWeb2Providers()
 
-console.log(web2Providers) // ["twitter", "github", "reddit", "poap"]
+console.log(web2Providers) // ["twitter", "github", "reddit"]
 ```
