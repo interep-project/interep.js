@@ -12,7 +12,7 @@ const banner = `/**
  * @see [Github]{@link ${pkg.homepage}}
 */`
 
-const name = pkg.name.split("/")[1].replace(/-./g, (x) => x.toUpperCase()[1])
+const name = pkg.name.substr(1).replace(/[-/]./g, (x) => x.toUpperCase()[1])
 
 export default {
     input: "src/index.ts",
