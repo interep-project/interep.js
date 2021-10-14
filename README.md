@@ -45,7 +45,7 @@
     </h4>
 </div>
 
-___
+---
 
 ## 📦 Packages
 
@@ -105,6 +105,31 @@ ___
                 <!-- Size -->
                 <a href="https://bundlephobia.com/package/@interrep/reputation-criteria">
                     <img src="https://img.shields.io/bundlephobia/minzip/@interrep/reputation-criteria" alt="npm bundle size (scoped)" />
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://github.com/InterRep/interrep.js/tree/main/packages/api">
+                    @interrep/api
+                </a>
+            </td>
+            <td>
+                <!-- NPM version -->
+                <a href="https://npmjs.org/package/@interrep/api">
+                    <img src="https://img.shields.io/npm/v/@interrep/api.svg?style=flat-square" alt="NPM version" />
+                </a>
+            </td>
+            <td>
+                <!-- Downloads -->
+                <a href="https://npmjs.org/package/@interrep/api">
+                    <img src="https://img.shields.io/npm/dm/@interrep/api.svg?style=flat-square" alt="Downloads" />
+                </a>
+            </td>
+            <td>
+                <!-- Size -->
+                <a href="https://bundlephobia.com/package/@interrep/api">
+                    <img src="https://img.shields.io/bundlephobia/minzip/@interrep/api" alt="npm bundle size (scoped)" />
                 </a>
             </td>
         </tr>
