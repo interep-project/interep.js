@@ -86,16 +86,84 @@ or [JSDelivr](https://www.jsdelivr.com/):
 import { API } from "@interrep/api"
 
 const api = new API()
+const devApi = new API("development")
 
 console.log(api.url) // "https://kovan.interrep.link/api"
+console.log(devApi.url) // "http://localhost:3000/api"
 ```
 
-\# **api.getGroups**(): _any[]_
+\# **api.getGroups**(): _Promise<any[]>_
 
-\# **api.providers**(): _string[]_
+```typescript
+const groups = await api.getGroups()
+```
 
-\# **api.checkIdentityCommitments**(parameters: _CheckIdentityCommitmentRequest_): _string[]_
+> API: [api/groups](https://docs.interrep.link/api#apigroups)
 
-\# **api.addIdentityCommitments**(parameters: _AddIdentityCommitmentRequest_): _string[]_
+\# **api.getProviders**(): _Promise<string[]>_
 
-\# **api.getMerkleTreePath**(parameters: _GetMerkleTreePathRequest_): _string[]_
+```typescript
+const providers = await api.getProviders()
+```
+
+> API: [api/providers](https://docs.interrep.link/api#apiproviders)
+
+\# **api.checkIdentityCommitment**(parameters: _CheckIdentityCommitmentRequest_): _Promise<boolean\>_
+
+```typescript
+// For any provider group.
+await api.checkIdentityCommitment({
+    provider: "twitter",
+    identityCommitment: "1231231..."
+})
+```
+
+> API: [/api/providers/:provider/:identityCommitment/check](https://docs.interrep.link/api#apiprovidersprovideridentitycommitmentcheck)
+
+```typescript
+// For specific group.
+await api.checkIdentityCommitment({
+    provider: "twitter",
+    group: "GOLD",
+    identityCommitment: "1231231..."
+})
+```
+
+> API: [/api/groups/:provider/:name/:identityCommitment/check](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitmentcheck)
+
+\# **api.addIdentityCommitment**(parameters: _AddIdentityCommitmentRequest_): Promise<_string[]_>
+
+```typescript
+// For Web2 providers.
+const rootHash = await api.addIdentityCommitment({
+    provider: "twitter",
+    group: "GOLD",
+    identityCommitment: "1231231...",
+    authenticationHeader: "token <OAuth-token>"
+})
+```
+
+```typescript
+// For Web3 providers.
+const rootHash = await api.addIdentityCommitment({
+    provider: "poap",
+    group: "DEVCON_4",
+    identityCommitment: "1231231...",
+    userAddress: "0xueaoueao",
+    userSignature: "aueouaoe"
+})
+```
+
+> API: [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
+
+\# **api.getMerkleTreePath**(parameters: _GetMerkleTreePathRequest_): Promise<_any_>
+
+```typescript
+const rootHash = await api.getMerkleTreePath({
+    provider: "twitter",
+    group: "GOLD",
+    identityCommitment: "1231231..."
+})
+```
+
+> API: [/api/groups/:provider/:name/:identityCommitment/path](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitmentpath)
