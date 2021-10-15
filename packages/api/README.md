@@ -124,7 +124,7 @@ await api.checkIdentityCommitment({
 // For specific group.
 await api.checkIdentityCommitment({
     provider: "twitter",
-    group: "GOLD",
+    name: "GOLD",
     identityCommitment: "1231231..."
 })
 ```
@@ -137,7 +137,7 @@ await api.checkIdentityCommitment({
 // For Web2 providers.
 const rootHash = await api.addIdentityCommitment({
     provider: "twitter",
-    group: "GOLD",
+    name: "GOLD",
     identityCommitment: "1231231...",
     authenticationHeader: "token <OAuth-token>"
 })
@@ -147,7 +147,7 @@ const rootHash = await api.addIdentityCommitment({
 // For Web3 providers.
 const rootHash = await api.addIdentityCommitment({
     provider: "poap",
-    group: "DEVCON_4",
+    name: "DEVCON_4",
     identityCommitment: "1231231...",
     userAddress: "0xueaoueao",
     userSignature: "aueouaoe"
@@ -161,7 +161,7 @@ const rootHash = await api.addIdentityCommitment({
 ```typescript
 const rootHash = await api.getMerkleTreePath({
     provider: "twitter",
-    group: "GOLD",
+    name: "GOLD",
     identityCommitment: "1231231..."
 })
 ```
