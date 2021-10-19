@@ -63,11 +63,6 @@ const useStyles = makeStyles((theme: Theme) =>
         listItem: {
             paddingTop: 0,
             paddingBottom: 0
-        },
-        identityObject: {
-            paddingLeft: theme.spacing(2),
-            paddingRight: theme.spacing(2),
-            color: "rgba(0, 0, 0, 0.54)"
         }
     })
 )
@@ -87,7 +82,7 @@ function App() {
     const classes = useStyles()
     const [provider, setProvider] = React.useState<any>()
     const [account, setAccount] = React.useState<string>("")
-    const [semaphoreIdentity, setSemaphoreIdentity] = React.useState<any>()
+    const [identityCommitment, setIdentityCommitment] = React.useState<any>()
     const [web2Provider, setWeb2Provider] = React.useState<string>("")
     const [activeStep, setActiveStep] = React.useState(0)
 
@@ -115,7 +110,7 @@ function App() {
                     } else {
                         setActiveStep(0)
                         setAccount("")
-                        setSemaphoreIdentity("")
+                        setIdentityCommitment("")
                     }
                 })
             }
@@ -128,7 +123,7 @@ function App() {
 
     function resetSteps() {
         setActiveStep(1)
-        setSemaphoreIdentity("")
+        setIdentityCommitment("")
     }
 
     async function connect() {
@@ -136,29 +131,12 @@ function App() {
         setActiveStep(1)
     }
 
-    function cutString(s: string) {
-        return `${s.substr(0, 30)}...`
-    }
-
-    async function createSemaphoreIdentity() {
+    async function createIdentityCommitment() {
         const ethersProvider = new ethers.providers.Web3Provider(provider)
         const signer = ethersProvider.getSigner()
-        const newSemaphoreIdentity = (await semethid(
-            (message: string) => signer.signMessage(message),
-            web2Provider
-        )) as any
+        const newIdentityCommitment = await semethid((message: string) => signer.signMessage(message), web2Provider)
 
-        newSemaphoreIdentity.identityTrapdoor = cutString(newSemaphoreIdentity.identityTrapdoor.toString())
-        newSemaphoreIdentity.identityNullifier = cutString(newSemaphoreIdentity.identityNullifier.toString())
-        newSemaphoreIdentity.keypair = {
-            privKey: `0x${cutString(newSemaphoreIdentity.keypair.privKey.toString("hex"))}`,
-            pubKey: [
-                cutString(newSemaphoreIdentity.keypair.pubKey[0].toString()),
-                cutString(newSemaphoreIdentity.keypair.pubKey[1].toString())
-            ]
-        }
-
-        setSemaphoreIdentity(newSemaphoreIdentity)
+        setIdentityCommitment(newIdentityCommitment)
         setActiveStep(3)
     }
 
@@ -166,7 +144,7 @@ function App() {
         <ThemeProvider theme={theme}>
             <Box className={classes.container}>
                 <Typography variant="h4">Semethid.js</Typography>
-                <Typography variant="subtitle1">Semaphore Ethereum identities</Typography>
+                <Typography variant="subtitle1">Semaphore/Ethereum id commitments</Typography>
 
                 <Stepper activeStep={activeStep} orientation="vertical">
                     <Step>
@@ -200,16 +178,16 @@ function App() {
                         </StepContent>
                     </Step>
                     <Step>
-                        <StepLabel>Create a Semaphore identity</StepLabel>
+                        <StepLabel>Create an identity commitment</StepLabel>
                         <StepContent style={{ width: 400 }}>
-                            <Button onClick={() => createSemaphoreIdentity()} variant="outlined">
+                            <Button onClick={() => createIdentityCommitment()} variant="outlined">
                                 Create Semaphore identity
                             </Button>
                         </StepContent>
                     </Step>
                 </Stepper>
                 <Paper className={classes.results}>
-                    {semaphoreIdentity && (
+                    {identityCommitment && (
                         <IconButton onClick={() => resetSteps()} className={classes.resetButton} color="secondary">
                             <ReplayIcon />
                         </IconButton>
@@ -220,10 +198,13 @@ function App() {
                                 <ListItemText primary="Selected account" secondary={account} />
                             </ListItem>
                         )}
-                        {semaphoreIdentity && (
-                            <pre className={classes.identityObject}>
-                                <code>const identity = {JSON.stringify(semaphoreIdentity, null, 2)}</code>
-                            </pre>
+                        {identityCommitment && (
+                            <ListItem className={classes.listItem}>
+                                <ListItemText
+                                    primary="Identity commitment"
+                                    secondary={`${identityCommitment.substr(0, 50)}...`}
+                                />
+                            </ListItem>
                         )}
                     </List>
                 </Paper>
