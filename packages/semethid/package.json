@@ -32,7 +32,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@libsem/identity": "^1.0.4"
+        "@libsem/identity": "^1.0.5"
     },
     "devDependencies": {
         "rimraf": "^3.0.2",

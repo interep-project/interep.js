@@ -199,11 +199,12 @@
   resolved "https://registry.yarnpkg.com/@juanelas/base64/-/base64-1.0.1.tgz#aaede00ffdca595741fc69d0008b4cfc8f08293a"
   integrity sha512-ZK/wWrjMrrMcprtOV72iilC1M/HfZcF2JeUJPHOL0tMm1TZrh9UhHDQEdPny/MmmT7tO4w47ycuy0YTnBrS5fg==
 
-"@libsem/identity@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@libsem/identity/-/identity-1.0.4.tgz#c91373ce126244d6f58887aaa1f5533145a7787b"
-  integrity sha512-Ngn5IObYhUmqM11npMD62cKH0hm9sdLQDfatZDeazLkGbzrYkuxZXWgh7UCj+njhLOk00HG5fYzUnbLdN82FOQ==
+"@libsem/identity@^1.0.5":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@libsem/identity/-/identity-1.0.6.tgz#43a2cd4353959f70959ce2eae1f6760d5e26f0d2"
+  integrity sha512-JoBTbCjFCuiyMzlsNdlN+jtf/HYc4gQlYF0qttUPotOS9OPQmEgQebgnh/wzIB82lhFFaF5/oehf+E3OnBp6PQ==
   dependencies:
+    "@libsem/types" "^1.0.0"
     bigint-conversion "^2.1.12"
     circomlibjs "^0.0.8"
     crypto "^1.0.1"
