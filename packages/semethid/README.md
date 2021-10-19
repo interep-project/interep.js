@@ -2,7 +2,7 @@
     <h1 align="center">
         Semaphore Ethereum identities
     </h1>
-    <p align="center">A simple JS library to create Semaphore identity by deriving the EdDSA keys from an Ethereum account.</p>
+    <p align="center">A simple JS library to create Semaphore identity commitments by deriving it from a signed message.</p>
 </p>
 
 <p align="center">
@@ -73,17 +73,12 @@ yarn add @interrep/semethid
 
 ```typescript
 import semethid from "@interrep/semethid"
-import { Identity } from "semaphore-lib"
 import detectEthereumProvider from "@metamask/detect-provider"
 import { ethers } from "ethers"
 
-const ethereumProvider = await detectEthereumProvider() as any
+const ethereumProvider = (await detectEthereumProvider()) as any
 const provider = new ethers.providers.Web3Provider(ethereumProvider)
 const signer = provider.getSigner()
 
-function sign(message: string): Promise<string> {
-    return signer.signMessage(message)
-}
-
-const identity: Identity = await semethid(sign, "twitter")
+const identityCommitment = await semethid((message) => signer.signMessage(message), "twitter")
 ```
