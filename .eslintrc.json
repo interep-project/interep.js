@@ -19,7 +19,7 @@
     "plugins": ["@typescript-eslint", "jest"],
     "ignorePatterns": ["node_modules", "dist", "build", "types", "/gh-pages"],
     "rules": {
-        "no-console": ["warn", { "allow": ["warn", "error"] }],
+        "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
         "no-restricted-syntax": "off"
     }
 }
