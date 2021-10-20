@@ -18,5 +18,5 @@ export default async function semethid(
     )
     const identity = ZkIdentity.genIdentity("signedMessage", { signedMessage: message })
 
-    return ZkIdentity.genIdentityCommitment([identity.identityTrapdoor, identity.identityNullifier]).toString()
+    return ZkIdentity.genIdentityCommitment(identity).toString()
 }

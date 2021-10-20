@@ -31,12 +31,12 @@
     "publishConfig": {
         "access": "public"
     },
-    "dependencies": {
-        "@libsem/identity": "^1.0.5"
-    },
     "devDependencies": {
         "rimraf": "^3.0.2",
         "rollup": "^2.56.2",
         "rollup-plugin-typescript2": "^0.30.0"
+    },
+    "dependencies": {
+        "@libsem/identity": "^1.0.9"
     }
 }
