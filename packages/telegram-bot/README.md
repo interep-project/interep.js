@@ -64,18 +64,4 @@ or yarn:
 yarn add @interrep/telegram-bot
 ```
 
-### CDN
-
-You can also load it using a `script` tag using [unpkg](https://unpkg.com/):
-
-```html
-<script src="https://unpkg.com/@interrep/telegram-bot/"></script>
-```
-
-or [JSDelivr](https://www.jsdelivr.com/):
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/@interrep/telegram-bot/"></script>
-```
-
 ## 📜 Usage
