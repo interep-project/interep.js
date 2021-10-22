@@ -1,12 +1,12 @@
 import { Chat, User } from "grammy/out/platform.node"
 import InterRepBot from "../bot"
 
-export default async function sendHelpMessage(bot: InterRepBot, chat: Chat, user?: User) {
+export default async function sendHelpMessage(bot: InterRepBot, chat: Chat, user?: User): Promise<void> {
     let subject: string
     let action: string
 
     if (chat.type === "private") {
-        subject = user ? `@${user.username}` : ""
+        subject = (user as User).first_name
         action =
             "Add me to a group here on Telegram so I can send a magic link to anyone who wants to join the corresponding Semaphore group\\. "
     } else {

@@ -7,7 +7,6 @@ import connectDB from "./connectDB"
 
 export default class InterRepBot extends Bot {
     readonly mongodbUrl: string
-
     readonly appURL: string
 
     constructor(token: string, mongodbUrl: string, appURL: string) {
