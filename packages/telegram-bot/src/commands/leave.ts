@@ -1,7 +1,7 @@
-import { InlineKeyboard } from "grammy"
 import { Chat, Message, User } from "grammy/out/platform.node"
 import InterRepBot from "../bot"
 import TelegramUser from "../model/TelegramUser.model"
+import showConnectButton from "./showConnectButton"
 import sha256 from "../sha256"
 
 export default async function leave(bot: InterRepBot, chat: Chat, msg: Message, user?: User) {
@@ -28,19 +28,7 @@ export default async function leave(bot: InterRepBot, chat: Chat, msg: Message, 
             )
         } catch (error: any) {
             if (error?.error_code === 403) {
-                const inlineKeyboard = new InlineKeyboard().url(
-                    "@InterRepBot",
-                    "https://telegram.me/InterRepBot?start=connect"
-                )
-
-                await bot.api.sendMessage(
-                    chat.id,
-                    "Click below, start the bot in a private chat and run /leave again to receive InterRep magic links!",
-                    {
-                        reply_to_message_id: msg.message_id,
-                        reply_markup: inlineKeyboard
-                    }
-                )
+                await showConnectButton(bot, chat, msg, "leave")
             } else {
                 console.error(error)
             }

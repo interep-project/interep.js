@@ -1,8 +1,8 @@
-import { InlineKeyboard } from "grammy"
 import { Chat, Message, User } from "grammy/out/platform.node"
 import InterRepBot from "../bot"
 import TelegramUser from "../model/TelegramUser.model"
 import sha256 from "../sha256"
+import showConnectButton from "./showConnectButton"
 
 export default async function join(bot: InterRepBot, chat: Chat, msg: Message, user?: User) {
     if (chat.type === "private") {
@@ -35,19 +35,7 @@ export default async function join(bot: InterRepBot, chat: Chat, msg: Message, u
             )
         } catch (error: any) {
             if (error?.error_code === 403) {
-                const inlineKeyboard = new InlineKeyboard().url(
-                    "@InterRepBot",
-                    "https://telegram.me/InterRepBot?start=connect"
-                )
-
-                await bot.api.sendMessage(
-                    chat.id,
-                    "Click below, start the bot in a private chat and run /join again to receive InterRep magic links!",
-                    {
-                        reply_to_message_id: msg.message_id,
-                        reply_markup: inlineKeyboard
-                    }
-                )
+                await showConnectButton(bot, chat, msg, "join")
             } else {
                 console.error(error)
             }
