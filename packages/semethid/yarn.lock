@@ -199,10 +199,10 @@
   resolved "https://registry.yarnpkg.com/@juanelas/base64/-/base64-1.0.1.tgz#aaede00ffdca595741fc69d0008b4cfc8f08293a"
   integrity sha512-ZK/wWrjMrrMcprtOV72iilC1M/HfZcF2JeUJPHOL0tMm1TZrh9UhHDQEdPny/MmmT7tO4w47ycuy0YTnBrS5fg==
 
-"@libsem/identity@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@libsem/identity/-/identity-1.0.9.tgz#30d2dfbb4880aec7f8efed6280594c2df5bf9962"
-  integrity sha512-UHB6iqXYOyDl6dQiIuih32V+tyYAe9XRWfj31MMeNe2fxE/Ms9w4+yB7EN4HqV1fNM9qkKOuUAhjhA6lWAKRWw==
+"@libsem/identity@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@libsem/identity/-/identity-1.0.11.tgz#2c88bdc470bc730e7874ed6600a33776b154a822"
+  integrity sha512-eSJhrX9CY6Rv/1+G89sdxxpC6bS3nQ8ZqDq28QIyCwwahk7H7awSP3cEYCKI6xRtZUWtLrml/ibFkTKI69C3tw==
   dependencies:
     "@libsem/types" "^1.0.0"
     bigint-conversion "^2.1.12"
