@@ -20,6 +20,7 @@
     "ignorePatterns": ["node_modules", "dist", "build", "types", "/gh-pages"],
     "rules": {
         "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
-        "no-restricted-syntax": "off"
+        "no-restricted-syntax": "off",
+        "import/no-cycle": "off"
     }
 }
