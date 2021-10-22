@@ -177,7 +177,7 @@ $ yarn lint # Lint all packages.
 $ yarn test # Test all packages (with common coverage).
 $ yarn build # Create a JS build for each package.
 $ yarn gh-pages # Create a new gh-page build for each package (where a demo exists).
-$ yarn lerna publish from-package # Publish packages on npm.
+$ yarn publish:fp # Publish packages on npm.
 ```
 
 You can see the other npm scripts in the `package.json` file.
