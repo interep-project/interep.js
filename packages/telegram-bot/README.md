@@ -46,6 +46,10 @@
     </h4>
 </div>
 
+The InterRep bot allows Telegram users to join corresponding Semaphore groups on InterRep. If a user is for example a member of the Telegram group 'Hello world', the bot will send a magic link in their private chat that will allow them to join the Semaphore Telegram group 'Hello world' on our web application with Metamask.
+
+When the bot sends the magic link (consisting of the user and group ids) it also saves a hash of the user and group ids with a flag to ensure that the magic link is correct in the application. The application will then be able to check whether the user redirected by the magic link is actually a user who has requested to join the group. The hash ensures that InterRep does not save any ids.
+
 ---
 
 ## 🛠 Install
@@ -65,3 +69,49 @@ yarn add @interrep/telegram-bot
 ```
 
 ## 📜 Usage
+
+### Start an InterRep bot
+
+Before starting the bot you must configure the environment variables. Copy the `.env.example` file and rename it as `.env`:
+
+```bash
+cp .env.example .env
+```
+
+You can create a Telegram bot and obtain a token with [@BotFather](https://telegram.me/@BotFather).
+
+Once the environment variables have been set, start the bot with the npm `start` script:
+
+```bash
+yarn start
+```
+
+### API
+
+\# **new InterRepBot**(token: _string_, mongodbUrl: _string_, appURL: _string_): _InterRepBot_
+
+```typescript
+import { InterRepBot } from "@interrep/telegram-bot"
+
+const { TELEGRAM_BOT_TOKEN, MONGO_URL, APP_URL } = process.env
+const bot = new InterRepBot(TELEGRAM_BOT_TOKEN, MONGO_URL, APP_URL)
+
+await bot.start()
+```
+
+\# **sha256**(message: _string_): _string_
+
+```typescript
+import { sha256 } from "@interrep/telegram-bot"
+
+const hashId = sha256("user id + group id")
+```
+
+\# **TelegramUser.findByHashId**(hashId: _string_): _Promise<ITelegramUserDocument/>_
+
+```typescript
+import { TelegramUser } from "@interrep/telegram-bot" // Mongoose model.
+
+const hashId = sha256("user id + group id")
+const telegramUser = TelegramUser.findByHashId(hashId)
+```
