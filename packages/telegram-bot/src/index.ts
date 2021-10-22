@@ -1,4 +1,5 @@
 import InterRepBot from "./bot"
+import TelegramUser from "./model/TelegramUser.model"
 
-// eslint-disable-next-line import/prefer-default-export
-export { InterRepBot }
+export { InterRepBot, TelegramUser }
+export * from "./model/TelegramUser.types"

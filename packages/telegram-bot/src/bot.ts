@@ -1,8 +1,15 @@
-import { Bot, InlineKeyboard } from "grammy"
+import { Bot, InlineKeyboard, PollingOptions } from "grammy"
+import connectDB from "./connectDB"
+import TelegramUser from "./model/TelegramUser.model"
+import sha256 from "./sha256"
 
 export default class InterRepBot extends Bot {
-    constructor(token: string) {
+    readonly mongodbUrl: string
+
+    constructor(token: string, mongodbUrl: string, appURL: string) {
         super(token)
+
+        this.mongodbUrl = mongodbUrl
 
         this.api.setMyCommands([
             { command: "help", description: "show the help message" },
@@ -38,7 +45,9 @@ export default class InterRepBot extends Bot {
             const { chat, match } = ctx
 
             if (chat.type === "private" && match === "connect") {
-                await ctx.reply("Great, you can receive the magic links here now 🎉")
+                await ctx.reply(
+                    "Great, you can receive the magic links here now 🎉\n\nRun /join when you are in a group!"
+                )
             }
         })
 
@@ -48,35 +57,55 @@ export default class InterRepBot extends Bot {
 
             if (chat.type === "private") {
                 await ctx.reply(
-                    "You cannot use this command in private chat. Please run the /help command to see how the bot works!"
+                    "You cannot use this command in a private chat. Please run the /help command to see how the bot works!"
                 )
             }
 
             if (chat.type !== "private" && user) {
-                await this.api
-                    .sendMessage(
+                try {
+                    const hashId = sha256(user.id.toString() + chat.id.toString())
+                    const telegramUser = await TelegramUser.findByHashId(hashId)
+
+                    if (telegramUser && telegramUser.joined) {
+                        await this.api.sendMessage(user.id, `You already joined the ${chat.title} Semaphore group!`)
+                        return
+                    }
+
+                    if (!telegramUser) {
+                        await TelegramUser.create({
+                            hashId,
+                            joined: false
+                        })
+                    }
+
+                    await this.api.sendMessage(
                         user.id,
-                        `Here's the magic link: https://kovan.interrep.link/telegram/${user.id}/${chat.id} 😉`
+                        `Here's the magic link: ${appURL}/telegram/join/${user.id}/${chat.id} 😉`
                     )
-                    .catch(async (error) => {
-                        if (error?.error_code === 403) {
-                            const inlineKeyboard = new InlineKeyboard().url(
-                                "@InterRepBot",
-                                "https://telegram.me/InterRepBot?start=connect"
-                            )
+                } catch (error: any) {
+                    if (error?.error_code === 403) {
+                        const inlineKeyboard = new InlineKeyboard().url(
+                            "@InterRepBot",
+                            "https://telegram.me/InterRepBot?start=connect"
+                        )
 
-                            await ctx.reply(
-                                "Click below and start the bot in a private chat to receive InterRep magic links!",
-                                {
-                                    reply_to_message_id: ctx.msg.message_id,
-                                    reply_markup: inlineKeyboard
-                                }
-                            )
-                        }
-
+                        await ctx.reply(
+                            "Click below, start the bot in a private chat and run /join again to receive InterRep magic links!",
+                            {
+                                reply_to_message_id: ctx.msg.message_id,
+                                reply_markup: inlineKeyboard
+                            }
+                        )
+                    } else {
                         console.error(error)
-                    })
+                    }
+                }
             }
         })
+    }
+
+    async start(options?: PollingOptions): Promise<void> {
+        await connectDB(this.mongodbUrl)
+        await super.start(options)
     }
 }
