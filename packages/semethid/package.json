@@ -1,6 +1,6 @@
 {
     "name": "@interrep/semethid",
-    "version": "0.8.1",
+    "version": "0.9.0",
     "description": "A simple JS library to create Semaphore identity commitments by deriving it from a signed message.",
     "main": "dist/index.node.js",
     "exports": {
