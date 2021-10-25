@@ -11,7 +11,7 @@ export default async function sendHelpMessage(bot: InterRepBot, chat: Chat, user
             "Add me to a group here on Telegram so I can send a magic link to anyone who wants to join the corresponding Semaphore group\\. "
     } else {
         subject = "everyone"
-        action = `Run /join so I can redirect you to our application where you will able to join the *${chat.title}* Semaphore group\\. If you want to leave a group run /leave\\.`
+        action = `Run /join so I can redirect you to our application where you will able to join the *${chat.title}* Semaphore group\\.` // If you want to leave a group run /leave\\.`
     }
 
     await bot.api.sendMessage(
