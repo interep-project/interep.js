@@ -1,4 +1,4 @@
-import { ZkIdentity } from "@libsem/identity"
+import { ZkIdentity, Strategy } from "@libsem/identity"
 
 /**
  * Create a Semaphore identity commitment by deriving it from a signed message.
@@ -16,7 +16,7 @@ export default async function semethid(
     const message = await sign(
         `Sign this message to generate your ${web2Provider} Semaphore identity with key nonce: ${nonce}.`
     )
-    const identity = ZkIdentity.genIdentity("signedMessage", { signedMessage: message })
+    const identity = new ZkIdentity(Strategy.MESSAGE, message)
 
-    return ZkIdentity.genIdentityCommitment(identity).toString()
+    return identity.genIdentityCommitment().toString()
 }
