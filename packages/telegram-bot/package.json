@@ -1,6 +1,6 @@
 {
     "name": "@interrep/telegram-bot",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "InterRep Telegram bot to allow users to join Semaphore Telegram groups.",
     "main": "dist/index.node.js",
     "exports": {
