@@ -24,7 +24,7 @@ export default async function leave(bot: InterRepBot, chat: Chat, msg: Message, 
 
             await bot.api.sendMessage(
                 user.id,
-                `Here's the magic link: ${bot.appURL}/telegram/leave/${user.id}/${chat.id} 😉`
+                `Here's the magic link: ${bot.appURL}/groups/telegram/leave/${user.id}/${chat.id} 😉`
             )
         } catch (error: any) {
             if (error?.error_code === 403) {
