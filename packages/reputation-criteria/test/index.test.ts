@@ -1,4 +1,4 @@
-import { calculateReputation, getProviders, getReputationLevels, Web2Provider } from "../src"
+import { calculateReputation, getProviders, getReputationLevels, Provider } from "../src"
 
 describe("InterRep reputation criteria", () => {
     describe("Get all providers", () => {
@@ -23,19 +23,19 @@ describe("InterRep reputation criteria", () => {
         })
 
         it("Should return a list of all available Twitter reputation levels", () => {
-            const expectedValue = getReputationLevels(Web2Provider.TWITTER)
+            const expectedValue = getReputationLevels(Provider.TWITTER)
 
             expect(expectedValue).toStrictEqual(["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"])
         })
 
         it("Should return a list of all available Github reputation levels", () => {
-            const expectedValue = getReputationLevels(Web2Provider.GITHUB)
+            const expectedValue = getReputationLevels(Provider.GITHUB)
 
             expect(expectedValue).toStrictEqual(["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"])
         })
 
         it("Should return a list of all available Reddit reputation levels", () => {
-            const expectedValue = getReputationLevels(Web2Provider.REDDIT)
+            const expectedValue = getReputationLevels(Provider.REDDIT)
 
             expect(expectedValue).toStrictEqual(["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"])
         })
@@ -49,91 +49,91 @@ describe("InterRep reputation criteria", () => {
         })
 
         it("Should throw an error if a parameter is not supported", () => {
-            const fun = () => calculateReputation(Web2Provider.TWITTER, { posts: 100 } as any)
+            const fun = () => calculateReputation(Provider.TWITTER, { posts: 100 } as any)
 
             expect(fun).toThrow("Parameter 'posts' is not supported")
         })
 
         it("Should throw an error if a parameter type is not correct", () => {
-            const fun = () => calculateReputation(Web2Provider.TWITTER, { followers: true } as any)
+            const fun = () => calculateReputation(Provider.TWITTER, { followers: true } as any)
 
             expect(fun).toThrow("Parameter 'followers' is not a number")
         })
 
         it("Should return a 'GOLD' Twitter reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.TWITTER, { verifiedProfile: true })
+            const expectedValue = calculateReputation(Provider.TWITTER, { verifiedProfile: true })
 
             expect(expectedValue).toBe("GOLD")
         })
 
         it("Should return a 'GOLD' Github reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.GITHUB, { followers: 600 })
+            const expectedValue = calculateReputation(Provider.GITHUB, { followers: 600 })
 
             expect(expectedValue).toBe("GOLD")
         })
 
         it("Should return a 'GOLD' Reddit reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.REDDIT, { premiumSubscription: true })
+            const expectedValue = calculateReputation(Provider.REDDIT, { premiumSubscription: true })
 
             expect(expectedValue).toBe("GOLD")
         })
 
         it("Should return a 'SILVER' Twitter reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.TWITTER, { botometerOverallScore: 1.5 })
+            const expectedValue = calculateReputation(Provider.TWITTER, { botometerOverallScore: 1.5 })
 
             expect(expectedValue).toBe("SILVER")
         })
 
         it("Should return a 'SILVER' Github reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.GITHUB, { receivedStars: 80 })
+            const expectedValue = calculateReputation(Provider.GITHUB, { receivedStars: 80 })
 
             expect(expectedValue).toBe("SILVER")
         })
 
         it("Should return a 'SILVER' Reddit reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.REDDIT, { linkedIdentities: 2 })
+            const expectedValue = calculateReputation(Provider.REDDIT, { linkedIdentities: 2 })
 
             expect(expectedValue).toBe("SILVER")
         })
 
         it("Should return a 'BRONZE' Twitter reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.TWITTER, { followers: 500 })
+            const expectedValue = calculateReputation(Provider.TWITTER, { followers: 500 })
 
             expect(expectedValue).toBe("BRONZE")
         })
 
         it("Should return a 'BRONZE' Github reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.GITHUB, { proPlan: true })
+            const expectedValue = calculateReputation(Provider.GITHUB, { proPlan: true })
 
             expect(expectedValue).toBe("BRONZE")
         })
 
         it("Should return a 'BRONZE' Reddit reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.REDDIT, { coins: 500 })
+            const expectedValue = calculateReputation(Provider.REDDIT, { coins: 500 })
 
             expect(expectedValue).toBe("BRONZE")
         })
 
         it("Should return a 'NOT_SUFFICIENT' Twitter reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.TWITTER, { followers: 1 })
+            const expectedValue = calculateReputation(Provider.TWITTER, { followers: 1 })
 
             expect(expectedValue).toBe("NOT_SUFFICIENT")
         })
 
         it("Should return a 'NOT_SUFFICIENT' Github reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.GITHUB, { followers: 1 })
+            const expectedValue = calculateReputation(Provider.GITHUB, { followers: 1 })
 
             expect(expectedValue).toBe("NOT_SUFFICIENT")
         })
 
         it("Should return a 'NOT_SUFFICIENT' Reddit reputation", () => {
-            const expectedValue = calculateReputation(Web2Provider.REDDIT, { karma: 100 })
+            const expectedValue = calculateReputation(Provider.REDDIT, { karma: 100 })
 
             expect(expectedValue).toBe("NOT_SUFFICIENT")
         })
 
         it("Should return 'GOLD' if at least one parameter matches the gold reputation rules", () => {
-            const expectedValue = calculateReputation(Web2Provider.TWITTER, {
+            const expectedValue = calculateReputation(Provider.TWITTER, {
                 botometerOverallScore: 2,
                 followers: 7000
             })

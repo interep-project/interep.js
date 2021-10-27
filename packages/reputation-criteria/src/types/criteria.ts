@@ -1,4 +1,4 @@
-export enum Web2Provider {
+export enum Provider {
     TWITTER = "twitter",
     GITHUB = "github",
     REDDIT = "reddit"
@@ -25,7 +25,7 @@ export type ReputationLevels = {
 }[]
 
 export type Criteria = {
-    provider: Web2Provider
+    provider: Provider
     parameters: Parameters
     reputationLevels: ReputationLevels
 }
