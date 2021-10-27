@@ -80,32 +80,32 @@ or [JSDelivr](https://www.jsdelivr.com/):
 
 ## 📜 Usage
 
-\# **calculateReputation**(provider: _Provider_, parameters: _TwitterParameters_): _ReputationLevel_
+\# **calculateReputation**(provider: _OAuthProvider_, parameters: _TwitterParameters_): _ReputationLevel_
 
 ```typescript
-import { calculateReputation, Provider } from "@interrep/reputation-criteria"
+import { calculateReputation, OAuthProvider } from "@interrep/reputation-criteria"
 
-const reputation = calculateReputation(Provider.TWITTER, { followers: 7000 })
+const reputation = calculateReputation(OAuthProvider.TWITTER, { followers: 7000 })
 
 console.log(reputation) // "GOLD"
 ```
 
-\# **getReputationLevels**(provider?: _Provider_): _ReputationLevel[]_
+\# **getReputationLevels**(provider?: _OAuthProvider_): _ReputationLevel[]_
 
 ```typescript
-import { getReputationLevels, Provider } from "@interrep/reputation-criteria"
+import { getReputationLevels, OAuthProvider } from "@interrep/reputation-criteria"
 
-const reputationLevels = getReputationLevels(Provider.GITHUB)
+const reputationLevels = getReputationLevels(OAuthProvider.GITHUB)
 
 console.log(reputationLevels) // ["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"]
 ```
 
-\# **getProviders**(): _Provider[]_
+\# **getOAuthProviders**(): _OAuthProvider[]_
 
 ```typescript
-import { getProviders } from "@interrep/reputation-criteria"
+import { getOAuthProviders } from "@interrep/reputation-criteria"
 
-const providers = getProviders()
+const providers = getOAuthProviders()
 
 console.log(providers) // ["twitter", "github", "reddit"]
 ```

@@ -1,4 +1,4 @@
-export enum Provider {
+export enum OAuthProvider {
     TWITTER = "twitter",
     GITHUB = "github",
     REDDIT = "reddit"
@@ -25,7 +25,7 @@ export type ReputationLevels = {
 }[]
 
 export type Criteria = {
-    provider: Provider
+    provider: OAuthProvider
     parameters: Parameters
     reputationLevels: ReputationLevels
 }

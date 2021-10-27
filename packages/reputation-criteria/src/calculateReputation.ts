@@ -1,8 +1,8 @@
 import githubCriteria from "./criteria/github"
 import redditCriteria from "./criteria/reddit"
 import twitterCriteria from "./criteria/twitter"
-import getProviders from "./getProviders"
-import { Criteria, ReputationLevel, Provider } from "./types/criteria"
+import getOAuthProviders from "./getOAuthProviders"
+import { Criteria, ReputationLevel, OAuthProvider } from "./types/criteria"
 import { ProviderParameters } from "./types/providerParameters"
 
 /**
@@ -11,16 +11,16 @@ import { ProviderParameters } from "./types/providerParameters"
  * @param paramaters The provider parameters to check.
  * @returns The reputation level found.
  */
-export default function calculateReputation(provider: Provider, paramaters: ProviderParameters): ReputationLevel {
-    if (!getProviders().includes(provider)) {
+export default function calculateReputation(provider: OAuthProvider, paramaters: ProviderParameters): ReputationLevel {
+    if (!getOAuthProviders().includes(provider)) {
         throw new Error(`Provider '${provider}' is not supported`)
     }
 
     let criteria: Criteria
 
-    if (provider === Provider.TWITTER) {
+    if (provider === OAuthProvider.TWITTER) {
         criteria = twitterCriteria
-    } else if (provider === Provider.GITHUB) {
+    } else if (provider === OAuthProvider.GITHUB) {
         criteria = githubCriteria
     } else {
         criteria = redditCriteria
