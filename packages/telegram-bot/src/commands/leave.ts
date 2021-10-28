@@ -1,8 +1,8 @@
+import { TelegramUser } from "@interrep/data-models"
 import { Chat, Message, User } from "grammy/out/platform.node"
 import InterRepBot from "../bot"
-import TelegramUser from "../model/TelegramUser.model"
-import showConnectButton from "./showConnectButton"
 import sha256 from "../sha256"
+import showConnectButton from "./showConnectButton"
 
 export default async function leave(bot: InterRepBot, chat: Chat, msg: Message, user?: User) {
     if (chat.type === "private") {

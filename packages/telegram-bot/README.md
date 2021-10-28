@@ -103,14 +103,7 @@ await bot.start()
 
 ```typescript
 import { sha256 } from "@interrep/telegram-bot"
-
-const hashId = sha256("user id + group id")
-```
-
-\# **TelegramUser.findByHashId**(hashId: _string_): _Promise<ITelegramUserDocument/>_
-
-```typescript
-import { TelegramUser } from "@interrep/telegram-bot" // Mongoose model.
+import { TelegramUser } from "@interrep/data-models"
 
 const hashId = sha256("user id + group id")
 const telegramUser = TelegramUser.findByHashId(hashId)
