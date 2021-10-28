@@ -7,7 +7,7 @@ import {
     findByGroupProviderAndHash,
     getGroupNamesByProvider
 } from "./MerkleTree.statics"
-import {
+import type {
     MerkleTreeNodeData,
     MerkleTreeNodeDocument,
     MerkleTreeNodeModel,

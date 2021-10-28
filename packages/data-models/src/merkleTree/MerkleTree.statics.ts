@@ -1,5 +1,5 @@
-import { MerkleTreeNode, MerkleTreeZero } from "./MerkleTree.model"
-import { Group, MerkleTreeNodeDocument, MerkleTreeZeroDocument } from "./MerkleTree.types"
+import type { MerkleTreeNode, MerkleTreeZero } from "./MerkleTree.model"
+import type { Group, MerkleTreeNodeDocument, MerkleTreeZeroDocument } from "./MerkleTree.types"
 
 export async function findByLevelAndIndex(
     this: typeof MerkleTreeNode,

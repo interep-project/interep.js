@@ -1,5 +1,5 @@
-import { Model, Document } from "mongoose"
-import {
+import type { Model, Document } from "mongoose"
+import type {
     findByLevelAndIndex,
     findByGroupAndHash,
     findZeroes,

@@ -1,6 +1,6 @@
 import { model, models } from "mongoose"
 import TelegramUserSchema from "./TelegramUser.schema"
-import { TelegramUserDocument, TelegramUserModel } from "./TelegramUser.types"
+import type { TelegramUserDocument, TelegramUserModel } from "./TelegramUser.types"
 
 const TELEGRAM_USER_MODEL_NAME = "TelegramUser"
 

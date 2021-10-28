@@ -1,6 +1,6 @@
 import { model, models } from "mongoose"
 import TokenSchema from "./Token.schema"
-import { TokenDocument, TokenModel } from "./Token.types"
+import type { TokenDocument, TokenModel } from "./Token.types"
 
 const MODEL_NAME = "Token"
 

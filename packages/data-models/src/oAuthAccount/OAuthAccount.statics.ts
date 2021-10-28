@@ -1,6 +1,6 @@
-import { OAuthProvider } from "@interrep/reputation-criteria"
-import OAuthAccount from "./OAuthAccount.model"
-import { OAuthAccountDocument } from "./OAuthAccount.types"
+import type { OAuthProvider } from "@interrep/reputation-criteria"
+import type OAuthAccount from "./OAuthAccount.model"
+import type { OAuthAccountDocument } from "./OAuthAccount.types"
 
 // eslint-disable-next-line import/prefer-default-export
 export async function findByProviderAccountId(

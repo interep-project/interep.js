@@ -1,6 +1,6 @@
 import type { ReputationLevel, OAuthProvider } from "@interrep/reputation-criteria"
-import { Model, Document } from "mongoose"
-import { findByProviderAccountId } from "./OAuthAccount.statics"
+import type { Model, Document } from "mongoose"
+import type { findByProviderAccountId } from "./OAuthAccount.statics"
 
 export type OAuthAccountData = {
     provider: OAuthProvider

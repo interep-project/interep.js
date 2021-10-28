@@ -1,6 +1,6 @@
 import { model, models } from "mongoose"
 import OAuthAccountSchema from "./OAuthAccount.schema"
-import { OAuthAccountDocument, OAuthAccountModel } from "./OAuthAccount.types"
+import type { OAuthAccountDocument, OAuthAccountModel } from "./OAuthAccount.types"
 
 const MODEL_NAME = "OAuthAccount"
 

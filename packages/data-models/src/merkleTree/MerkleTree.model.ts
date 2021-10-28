@@ -1,6 +1,6 @@
 import { model, models } from "mongoose"
 import { MerkleTreeNodeSchema, MerkleTreeZeroSchema } from "./MerkleTree.schema"
-import {
+import type {
     MerkleTreeNodeDocument,
     MerkleTreeNodeModel,
     MerkleTreeZeroDocument,

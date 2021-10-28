@@ -1,7 +1,7 @@
 import type { OAuthProvider } from "@interrep/reputation-criteria"
-import { Model, Document } from "mongoose"
-import { Transaction } from "../transaction/Transaction.types"
-import { findByUserAddress } from "./Token.statics"
+import type { Document, Model } from "mongoose"
+import type { Transaction } from "../transaction/Transaction.types"
+import type { findByUserAddress } from "./Token.statics"
 
 export enum TokenStatus {
     NOT_MINTED = "NOT_MINTED",
