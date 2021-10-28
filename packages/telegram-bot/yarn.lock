@@ -7,7 +7,7 @@
   resolved "https://registry.yarnpkg.com/@grammyjs/types/-/types-2.2.6.tgz#0d19249a63e483ab0a0a014d5979e028c5444d29"
   integrity sha512-O16e0WxwOLWUGvvtH+FgwSxKvg414dcMAjQAYrotVAVF2P5qOU+NHqbbY/sgVdDKs/uqimhjt/z8IGVeGZYocw==
 
-"@interrep/data-models@~0.1.1":
+"@interrep/data-models@~0.1.2":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@interrep/data-models/-/data-models-0.1.1.tgz#9d9773a71e686a1df4ef0322cbed3263a9b8e786"
   integrity sha512-sNBCJtFqXrBoxPuB6A01N7OyN1GJWEPUQoRKpoYePNb+490dJpRj5U0wODdYsa48h3gV79oakIEavWyeeNgBig==
