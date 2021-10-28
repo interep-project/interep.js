@@ -31,7 +31,6 @@
 
 <div align="center">
     <h4>
-        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <a href="https://docs.interrep.link/contributing">
             👥 Contributing
         </a>
