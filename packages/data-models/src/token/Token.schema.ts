@@ -1,4 +1,4 @@
-import { Provider } from "@interrep/reputation-criteria"
+import { OAuthProvider } from "@interrep/reputation-criteria"
 import { Schema } from "mongoose"
 import { TransactionSchema } from "../transaction/Transaction.schema"
 import { findByUserAddress } from "./Token.statics"
@@ -15,7 +15,7 @@ const TokenSchemaFields: Record<keyof TokenData, any> = {
     mintTransactions: [TransactionSchema],
     provider: {
         type: String,
-        enum: Object.values(Provider),
+        enum: Object.values(OAuthProvider),
         required: true
     }
 }

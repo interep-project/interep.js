@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@interrep/reputation-criteria@^0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@interrep/reputation-criteria/-/reputation-criteria-0.11.0.tgz#5c3928a72d8dc9e8cd3667ccd349b3ac740c18ac"
-  integrity sha512-R8VDSrbQb+NQw2on/4bZ8nTI3tV2vXUeL0Ywy7MuMTjqGACdKDfuGlaiVJHJrTV+LVBUfrUA9LrGcltmcjpa2g==
+"@interrep/reputation-criteria@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@interrep/reputation-criteria/-/reputation-criteria-0.12.0.tgz#c7cdb07430ee97a64be73b5764341d7a0ea871ad"
+  integrity sha512-pMhduXG2qJ23DffSpEE/ZzJCU043508tWrI/5+kUZg8Y+XzREPk5PDV+nHiXsklAuslH1kGS+JXVKb+0S44P6Q==
 
 "@rollup/pluginutils@^4.1.0":
   version "4.1.1"

@@ -1,4 +1,4 @@
-import { ReputationLevel, Provider } from "@interrep/reputation-criteria"
+import { ReputationLevel, OAuthProvider } from "@interrep/reputation-criteria"
 import { Schema } from "mongoose"
 import { findByProviderAccountId } from "./OAuthAccount.statics"
 import { OAuthAccountData, OAuthAccountDocument, OAuthAccountModel } from "./OAuthAccount.types"
@@ -6,7 +6,7 @@ import { OAuthAccountData, OAuthAccountDocument, OAuthAccountModel } from "./OAu
 const Web2AccountSchemaFields: Record<keyof OAuthAccountData, any> = {
     provider: {
         type: String,
-        enum: Object.values(Provider),
+        enum: Object.values(OAuthProvider),
         required: true
     },
     providerAccountId: { type: String, index: true, required: true },

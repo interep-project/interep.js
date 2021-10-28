@@ -1,4 +1,4 @@
-import type { Provider } from "@interrep/reputation-criteria"
+import type { OAuthProvider } from "@interrep/reputation-criteria"
 import { Model, Document } from "mongoose"
 import { Transaction } from "../transaction/Transaction.types"
 import { findByUserAddress } from "./Token.statics"
@@ -21,7 +21,7 @@ export type TokenData = {
     decimalId: string
     status: TokenStatus
     mintTransactions?: Transaction[]
-    provider: Provider
+    provider: OAuthProvider
 }
 
 export type TokenDocument = TokenData & Document
