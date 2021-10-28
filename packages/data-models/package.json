@@ -1,6 +1,6 @@
 {
     "name": "@interrep/data-models",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Mongoose schemas and models used by InterRep.",
     "main": "dist/index.node.js",
     "exports": {
