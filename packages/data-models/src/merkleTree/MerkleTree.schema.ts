@@ -1,6 +1,6 @@
 import { Schema } from "mongoose"
 import {
-    findByLevelAndIndex,
+    findByGroupAndLevelAndIndex,
     findByGroupAndHash,
     findZeroes,
     getNumberOfNodes,
@@ -34,7 +34,7 @@ const MerkleTreeNodeSchemaFields: Record<keyof MerkleTreeNodeData, any> = {
 
 export const MerkleTreeNodeSchema = new Schema<MerkleTreeNodeDocument, MerkleTreeNodeModel>(MerkleTreeNodeSchemaFields)
 
-MerkleTreeNodeSchema.statics.findByLevelAndIndex = findByLevelAndIndex
+MerkleTreeNodeSchema.statics.findByGroupAndLevelAndIndex = findByGroupAndLevelAndIndex
 MerkleTreeNodeSchema.statics.findByGroupAndHash = findByGroupAndHash
 MerkleTreeNodeSchema.statics.findByGroupProviderAndHash = findByGroupProviderAndHash
 MerkleTreeNodeSchema.statics.getGroupNamesByProvider = getGroupNamesByProvider

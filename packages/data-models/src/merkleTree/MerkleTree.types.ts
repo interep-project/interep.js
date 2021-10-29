@@ -1,6 +1,6 @@
 import type { Model, Document } from "mongoose"
 import type {
-    findByLevelAndIndex,
+    findByGroupAndLevelAndIndex,
     findByGroupAndHash,
     findZeroes,
     getNumberOfNodes,
@@ -25,7 +25,7 @@ export type MerkleTreeNodeData = {
 export type MerkleTreeNodeDocument = MerkleTreeNodeData & Document
 
 export type MerkleTreeNodeModel = Model<MerkleTreeNodeDocument> & {
-    findByLevelAndIndex: typeof findByLevelAndIndex
+    findByGroupAndLevelAndIndex: typeof findByGroupAndLevelAndIndex
     findByGroupAndHash: typeof findByGroupAndHash
     findByGroupProviderAndHash: typeof findByGroupProviderAndHash
     getGroupNamesByProvider: typeof getGroupNamesByProvider
