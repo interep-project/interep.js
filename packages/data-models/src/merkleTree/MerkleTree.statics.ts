@@ -7,7 +7,7 @@ export async function findByGroupAndLevelAndIndex(
     level: number,
     index: number
 ): Promise<MerkleTreeNodeDocument | null> {
-    return this.findOne({ group, level, index }).populate("parent")
+    return this.findOne({ "group.provider": group.provider, "group.name": group.name, level, index }).populate("parent")
 }
 
 export async function findByGroupAndHash(
@@ -15,7 +15,7 @@ export async function findByGroupAndHash(
     group: Group,
     hash: string
 ): Promise<MerkleTreeNodeDocument | null> {
-    return this.findOne({ group, hash }).populate("parent")
+    return this.findOne({ "group.provider": group.provider, "group.name": group.name, hash }).populate("parent")
 }
 
 export async function findByGroupProviderAndHash(
@@ -31,7 +31,7 @@ export async function getGroupNamesByProvider(this: typeof MerkleTreeNode, provi
 }
 
 export async function getNumberOfNodes(this: typeof MerkleTreeNode, group: Group, level: number): Promise<number> {
-    return this.countDocuments({ group, level })
+    return this.countDocuments({ "group.provider": group.provider, "group.name": group.name, level })
 }
 
 export async function findZeroes(this: typeof MerkleTreeZero): Promise<MerkleTreeZeroDocument[] | null> {
