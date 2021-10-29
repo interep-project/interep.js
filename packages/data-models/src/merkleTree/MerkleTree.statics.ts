@@ -1,20 +1,21 @@
 import type { MerkleTreeNode, MerkleTreeZero } from "./MerkleTree.model"
 import type { Group, MerkleTreeNodeDocument, MerkleTreeZeroDocument } from "./MerkleTree.types"
 
-export async function findByLevelAndIndex(
+export async function findByGroupAndLevelAndIndex(
     this: typeof MerkleTreeNode,
+    group: Group,
     level: number,
     index: number
 ): Promise<MerkleTreeNodeDocument | null> {
-    return this.findOne({ level, index }).populate("parent")
+    return this.findOne({ group, level, index }).populate("parent")
 }
 
 export async function findByGroupAndHash(
     this: typeof MerkleTreeNode,
-    group: Omit<Group, "size">,
+    group: Group,
     hash: string
 ): Promise<MerkleTreeNodeDocument | null> {
-    return this.findOne({ "group.provider": group.provider, "group.name": group.name, hash }).populate("parent")
+    return this.findOne({ group, hash }).populate("parent")
 }
 
 export async function findByGroupProviderAndHash(
@@ -29,12 +30,8 @@ export async function getGroupNamesByProvider(this: typeof MerkleTreeNode, provi
     return this.distinct("group.name", { "group.provider": provider })
 }
 
-export async function getNumberOfNodes(
-    this: typeof MerkleTreeNode,
-    group: Omit<Group, "size">,
-    level: number
-): Promise<number> {
-    return this.countDocuments({ "group.provider": group.provider, "group.name": group.name, level })
+export async function getNumberOfNodes(this: typeof MerkleTreeNode, group: Group, level: number): Promise<number> {
+    return this.countDocuments({ group, level })
 }
 
 export async function findZeroes(this: typeof MerkleTreeZero): Promise<MerkleTreeZeroDocument[] | null> {
