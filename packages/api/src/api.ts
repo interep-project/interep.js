@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { OAuthProvider } from "@interrep/reputation-criteria"
 import { AxiosRequestConfig } from "axios"
 import checkParameter from "./checkParameter"
 import checkProvider from "./checkProvider"
@@ -7,8 +9,7 @@ import { Environment } from "./types/config"
 import {
     AddIdentityCommitmentRequest,
     CheckIdentityCommitmentRequest,
-    GetMerkleTreePathRequest,
-    Web2Provider
+    GetMerkleTreePathRequest
 } from "./types/requestParameters"
 
 export default class API {
@@ -44,7 +45,7 @@ export default class API {
         return request(`${this.url}/providers/${provider}/${identityCommitment}/check`)
     }
 
-    async addIdentityCommitment(parameters: AddIdentityCommitmentRequest): Promise<string> {
+    async addIdentityCommitment(parameters: AddIdentityCommitmentRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name, identityCommitment, authenticationHeader, userAddress, userSignature } = parameters
@@ -56,7 +57,7 @@ export default class API {
 
         const config: AxiosRequestConfig = { method: "post" }
 
-        if (Object.values(Web2Provider).includes(provider as Web2Provider)) {
+        if (Object.values(OAuthProvider).includes(provider as OAuthProvider)) {
             checkParameter(authenticationHeader, "authentication header", "string")
 
             config.headers = { Authentication: authenticationHeader as string }

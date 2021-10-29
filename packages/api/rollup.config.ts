@@ -1,8 +1,9 @@
 import typescript from "rollup-plugin-typescript2"
 import { terser } from "rollup-plugin-terser"
+import { nodeResolve } from "@rollup/plugin-node-resolve"
+import fs from "fs"
 
-const pkg = require("./package.json")
-
+const pkg = JSON.parse(fs.readFileSync("./package.json", "utf8"))
 const banner = `/**
  * @module ${pkg.name}
  * @version ${pkg.version}
@@ -34,6 +35,6 @@ export default {
         { file: pkg.exports.require, format: "cjs", banner, exports: "auto" },
         { file: pkg.exports.import, format: "es", banner }
     ],
-    external: Object.keys(pkg.dependencies),
-    plugins: [typescript({ useTsconfigDeclarationDir: true })]
+    external: ["axios"],
+    plugins: [typescript({ useTsconfigDeclarationDir: true }), nodeResolve()]
 }

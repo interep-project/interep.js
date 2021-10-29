@@ -1,14 +1,10 @@
-export enum Web2Provider {
-    TWITTER = "twitter",
-    GITHUB = "github",
-    REDDIT = "reddit"
-}
+import type { OAuthProvider } from "@interrep/reputation-criteria"
 
 export enum Web3Provider {
     POAP = "poap"
 }
 
-export type Provider = Web2Provider | Web3Provider
+export type Provider = OAuthProvider | Web3Provider | "telegram"
 
 export type CheckIdentityCommitmentRequest = {
     provider: Provider

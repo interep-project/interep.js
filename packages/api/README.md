@@ -49,7 +49,7 @@
 
 ## 🛠 Install
 
-### npm or yarn
+### NPM or Yarn 
 
 Install the `@interrep/api` package with npm:
 
@@ -68,12 +68,14 @@ yarn add @interrep/api
 You can also load it using a `script` tag using [unpkg](https://unpkg.com/):
 
 ```html
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/@interrep/api/"></script>
 ```
 
 or [JSDelivr](https://www.jsdelivr.com/):
 
 ```html
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@interrep/api/"></script>
 ```
 
@@ -111,7 +113,7 @@ const providers = await api.getProviders()
 
 ```typescript
 // For any provider group.
-await api.checkIdentityCommitment({
+const hasIdentityCommitment = await api.checkIdentityCommitment({
     provider: "twitter",
     identityCommitment: "1231231..."
 })
@@ -121,7 +123,7 @@ await api.checkIdentityCommitment({
 
 ```typescript
 // For specific group.
-await api.checkIdentityCommitment({
+const hasIdentityCommitment = await api.checkIdentityCommitment({
     provider: "twitter",
     name: "GOLD",
     identityCommitment: "1231231..."
@@ -130,11 +132,11 @@ await api.checkIdentityCommitment({
 
 > API: [/api/groups/:provider/:name/:identityCommitment/check](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitmentcheck)
 
-\# **api.addIdentityCommitment**(parameters: _AddIdentityCommitmentRequest_): Promise<_string[]_>
+\# **api.addIdentityCommitment**(parameters: _AddIdentityCommitmentRequest_): _Promise<boolean\>_
 
 ```typescript
 // For Web2 providers.
-const rootHash = await api.addIdentityCommitment({
+await api.addIdentityCommitment({
     provider: "twitter",
     name: "GOLD",
     identityCommitment: "1231231...",
@@ -144,7 +146,7 @@ const rootHash = await api.addIdentityCommitment({
 
 ```typescript
 // For Web3 providers.
-const rootHash = await api.addIdentityCommitment({
+await api.addIdentityCommitment({
     provider: "poap",
     name: "DEVCON_4",
     identityCommitment: "1231231...",
@@ -155,10 +157,10 @@ const rootHash = await api.addIdentityCommitment({
 
 > API: [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
 
-\# **api.getMerkleTreePath**(parameters: _GetMerkleTreePathRequest_): Promise<_any_>
+\# **api.getMerkleTreePath**(parameters: _GetMerkleTreePathRequest_): _Promise<any\>_
 
 ```typescript
-const rootHash = await api.getMerkleTreePath({
+const path = await api.getMerkleTreePath({
     provider: "twitter",
     name: "GOLD",
     identityCommitment: "1231231..."

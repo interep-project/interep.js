@@ -1,5 +1,6 @@
+import { OAuthProvider } from "@interrep/reputation-criteria"
+import { API, Web3Provider } from "../src"
 import request from "../src/request"
-import { API, Web2Provider, Web3Provider } from "../src"
 
 jest.mock("../src/request", () => ({
     __esModule: true,
@@ -80,7 +81,7 @@ describe("InterRep API", () => {
             requestMocked.mockImplementationOnce(() => Promise.resolve(false))
 
             const expectedValue = await api.checkIdentityCommitment({
-                provider: Web2Provider.TWITTER,
+                provider: OAuthProvider.TWITTER,
                 identityCommitment: "23131231231"
             })
 
@@ -92,7 +93,7 @@ describe("InterRep API", () => {
             requestMocked.mockImplementationOnce(() => Promise.resolve(false))
 
             const expectedValue = await api.checkIdentityCommitment({
-                provider: Web2Provider.TWITTER,
+                provider: OAuthProvider.TWITTER,
                 name: "GOLD",
                 identityCommitment: "23131231231"
             })
@@ -103,22 +104,22 @@ describe("InterRep API", () => {
     })
 
     describe("Add identity commitment", () => {
-        it("Should add an identity commitment for a Web2 group", async () => {
-            requestMocked.mockImplementationOnce(() => Promise.resolve("rootHash"))
+        it("Should add an identity commitment for a OAuth group", async () => {
+            requestMocked.mockImplementationOnce(() => Promise.resolve(true))
 
             const expectedValue = await api.addIdentityCommitment({
-                provider: Web2Provider.TWITTER,
+                provider: OAuthProvider.TWITTER,
                 name: "GOLD",
                 identityCommitment: "23131231231",
                 authenticationHeader: "token 3ao32423"
             })
 
             expect(expectedValue).not.toBeUndefined()
-            expect(expectedValue).toEqual("rootHash")
+            expect(expectedValue).toEqual(true)
         })
 
         it("Should add an identity commitment for a Web3 group", async () => {
-            requestMocked.mockImplementationOnce(() => Promise.resolve("rootHash"))
+            requestMocked.mockImplementationOnce(() => Promise.resolve(true))
 
             const expectedValue = await api.addIdentityCommitment({
                 provider: Web3Provider.POAP,
@@ -129,7 +130,7 @@ describe("InterRep API", () => {
             })
 
             expect(expectedValue).not.toBeUndefined()
-            expect(expectedValue).toEqual("rootHash")
+            expect(expectedValue).toEqual(true)
         })
     })
 
@@ -140,7 +141,7 @@ describe("InterRep API", () => {
             )
 
             const expectedValue = await api.getMerkleTreePath({
-                provider: Web2Provider.TWITTER,
+                provider: OAuthProvider.TWITTER,
                 name: "GOLD",
                 identityCommitment: "23131231231"
             })
