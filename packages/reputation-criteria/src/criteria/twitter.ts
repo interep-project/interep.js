@@ -1,67 +1,17 @@
-import { Criteria } from "../types/criteria"
+import { ReputationLevel } from "../config"
+import { ProviderCriteria, TwitterParameters } from "../types"
 
-export default {
-    provider: "twitter",
-    parameters: [
-        { name: "followers", type: "number" },
-        { name: "botometerOverallScore", type: "number" },
-        { name: "verifiedProfile", type: "boolean" }
-    ],
-    reputationLevels: [
-        {
-            name: "GOLD",
-            rules: [
-                {
-                    parameter: "verifiedProfile",
-                    value: true
-                },
-                {
-                    parameter: "followers",
-                    value: {
-                        min: 7000
-                    }
-                },
-                {
-                    parameter: "botometerOverallScore",
-                    value: {
-                        max: 1
-                    }
-                }
-            ]
-        },
-        {
-            name: "SILVER",
-            rules: [
-                {
-                    parameter: "followers",
-                    value: {
-                        min: 2000
-                    }
-                },
-                {
-                    parameter: "botometerOverallScore",
-                    value: {
-                        max: 1.5
-                    }
-                }
-            ]
-        },
-        {
-            name: "BRONZE",
-            rules: [
-                {
-                    parameter: "followers",
-                    value: {
-                        min: 500
-                    }
-                },
-                {
-                    parameter: "botometerOverallScore",
-                    value: {
-                        max: 2
-                    }
-                }
-            ]
-        }
-    ]
-} as Criteria
+const twitterCriteria: ProviderCriteria<TwitterParameters> = {
+    maxValues: {
+        botScore: 1,
+        followers: 1,
+        verifiedProfile: 1
+    },
+    reputationThresholds: {
+        [ReputationLevel.GOLD]: 12,
+        [ReputationLevel.SILVER]: 12,
+        [ReputationLevel.BRONZE]: 12
+    }
+}
+
+export default twitterCriteria
