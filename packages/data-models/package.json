@@ -31,6 +31,7 @@
         "access": "public"
     },
     "devDependencies": {
+        "mongodb-memory-server": "^8.0.0",
         "rimraf": "^3.0.2",
         "rollup": "^2.56.2",
         "rollup-plugin-typescript2": "^0.30.0"
