@@ -102,7 +102,7 @@ await bot.start()
 
 ```typescript
 import { sha256 } from "@interrep/telegram-bot"
-import { TelegramUser } from "@interrep/data-models"
+import { TelegramUser } from "@interrep/db"
 
 const hashId = sha256("user id + group id")
 const telegramUser = TelegramUser.findByHashId(hashId)

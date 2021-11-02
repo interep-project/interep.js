@@ -1,4 +1,4 @@
-import { TelegramUser } from "@interrep/data-models"
+import { TelegramUser } from "@interrep/db"
 import { Chat, Message, User } from "grammy/out/platform.node"
 import InterRepBot from "../bot"
 import sha256 from "../sha256"

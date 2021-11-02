@@ -1,9 +1,9 @@
+import { connect } from "@interrep/db"
 import { Bot, PollingOptions } from "grammy"
 import join from "./commands/join"
 import leave from "./commands/leave"
 import showHelpMessage from "./commands/showHelpMessage"
 import showStartMessage from "./commands/showStartMessage"
-import connectDB from "./connectDB"
 
 export default class InterRepBot extends Bot {
     readonly mongodbUrl: string
@@ -28,7 +28,7 @@ export default class InterRepBot extends Bot {
     }
 
     async start(options?: PollingOptions): Promise<void> {
-        await connectDB(this.mongodbUrl)
+        await connect(this.mongodbUrl)
         await super.start(options)
     }
 }
