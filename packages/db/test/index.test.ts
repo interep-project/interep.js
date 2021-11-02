@@ -58,9 +58,7 @@ describe("InterRep db", () => {
         })
 
         it("Should connect a MongoDB instance with an error listener", async () => {
-            const expectedValue = await connect(mms.getUri(), (error) => {
-                console.log(error)
-            })
+            const expectedValue = await connect(mms.getUri(), (error) => error)
 
             expect(expectedValue).toBeTruthy()
         })
