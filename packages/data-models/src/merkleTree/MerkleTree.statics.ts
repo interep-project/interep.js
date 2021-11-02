@@ -1,5 +1,5 @@
-import type { MerkleTreeNode, MerkleTreeZero } from "./MerkleTree.model"
-import type { Group, MerkleTreeNodeDocument, MerkleTreeZeroDocument } from "./MerkleTree.types"
+import type { MerkleTreeNode } from "./MerkleTree.model"
+import type { Group, MerkleTreeNodeDocument } from "./MerkleTree.types"
 
 export async function findByGroupAndLevelAndIndex(
     this: typeof MerkleTreeNode,
@@ -32,8 +32,4 @@ export async function getGroupNamesByProvider(this: typeof MerkleTreeNode, provi
 
 export async function getNumberOfNodes(this: typeof MerkleTreeNode, group: Group, level: number): Promise<number> {
     return this.countDocuments({ "group.provider": group.provider, "group.name": group.name, level })
-}
-
-export async function findZeroes(this: typeof MerkleTreeZero): Promise<MerkleTreeZeroDocument[] | null> {
-    return this.find()
 }

@@ -2,7 +2,6 @@ import { Schema } from "mongoose"
 import {
     findByGroupAndLevelAndIndex,
     findByGroupAndHash,
-    findZeroes,
     getNumberOfNodes,
     findByGroupProviderAndHash,
     getGroupNamesByProvider
@@ -46,5 +45,3 @@ export const MerkleTreeZeroSchemaFields: Record<keyof MerkleTreeZeroData, any> =
 }
 
 export const MerkleTreeZeroSchema = new Schema<MerkleTreeZeroDocument, MerkleTreeZeroModel>(MerkleTreeZeroSchemaFields)
-
-MerkleTreeZeroSchema.statics.findZeroes = findZeroes

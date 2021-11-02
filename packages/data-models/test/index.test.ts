@@ -1,5 +1,18 @@
+import { OAuthProvider } from "@interrep/reputation-criteria"
 import { MongoMemoryServer } from "mongodb-memory-server"
-import { connect, disconnect, drop, getState, clear, TelegramUser } from "../src"
+import {
+    connect,
+    disconnect,
+    drop,
+    getState,
+    clear,
+    TelegramUser,
+    OAuthAccount,
+    MerkleTreeNode,
+    MerkleTreeZero,
+    Token,
+    TokenStatus
+} from "../src"
 
 describe("InterRep db", () => {
     let mms: MongoMemoryServer
@@ -31,6 +44,13 @@ describe("InterRep db", () => {
             await expect(promise).rejects.toThrow()
         })
 
+        it("Should not connect a MongoDB instance if it has already been connected", async () => {
+            await connect(mms.getUri())
+            const expectedValue = await connect(mms.getUri())
+
+            expect(expectedValue).toBeFalsy()
+        })
+
         it("Should connect a MongoDB instance", async () => {
             const expectedValue = await connect(mms.getUri())
 
@@ -47,7 +67,13 @@ describe("InterRep db", () => {
     })
 
     describe("Disconnect", () => {
-        it("Should disconnect a MongoDB", async () => {
+        it("Should not disconnect a MongoDB instance if it has not yet been connected", async () => {
+            const expectedValue = await disconnect()
+
+            expect(expectedValue).toBeFalsy()
+        })
+
+        it("Should disconnect a MongoDB instance", async () => {
             await connect(mms.getUri())
 
             const expectedValue = await disconnect()
@@ -57,15 +83,18 @@ describe("InterRep db", () => {
     })
 
     describe("Drop", () => {
-        beforeAll(async () => {
-            await connect(mms.getUri())
-        })
-
         afterAll(async () => {
             await disconnect()
         })
 
+        it("Should not drop any db if there is no connected db", async () => {
+            const expectedValue = await drop()
+
+            expect(expectedValue).toBeFalsy()
+        })
+
         it("Should drop a db", async () => {
+            await connect(mms.getUri())
             await TelegramUser.create({ hashId: "hash", joined: false })
             await drop()
 
@@ -76,21 +105,198 @@ describe("InterRep db", () => {
     })
 
     describe("Clear", () => {
-        beforeAll(async () => {
-            await connect(mms.getUri())
-        })
-
         afterAll(async () => {
             await disconnect()
         })
 
+        it("Should not clear any db collection if there is no connected db", async () => {
+            const expectedValue = await clear()
+
+            expect(expectedValue).toBeFalsy()
+        })
+
         it("Should clear all the db collections", async () => {
+            await connect(mms.getUri())
             await TelegramUser.create({ hashId: "hash", joined: false })
             await clear()
 
             const expectedValue = await TelegramUser.findOne({ hashId: "hash" })
 
             expect(expectedValue).toBeNull()
+        })
+    })
+
+    describe("OAuthAccount", () => {
+        beforeAll(async () => {
+            await connect(mms.getUri())
+        })
+
+        afterAll(async () => {
+            await clear()
+            await disconnect()
+        })
+
+        it("Should create an OAuthAccount entity", async () => {
+            await OAuthAccount.create({
+                provider: OAuthProvider.TWITTER,
+                providerAccountId: "12321",
+                uniqueKey: `${OAuthProvider.TWITTER}:12321`,
+                isLinkedToAddress: false,
+                createdAt: Date.now()
+            })
+
+            const expectedValue = await OAuthAccount.countDocuments()
+
+            expect(expectedValue).toBe(1)
+        })
+
+        it("Should find an OAuth account by provider and provider account id", async () => {
+            const expectedValue = await OAuthAccount.findByProviderAccountId(OAuthProvider.TWITTER, "12321")
+
+            expect(expectedValue).not.toBeNull()
+        })
+    })
+
+    describe("MerkleTree", () => {
+        beforeAll(async () => {
+            await connect(mms.getUri())
+        })
+
+        afterAll(async () => {
+            await clear()
+            await disconnect()
+        })
+
+        it("Should create a MerkleTreeNode entity", async () => {
+            await MerkleTreeNode.create({
+                group: {
+                    provider: OAuthProvider.TWITTER,
+                    name: "GOLD"
+                },
+                level: 1,
+                index: 1,
+                hash: "hash"
+            })
+
+            const expectedValue = await MerkleTreeNode.countDocuments()
+
+            expect(expectedValue).toBe(1)
+        })
+
+        it("Should create a MerkleTreeZero entity", async () => {
+            await MerkleTreeZero.create({
+                level: 1,
+                hash: "hash"
+            })
+
+            const expectedValue = await MerkleTreeZero.countDocuments()
+
+            expect(expectedValue).toBe(1)
+        })
+
+        it("Should get the number of nodes", async () => {
+            const expectedValue = await MerkleTreeNode.getNumberOfNodes(
+                { provider: OAuthProvider.TWITTER, name: "GOLD" },
+                1
+            )
+
+            expect(expectedValue).toBe(1)
+        })
+
+        it("Should get group names by provider", async () => {
+            const expectedValue = await MerkleTreeNode.getGroupNamesByProvider(OAuthProvider.TWITTER)
+
+            expect(expectedValue).toEqual(["GOLD"])
+        })
+
+        it("Should find a node by group provider and hash", async () => {
+            const expectedValue = await MerkleTreeNode.findByGroupProviderAndHash(OAuthProvider.TWITTER, "hash")
+
+            expect(expectedValue).not.toBeNull()
+        })
+
+        it("Should find a node by group and hash", async () => {
+            const expectedValue = await MerkleTreeNode.findByGroupAndHash(
+                { provider: OAuthProvider.TWITTER, name: "GOLD" },
+                "hash"
+            )
+
+            expect(expectedValue).not.toBeNull()
+        })
+
+        it("Should find a node by group, level and index", async () => {
+            const expectedValue = await MerkleTreeNode.findByGroupAndLevelAndIndex(
+                {
+                    provider: OAuthProvider.TWITTER,
+                    name: "GOLD"
+                },
+                1,
+                1
+            )
+
+            expect(expectedValue).not.toBeNull()
+        })
+    })
+
+    describe("TelegramUser", () => {
+        beforeAll(async () => {
+            await connect(mms.getUri())
+        })
+
+        afterAll(async () => {
+            await clear()
+            await disconnect()
+        })
+
+        it("Should create a TelegramUser entity", async () => {
+            await TelegramUser.create({
+                hashId: "hashId",
+                joined: true
+            })
+
+            const expectedValue = await TelegramUser.countDocuments()
+
+            expect(expectedValue).toBe(1)
+        })
+
+        it("Should find a Telegram user by hash id", async () => {
+            const expectedValue = await TelegramUser.findByHashId("hashId")
+
+            expect(expectedValue).not.toBeNull()
+        })
+    })
+
+    describe("Token", () => {
+        beforeAll(async () => {
+            await connect(mms.getUri())
+        })
+
+        afterAll(async () => {
+            await clear()
+            await disconnect()
+        })
+
+        it("Should create a Token entity", async () => {
+            await Token.create({
+                chainId: 1,
+                contractAddress: "userAddress",
+                userAddress: "userAddress",
+                encryptedAttestation: "encryptedAttestation",
+                issuanceTimestamp: Date.now(),
+                decimalId: "decimalId",
+                status: TokenStatus.NOT_MINTED,
+                provider: OAuthProvider.TWITTER
+            })
+
+            const expectedValue = await Token.countDocuments()
+
+            expect(expectedValue).toBe(1)
+        })
+
+        it("Should find a Token by user address", async () => {
+            const expectedValue = await Token.findByUserAddress("userAddress")
+
+            expect(expectedValue).not.toBeNull()
         })
     })
 })
