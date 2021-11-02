@@ -1,3 +1,4 @@
+import { ZkIdentity } from "@libsem/identity"
 import semethid from "../src"
 
 describe("Semaphore Ethereum identity", () => {
@@ -11,7 +12,7 @@ describe("Semaphore Ethereum identity", () => {
 
             const expectedValue = await semethid(sign, web2Provider)
 
-            expect(typeof expectedValue).toEqual("string")
+            expect(expectedValue).toBeInstanceOf(ZkIdentity)
         })
 
         it("Should create a Semaphore identity commitment with a nonce", async () => {
@@ -19,7 +20,7 @@ describe("Semaphore Ethereum identity", () => {
 
             const expectedValue = await semethid(sign, web2Provider, 1)
 
-            expect(typeof expectedValue).toEqual("string")
+            expect(expectedValue).toBeInstanceOf(ZkIdentity)
         })
     })
 })
