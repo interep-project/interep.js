@@ -2,7 +2,7 @@
     <h1 align="center">
         Semaphore Ethereum identities
     </h1>
-    <p align="center">A simple JS library to create Semaphore identity commitments by deriving it from a signed message.</p>
+    <p align="center">A simple JS function to create Semaphore identities by deriving them from Ethereum signed messages.</p>
 </p>
 
 <p align="center">
@@ -69,10 +69,11 @@ yarn add @interrep/semethid
 
 ## 📜 Usage
 
-\# **semethid**(sign: _(message: string) => Promise\<string\>_, web2Provider: _string_, nonce?: _number_): _string_
+\# **semethid**(sign: _(message: string) => Promise\<string\>_, provider: _string_, nonce?: _number_): _ZKIdentity_
 
 ```typescript
 import semethid from "@interrep/semethid"
+import { ZkIdentity } from "@libsem/identity"
 import detectEthereumProvider from "@metamask/detect-provider"
 import { ethers } from "ethers"
 
@@ -80,5 +81,5 @@ const ethereumProvider = (await detectEthereumProvider()) as any
 const provider = new ethers.providers.Web3Provider(ethereumProvider)
 const signer = provider.getSigner()
 
-const identityCommitment = await semethid((message) => signer.signMessage(message), "twitter")
+const identity: ZkIdentity = await semethid((message) => signer.signMessage(message), "twitter")
 ```

@@ -1,22 +1,21 @@
 import { ZkIdentity, Strategy } from "@libsem/identity"
 
 /**
- * Create a Semaphore identity commitment by deriving it from a signed message.
- * The signed message should contain the Web2 provider and a nonce.
+ * Create a Semaphore identity by deriving it from a signed message.
+ * The signed message should contain an InterRep provider and a nonce.
  * @param sign The function to sign the message.
- * @param web2Provider The InterRep Web2 provider of the message (e.g. twitter).
+ * @param provider The InterRep provider of the message (e.g. twitter).
  * @param nonce The nonce of the message.
- * @returns A Semaphore identity commitment.
+ * @returns A Semaphore identity class.
  */
 export default async function semethid(
     sign: (message: string) => Promise<string>,
-    web2Provider: string,
+    provider: string,
     nonce = 0
-): Promise<string> {
+): Promise<ZkIdentity> {
     const message = await sign(
-        `Sign this message to generate your ${web2Provider} Semaphore identity with key nonce: ${nonce}.`
+        `Sign this message to generate your ${provider} Semaphore identity with key nonce: ${nonce}.`
     )
-    const identity = new ZkIdentity(Strategy.MESSAGE, message)
 
-    return identity.genIdentityCommitment().toString()
+    return new ZkIdentity(Strategy.MESSAGE, message)
 }

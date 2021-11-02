@@ -80,31 +80,33 @@ const theme = createTheme({
 
 function App() {
     const classes = useStyles()
-    const [provider, setProvider] = React.useState<any>()
-    const [account, setAccount] = React.useState<string>("")
-    const [identityCommitment, setIdentityCommitment] = React.useState<any>()
-    const [web2Provider, setWeb2Provider] = React.useState<string>("")
-    const [activeStep, setActiveStep] = React.useState(0)
+    const [_provider, setProvider] = React.useState<any>()
+    const [_account, setAccount] = React.useState<string>("")
+    const [_identityCommitment, setIdentityCommitment] = React.useState<any>()
+    const [_identityNullifier, setIdentityNullifier] = React.useState<any>()
+    const [_identityTrapdoor, setIdentityTrapdoor] = React.useState<any>()
+    const [_oAuthProvider, setOAuthProvider] = React.useState<string>("")
+    const [_activeStep, setActiveStep] = React.useState(0)
 
     React.useEffect(() => {
         ;(async function IIFE() {
-            if (!provider) {
-                const newProvider = (await detectEthereumProvider()) as any
+            if (!_provider) {
+                const provider = (await detectEthereumProvider()) as any
 
-                if (newProvider) {
-                    setProvider(newProvider)
+                if (provider) {
+                    setProvider(provider)
                 } else {
                     console.error("Please install MetaMask!")
                 }
             } else {
-                const accounts = await provider.request({ method: "eth_accounts" })
+                const accounts = await _provider.request({ method: "eth_accounts" })
 
                 if (accounts.lenght !== 0 && accounts[0]) {
                     setAccount(accounts[0])
                     setActiveStep(1)
                 }
 
-                provider.on("accountsChanged", (newAccounts: string[]) => {
+                _provider.on("accountsChanged", (newAccounts: string[]) => {
                     if (newAccounts.length !== 0) {
                         setAccount(newAccounts[0])
                     } else {
@@ -115,7 +117,7 @@ function App() {
                 })
             }
         })()
-    }, [provider])
+    }, [_provider])
 
     function handleNext() {
         setActiveStep((prevActiveStep) => prevActiveStep + 1)
@@ -127,16 +129,22 @@ function App() {
     }
 
     async function connect() {
-        await provider.request({ method: "eth_requestAccounts" })
+        await _provider.request({ method: "eth_requestAccounts" })
         setActiveStep(1)
     }
 
-    async function createIdentityCommitment() {
-        const ethersProvider = new ethers.providers.Web3Provider(provider)
+    async function createIdentity() {
+        const ethersProvider = new ethers.providers.Web3Provider(_provider)
         const signer = ethersProvider.getSigner()
-        const newIdentityCommitment = await semethid((message: string) => signer.signMessage(message), web2Provider)
+        const identity = await semethid((message: string) => signer.signMessage(message), _oAuthProvider)
 
-        setIdentityCommitment(newIdentityCommitment)
+        const { identityTrapdoor, identityNullifier } = identity.getIdentity()
+        const identityCommitment = identity.genIdentityCommitment()
+
+        setIdentityTrapdoor(identityTrapdoor.toString())
+        setIdentityNullifier(identityNullifier.toString())
+        setIdentityCommitment(identityCommitment.toString())
+
         setActiveStep(3)
     }
 
@@ -146,30 +154,30 @@ function App() {
                 <Typography variant="h4">Semethid.js</Typography>
                 <Typography variant="subtitle1">Semaphore/Ethereum id commitments</Typography>
 
-                <Stepper activeStep={activeStep} orientation="vertical">
+                <Stepper activeStep={_activeStep} orientation="vertical">
                     <Step>
                         <StepLabel>Connect to MetaMask</StepLabel>
                         <StepContent style={{ width: 400 }}>
-                            <Button onClick={() => connect()} variant="outlined">
+                            <Button onClick={() => connect()} variant="outlined" disabled={!_provider}>
                                 Connect
                             </Button>
                         </StepContent>
                     </Step>
                     <Step>
-                        <StepLabel>Enter the Web2 provider</StepLabel>
+                        <StepLabel>Enter a provider</StepLabel>
                         <StepContent style={{ width: 400 }}>
                             <Paper component="form" className={classes.inputPaper}>
                                 <InputBase
                                     className={classes.input}
                                     placeholder="Twitter"
-                                    onChange={(event) => setWeb2Provider(event.target.value)}
-                                    value={web2Provider}
+                                    onChange={(event) => setOAuthProvider(event.target.value)}
+                                    value={_oAuthProvider}
                                 />
                                 <Divider className={classes.divider} orientation="vertical" />
                                 <IconButton
                                     onClick={() => handleNext()}
                                     className={classes.iconButton}
-                                    disabled={!web2Provider}
+                                    disabled={!_oAuthProvider}
                                     color="secondary"
                                 >
                                     <CheckIcon />
@@ -178,31 +186,47 @@ function App() {
                         </StepContent>
                     </Step>
                     <Step>
-                        <StepLabel>Create an identity commitment</StepLabel>
+                        <StepLabel>Create an identity</StepLabel>
                         <StepContent style={{ width: 400 }}>
-                            <Button onClick={() => createIdentityCommitment()} variant="outlined">
+                            <Button onClick={() => createIdentity()} variant="outlined">
                                 Create Semaphore identity
                             </Button>
                         </StepContent>
                     </Step>
                 </Stepper>
                 <Paper className={classes.results}>
-                    {identityCommitment && (
+                    {_identityCommitment && (
                         <IconButton onClick={() => resetSteps()} className={classes.resetButton} color="secondary">
                             <ReplayIcon />
                         </IconButton>
                     )}
                     <List>
-                        {account && (
+                        {_account && (
                             <ListItem className={classes.listItem}>
-                                <ListItemText primary="Selected account" secondary={account} />
+                                <ListItemText primary="Selected account" secondary={_account} />
                             </ListItem>
                         )}
-                        {identityCommitment && (
+                        {_identityTrapdoor && (
+                            <ListItem className={classes.listItem}>
+                                <ListItemText
+                                    primary="Identity trapdoor"
+                                    secondary={`${_identityTrapdoor.substr(0, 50)}...`}
+                                />
+                            </ListItem>
+                        )}
+                        {_identityNullifier && (
+                            <ListItem className={classes.listItem}>
+                                <ListItemText
+                                    primary="Identity nullifier"
+                                    secondary={`${_identityNullifier.substr(0, 50)}...`}
+                                />
+                            </ListItem>
+                        )}
+                        {_identityCommitment && (
                             <ListItem className={classes.listItem}>
                                 <ListItemText
                                     primary="Identity commitment"
-                                    secondary={`${identityCommitment.substr(0, 50)}...`}
+                                    secondary={`${_identityCommitment.substr(0, 50)}...`}
                                 />
                             </ListItem>
                         )}
