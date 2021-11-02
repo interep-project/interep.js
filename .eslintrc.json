@@ -22,6 +22,14 @@
         "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
         "no-restricted-syntax": "off",
         "import/no-cycle": "off",
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "variable",
+                "format": ["camelCase", "PascalCase", "UPPER_CASE", "snake_case"],
+                "leadingUnderscore": "allow"
+            }
+        ],
         "@typescript-eslint/lines-between-class-members": "off"
     }
 }
