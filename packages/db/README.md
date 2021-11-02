@@ -45,6 +45,8 @@
     </h4>
 </div>
 
+The `@interrep/db` package is an internal package that contains utility functions, models and methods used in the system to interact with persistent data, and its purpose is to make InterRep more database-agnostic. InterRep currently uses MongoDB and Mongoose.
+
 ---
 
 ## 🛠 Install
@@ -89,7 +91,7 @@ await disconnect()
 ```typescript
 import { clear } from "@interrep/db"
 
-await clear()
+await clear() // Delete all the db entries.
 ```
 
 \# **drop**(): _Promise<boolean\>_
@@ -97,7 +99,7 @@ await clear()
 ```typescript
 import { drop } from "@interrep/db"
 
-await drop()
+await drop() // Drop the db.
 ```
 
 \# **getState**(): _number_
@@ -116,4 +118,4 @@ Connection ready state:
 */
 ```
 
-You can find the Mongoose model of each entity on `src/<entityName>/<EntityName.model.ts>`. Each model has predefined functions and some custom static functions defined on `src/<entityName>/<EntityName>.statics.ts`. The `@interrep/db` package also exports types and models of each entity.
+You can find the model of each entity on `src/<entityName>/<EntityName.model.ts>`. Each model has predefined functions and some custom static functions defined on `src/<entityName>/<EntityName>.statics.ts`. The `@interrep/db` package also exports types and models of each entity.
