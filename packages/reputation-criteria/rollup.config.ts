@@ -1,8 +1,8 @@
 import typescript from "rollup-plugin-typescript2"
 import { terser } from "rollup-plugin-terser"
+import fs from "fs"
 
-const pkg = require("./package.json")
-
+const pkg = JSON.parse(fs.readFileSync("./package.json", "utf8"))
 const banner = `/**
  * @module ${pkg.name}
  * @version ${pkg.version}
