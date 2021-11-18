@@ -15,7 +15,7 @@
         "README.md"
     ],
     "repository": "git@github.com:InterRep/interrep.js.git",
-    "homepage": "https://github.com/InterRep/interrep.js",
+    "homepage": "https://github.com/InterRep/interrep.js/tree/main/packages/semethid",
     "author": {
         "name": "Omar Desogus",
         "email": "me@cedoor.dev",
