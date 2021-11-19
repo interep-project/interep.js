@@ -21,6 +21,7 @@
     "rules": {
         "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
         "no-restricted-syntax": "off",
+        "no-underscore-dangle": "off",
         "no-param-reassign": "off",
         "import/no-cycle": "off",
         "@typescript-eslint/naming-convention": [
