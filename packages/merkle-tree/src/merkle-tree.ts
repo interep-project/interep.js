@@ -1,3 +1,4 @@
+import checkParameter from "./checkParameter"
 import { HashFunction, Proof } from "./types"
 
 export default class MerkleTree {
@@ -10,7 +11,11 @@ export default class MerkleTree {
     hash: HashFunction
     depth: number
 
-    constructor(hash: HashFunction, depth: number, zero: BigInt = BigInt(0)) {
+    constructor(hash: HashFunction, depth: number, zeroValue: BigInt = BigInt(0)) {
+        checkParameter(hash, "hash", "function")
+        checkParameter(depth, "depth", "number")
+        checkParameter(zeroValue, "zeroValue", "bigint")
+
         if (depth < 1 || depth > MerkleTree.maxDepth) {
             throw new Error("The tree depth must be between 1 and 32")
         }
@@ -22,16 +27,18 @@ export default class MerkleTree {
         this.nodes = []
 
         for (let i = 0; i < depth; i += 1) {
-            this.zeroes.push(zero)
+            this.zeroes.push(zeroValue)
             this.nodes[i] = []
 
-            zero = hash([zero, zero])
+            zeroValue = hash([zeroValue, zeroValue])
         }
 
-        this.root = zero
+        this.root = zeroValue
     }
 
     insert(leaf: BigInt) {
+        checkParameter(leaf, "leaf", "bigint")
+
         if (leaf === this.zeroes[0]) {
             throw new Error("The leaf cannot be a zero value")
         }
@@ -59,6 +66,8 @@ export default class MerkleTree {
     }
 
     delete(index: number) {
+        checkParameter(index, "index", "number")
+
         if (index < 0 || index >= this.nodes[0].length) {
             throw new Error("The leaf does not exist in this tree")
         }
@@ -81,6 +90,8 @@ export default class MerkleTree {
     }
 
     createProof(index: number): Proof {
+        checkParameter(index, "index", "number")
+
         if (index < 0 || index >= this.nodes[0].length) {
             throw new Error("The leaf does not exist in this tree")
         }
@@ -105,6 +116,12 @@ export default class MerkleTree {
     }
 
     verifyProof(proof: Proof): boolean {
+        checkParameter(proof, "proof", "object")
+        checkParameter(proof.root, "proof.root", "bigint")
+        checkParameter(proof.leaf, "proof.leaf", "bigint")
+        checkParameter(proof.siblingNodes, "proof.siblingNodes", "object")
+        checkParameter(proof.path, "proof.path", "object")
+
         let node = proof.leaf
 
         for (let i = 0; i < proof.siblingNodes.length; i += 1) {
@@ -119,6 +136,8 @@ export default class MerkleTree {
     }
 
     indexOf(leaf: BigInt): number {
+        checkParameter(leaf, "leaf", "bigint")
+
         return this.nodes[0].indexOf(leaf)
     }
 }

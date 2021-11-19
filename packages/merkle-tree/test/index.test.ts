@@ -11,10 +11,13 @@ describe("InterRep Merkle Tree", () => {
             tree = new MerkleTree(poseidon, depth)
         })
 
-        it("Should not initialize a Merkle tree with depth > 32", () => {
-            const fun = () => new MerkleTree(poseidon, 33, BigInt(0))
+        it("Should not initialize a Merkle tree with wrong parameters", () => {
+            expect(() => new MerkleTree(undefined as any, 33)).toThrow("Parameter 'hash' is not defined")
+            expect(() => new MerkleTree(1 as any, 33)).toThrow("Parameter 'hash' is not a function")
+        })
 
-            expect(fun).toThrow("The tree depth must be between 1 and 32")
+        it("Should not initialize a Merkle tree with depth > 32", () => {
+            expect(() => new MerkleTree(poseidon, 33, BigInt(0))).toThrow("The tree depth must be between 1 and 32")
         })
 
         it("Should initialize a Merkle tree", () => {
@@ -27,9 +30,7 @@ describe("InterRep Merkle Tree", () => {
         })
 
         it("Should not insert a zero leaf", () => {
-            const fun = () => tree.insert(BigInt(0))
-
-            expect(fun).toThrow("The leaf cannot be a zero value")
+            expect(() => tree.insert(BigInt(0))).toThrow("The leaf cannot be a zero value")
         })
 
         it("Should not insert a leaf in a full tree", () => {
@@ -38,9 +39,7 @@ describe("InterRep Merkle Tree", () => {
             fullTree.insert(BigInt(1))
             fullTree.insert(BigInt(2))
 
-            const fun = () => fullTree.insert(BigInt(3))
-
-            expect(fun).toThrow("The tree is full")
+            expect(() => fullTree.insert(BigInt(3))).toThrow("The tree is full")
         })
 
         it("Should insert a leaf", () => {
@@ -53,9 +52,7 @@ describe("InterRep Merkle Tree", () => {
         })
 
         it("Should not delete a leaf that does not exist", () => {
-            const fun = () => tree.delete(0)
-
-            expect(fun).toThrow("The leaf does not exist in this tree")
+            expect(() => tree.delete(0)).toThrow("The leaf does not exist in this tree")
         })
 
         it("Should delete a leaf", () => {
@@ -95,9 +92,7 @@ describe("InterRep Merkle Tree", () => {
         it("Should not create any proof if the leaf does not exist", () => {
             tree.insert(BigInt(1))
 
-            const fun = () => tree.createProof(1)
-
-            expect(fun).toThrow("The leaf does not exist in this tree")
+            expect(() => tree.createProof(1)).toThrow("The leaf does not exist in this tree")
         })
 
         it("Should create a valid proof", () => {
@@ -115,6 +110,11 @@ describe("InterRep Merkle Tree", () => {
 
                 expect(tree.verifyProof(proof)).toBeTruthy()
             }
+        })
+
+        it("Should not verify any proof if the parameters are wrong", () => {
+            expect(() => tree.verifyProof(1 as any)).toThrow("Parameter 'proof' is not an object")
+            expect(() => tree.verifyProof({ root: 1 } as any)).toThrow("Parameter 'proof.root' is not a bigint")
         })
     })
 })
