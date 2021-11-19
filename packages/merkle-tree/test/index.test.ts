@@ -25,7 +25,7 @@ describe("InterRep Merkle Tree", () => {
             expect(tree.root).toEqual(
                 BigInt("19217088683336594659449020493828377907203207941212636669271704950158751593251")
             )
-            expect(tree.nodes[0]).toHaveLength(0)
+            expect(tree.leaves).toHaveLength(0)
             expect(tree.zeroes).toHaveLength(depth)
         })
 
@@ -48,7 +48,7 @@ describe("InterRep Merkle Tree", () => {
             expect(tree.root).toEqual(
                 BigInt("16211261537006706331557500769845541584780950636316907182067421710925347020533")
             )
-            expect(tree.nodes[0]).toHaveLength(1)
+            expect(tree.leaves).toHaveLength(1)
         })
 
         it("Should not delete a leaf that does not exist", () => {
@@ -63,7 +63,7 @@ describe("InterRep Merkle Tree", () => {
             expect(tree.root).toEqual(
                 BigInt("19217088683336594659449020493828377907203207941212636669271704950158751593251")
             )
-            expect(tree.nodes[0][0]).toEqual(BigInt(0))
+            expect(tree.leaves[0]).toEqual(BigInt(0))
         })
 
         it("Should delete all the leaves of a tree", () => {
