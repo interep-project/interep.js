@@ -100,20 +100,17 @@ export default class MerkleTree {
             throw new Error("The tree is full")
         }
 
-        let index = this.leaves.length
         let node = leaf
 
-        for (let i = 0; i < this._depth; i += 1) {
-            this._nodes[i][index] = node
+        this.forEachLevel(this.leaves.length, (l, i, d) => {
+            this._nodes[l][i] = node
 
-            if (index % 2 === 0) {
-                node = this._hash([node, this._zeroes[i]])
+            if (d) {
+                node = this._hash([node, this._zeroes[l]])
             } else {
-                node = this._hash([this._nodes[i][index - 1], node])
+                node = this._hash([this._nodes[l][i - 1], node])
             }
-
-            index = Math.floor(index / 2)
-        }
+        })
 
         this._root = node
     }
@@ -132,17 +129,15 @@ export default class MerkleTree {
 
         let node = this._zeroes[0]
 
-        for (let i = 0; i < this._depth; i += 1) {
-            this._nodes[i][index] = node
+        this.forEachLevel(index, (l, i, d) => {
+            this._nodes[l][i] = node
 
-            if (index % 2 === 0) {
-                node = this._hash([node, this._nodes[i][index + 1] || this._zeroes[i]])
+            if (d) {
+                node = this._hash([node, this._nodes[l][i + 1] || this._zeroes[l]])
             } else {
-                node = this._hash([this._nodes[i][index - 1], node])
+                node = this._hash([this._nodes[l][i - 1], node])
             }
-
-            index = Math.floor(index / 2)
-        }
+        })
 
         this._root = node
     }
@@ -159,23 +154,20 @@ export default class MerkleTree {
             throw new Error("The leaf does not exist in this tree")
         }
 
-        const leaf = this.leaves[index]
         const siblingNodes: BigInt[] = []
         const path: (0 | 1)[] = []
 
-        for (let i = 0; i < this._depth; i += 1) {
-            if (index % 2 === 0) {
+        this.forEachLevel(index, (l, i, d) => {
+            if (d) {
                 path.push(0)
-                siblingNodes.push(this._nodes[i][index + 1] || this._zeroes[i])
+                siblingNodes.push(this._nodes[l][i + 1] || this._zeroes[l])
             } else {
                 path.push(1)
-                siblingNodes.push(this._nodes[i][index - 1])
+                siblingNodes.push(this._nodes[l][i - 1])
             }
+        })
 
-            index = Math.floor(index / 2)
-        }
-
-        return { root: this._root, leaf, siblingNodes, path }
+        return { root: this._root, leaf: this.leaves[index], siblingNodes, path }
     }
 
     /**
@@ -212,5 +204,18 @@ export default class MerkleTree {
         checkParameter(leaf, "leaf", "bigint")
 
         return this.leaves.indexOf(leaf)
+    }
+
+    /**
+     * Provides a bottom-up tree traversal where for each level it calls a callback.
+     * @param index Index of the leaf.
+     * @param callback Callback with tree level, index of node in that level and direction (left node: true, right node: false).
+     */
+    private forEachLevel(index: number, callback: (level: number, index: number, direction: boolean) => void) {
+        for (let level = 0; level < this._depth; level += 1) {
+            callback(level, index, index % 2 === 0)
+
+            index = Math.floor(index / 2)
+        }
     }
 }
