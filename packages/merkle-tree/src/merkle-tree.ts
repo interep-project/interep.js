@@ -1,8 +1,15 @@
 import checkParameter from "./checkParameter"
 import { HashFunction, Proof } from "./types"
 
+/**
+ * A Merkle tree is a tree in which every leaf node is labelled with the cryptographic hash of a
+ * data block, and every non-leaf node is labelled with the cryptographic hash of the labels of its child nodes.
+ * It allows efficient and secure verification of the contents of large data structures.
+ * The MerkleTree class is a TypeScript implementation of Merkle tree and it provides all the functions to create
+ * efficient trees and to generate and verify proofs of membership.
+ */
 export default class MerkleTree {
-    static readonly maxDepth = 32
+    static readonly maxDepth = 32 // 2**32 = 4294967296 possible leaves.
 
     private _root: BigInt
     private readonly _nodes: BigInt[][]
@@ -10,6 +17,12 @@ export default class MerkleTree {
     private readonly _hash: HashFunction
     private readonly _depth: number
 
+    /**
+     * Initializes the Merkle tree with the hash function, the depth and the zero value to use for zeroes.
+     * @param hash Hash function.
+     * @param depth Tree depth.
+     * @param zeroValue Zero values for zeroes.
+     */
     constructor(hash: HashFunction, depth: number, zeroValue: BigInt = BigInt(0)) {
         checkParameter(hash, "hash", "function")
         checkParameter(depth, "depth", "number")
@@ -19,42 +32,63 @@ export default class MerkleTree {
             throw new Error("The tree depth must be between 1 and 32")
         }
 
+        // Initialize the attributes.
         this._hash = hash
         this._depth = depth
-
         this._zeroes = []
-
         this._nodes = []
 
         for (let i = 0; i < depth; i += 1) {
             this._zeroes.push(zeroValue)
             this._nodes[i] = []
-
+            // There must be a zero value for each tree level (except the root).
             zeroValue = hash([zeroValue, zeroValue])
         }
 
+        // The default root is the last zero value.
         this._root = zeroValue
 
+        // Freeze the array objects. It prevents unintentional changes.
         Object.freeze(this._zeroes)
         Object.freeze(this._nodes)
     }
 
+    /**
+     * Returns the root hash of the tree.
+     * @returns Root hash.
+     */
     public get root(): BigInt {
         return this._root
     }
 
+    /**
+     * Returns the depth of the tree.
+     * @returns Tree depth.
+     */
     public get depth(): number {
         return this._depth
     }
 
+    /**
+     * Returns the leaves of the tree.
+     * @returns List of leaves.
+     */
     public get leaves(): BigInt[] {
         return this._nodes[0].slice()
     }
 
+    /**
+     * Returns the zeroes nodes of the tree.
+     * @returns List of zeroes.
+     */
     public get zeroes(): BigInt[] {
         return this._zeroes
     }
 
+    /**
+     * Inserts a new leaf in the tree.
+     * @param leaf New leaf.
+     */
     public insert(leaf: BigInt) {
         checkParameter(leaf, "leaf", "bigint")
 
@@ -84,6 +118,11 @@ export default class MerkleTree {
         this._root = node
     }
 
+    /**
+     * Deletes a leaf from the tree. It does not remove the leaf from
+     * the data structure. It set the leaf to be deleted to a zero value.
+     * @param index Index of the leaf to be deleted.
+     */
     public delete(index: number) {
         checkParameter(index, "index", "number")
 
@@ -108,6 +147,11 @@ export default class MerkleTree {
         this._root = node
     }
 
+    /**
+     * Creates a proof of membership.
+     * @param index Index of the proof's leaf.
+     * @returns Proof object.
+     */
     public createProof(index: number): Proof {
         checkParameter(index, "index", "number")
 
@@ -134,6 +178,11 @@ export default class MerkleTree {
         return { root: this._root, leaf, siblingNodes, path }
     }
 
+    /**
+     * Verifies a proof and return true or false.
+     * @param proof Proof to be verified.
+     * @returns True or false.
+     */
     public verifyProof(proof: Proof): boolean {
         checkParameter(proof, "proof", "object")
         checkParameter(proof.root, "proof.root", "bigint")
@@ -154,6 +203,11 @@ export default class MerkleTree {
         return proof.root === node
     }
 
+    /**
+     * Returns the index of a leaf. If the leaf does not exist it returns -1.
+     * @param leaf Tree leaf.
+     * @returns Index of the leaf.
+     */
     public indexOf(leaf: BigInt): number {
         checkParameter(leaf, "leaf", "bigint")
 
