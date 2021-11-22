@@ -18,7 +18,7 @@ export default async function join(bot: InterRepBot, chat: Chat, msg: Message, u
             const telegramUser = await TelegramUser.findByHashId(hashId)
 
             if (telegramUser && telegramUser.joined) {
-                await bot.api.sendMessage(user.id, `You already joined the ${chat.title} Semaphore group!`)
+                await bot.api.sendMessage(user.id, `You already joined the '${chat.title}' Semaphore group!`)
                 return
             }
 
@@ -31,7 +31,7 @@ export default async function join(bot: InterRepBot, chat: Chat, msg: Message, u
 
             await bot.api.sendMessage(
                 user.id,
-                `Here's the magic link: ${bot.appURL}/groups/telegram/join/${user.id}/${chat.id} 😉`
+                `Here's the magic link to join the '${chat.title}' group: ${bot.appURL}/groups/telegram/join/${user.id}/${chat.id} 😉`
             )
         } catch (error: any) {
             if (error?.error_code === 403) {

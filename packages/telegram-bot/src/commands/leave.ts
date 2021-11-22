@@ -18,13 +18,13 @@ export default async function leave(bot: InterRepBot, chat: Chat, msg: Message, 
             const telegramUser = await TelegramUser.findByHashId(hashId)
 
             if (!telegramUser || !telegramUser.joined) {
-                await bot.api.sendMessage(user.id, `You have not yet joined the ${chat.title} Semaphore group!`)
+                await bot.api.sendMessage(user.id, `You are not part of the '${chat.title}' Semaphore group!`)
                 return
             }
 
             await bot.api.sendMessage(
                 user.id,
-                `Here's the magic link: ${bot.appURL}/groups/telegram/leave/${user.id}/${chat.id} 😉`
+                `Here's the magic link to leave the '${chat.title}' group: ${bot.appURL}/groups/telegram/leave/${user.id}/${chat.id} 😉`
             )
         } catch (error: any) {
             if (error?.error_code === 403) {

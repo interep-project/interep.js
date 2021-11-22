@@ -17,8 +17,8 @@ export default class InterRepBot extends Bot {
 
         this.api.setMyCommands([
             { command: "help", description: "show the help message" },
-            { command: "join", description: "send you a magic link to join a group" }
-            // { command: "leave", description: "send you a magic link to leave a group" }
+            { command: "join", description: "send you a magic link to join a group" },
+            { command: "leave", description: "send you a magic link to leave a group" }
         ])
 
         this.command("help", (ctx) => showHelpMessage(this, ctx.chat, ctx.from))
