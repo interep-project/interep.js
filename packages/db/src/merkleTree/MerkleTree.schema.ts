@@ -2,7 +2,7 @@ import { Schema } from "mongoose"
 import {
     findByGroupAndLevelAndIndex,
     findByGroupAndHash,
-    getNumberOfNodes,
+    getNumberOfActiveLeaves,
     findByGroupProviderAndHash,
     getGroupNamesByProvider
 } from "./MerkleTree.statics"
@@ -37,7 +37,7 @@ MerkleTreeNodeSchema.statics.findByGroupAndLevelAndIndex = findByGroupAndLevelAn
 MerkleTreeNodeSchema.statics.findByGroupAndHash = findByGroupAndHash
 MerkleTreeNodeSchema.statics.findByGroupProviderAndHash = findByGroupProviderAndHash
 MerkleTreeNodeSchema.statics.getGroupNamesByProvider = getGroupNamesByProvider
-MerkleTreeNodeSchema.statics.getNumberOfNodes = getNumberOfNodes
+MerkleTreeNodeSchema.statics.getNumberOfActiveLeaves = getNumberOfActiveLeaves
 
 export const MerkleTreeZeroSchemaFields: Record<keyof MerkleTreeZeroData, any> = {
     level: { type: Number, unique: true },

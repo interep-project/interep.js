@@ -30,6 +30,11 @@ export async function getGroupNamesByProvider(this: typeof MerkleTreeNode, provi
     return this.distinct("group.name", { "group.provider": provider })
 }
 
-export async function getNumberOfNodes(this: typeof MerkleTreeNode, group: Group, level: number): Promise<number> {
-    return this.countDocuments({ "group.provider": group.provider, "group.name": group.name, level })
+export async function getNumberOfActiveLeaves(this: typeof MerkleTreeNode, group: Group): Promise<number> {
+    return this.countDocuments({
+        "group.provider": group.provider,
+        "group.name": group.name,
+        level: 0,
+        hash: { $ne: "0" }
+    })
 }

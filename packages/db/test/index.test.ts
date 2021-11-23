@@ -93,7 +93,7 @@ describe("InterRep db", () => {
 
         it("Should drop a db", async () => {
             await connect(mms.getUri())
-            await TelegramUser.create({ hashId: "hash", joined: false })
+            await TelegramUser.create({ hashId: "hash", hasJoined: false })
             await drop()
 
             const expectedValue = await TelegramUser.findOne({ hashId: "hash" })
@@ -115,7 +115,7 @@ describe("InterRep db", () => {
 
         it("Should clear all the db collections", async () => {
             await connect(mms.getUri())
-            await TelegramUser.create({ hashId: "hash", joined: false })
+            await TelegramUser.create({ hashId: "hash", hasJoined: false })
             await clear()
 
             const expectedValue = await TelegramUser.findOne({ hashId: "hash" })
@@ -192,11 +192,30 @@ describe("InterRep db", () => {
             expect(expectedValue).toBe(1)
         })
 
-        it("Should get the number of nodes", async () => {
-            const expectedValue = await MerkleTreeNode.getNumberOfNodes(
-                { provider: OAuthProvider.TWITTER, name: "GOLD" },
-                1
-            )
+        it("Should get the number of active leaves", async () => {
+            await MerkleTreeNode.create({
+                group: {
+                    provider: OAuthProvider.TWITTER,
+                    name: "GOLD"
+                },
+                level: 0,
+                index: 0,
+                hash: "1"
+            })
+            await MerkleTreeNode.create({
+                group: {
+                    provider: OAuthProvider.TWITTER,
+                    name: "GOLD"
+                },
+                level: 0,
+                index: 1,
+                hash: "0"
+            })
+
+            const expectedValue = await MerkleTreeNode.getNumberOfActiveLeaves({
+                provider: OAuthProvider.TWITTER,
+                name: "GOLD"
+            })
 
             expect(expectedValue).toBe(1)
         })
@@ -249,7 +268,7 @@ describe("InterRep db", () => {
         it("Should create a TelegramUser entity", async () => {
             await TelegramUser.create({
                 hashId: "hashId",
-                joined: true
+                hasJoined: true
             })
 
             const expectedValue = await TelegramUser.countDocuments()

@@ -2,7 +2,7 @@ import type { Model, Document } from "mongoose"
 import type {
     findByGroupAndLevelAndIndex,
     findByGroupAndHash,
-    getNumberOfNodes,
+    getNumberOfActiveLeaves,
     findByGroupProviderAndHash,
     getGroupNamesByProvider
 } from "./MerkleTree.statics"
@@ -28,7 +28,7 @@ export type MerkleTreeNodeModel = Model<MerkleTreeNodeDocument> & {
     findByGroupAndHash: typeof findByGroupAndHash
     findByGroupProviderAndHash: typeof findByGroupProviderAndHash
     getGroupNamesByProvider: typeof getGroupNamesByProvider
-    getNumberOfNodes: typeof getNumberOfNodes
+    getNumberOfActiveLeaves: typeof getNumberOfActiveLeaves
 }
 
 export type MerkleTreeZeroData = {
