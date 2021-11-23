@@ -3,6 +3,7 @@ import {
     findByGroupAndLevelAndIndex,
     findByGroupAndHash,
     getNumberOfActiveLeaves,
+    getNumberOfNodes,
     findByGroupProviderAndHash,
     getGroupNamesByProvider
 } from "./MerkleTree.statics"
@@ -38,6 +39,7 @@ MerkleTreeNodeSchema.statics.findByGroupAndHash = findByGroupAndHash
 MerkleTreeNodeSchema.statics.findByGroupProviderAndHash = findByGroupProviderAndHash
 MerkleTreeNodeSchema.statics.getGroupNamesByProvider = getGroupNamesByProvider
 MerkleTreeNodeSchema.statics.getNumberOfActiveLeaves = getNumberOfActiveLeaves
+MerkleTreeNodeSchema.statics.getNumberOfNodes = getNumberOfNodes
 
 export const MerkleTreeZeroSchemaFields: Record<keyof MerkleTreeZeroData, any> = {
     level: { type: Number, unique: true },

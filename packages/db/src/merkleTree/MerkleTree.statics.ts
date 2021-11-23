@@ -38,3 +38,7 @@ export async function getNumberOfActiveLeaves(this: typeof MerkleTreeNode, group
         hash: { $ne: "0" }
     })
 }
+
+export async function getNumberOfNodes(this: typeof MerkleTreeNode, group: Group, level: number): Promise<number> {
+    return this.countDocuments({ "group.provider": group.provider, "group.name": group.name, level })
+}

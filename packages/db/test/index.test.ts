@@ -192,6 +192,15 @@ describe("InterRep db", () => {
             expect(expectedValue).toBe(1)
         })
 
+        it("Should get the number of nodes", async () => {
+            const expectedValue = await MerkleTreeNode.getNumberOfNodes(
+                { provider: OAuthProvider.TWITTER, name: "GOLD" },
+                1
+            )
+
+            expect(expectedValue).toBe(1)
+        })
+
         it("Should get the number of active leaves", async () => {
             await MerkleTreeNode.create({
                 group: {

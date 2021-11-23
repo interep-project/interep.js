@@ -3,6 +3,7 @@ import type {
     findByGroupAndLevelAndIndex,
     findByGroupAndHash,
     getNumberOfActiveLeaves,
+    getNumberOfNodes,
     findByGroupProviderAndHash,
     getGroupNamesByProvider
 } from "./MerkleTree.statics"
@@ -29,6 +30,7 @@ export type MerkleTreeNodeModel = Model<MerkleTreeNodeDocument> & {
     findByGroupProviderAndHash: typeof findByGroupProviderAndHash
     getGroupNamesByProvider: typeof getGroupNamesByProvider
     getNumberOfActiveLeaves: typeof getNumberOfActiveLeaves
+    getNumberOfNodes: typeof getNumberOfNodes
 }
 
 export type MerkleTreeZeroData = {
