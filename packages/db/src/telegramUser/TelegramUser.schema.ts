@@ -4,7 +4,7 @@ import { TelegramUserData, TelegramUserDocument, TelegramUserModel } from "./Tel
 
 const TelegramUserSchemaFields: Record<keyof TelegramUserData, any> = {
     hashId: { type: String, required: true, index: true, unique: true },
-    joined: { type: Boolean, required: true }
+    hasJoined: { type: Boolean, required: true }
 }
 
 const TelegramUserSchema = new Schema<TelegramUserDocument, TelegramUserModel>(TelegramUserSchemaFields)

@@ -3,7 +3,7 @@ import type { findByHashId } from "./TelegramUser.statics"
 
 export type TelegramUserData = {
     hashId: string
-    joined: boolean
+    hasJoined: boolean
 }
 
 export type TelegramUserDocument = TelegramUserData & Document
