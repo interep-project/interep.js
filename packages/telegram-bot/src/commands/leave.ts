@@ -17,7 +17,7 @@ export default async function leave(bot: InterRepBot, chat: Chat, msg: Message, 
             const hashId = sha256(user.id.toString() + chat.id.toString())
             const telegramUser = await TelegramUser.findByHashId(hashId)
 
-            if (!telegramUser || !telegramUser.joined) {
+            if (!telegramUser || !telegramUser.hasJoined) {
                 await bot.api.sendMessage(user.id, `You are not part of the '${chat.title}' Semaphore group!`)
                 return
             }

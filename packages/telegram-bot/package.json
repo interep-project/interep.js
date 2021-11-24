@@ -38,7 +38,7 @@
         "rollup-plugin-typescript2": "^0.30.0"
     },
     "dependencies": {
-        "@interrep/db": "^0.2.0",
+        "@interrep/db": "^0.4.0",
         "grammy": "^1.3.4",
         "js-sha256": "^0.9.0"
     }

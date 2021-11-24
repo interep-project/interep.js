@@ -17,7 +17,7 @@ export default async function join(bot: InterRepBot, chat: Chat, msg: Message, u
             const hashId = sha256(user.id.toString() + chat.id.toString())
             const telegramUser = await TelegramUser.findByHashId(hashId)
 
-            if (telegramUser && telegramUser.joined) {
+            if (telegramUser && telegramUser.hasJoined) {
                 await bot.api.sendMessage(user.id, `You already joined the '${chat.title}' Semaphore group!`)
                 return
             }
@@ -25,7 +25,7 @@ export default async function join(bot: InterRepBot, chat: Chat, msg: Message, u
             if (!telegramUser) {
                 await TelegramUser.create({
                     hashId,
-                    joined: false
+                    hasJoined: false
                 })
             }
 
