@@ -1,6 +1,6 @@
 {
     "name": "@interrep/merkle-tree",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "InterRep Merkle tree implementation in TypeScript.",
     "iife": "dist/index.js",
     "unpkg": "dist/index.min.js",
