@@ -1,4 +1,4 @@
 import InterRepBot from "./bot"
-import sha256 from "./sha256"
 
-export { InterRepBot, sha256 }
+// eslint-disable-next-line import/prefer-default-export
+export { InterRepBot }

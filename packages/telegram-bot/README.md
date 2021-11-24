@@ -47,7 +47,7 @@
 
 The InterRep bot allows Telegram users to join corresponding Semaphore groups on InterRep. If a user is for example a member of the Telegram group 'Hello world', the bot will send a magic link in their private chat that will allow them to join the Semaphore Telegram group 'Hello world' on our web application with Metamask.
 
-When the bot sends the magic link (consisting of the user and group ids) it also saves a hash of the user and group ids with a flag to ensure that the magic link is correct in the application. The application will then be able to check whether the user redirected by the magic link is actually a user who has requested to join the group. The hash ensures that InterRep does not save any ids.
+When the bot sends the magic link (consisting of the user and group ids) it also saves a sha256 hash of the user and group ids with a flag to ensure that the magic link is correct in the application. The application will then be able to check whether the user redirected by the magic link is actually a user who has requested to join the group. The hash ensures that InterRep does not save any ids.
 
 ---
 
@@ -96,14 +96,4 @@ const { TELEGRAM_BOT_TOKEN, MONGO_URL, APP_URL } = process.env
 const bot = new InterRepBot(TELEGRAM_BOT_TOKEN, MONGO_URL, APP_URL)
 
 await bot.start()
-```
-
-\# **sha256**(message: _string_): _string_
-
-```typescript
-import { sha256 } from "@interrep/telegram-bot"
-import { TelegramUser } from "@interrep/db"
-
-const hashId = sha256("user id + group id")
-const telegramUser = TelegramUser.findByHashId(hashId)
 ```
