@@ -8,12 +8,12 @@ describe("InterRep Merkle Tree", () => {
 
     describe("Merkle Tree class", () => {
         beforeEach(() => {
-            tree = new MerkleTree(poseidon, depth)
+            tree = new MerkleTree(poseidon, depth, BigInt(0))
         })
 
         it("Should not initialize a Merkle tree with wrong parameters", () => {
-            expect(() => new MerkleTree(undefined as any, 33)).toThrow("Parameter 'hash' is not defined")
-            expect(() => new MerkleTree(1 as any, 33)).toThrow("Parameter 'hash' is not a function")
+            expect(() => new MerkleTree(undefined as any, 33, 0)).toThrow("Parameter 'hash' is not defined")
+            expect(() => new MerkleTree(1 as any, 33, 0)).toThrow("Parameter 'hash' is none of these types: function")
         })
 
         it("Should not initialize a Merkle tree with depth > 32", () => {
@@ -34,7 +34,7 @@ describe("InterRep Merkle Tree", () => {
         })
 
         it("Should not insert a leaf in a full tree", () => {
-            const fullTree = new MerkleTree(poseidon, 1)
+            const fullTree = new MerkleTree(poseidon, 1, BigInt(0))
 
             fullTree.insert(BigInt(1))
             fullTree.insert(BigInt(2))
@@ -113,8 +113,10 @@ describe("InterRep Merkle Tree", () => {
         })
 
         it("Should not verify any proof if the parameters are wrong", () => {
-            expect(() => tree.verifyProof(1 as any)).toThrow("Parameter 'proof' is not an object")
-            expect(() => tree.verifyProof({ root: 1 } as any)).toThrow("Parameter 'proof.root' is not a bigint")
+            expect(() => tree.verifyProof(1 as any)).toThrow("Parameter 'proof' is none of these types: object")
+            expect(() => tree.verifyProof({ root: true } as any)).toThrow(
+                "Parameter 'proof.root' is none of these types: number, string, bigint"
+            )
         })
     })
 })

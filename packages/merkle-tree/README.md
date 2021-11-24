@@ -79,18 +79,18 @@ or [JSDelivr](https://www.jsdelivr.com/):
 
 ## 📜 Usage
 
-\# **new MerkleTree**(hash: _HashFunction_, depth: _number_, zero?: _BigInt_): _MerkleTree_
+\# **new MerkleTree**(hash: _HashFunction_, depth: _number_, zero: _Node_): _MerkleTree_
 
 ```typescript
 import { MerkleTree } from "@interrep/merkle-tree"
 import { poseidon } from "circomlibjs" // v0.0.8
 
-const tree = new MerkleTree(poseidon, 16)
+const tree = new MerkleTree(poseidon, 16, BigInt(0))
 
 console.log(tree.root) // 19217088683336594659449020493828377907203207941212636669271704950158751593251
 ```
 
-\# **insert**(leaf: _BigInt_)
+\# **insert**(leaf: _Node_)
 
 ```typescript
 tree.insert(BigInt(1))
@@ -106,7 +106,7 @@ tree.delete(0)
 console.log(tree.root) // 19217088683336594659449020493828377907203207941212636669271704950158751593251
 ```
 
-\# **indexOf**(leaf: _BigInt_): _number_
+\# **indexOf**(leaf: _Node_): _number_
 
 ```typescript
 tree.insert(BigInt(2))

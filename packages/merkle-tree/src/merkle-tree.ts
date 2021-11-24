@@ -1,5 +1,5 @@
 import checkParameter from "./checkParameter"
-import { HashFunction, Proof } from "./types"
+import { HashFunction, Proof, Node } from "./types"
 
 /**
  * A Merkle tree is a tree in which every leaf node is labelled with the cryptographic hash of a
@@ -11,9 +11,9 @@ import { HashFunction, Proof } from "./types"
 export default class MerkleTree {
     static readonly maxDepth = 32 // 2**32 = 4294967296 possible leaves.
 
-    private _root: BigInt
-    private readonly _nodes: BigInt[][]
-    private readonly _zeroes: BigInt[]
+    private _root: Node
+    private readonly _nodes: Node[][]
+    private readonly _zeroes: Node[]
     private readonly _hash: HashFunction
     private readonly _depth: number
 
@@ -23,10 +23,10 @@ export default class MerkleTree {
      * @param depth Tree depth.
      * @param zeroValue Zero values for zeroes.
      */
-    constructor(hash: HashFunction, depth: number, zeroValue: BigInt = BigInt(0)) {
+    constructor(hash: HashFunction, depth: number, zeroValue: Node) {
         checkParameter(hash, "hash", "function")
         checkParameter(depth, "depth", "number")
-        checkParameter(zeroValue, "zeroValue", "bigint")
+        checkParameter(zeroValue, "zeroValue", "number", "string", "bigint")
 
         if (depth < 1 || depth > MerkleTree.maxDepth) {
             throw new Error("The tree depth must be between 1 and 32")
@@ -57,7 +57,7 @@ export default class MerkleTree {
      * Returns the root hash of the tree.
      * @returns Root hash.
      */
-    public get root(): BigInt {
+    public get root(): Node {
         return this._root
     }
 
@@ -73,7 +73,7 @@ export default class MerkleTree {
      * Returns the leaves of the tree.
      * @returns List of leaves.
      */
-    public get leaves(): BigInt[] {
+    public get leaves(): Node[] {
         return this._nodes[0].slice()
     }
 
@@ -81,7 +81,7 @@ export default class MerkleTree {
      * Returns the zeroes nodes of the tree.
      * @returns List of zeroes.
      */
-    public get zeroes(): BigInt[] {
+    public get zeroes(): Node[] {
         return this._zeroes
     }
 
@@ -89,8 +89,8 @@ export default class MerkleTree {
      * Inserts a new leaf in the tree.
      * @param leaf New leaf.
      */
-    public insert(leaf: BigInt) {
-        checkParameter(leaf, "leaf", "bigint")
+    public insert(leaf: Node) {
+        checkParameter(leaf, "leaf", "number", "string", "bigint")
 
         if (leaf === this._zeroes[0]) {
             throw new Error("The leaf cannot be a zero value")
@@ -154,7 +154,7 @@ export default class MerkleTree {
             throw new Error("The leaf does not exist in this tree")
         }
 
-        const siblingNodes: BigInt[] = []
+        const siblingNodes: Node[] = []
         const path: (0 | 1)[] = []
 
         this.forEachLevel(index, (l, i, d) => {
@@ -177,8 +177,8 @@ export default class MerkleTree {
      */
     public verifyProof(proof: Proof): boolean {
         checkParameter(proof, "proof", "object")
-        checkParameter(proof.root, "proof.root", "bigint")
-        checkParameter(proof.leaf, "proof.leaf", "bigint")
+        checkParameter(proof.root, "proof.root", "number", "string", "bigint")
+        checkParameter(proof.leaf, "proof.leaf", "number", "string", "bigint")
         checkParameter(proof.siblingNodes, "proof.siblingNodes", "object")
         checkParameter(proof.path, "proof.path", "object")
 
@@ -200,8 +200,8 @@ export default class MerkleTree {
      * @param leaf Tree leaf.
      * @returns Index of the leaf.
      */
-    public indexOf(leaf: BigInt): number {
-        checkParameter(leaf, "leaf", "bigint")
+    public indexOf(leaf: Node): number {
+        checkParameter(leaf, "leaf", "number", "string", "bigint")
 
         return this.leaves.indexOf(leaf)
     }
