@@ -11,7 +11,8 @@ import {
     MerkleTreeNode,
     MerkleTreeZero,
     Token,
-    TokenStatus
+    TokenStatus,
+    EmailUser
 } from "../src"
 
 describe("InterRep db", () => {
@@ -287,6 +288,35 @@ describe("InterRep db", () => {
 
         it("Should find a Telegram user by hash id", async () => {
             const expectedValue = await TelegramUser.findByHashId("hashId")
+
+            expect(expectedValue).not.toBeNull()
+        })
+    })
+
+    describe("EmailUser", () => {
+        beforeAll(async () => {
+            await connect(mms.getUri())
+        })
+
+        afterAll(async () => {
+            await clear()
+            await disconnect()
+        })
+
+        it("Should create a EmailUser entity", async () => {
+            await EmailUser.create({
+                hashId: "hashId",
+                hasJoined: true,
+                verificationToken: "token"
+            })
+
+            const expectedValue = await EmailUser.countDocuments()
+
+            expect(expectedValue).toBe(1)
+        })
+
+        it("Should find a Email user by hash id", async () => {
+            const expectedValue = await EmailUser.findByHashId("hashId")
 
             expect(expectedValue).not.toBeNull()
         })
