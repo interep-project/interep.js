@@ -1,4 +1,4 @@
-export type Node = bigint | string | number
+export type Node = any
 
 export type HashFunction = (values: Node[]) => Node
 
