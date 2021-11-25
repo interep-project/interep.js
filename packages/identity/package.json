@@ -1,7 +1,7 @@
 {
     "name": "@interrep/identity",
     "version": "0.10.0",
-    "description": "A simple JS function to create InterRep identities by deriving them from Ethereum accounts.",
+    "description": "A simple JS function to create InterRep identities.",
     "main": "dist/index.node.js",
     "exports": {
         "import": "./dist/index.mjs",

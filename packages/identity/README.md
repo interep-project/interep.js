@@ -2,7 +2,7 @@
     <h1 align="center">
         InterRep identities
     </h1>
-    <p align="center">A simple JS function to create InterRep identities by deriving them from Ethereum accounts.</p>
+    <p align="center">A simple JS function to create InterRep identities.</p>
 </p>
 
 <p align="center">
@@ -48,6 +48,8 @@
         </a>
     </h4>
 </div>
+
+The `@interrep/identity` package uses Semaphore identities by deriving parameters from a message signed with an Ethereum account. It is sufficient to pass the function to sign the message and the InterRep provider as parameters to obtain an identity to be used for the creation of the identity commitment and the zero-knowledge proofs.
 
 ---
 
