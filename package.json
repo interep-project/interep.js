@@ -15,7 +15,7 @@
         "bootstrap": "lerna bootstrap --no-ci",
         "build": "lerna run build",
         "build:watch": "lerna run --parallel build:watch -- -- --watch",
-        "gh-pages": "lerna run --scope @interrep/semethid gh-pages",
+        "gh-pages": "lerna run --scope @interrep/identity gh-pages",
         "publish:fp": "yarn test:prod && lerna publish from-package",
         "commit": "cz",
         "precommit": "lint-staged"
