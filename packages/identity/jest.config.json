@@ -1,5 +1,5 @@
 {
-    "displayName": "semethid",
+    "displayName": "identity",
     "transform": {
         "\\.(ts|tsx)": "ts-jest"
     },

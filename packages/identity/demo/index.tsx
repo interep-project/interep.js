@@ -25,7 +25,7 @@ import detectEthereumProvider from "@metamask/detect-provider"
 import { ethers } from "ethers"
 import React from "react"
 import ReactDOM from "react-dom"
-import semethid from "../src"
+import createIdentity from "../src"
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -133,10 +133,10 @@ function App() {
         setActiveStep(1)
     }
 
-    async function createIdentity() {
+    async function generateIdentity() {
         const ethersProvider = new ethers.providers.Web3Provider(_provider)
         const signer = ethersProvider.getSigner()
-        const identity = await semethid((message: string) => signer.signMessage(message), _oAuthProvider)
+        const identity = await createIdentity((message: string) => signer.signMessage(message), _oAuthProvider)
 
         const { identityTrapdoor, identityNullifier } = identity.getIdentity()
         const identityCommitment = identity.genIdentityCommitment()
@@ -151,8 +151,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <Box className={classes.container}>
-                <Typography variant="h4">Semethid.js</Typography>
-                <Typography variant="subtitle1">Semaphore/Ethereum id commitments</Typography>
+                <Typography variant="h4">InterRep identity</Typography>
 
                 <Stepper activeStep={_activeStep} orientation="vertical">
                     <Step>
@@ -186,10 +185,10 @@ function App() {
                         </StepContent>
                     </Step>
                     <Step>
-                        <StepLabel>Create an identity</StepLabel>
+                        <StepLabel>Generate the identity parameters</StepLabel>
                         <StepContent style={{ width: 400 }}>
-                            <Button onClick={() => createIdentity()} variant="outlined">
-                                Create Semaphore identity
+                            <Button onClick={() => generateIdentity()} variant="outlined">
+                                Generate identity
                             </Button>
                         </StepContent>
                     </Step>
