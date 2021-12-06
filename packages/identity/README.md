@@ -49,7 +49,7 @@
     </h4>
 </div>
 
-The `@interrep/identity` package uses Semaphore identities by deriving parameters from a message signed with an Ethereum account. It is sufficient to pass the function to sign the message and the InterRep provider as parameters to obtain an identity to be used for the creation of the identity commitment and the zero-knowledge proofs.
+The `@interrep/identity` package allows you to create Semaphore identities by deriving them from a message signed with an Ethereum account. The identity can be used to generate identity commitments and other parameters needed to create zero-knowledge proofs with Semaphore.
 
 ---
 
