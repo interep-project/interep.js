@@ -199,21 +199,21 @@
   resolved "https://registry.yarnpkg.com/@juanelas/base64/-/base64-1.0.1.tgz#aaede00ffdca595741fc69d0008b4cfc8f08293a"
   integrity sha512-ZK/wWrjMrrMcprtOV72iilC1M/HfZcF2JeUJPHOL0tMm1TZrh9UhHDQEdPny/MmmT7tO4w47ycuy0YTnBrS5fg==
 
-"@libsem/identity@^1.0.17":
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/@libsem/identity/-/identity-1.0.17.tgz#0822b8d6e371c9b841504de350b033ae55608d1c"
-  integrity sha512-5j8iP54nrW75zwIhvZZoqsMLHKa4a+boQ21RvIES0jcjwgHiuUrh3qmBCrlbaso/cdjV7hCc+PXaChcvP2d90A==
+"@libsem/identity@^1.0.19":
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/@libsem/identity/-/identity-1.0.19.tgz#8a2373e2d392ec7ebad3b491482e474632442ec4"
+  integrity sha512-U0q6MHb910qKT8n7j+nALv8NNAXVGXNSNoOolil0VnOv40OpuEUH7zroK91Vxz1wJYhiXFOa+od3ixC6JifeFQ==
   dependencies:
-    "@libsem/types" "^1.0.5"
+    "@libsem/types" "^1.0.7"
     bigint-conversion "^2.1.12"
     circomlibjs "^0.0.8"
     crypto "^1.0.1"
     js-sha256 "^0.9.0"
 
-"@libsem/types@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@libsem/types/-/types-1.0.5.tgz#539bd84d46402863495d6c39f13be214ebf14645"
-  integrity sha512-DnTfdL4fEfyDa6HDjuo6sOeTCABcKY3Av/7Gies4F68KRIL3YdkcBeKDJeY2j5lvz8sX53fw3QmrIsjbkQnsYw==
+"@libsem/types@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@libsem/types/-/types-1.0.7.tgz#abdee9ff16d6b1e6d283d34374e44d62843eb44a"
+  integrity sha512-M/mfMf8zzgWUssolx/3itE5h3hCt2PAQxclEt0YAWQIgE1UZM10jHfCwy1rYmTduAGfKzsYlIiSENOqthH2biw==
 
 "@rollup/pluginutils@^4.1.0":
   version "4.1.1"

@@ -37,6 +37,6 @@
         "rollup-plugin-typescript2": "^0.30.0"
     },
     "dependencies": {
-        "@libsem/identity": "^1.0.17"
+        "@libsem/identity": "^1.0.19"
     }
 }
