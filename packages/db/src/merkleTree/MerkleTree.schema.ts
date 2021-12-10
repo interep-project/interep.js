@@ -13,7 +13,10 @@ import type {
     MerkleTreeNodeModel,
     MerkleTreeZeroData,
     MerkleTreeZeroModel,
-    MerkleTreeZeroDocument
+    MerkleTreeZeroDocument,
+    MerkleTreeRootsBatchData,
+    MerkleTreeRootsBatchDocument,
+    MerkleTreeRootsBatchModel
 } from "./MerkleTree.types"
 
 const MerkleTreeNodeSchemaFields: Record<keyof MerkleTreeNodeData, any> = {
@@ -47,3 +50,23 @@ export const MerkleTreeZeroSchemaFields: Record<keyof MerkleTreeZeroData, any> =
 }
 
 export const MerkleTreeZeroSchema = new Schema<MerkleTreeZeroDocument, MerkleTreeZeroModel>(MerkleTreeZeroSchemaFields)
+
+const MerkleTreeRootsBatchSchemaFields: Record<keyof MerkleTreeRootsBatchData, any> = {
+    group: {
+        type: {
+            name: { type: String, required: true },
+            provider: { type: String, required: true }
+        },
+        required: true
+    },
+    hashes: { type: [String], default: [] },
+    transaction: {
+        hash: String,
+        blockNumber: Number,
+        timestamp: Number
+    }
+}
+
+export const MerkleTreeRootsBatchSchema = new Schema<MerkleTreeRootsBatchDocument, MerkleTreeRootsBatchModel>(
+    MerkleTreeRootsBatchSchemaFields
+)

@@ -41,3 +41,19 @@ export type MerkleTreeZeroData = {
 export type MerkleTreeZeroDocument = MerkleTreeZeroData & Document
 
 export type MerkleTreeZeroModel = Model<MerkleTreeZeroDocument> & {}
+
+export type Transaction = {
+    hash: string
+    blockNumber: number
+    timestamp: number
+}
+
+export type MerkleTreeRootsBatchData = {
+    group: Group
+    hashes: string[]
+    transaction?: Transaction
+}
+
+export type MerkleTreeRootsBatchDocument = MerkleTreeRootsBatchData & Document
+
+export type MerkleTreeRootsBatchModel = Model<MerkleTreeRootsBatchDocument> & {}
