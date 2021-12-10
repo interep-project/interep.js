@@ -1,6 +1,6 @@
 {
     "name": "@interrep/db",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "description": "DB utility functions, schemas and models used by InterRep.",
     "main": "dist/index.node.js",
     "exports": {
