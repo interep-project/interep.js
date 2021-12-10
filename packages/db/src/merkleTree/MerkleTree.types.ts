@@ -47,12 +47,12 @@ export type Transaction = {
     blockNumber: number
 }
 
-export type MerkleTreeRootsBatchData = {
+export type MerkleTreeRootBatchData = {
     group: Group
-    hashes: string[]
+    rootHashes: string[]
     transaction?: Transaction
 }
 
-export type MerkleTreeRootsBatchDocument = MerkleTreeRootsBatchData & Document
+export type MerkleTreeRootBatchDocument = MerkleTreeRootBatchData & Document
 
-export type MerkleTreeRootsBatchModel = Model<MerkleTreeRootsBatchDocument> & {}
+export type MerkleTreeRootBatchModel = Model<MerkleTreeRootBatchDocument> & {}

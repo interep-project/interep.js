@@ -14,9 +14,9 @@ import type {
     MerkleTreeZeroData,
     MerkleTreeZeroModel,
     MerkleTreeZeroDocument,
-    MerkleTreeRootsBatchData,
-    MerkleTreeRootsBatchDocument,
-    MerkleTreeRootsBatchModel
+    MerkleTreeRootBatchData,
+    MerkleTreeRootBatchDocument,
+    MerkleTreeRootBatchModel
 } from "./MerkleTree.types"
 
 const MerkleTreeNodeSchemaFields: Record<keyof MerkleTreeNodeData, any> = {
@@ -51,7 +51,7 @@ export const MerkleTreeZeroSchemaFields: Record<keyof MerkleTreeZeroData, any> =
 
 export const MerkleTreeZeroSchema = new Schema<MerkleTreeZeroDocument, MerkleTreeZeroModel>(MerkleTreeZeroSchemaFields)
 
-const MerkleTreeRootsBatchSchemaFields: Record<keyof MerkleTreeRootsBatchData, any> = {
+const MerkleTreeRootBatchSchemaFields: Record<keyof MerkleTreeRootBatchData, any> = {
     group: {
         type: {
             name: { type: String, required: true },
@@ -59,13 +59,13 @@ const MerkleTreeRootsBatchSchemaFields: Record<keyof MerkleTreeRootsBatchData, a
         },
         required: true
     },
-    hashes: { type: [String], default: [] },
+    rootHashes: { type: [String], default: [] },
     transaction: {
         hash: String,
         blockNumber: Number
     }
 }
 
-export const MerkleTreeRootsBatchSchema = new Schema<MerkleTreeRootsBatchDocument, MerkleTreeRootsBatchModel>(
-    MerkleTreeRootsBatchSchemaFields
+export const MerkleTreeRootBatchSchema = new Schema<MerkleTreeRootBatchDocument, MerkleTreeRootBatchModel>(
+    MerkleTreeRootBatchSchemaFields
 )
