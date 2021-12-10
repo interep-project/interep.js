@@ -2,7 +2,7 @@ import TelegramUser from "./telegramUser/TelegramUser.model"
 import EmailUser from "./emailUser/EmailUser.model"
 import OAuthAccount from "./oAuthAccount/OAuthAccount.model"
 import Token from "./token/Token.model"
-import { MerkleTreeNode, MerkleTreeZero } from "./merkleTree/MerkleTree.model"
+import { MerkleTreeNode, MerkleTreeZero, MerkleTreeRootsBatch } from "./merkleTree/MerkleTree.model"
 import connect from "./connect"
 import disconnect from "./disconnect"
 import drop from "./drop"
@@ -16,6 +16,7 @@ export {
     Token,
     MerkleTreeNode,
     MerkleTreeZero,
+    MerkleTreeRootsBatch,
     connect,
     disconnect,
     drop,
