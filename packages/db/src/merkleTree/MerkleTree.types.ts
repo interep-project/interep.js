@@ -45,7 +45,6 @@ export type MerkleTreeZeroModel = Model<MerkleTreeZeroDocument> & {}
 export type Transaction = {
     hash: string
     blockNumber: number
-    timestamp: number
 }
 
 export type MerkleTreeRootsBatchData = {
