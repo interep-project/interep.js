@@ -1,4 +1,5 @@
 import InterRepBot from "./bot"
+import getTelegramGroups from "./getTelegramGroups"
+import telegramGroup from "./telegramGroup"
 
-// eslint-disable-next-line import/prefer-default-export
-export { InterRepBot }
+export { InterRepBot, getTelegramGroups, telegramGroup }

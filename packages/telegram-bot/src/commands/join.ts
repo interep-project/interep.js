@@ -1,7 +1,9 @@
 import { TelegramUser } from "@interrep/db"
 import { Chat, Message, User } from "grammy/out/platform.node"
 import InterRepBot from "../bot"
+import getTelegramGroups from "../getTelegramGroups"
 import sha256 from "../sha256"
+import TelegramGroup from "../telegramGroup"
 import showConnectButton from "./showConnectButton"
 
 export default async function join(bot: InterRepBot, chat: Chat, msg: Message, user?: User) {
@@ -14,6 +16,16 @@ export default async function join(bot: InterRepBot, chat: Chat, msg: Message, u
 
     if (chat.type !== "private" && user) {
         try {
+            const groupId = chat.id.toString()
+
+            if (!getTelegramGroups().includes(groupId as TelegramGroup)) {
+                await bot.api.sendMessage(
+                    user.id,
+                    `Sorry, the '${chat.title}' group is not supported, please contact the InterRep team if you want to add this group to the supported ones.`
+                )
+                return
+            }
+
             const hashId = sha256(user.id.toString() + chat.id.toString())
             const telegramUser = await TelegramUser.findByHashId(hashId)
 

@@ -1,5 +1,7 @@
 import { TelegramUser } from "@interrep/db"
 import { Chat, Message, User } from "grammy/out/platform.node"
+import getTelegramGroups from "../getTelegramGroups"
+import TelegramGroup from "../telegramGroup"
 import InterRepBot from "../bot"
 import sha256 from "../sha256"
 import showConnectButton from "./showConnectButton"
@@ -14,6 +16,16 @@ export default async function leave(bot: InterRepBot, chat: Chat, msg: Message, 
 
     if (chat.type !== "private" && user) {
         try {
+            const groupId = chat.id.toString()
+
+            if (!getTelegramGroups().includes(groupId as TelegramGroup)) {
+                await bot.api.sendMessage(
+                    user.id,
+                    `Sorry, this group is not supported, please contact the InterRep team!`
+                )
+                return
+            }
+
             const hashId = sha256(user.id.toString() + chat.id.toString())
             const telegramUser = await TelegramUser.findByHashId(hashId)
 
