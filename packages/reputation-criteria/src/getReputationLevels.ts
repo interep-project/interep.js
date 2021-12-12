@@ -7,7 +7,7 @@ import getOAuthProviders from "./getOAuthProviders"
 /**
  * Returns all possible reputation levels of a provider or
  * all existing reputation levels. It is important to return
- * this value in order of importante (GOLD, SILVER, BRONZE, ...).
+ * this value in order of importance (gold, silver, bronze, ...).
  * @param provider The provider.
  * @returns A list of reputation levels.
  */

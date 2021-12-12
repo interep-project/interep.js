@@ -10,7 +10,7 @@ export default {
     ],
     reputationLevels: [
         {
-            name: "GOLD",
+            name: "gold",
             rules: [
                 {
                     parameter: "premiumSubscription",
@@ -37,7 +37,7 @@ export default {
             ]
         },
         {
-            name: "SILVER",
+            name: "silver",
             rules: [
                 {
                     parameter: "karma",
@@ -60,7 +60,7 @@ export default {
             ]
         },
         {
-            name: "BRONZE",
+            name: "bronze",
             rules: [
                 {
                     parameter: "karma",

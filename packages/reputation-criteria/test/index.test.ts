@@ -13,7 +13,7 @@ describe("InterRep reputation criteria", () => {
         it("Should return all the existing reputation levels", () => {
             const expectedvalue = getReputationLevels()
 
-            expect(expectedvalue).toStrictEqual(["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"])
+            expect(expectedvalue).toStrictEqual(["gold", "silver", "bronze", "not_sufficient"])
         })
 
         it("Should throw an error if the provider is not supported", () => {
@@ -25,19 +25,19 @@ describe("InterRep reputation criteria", () => {
         it("Should return a list of all available Twitter reputation levels", () => {
             const expectedValue = getReputationLevels(OAuthProvider.TWITTER)
 
-            expect(expectedValue).toStrictEqual(["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"])
+            expect(expectedValue).toStrictEqual(["gold", "silver", "bronze", "not_sufficient"])
         })
 
         it("Should return a list of all available Github reputation levels", () => {
             const expectedValue = getReputationLevels(OAuthProvider.GITHUB)
 
-            expect(expectedValue).toStrictEqual(["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"])
+            expect(expectedValue).toStrictEqual(["gold", "silver", "bronze", "not_sufficient"])
         })
 
         it("Should return a list of all available Reddit reputation levels", () => {
             const expectedValue = getReputationLevels(OAuthProvider.REDDIT)
 
-            expect(expectedValue).toStrictEqual(["GOLD", "SILVER", "BRONZE", "NOT_SUFFICIENT"])
+            expect(expectedValue).toStrictEqual(["gold", "silver", "bronze", "not_sufficient"])
         })
     })
 
@@ -60,85 +60,85 @@ describe("InterRep reputation criteria", () => {
             expect(fun).toThrow("Parameter 'followers' is not a number")
         })
 
-        it("Should return a 'GOLD' Twitter reputation", () => {
+        it("Should return a 'gold' Twitter reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.TWITTER, { verifiedProfile: true })
 
-            expect(expectedValue).toBe("GOLD")
+            expect(expectedValue).toBe("gold")
         })
 
-        it("Should return a 'GOLD' Github reputation", () => {
+        it("Should return a 'gold' Github reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.GITHUB, { followers: 600 })
 
-            expect(expectedValue).toBe("GOLD")
+            expect(expectedValue).toBe("gold")
         })
 
-        it("Should return a 'GOLD' Reddit reputation", () => {
+        it("Should return a 'gold' Reddit reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.REDDIT, { premiumSubscription: true })
 
-            expect(expectedValue).toBe("GOLD")
+            expect(expectedValue).toBe("gold")
         })
 
-        it("Should return a 'SILVER' Twitter reputation", () => {
+        it("Should return a 'silver' Twitter reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.TWITTER, { botometerOverallScore: 1.5 })
 
-            expect(expectedValue).toBe("SILVER")
+            expect(expectedValue).toBe("silver")
         })
 
-        it("Should return a 'SILVER' Github reputation", () => {
+        it("Should return a 'silver' Github reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.GITHUB, { receivedStars: 80 })
 
-            expect(expectedValue).toBe("SILVER")
+            expect(expectedValue).toBe("silver")
         })
 
-        it("Should return a 'SILVER' Reddit reputation", () => {
+        it("Should return a 'silver' Reddit reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.REDDIT, { linkedIdentities: 2 })
 
-            expect(expectedValue).toBe("SILVER")
+            expect(expectedValue).toBe("silver")
         })
 
-        it("Should return a 'BRONZE' Twitter reputation", () => {
+        it("Should return a 'bronze' Twitter reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.TWITTER, { followers: 500 })
 
-            expect(expectedValue).toBe("BRONZE")
+            expect(expectedValue).toBe("bronze")
         })
 
-        it("Should return a 'BRONZE' Github reputation", () => {
+        it("Should return a 'bronze' Github reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.GITHUB, { proPlan: true })
 
-            expect(expectedValue).toBe("BRONZE")
+            expect(expectedValue).toBe("bronze")
         })
 
-        it("Should return a 'BRONZE' Reddit reputation", () => {
+        it("Should return a 'bronze' Reddit reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.REDDIT, { coins: 500 })
 
-            expect(expectedValue).toBe("BRONZE")
+            expect(expectedValue).toBe("bronze")
         })
 
-        it("Should return a 'NOT_SUFFICIENT' Twitter reputation", () => {
+        it("Should return a 'not_sufficient' Twitter reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.TWITTER, { followers: 1 })
 
-            expect(expectedValue).toBe("NOT_SUFFICIENT")
+            expect(expectedValue).toBe("not_sufficient")
         })
 
-        it("Should return a 'NOT_SUFFICIENT' Github reputation", () => {
+        it("Should return a 'not_sufficient' Github reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.GITHUB, { followers: 1 })
 
-            expect(expectedValue).toBe("NOT_SUFFICIENT")
+            expect(expectedValue).toBe("not_sufficient")
         })
 
-        it("Should return a 'NOT_SUFFICIENT' Reddit reputation", () => {
+        it("Should return a 'not_sufficient' Reddit reputation", () => {
             const expectedValue = calculateReputation(OAuthProvider.REDDIT, { karma: 100 })
 
-            expect(expectedValue).toBe("NOT_SUFFICIENT")
+            expect(expectedValue).toBe("not_sufficient")
         })
 
-        it("Should return 'GOLD' if at least one parameter matches the gold reputation rules", () => {
+        it("Should return 'gold' if at least one parameter matches the gold reputation rules", () => {
             const expectedValue = calculateReputation(OAuthProvider.TWITTER, {
                 botometerOverallScore: 2,
                 followers: 7000
             })
 
-            expect(expectedValue).toBe("GOLD")
+            expect(expectedValue).toBe("gold")
         })
     })
 })

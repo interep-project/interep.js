@@ -9,7 +9,7 @@ export default {
     ],
     reputationLevels: [
         {
-            name: "GOLD",
+            name: "gold",
             rules: [
                 {
                     parameter: "followers",
@@ -26,7 +26,7 @@ export default {
             ]
         },
         {
-            name: "SILVER",
+            name: "silver",
             rules: [
                 {
                     parameter: "followers",
@@ -43,7 +43,7 @@ export default {
             ]
         },
         {
-            name: "BRONZE",
+            name: "bronze",
             rules: [
                 {
                     parameter: "proPlan",
