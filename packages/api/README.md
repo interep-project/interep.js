@@ -49,7 +49,7 @@
 
 ## 🛠 Install
 
-### NPM or Yarn 
+### NPM or Yarn
 
 Install the `@interrep/api` package with npm:
 
@@ -93,14 +93,6 @@ console.log(api.url) // "https://kovan.interrep.link/api"
 console.log(devApi.url) // "http://localhost:3000/api"
 ```
 
-\# **api.getGroups**(): _Promise<any[]>_
-
-```typescript
-const groups = await api.getGroups()
-```
-
-> API: [api/groups](https://docs.interrep.link/api#apigroups)
-
 \# **api.getProviders**(): _Promise<string[]>_
 
 ```typescript
@@ -109,28 +101,47 @@ const providers = await api.getProviders()
 
 > API: [api/providers](https://docs.interrep.link/api#apiproviders)
 
-\# **api.checkIdentityCommitment**(parameters: _CheckIdentityCommitmentRequest_): _Promise<boolean\>_
+\# **api.getGroups**(): _Promise<any[]>_
+
+```typescript
+const groups = await api.getGroups()
+```
+
+> API: [api/groups](https://docs.interrep.link/api#apigroups)
+
+\# **api.getGroup**(parameters: _GetGroupRequest_): _Promise<any>_
+
+```typescript
+const group = await api.getGroup({
+    provider: "twitter",
+    name: "gold"
+})
+```
+
+> API: [/api/groups/:provider/:name](https://docs.interrep.link/api#apigroupsprovidername)
+
+\# **api.hasIdentityCommitment**(parameters: _HasIdentityCommitmentRequest_): _Promise<boolean\>_
 
 ```typescript
 // For any provider group.
-const hasIdentityCommitment = await api.checkIdentityCommitment({
+const hasIdentityCommitment = await api.hasIdentityCommitment({
     provider: "twitter",
     identityCommitment: "1231231..."
 })
 ```
 
-> API: [/api/providers/:provider/:identityCommitment/check](https://docs.interrep.link/api#apiprovidersprovideridentitycommitmentcheck)
+> API: [/api/providers/:provider/:identityCommitment](https://docs.interrep.link/api#apiprovidersprovideridentitycommitment)
 
 ```typescript
 // For specific group.
-const hasIdentityCommitment = await api.checkIdentityCommitment({
+const hasIdentityCommitment = await api.hasIdentityCommitment({
     provider: "twitter",
-    name: "GOLD",
+    name: "gold",
     identityCommitment: "1231231..."
 })
 ```
 
-> API: [/api/groups/:provider/:name/:identityCommitment/check](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitmentcheck)
+> API (method: get): [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
 
 \# **api.addIdentityCommitment**(parameters: _AddIdentityCommitmentRequest_): _Promise<boolean\>_
 
@@ -138,7 +149,7 @@ const hasIdentityCommitment = await api.checkIdentityCommitment({
 // For Web2 providers.
 await api.addIdentityCommitment({
     provider: "twitter",
-    name: "GOLD",
+    name: "gold",
     identityCommitment: "1231231...",
     authenticationHeader: "token <OAuth-token>"
 })
@@ -148,23 +159,91 @@ await api.addIdentityCommitment({
 // For Web3 providers.
 await api.addIdentityCommitment({
     provider: "poap",
-    name: "DEVCON_4",
+    name: "devcon4",
     identityCommitment: "1231231...",
     userAddress: "0xueaoueao",
     userSignature: "aueouaoe"
 })
 ```
 
-> API: [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
+> API (method: post): [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
 
-\# **api.getMerkleTreePath**(parameters: _GetMerkleTreePathRequest_): _Promise<any\>_
+\# **api.deleteIdentityCommitment**(parameters: _DeleteIdentityCommitmentRequest_): _Promise<boolean\>_
 
 ```typescript
-const path = await api.getMerkleTreePath({
+// For Web2 providers.
+await api.deleteIdentityCommitment({
     provider: "twitter",
-    name: "GOLD",
-    identityCommitment: "1231231..."
+    name: "gold",
+    identityCommitment: "1231231...",
+    authenticationHeader: "token <OAuth-token>"
 })
 ```
 
-> API: [/api/groups/:provider/:name/:identityCommitment/path](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitmentpath)
+```typescript
+// For Web3 providers.
+await api.deleteIdentityCommitment({
+    provider: "poap",
+    name: "devcon4",
+    identityCommitment: "1231231...",
+    userAddress: "0xueaoueao",
+    userSignature: "aueouaoe"
+})
+```
+
+> API (method: delete): [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
+
+\# **api.getMerkleTreeLeaves**(parameters: _GetMerkleTreeLeavesRequest_, options: _RequestOptions_): _Promise<any[]\>_
+
+```typescript
+const leaves = await api.getMerkleTreeLeaves(
+    {
+        rootHash: "1212121..."
+    },
+    {
+        limit: 10
+    }
+)
+```
+
+> API: [/api/trees/:rootHash](https://docs.interrep.link/api#apitreesroothash)
+
+\# **api.hasMerkleTreeLeaf**(parameters: _HasMerkleTreeLeafRequest_): _Promise<boolean\>_
+
+```typescript
+const hasMerkleTreeLeaf = await api.hasMerkleTreeLeaf({
+    rootHash: "1212121...",
+    leafHash: "2122131..."
+})
+```
+
+> API: [/api/trees/:rootHash/:leafHash](https://docs.interrep.link/api#apitreesroothashleafhash)
+
+\# **api.getMerkleTreeProof**(parameters: _GetMerkleTreeProofRequest_): _Promise<any\>_
+
+```typescript
+const proof = await api.getMerkleTreePath({
+    rootHash: "1212121...",
+    leafHash: "2122131..."
+})
+```
+
+> API: [/api/trees/:rootHash/:leafHash/proof](https://docs.interrep.link/api#apitreesroothashleafhashproof)
+
+\# **api.getMerkleTreeRootBatches**(): _Promise<any[]\>_
+
+```typescript
+const rootBatches = await api.getMerkleTreeRootBatches()
+```
+
+> API: [/api/trees/batches](https://docs.interrep.link/api#apitreesbatches)
+
+\# **api.getMerkleTreeRootBatch**(parameters: _GetMerkleTreeRootBatchRequest_): _Promise<any\>_
+
+```typescript
+const rootBatch = await api.getMerkleTreeRootBatch({
+    rootHash: "1212121..."
+})
+```
+
+> API: [/api/trees/batches/:rootHash](https://docs.interrep.link/api#apitreesbatchesroothash)

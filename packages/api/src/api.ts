@@ -8,8 +8,14 @@ import request from "./request"
 import { Environment } from "./types/config"
 import {
     AddIdentityCommitmentRequest,
-    CheckIdentityCommitmentRequest,
-    GetMerkleTreePathRequest
+    DeleteIdentityCommitmentRequest,
+    GetGroupRequest,
+    GetMerkleTreeLeavesRequest,
+    GetMerkleTreeProofRequest,
+    GetMerkleTreeRootBatchRequest,
+    HasIdentityCommitmentRequest,
+    HasMerkleTreeLeafRequest,
+    RequestOptions
 } from "./types/requestParameters"
 
 export default class API {
@@ -19,15 +25,26 @@ export default class API {
         this.url = getURL(environment)
     }
 
-    async getGroups(): Promise<any[]> {
-        return request(`${this.url}/groups`)
-    }
-
     async getProviders(): Promise<string[]> {
         return request(`${this.url}/providers`)
     }
 
-    async checkIdentityCommitment(parameters: CheckIdentityCommitmentRequest): Promise<boolean> {
+    async getGroups(): Promise<any[]> {
+        return request(`${this.url}/groups`)
+    }
+
+    async getGroup(parameters: GetGroupRequest): Promise<any> {
+        checkParameter(parameters, "request", "object")
+
+        const { provider, name } = parameters
+
+        checkParameter(provider, "provider", "string")
+        checkParameter(name, "name", "string")
+
+        return request(`${this.url}/groups/${provider}/${name}`)
+    }
+
+    async hasIdentityCommitment(parameters: HasIdentityCommitmentRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name, identityCommitment } = parameters
@@ -39,10 +56,10 @@ export default class API {
         if (name) {
             checkParameter(name, "name", "string")
 
-            return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}/check`)
+            return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`)
         }
 
-        return request(`${this.url}/providers/${provider}/${identityCommitment}/check`)
+        return request(`${this.url}/providers/${provider}/${identityCommitment}`)
     }
 
     async addIdentityCommitment(parameters: AddIdentityCommitmentRequest): Promise<boolean> {
@@ -73,16 +90,80 @@ export default class API {
         return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
     }
 
-    async getMerkleTreePath(parameters: GetMerkleTreePathRequest): Promise<any> {
+    async deleteIdentityCommitment(parameters: DeleteIdentityCommitmentRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
-        const { provider, name, identityCommitment } = parameters
+        const { provider, name, identityCommitment, authenticationHeader, userAddress, userSignature } = parameters
 
         checkParameter(provider, "provider", "string")
         checkParameter(name, "name", "string")
         checkParameter(identityCommitment, "identity commitment", "string")
         checkProvider(provider)
 
-        return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}/path`)
+        const config: AxiosRequestConfig = { method: "delete" }
+
+        if (Object.values(OAuthProvider).includes(provider as OAuthProvider)) {
+            checkParameter(authenticationHeader, "authentication header", "string")
+
+            config.headers = { Authentication: authenticationHeader as string }
+
+            return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
+        }
+
+        checkParameter(userAddress, "user address", "string")
+        checkParameter(userSignature, "user signature", "string")
+
+        config.data = { userAddress, userSignature }
+
+        return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
+    }
+
+    async getMerkleTreeLeaves(parameters: GetMerkleTreeLeavesRequest, options: RequestOptions): Promise<any[]> {
+        checkParameter(parameters, "request", "object")
+        checkParameter(options, "options", "object")
+
+        const { rootHash } = parameters
+        const { limit = 0 } = options
+
+        checkParameter(rootHash, "root hash", "string")
+        checkParameter(limit, "limit", "number")
+
+        return request(`${this.url}/trees/${rootHash}?limit=${limit}`)
+    }
+
+    async hasMerkleTreeLeaf(parameters: HasMerkleTreeLeafRequest): Promise<boolean> {
+        checkParameter(parameters, "request", "object")
+
+        const { rootHash, leafHash } = parameters
+
+        checkParameter(rootHash, "root hash", "string")
+        checkParameter(leafHash, "leaf hash", "string")
+
+        return request(`${this.url}/trees/${rootHash}/${leafHash}`)
+    }
+
+    async getMerkleTreeProof(parameters: GetMerkleTreeProofRequest): Promise<any> {
+        checkParameter(parameters, "request", "object")
+
+        const { rootHash, leafHash } = parameters
+
+        checkParameter(rootHash, "root hash", "string")
+        checkParameter(leafHash, "leaf hash", "string")
+
+        return request(`${this.url}/trees/${rootHash}/${leafHash}/proof`)
+    }
+
+    async getMerkleTreeRootBatches(): Promise<any[]> {
+        return request(`${this.url}/trees/batches`)
+    }
+
+    async getMerkleTreeRootBatch(parameters: GetMerkleTreeRootBatchRequest): Promise<any> {
+        checkParameter(parameters, "request", "object")
+
+        const { rootHash } = parameters
+
+        checkParameter(rootHash, "root hash", "string")
+
+        return request(`${this.url}/trees/batches/${rootHash}`)
     }
 }
