@@ -1,7 +1,7 @@
 {
-    "name": "@interrep/reputation-criteria",
-    "version": "0.12.1",
-    "description": "Definitions and utility functions of InterRep reputation criteria.",
+    "name": "@interrep/reputation",
+    "version": "0.13.0",
+    "description": "Definitions and utility functions of InterRep reputation.",
     "iife": "dist/index.js",
     "unpkg": "dist/index.min.js",
     "jsdelivr": "dist/index.min.js",
@@ -18,7 +18,7 @@
         "README.md"
     ],
     "repository": "git@github.com:InterRep/interrep.js.git",
-    "homepage": "https://github.com/InterRep/interrep.js/tree/main/packages/reputation-criteria",
+    "homepage": "https://github.com/InterRep/interrep.js/tree/main/packages/reputation",
     "author": {
         "name": "Omar Desogus",
         "email": "me@cedoor.dev",

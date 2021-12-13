@@ -1,5 +1,5 @@
 {
-    "displayName": "reputation-criteria",
+    "displayName": "reputation",
     "transform": {
         "\\.(ts|tsx)": "ts-jest"
     },
