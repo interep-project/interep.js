@@ -109,7 +109,7 @@ const groups = await api.getGroups()
 
 > API: [api/groups](https://docs.interrep.link/api#apigroups)
 
-\# **api.getGroup**(parameters: _GetGroupRequest_): _Promise<any>_
+\# **api.getGroup**(parameters: _GetGroupRequest_): _Promise<any\>_
 
 ```typescript
 const group = await api.getGroup({
@@ -193,7 +193,7 @@ await api.deleteIdentityCommitment({
 
 > API (method: delete): [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
 
-\# **api.getMerkleTreeLeaves**(parameters: _GetMerkleTreeLeavesRequest_, options: _RequestOptions_): _Promise<any[]\>_
+\# **api.getMerkleTreeLeaves**(parameters: _GetMerkleTreeLeavesRequest_, options: _RequestOptions_): _Promise<string[]\>_
 
 ```typescript
 const leaves = await api.getMerkleTreeLeaves(

@@ -118,7 +118,7 @@ export default class API {
         return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
     }
 
-    async getMerkleTreeLeaves(parameters: GetMerkleTreeLeavesRequest, options: RequestOptions): Promise<any[]> {
+    async getMerkleTreeLeaves(parameters: GetMerkleTreeLeavesRequest, options: RequestOptions): Promise<string[]> {
         checkParameter(parameters, "request", "object")
         checkParameter(options, "options", "object")
 
