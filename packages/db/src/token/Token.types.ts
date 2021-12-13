@@ -1,4 +1,4 @@
-import type { OAuthProvider } from "@interrep/reputation-criteria"
+import type { OAuthProvider } from "@interrep/reputation"
 import type { Document, Model } from "mongoose"
 import type { Transaction } from "../transaction/Transaction.types"
 import type { findByUserAddress } from "./Token.statics"

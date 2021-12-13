@@ -1,4 +1,4 @@
-import { OAuthProvider } from "@interrep/reputation-criteria"
+import { OAuthProvider } from "@interrep/reputation"
 import { MongoMemoryServer } from "mongodb-memory-server"
 import {
     connect,

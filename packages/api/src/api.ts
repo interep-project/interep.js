@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { OAuthProvider } from "@interrep/reputation-criteria"
+import { OAuthProvider } from "@interrep/reputation"
 import { AxiosRequestConfig } from "axios"
 import checkParameter from "./checkParameter"
 import checkProvider from "./checkProvider"

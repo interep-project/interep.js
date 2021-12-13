@@ -1,4 +1,4 @@
-import type { OAuthProvider } from "@interrep/reputation-criteria"
+import type { OAuthProvider } from "@interrep/reputation"
 
 export enum Web3Provider {
     POAP = "poap"

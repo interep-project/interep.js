@@ -1,4 +1,4 @@
-import { OAuthProvider } from "@interrep/reputation-criteria"
+import { OAuthProvider } from "@interrep/reputation"
 import { Schema } from "mongoose"
 import { TransactionSchema } from "../transaction/Transaction.schema"
 import { findByUserAddress } from "./Token.statics"
