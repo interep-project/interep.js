@@ -42,7 +42,7 @@ export type MerkleTreeZeroDocument = MerkleTreeZeroData & Document
 
 export type MerkleTreeZeroModel = Model<MerkleTreeZeroDocument> & {}
 
-export type Transaction = {
+type Transaction = {
     hash: string
     blockNumber: number
 }

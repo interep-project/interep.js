@@ -1,18 +1,17 @@
 import { OAuthProvider } from "@interrep/reputation"
 import { MongoMemoryServer } from "mongodb-memory-server"
 import {
+    clear,
     connect,
     disconnect,
     drop,
+    EmailUser,
     getState,
-    clear,
-    TelegramUser,
-    OAuthAccount,
     MerkleTreeNode,
     MerkleTreeZero,
-    Token,
-    TokenStatus,
-    EmailUser
+    OAuthAccount,
+    TelegramUser,
+    Token
 } from "../src"
 
 describe("InterRep db", () => {
@@ -334,14 +333,10 @@ describe("InterRep db", () => {
 
         it("Should create a Token entity", async () => {
             await Token.create({
-                chainId: 1,
-                contractAddress: "userAddress",
+                tokenId: "tokenId",
+                provider: OAuthProvider.TWITTER,
                 userAddress: "userAddress",
-                encryptedAttestation: "encryptedAttestation",
-                issuanceTimestamp: Date.now(),
-                decimalId: "decimalId",
-                status: TokenStatus.NOT_MINTED,
-                provider: OAuthProvider.TWITTER
+                encryptedAttestation: "encryptedAttestation"
             })
 
             const expectedValue = await Token.countDocuments()
