@@ -1,4 +1,4 @@
-import { OAuthProvider } from "@interrep/reputation"
+import { OAuthProvider, ReputationLevel } from "@interrep/reputation"
 import { API, Web3Provider } from "../src"
 import request from "../src/request"
 
@@ -180,6 +180,25 @@ describe("InterRep API", () => {
         })
     })
 
+    describe("Get Merkle tree proof", () => {
+        it("Should get a valid Merkle tree proof", async () => {
+            requestMocked.mockImplementationOnce(() =>
+                Promise.resolve({ siblingNodes: ["0"], path: [0], root: "1123123" })
+            )
+
+            const expectedValue = await api.getMerkleTreeProof({
+                provider: OAuthProvider.TWITTER,
+                name: ReputationLevel.GOLD,
+                identityCommitment: "23131231231"
+            })
+
+            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toHaveProperty("siblingNodes")
+            expect(expectedValue).toHaveProperty("path")
+            expect(expectedValue).toHaveProperty("root")
+        })
+    })
+
     describe("Get Merkle tree leaves", () => {
         it("Should get the leaves of a Merkle tree", async () => {
             requestMocked.mockImplementationOnce(() => Promise.resolve(["0", "1"]))
@@ -205,24 +224,6 @@ describe("InterRep API", () => {
 
             expect(expectedValue).not.toBeUndefined()
             expect(expectedValue).toEqual(true)
-        })
-    })
-
-    describe("Get Merkle tree proof", () => {
-        it("Should get a valid Merkle tree proof", async () => {
-            requestMocked.mockImplementationOnce(() =>
-                Promise.resolve({ siblingNodes: ["0"], path: [0], root: "1123123" })
-            )
-
-            const expectedValue = await api.getMerkleTreeProof({
-                rootHash: "1",
-                leafHash: "1"
-            })
-
-            expect(expectedValue).not.toBeUndefined()
-            expect(expectedValue).toHaveProperty("siblingNodes")
-            expect(expectedValue).toHaveProperty("path")
-            expect(expectedValue).toHaveProperty("root")
         })
     })
 

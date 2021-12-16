@@ -118,6 +118,19 @@ export default class API {
         return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
     }
 
+    async getMerkleTreeProof(parameters: GetMerkleTreeProofRequest): Promise<any> {
+        checkParameter(parameters, "request", "object")
+
+        const { provider, name, identityCommitment } = parameters
+
+        checkParameter(provider, "provider", "string")
+        checkParameter(name, "name", "string")
+        checkParameter(identityCommitment, "identity commitment", "string")
+        checkProvider(provider)
+
+        return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}/proof`)
+    }
+
     async getMerkleTreeLeaves(parameters: GetMerkleTreeLeavesRequest, options: RequestOptions): Promise<string[]> {
         checkParameter(parameters, "request", "object")
         checkParameter(options, "options", "object")
@@ -140,17 +153,6 @@ export default class API {
         checkParameter(leafHash, "leaf hash", "string")
 
         return request(`${this.url}/trees/${rootHash}/${leafHash}`)
-    }
-
-    async getMerkleTreeProof(parameters: GetMerkleTreeProofRequest): Promise<any> {
-        checkParameter(parameters, "request", "object")
-
-        const { rootHash, leafHash } = parameters
-
-        checkParameter(rootHash, "root hash", "string")
-        checkParameter(leafHash, "leaf hash", "string")
-
-        return request(`${this.url}/trees/${rootHash}/${leafHash}/proof`)
     }
 
     async getMerkleTreeRootBatches(): Promise<any[]> {

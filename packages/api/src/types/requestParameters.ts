@@ -21,6 +21,10 @@ export type HasIdentityCommitmentRequest = {
     identityCommitment: string
 }
 
+export type GetMerkleTreeProofRequest = HasIdentityCommitmentRequest & {
+    name: string
+}
+
 export type AddIdentityCommitmentRequest = HasIdentityCommitmentRequest & {
     authenticationHeader?: string
     userAddress?: string
@@ -36,7 +40,5 @@ export type GetMerkleTreeLeavesRequest = {
 export type HasMerkleTreeLeafRequest = GetMerkleTreeLeavesRequest & {
     leafHash: string
 }
-
-export type GetMerkleTreeProofRequest = HasMerkleTreeLeafRequest
 
 export type GetMerkleTreeRootBatchRequest = GetMerkleTreeLeavesRequest
