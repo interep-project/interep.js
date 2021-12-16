@@ -193,6 +193,18 @@ await api.deleteIdentityCommitment({
 
 > API (method: delete): [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
 
+\# **api.getMerkleTreeProof**(parameters: _GetMerkleTreeProofRequest_): _Promise<any\>_
+
+```typescript
+const proof = await api.getMerkleTreeProof({
+    provider: "twitter",
+    name: "gold",
+    identityCommitment: "1231231..."
+})
+```
+
+> API: [/api/groups/:provider/:name/:identityCommitment/proof](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitmentproof)
+
 \# **api.getMerkleTreeLeaves**(parameters: _GetMerkleTreeLeavesRequest_, options: _RequestOptions_): _Promise<string[]\>_
 
 ```typescript
@@ -218,17 +230,6 @@ const hasMerkleTreeLeaf = await api.hasMerkleTreeLeaf({
 ```
 
 > API: [/api/trees/:rootHash/:leafHash](https://docs.interrep.link/api#apitreesroothashleafhash)
-
-\# **api.getMerkleTreeProof**(parameters: _GetMerkleTreeProofRequest_): _Promise<any\>_
-
-```typescript
-const proof = await api.getMerkleTreePath({
-    rootHash: "1212121...",
-    leafHash: "2122131..."
-})
-```
-
-> API: [/api/trees/:rootHash/:leafHash/proof](https://docs.interrep.link/api#apitreesroothashleafhashproof)
 
 \# **api.getMerkleTreeRootBatches**(): _Promise<any[]\>_
 
