@@ -23,18 +23,16 @@
     },
     "license": "MIT",
     "scripts": {
-        "build:watch": "rollup -c rollup.config.ts -w",
-        "build": "rimraf dist && rollup -c rollup.config.ts",
+        "build:watch": "rollup -c rollup.config.ts -w --configPlugin typescript",
+        "build": "rimraf dist && rollup -c rollup.config.ts --configPlugin typescript",
         "prepublishOnly": "yarn build"
     },
     "publishConfig": {
         "access": "public"
     },
     "devDependencies": {
-        "mongodb-memory-server": "^8.0.0",
-        "rimraf": "^3.0.2",
-        "rollup": "^2.56.2",
-        "rollup-plugin-typescript2": "^0.30.0"
+        "@rollup/plugin-typescript": "^8.3.0",
+        "mongodb-memory-server": "^8.0.0"
     },
     "dependencies": {
         "@interrep/reputation": "^0.13.0",

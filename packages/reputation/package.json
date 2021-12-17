@@ -26,8 +26,8 @@
     },
     "license": "MIT",
     "scripts": {
-        "build:watch": "rollup -c rollup.config.ts -w",
-        "build": "rimraf dist && rollup -c rollup.config.ts",
+        "build:watch": "rollup -c rollup.config.ts -w --configPlugin typescript",
+        "build": "rimraf dist && rollup -c rollup.config.ts --configPlugin typescript",
         "gh-pages": "cd demo && yarn && yarn build",
         "prepublishOnly": "yarn build"
     },
@@ -35,9 +35,7 @@
         "access": "public"
     },
     "devDependencies": {
-        "rimraf": "^3.0.2",
-        "rollup": "^2.56.2",
-        "rollup-plugin-terser": "^7.0.2",
-        "rollup-plugin-typescript2": "^0.30.0"
+        "@rollup/plugin-typescript": "^8.3.0",
+        "rollup-plugin-terser": "^7.0.2"
     }
 }

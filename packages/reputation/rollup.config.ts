@@ -1,4 +1,4 @@
-import typescript from "rollup-plugin-typescript2"
+import typescript from "@rollup/plugin-typescript"
 import { terser } from "rollup-plugin-terser"
 import fs from "fs"
 
@@ -11,8 +11,7 @@ const banner = `/**
  * @license ${pkg.license}
  * @see [Github]{@link ${pkg.homepage}}
 */`
-
-const name = pkg.name.substr(1).replace(/[-/]./g, (x) => x.toUpperCase()[1])
+const name = pkg.name.substr(1).replace(/[-/]./g, (x: string) => x.toUpperCase()[1])
 
 export default {
     input: "src/index.ts",
@@ -32,5 +31,5 @@ export default {
         { file: pkg.exports.require, format: "cjs", banner, exports: "auto" },
         { file: pkg.exports.import, format: "es", banner }
     ],
-    plugins: [typescript({ useTsconfigDeclarationDir: true })]
+    plugins: [typescript({ tsconfig: "./build.tsconfig.json" })]
 }

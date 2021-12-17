@@ -1,12 +1,4 @@
 {
     "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "baseUrl": ".",
-        "target": "ES6",
-        "declarationDir": "dist/types"
-    },
-    "ts-node": {
-        "compilerOptions": { "module": "CommonJS" }
-    },
-    "include": ["src"]
+    "include": ["src", "test", "types", "rollup.config.ts"]
 }
