@@ -3,5 +3,5 @@ import type { TokenDocument } from "./Token.types"
 
 // eslint-disable-next-line import/prefer-default-export
 export async function findByUserAddress(this: typeof Token, userAddress: string): Promise<TokenDocument[]> {
-    return this.find({ userAddress })
+    return this.find({ userAddress }).select({ __v: 0, _id: 0 })
 }
