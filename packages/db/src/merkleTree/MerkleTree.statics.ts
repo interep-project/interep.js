@@ -7,9 +7,7 @@ export async function findByGroupAndLevelAndIndex(
     level: number,
     index: number
 ): Promise<MerkleTreeNodeDocument | null> {
-    return this.findOne({ "group.provider": group.provider, "group.name": group.name, level, index })
-        .populate("parent")
-        .select({ __v: 0, _id: 0 })
+    return this.findOne({ "group.provider": group.provider, "group.name": group.name, level, index }).populate("parent")
 }
 
 export async function findByGroupAndHash(
@@ -17,9 +15,7 @@ export async function findByGroupAndHash(
     group: Group,
     hash: string
 ): Promise<MerkleTreeNodeDocument | null> {
-    return this.findOne({ "group.provider": group.provider, "group.name": group.name, hash })
-        .populate("parent")
-        .select({ __v: 0, _id: 0 })
+    return this.findOne({ "group.provider": group.provider, "group.name": group.name, hash }).populate("parent")
 }
 
 export async function findByGroupProviderAndHash(
@@ -27,7 +23,7 @@ export async function findByGroupProviderAndHash(
     groupProvider: string,
     hash: string
 ): Promise<MerkleTreeNodeDocument | null> {
-    return this.findOne({ "group.provider": groupProvider, hash }).populate("parent").select({ __v: 0, _id: 0 })
+    return this.findOne({ "group.provider": groupProvider, hash }).populate("parent")
 }
 
 export async function getGroupNamesByProvider(this: typeof MerkleTreeNode, provider: string): Promise<string[]> {

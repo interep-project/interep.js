@@ -11,5 +11,5 @@ export async function findByProviderAccountId(
     return this.findOne({
         provider,
         providerAccountId
-    }).select({ __v: 0, _id: 0 })
+    })
 }

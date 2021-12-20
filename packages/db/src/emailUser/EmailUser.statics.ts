@@ -3,5 +3,5 @@ import type { EmailUserDocument } from "./EmailUser.types"
 
 // eslint-disable-next-line import/prefer-default-export
 export async function findByHashId(this: typeof EmailUser, hashId: string): Promise<EmailUserDocument | null> {
-    return this.findOne({ hashId }).select({ __v: 0, _id: 0 })
+    return this.findOne({ hashId })
 }
