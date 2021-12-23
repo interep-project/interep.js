@@ -1,4 +1,4 @@
-import { OAuthProvider } from "@interrep/reputation"
+import { OAuthProvider, ReputationLevel } from "@interrep/reputation"
 import { MongoMemoryServer } from "mongodb-memory-server"
 import {
     clear,
@@ -135,17 +135,16 @@ describe("InterRep db", () => {
         })
 
         it("Should create an OAuthAccount entity", async () => {
-            await OAuthAccount.create({
+            const expectedValue1 = await OAuthAccount.create({
                 provider: OAuthProvider.TWITTER,
                 providerAccountId: "12321",
-                uniqueKey: `${OAuthProvider.TWITTER}:12321`,
-                isLinkedToAddress: false,
-                createdAt: Date.now()
+                reputation: ReputationLevel.GOLD
             })
+            const expectedValue2 = await OAuthAccount.countDocuments()
 
-            const expectedValue = await OAuthAccount.countDocuments()
-
-            expect(expectedValue).toBe(1)
+            expect(expectedValue1.isLinkedToAddress).toBe(false)
+            expect(expectedValue1.hasJoinedAGroup).toBe(false)
+            expect(expectedValue2).toBe(1)
         })
 
         it("Should find an OAuth account by provider and provider account id", async () => {

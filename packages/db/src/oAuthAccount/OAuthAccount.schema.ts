@@ -3,28 +3,19 @@ import { Schema } from "mongoose"
 import { findByProviderAccountId } from "./OAuthAccount.statics"
 import type { OAuthAccountData, OAuthAccountDocument, OAuthAccountModel } from "./OAuthAccount.types"
 
-const Web2AccountSchemaFields: Record<keyof OAuthAccountData, any> = {
-    provider: {
-        type: String,
-        enum: Object.values(OAuthProvider),
-        required: true
-    },
+const OAuthAccountSchemaFields: Record<keyof OAuthAccountData, any> = {
+    provider: { type: String, enum: Object.values(OAuthProvider), required: true },
     providerAccountId: { type: String, index: true, required: true },
-    uniqueKey: { type: String, index: true, unique: true },
-    reputation: { type: String, enum: Object.values(ReputationLevel) },
-    isLinkedToAddress: { type: Boolean, required: true },
+    reputation: { type: String, enum: Object.values(ReputationLevel), required: true },
+    isLinkedToAddress: { type: Boolean, default: false },
     hasJoinedAGroup: { type: Boolean, default: false },
-    createdAt: { type: Date, default: Date.now, required: true },
-    updatedAt: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now },
     refreshToken: String,
-    accessToken: String,
-    isSeedUser: { type: Boolean, default: false }
+    accessToken: String
 }
 
-const options = { discriminatorKey: "provider" }
+const OAuthAccountSchema = new Schema<OAuthAccountDocument, OAuthAccountModel>(OAuthAccountSchemaFields)
 
-const Web2AccountSchema = new Schema<OAuthAccountDocument, OAuthAccountModel>(Web2AccountSchemaFields, options)
+OAuthAccountSchema.statics.findByProviderAccountId = findByProviderAccountId
 
-Web2AccountSchema.statics.findByProviderAccountId = findByProviderAccountId
-
-export default Web2AccountSchema
+export default OAuthAccountSchema
