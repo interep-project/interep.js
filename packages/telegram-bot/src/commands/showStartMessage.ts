@@ -1,8 +1,8 @@
+import { Bot } from "grammy"
 import { Chat, User } from "grammy/out/platform.node"
-import InterRepBot from "../bot"
 import showHelpMessage from "./showHelpMessage"
 
-export default async function sendStartMessage(bot: InterRepBot, chat: Chat, payload: string, user?: User) {
+export default async function sendStartMessage(bot: Bot, chat: Chat, payload: string, user?: User) {
     if (chat.type === "private") {
         if (payload === "connect") {
             bot.api.sendMessage(

@@ -9,7 +9,13 @@
         "skipLibCheck": true,
         "declaration": true,
         "allowSyntheticDefaultImports": true,
-        "declarationDir": "dist/types",
+        "declarationDir": "types",
         "typeRoots": ["node_modules/@types", "types"]
+    },
+    "ts-node": {
+        "compilerOptions": {
+            "target": "esnext",
+            "module": "commonjs"
+        }
     }
 }

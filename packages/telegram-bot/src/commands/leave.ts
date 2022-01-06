@@ -1,12 +1,12 @@
 import { TelegramUser } from "@interrep/db"
+import { Bot } from "grammy"
 import { Chat, Message, User } from "grammy/out/platform.node"
 import getTelegramGroups from "../getTelegramGroups"
-import TelegramGroup from "../telegramGroup"
-import InterRepBot from "../bot"
 import sha256 from "../sha256"
+import TelegramGroup from "../telegramGroup"
 import showConnectButton from "./showConnectButton"
 
-export default async function leave(bot: InterRepBot, chat: Chat, msg: Message, user?: User) {
+export default async function leave(bot: Bot, appURL: string, chat: Chat, msg: Message, user?: User) {
     if (chat.type === "private") {
         bot.api.sendMessage(
             chat.id,
@@ -36,7 +36,7 @@ export default async function leave(bot: InterRepBot, chat: Chat, msg: Message, 
 
             await bot.api.sendMessage(
                 user.id,
-                `Here's the magic link to leave the '${chat.title}' group: ${bot.appURL}/groups/telegram/${user.id}/${chat.id} 😉`
+                `Here's the magic link to leave the '${chat.title}' group: ${appURL}/groups/telegram/${user.id}/${chat.id} 😉`
             )
         } catch (error: any) {
             if (error?.error_code === 403) {

@@ -1,7 +1,7 @@
+import { Bot } from "grammy"
 import { Chat, User } from "grammy/out/platform.node"
-import InterRepBot from "../bot"
 
-export default async function sendHelpMessage(bot: InterRepBot, chat: Chat, user?: User): Promise<void> {
+export default async function sendHelpMessage(bot: Bot, chat: Chat, user?: User): Promise<void> {
     let subject: string
     let action: string
 

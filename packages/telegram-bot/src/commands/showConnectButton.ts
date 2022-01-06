@@ -1,8 +1,7 @@
-import { InlineKeyboard } from "grammy"
+import { Bot, InlineKeyboard } from "grammy"
 import { Chat, Message } from "grammy/out/platform.node"
-import InterRepBot from "../bot"
 
-export default async function showConnectButton(bot: InterRepBot, chat: Chat, msg: Message, command: string) {
+export default async function showConnectButton(bot: Bot, chat: Chat, msg: Message, command: string) {
     const inlineKeyboard = new InlineKeyboard().url(
         "Connect",
         `https://telegram.me/${bot.botInfo.username}?start=connect`
