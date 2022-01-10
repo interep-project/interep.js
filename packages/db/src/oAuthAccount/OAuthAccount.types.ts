@@ -6,7 +6,6 @@ export type OAuthAccountData = {
     provider: OAuthProvider
     providerAccountId: string
     reputation: ReputationLevel
-    isLinkedToAddress?: boolean
     hasJoinedAGroup?: boolean
     refreshToken?: string
     accessToken?: string

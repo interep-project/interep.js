@@ -7,7 +7,6 @@ const OAuthAccountSchemaFields: Record<keyof OAuthAccountData, any> = {
     provider: { type: String, enum: Object.values(OAuthProvider), required: true },
     providerAccountId: { type: String, index: true, required: true },
     reputation: { type: String, enum: Object.values(ReputationLevel), required: true },
-    isLinkedToAddress: { type: Boolean, default: false },
     hasJoinedAGroup: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now },
     refreshToken: String,

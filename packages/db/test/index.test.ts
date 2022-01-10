@@ -10,8 +10,7 @@ import {
     MerkleTreeNode,
     MerkleTreeZero,
     OAuthAccount,
-    TelegramUser,
-    Token
+    TelegramUser
 } from "../src"
 
 describe("InterRep db", () => {
@@ -142,7 +141,6 @@ describe("InterRep db", () => {
             })
             const expectedValue2 = await OAuthAccount.countDocuments()
 
-            expect(expectedValue1.isLinkedToAddress).toBe(false)
             expect(expectedValue1.hasJoinedAGroup).toBe(false)
             expect(expectedValue2).toBe(1)
         })
@@ -315,36 +313,6 @@ describe("InterRep db", () => {
 
         it("Should find a Email user by hash id", async () => {
             const expectedValue = await EmailUser.findByHashId("hashId")
-
-            expect(expectedValue).not.toBeNull()
-        })
-    })
-
-    describe("Token", () => {
-        beforeAll(async () => {
-            await connect(mms.getUri())
-        })
-
-        afterAll(async () => {
-            await clear()
-            await disconnect()
-        })
-
-        it("Should create a Token entity", async () => {
-            await Token.create({
-                tokenId: "tokenId",
-                provider: OAuthProvider.TWITTER,
-                userAddress: "userAddress",
-                encryptedAttestation: "encryptedAttestation"
-            })
-
-            const expectedValue = await Token.countDocuments()
-
-            expect(expectedValue).toBe(1)
-        })
-
-        it("Should find a Token by user address", async () => {
-            const expectedValue = await Token.findByUserAddress("userAddress")
 
             expect(expectedValue).not.toBeNull()
         })
