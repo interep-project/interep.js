@@ -86,7 +86,7 @@ function App() {
     const [_identityNullifier, setIdentityNullifier] = React.useState<any>()
     const [_identityTrapdoor, setIdentityTrapdoor] = React.useState<any>()
     const [_oAuthProvider, setOAuthProvider] = React.useState<string>("")
-    const [_activeStep, setActiveStep] = React.useState(0)
+    const [_activeStep, setActiveStep] = React.useState<number>(0)
 
     React.useEffect(() => {
         ;(async function IIFE() {
@@ -101,7 +101,7 @@ function App() {
             } else {
                 const accounts = await _provider.request({ method: "eth_accounts" })
 
-                if (accounts.lenght !== 0 && accounts[0]) {
+                if (accounts.length !== 0 && accounts[0]) {
                     setAccount(accounts[0])
                     setActiveStep(1)
                 }
@@ -120,7 +120,7 @@ function App() {
     }, [_provider])
 
     function handleNext() {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1)
+        setActiveStep((prevActiveStep: number) => prevActiveStep + 1)
     }
 
     function resetSteps() {
