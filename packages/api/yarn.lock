@@ -23,11 +23,6 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@interrep/reputation@^0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@interrep/reputation/-/reputation-0.13.0.tgz#cdb5b50bf0ed61dc049c6101dc626088b171d7c5"
-  integrity sha512-UPcCQv90f5VE8BB6Ao/CvY9Tl3vhrAyNs61OPxy5K/NkDtfO3h5XSFym4JEcv+wyAbfWXUcP9Pf2M5nnKvjv9A==
-
 "@rollup/plugin-node-resolve@^13.1.1":
   version "13.1.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-13.1.1.tgz#d38ba06e7b181ab4df64c75409b43d9bdc95ae34"
