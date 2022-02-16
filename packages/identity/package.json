@@ -14,8 +14,8 @@
         "LICENSE",
         "README.md"
     ],
-    "repository": "git@github.com:interep/interep.js.git",
-    "homepage": "https://github.com/interep/interep.js/tree/main/packages/identity",
+    "repository": "git@github.com:interep-project/interep.js.git",
+    "homepage": "https://github.com/interep-project/interep.js/tree/main/packages/identity",
     "author": {
         "name": "Omar Desogus",
         "email": "me@cedoor.dev",

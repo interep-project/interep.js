@@ -2,8 +2,8 @@
     "name": "@interep/monorepo-js",
     "description": "A monorepo of Interep JavaScript libraries.",
     "license": "MIT",
-    "repository": "git@github.com:interep/interep.js.git",
-    "homepage": "https://github.com/interep/interep.js",
+    "repository": "git@github.com:interep-project/interep.js.git",
+    "homepage": "https://github.com/interep-project/interep.js",
     "private": true,
     "scripts": {
         "install": "yarn bootstrap && yarn build",

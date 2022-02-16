@@ -6,11 +6,11 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/interep">
+    <a href="https://github.com/interep-project">
         <img src="https://img.shields.io/badge/project-Interep-blue.svg?style=flat-square">
     </a>
-    <a href="https://github.com/interep/interep.js/blob/main/LICENSE">
-        <img alt="Github license" src="https://img.shields.io/github/license/interep/interep.js.svg?style=flat-square">
+    <a href="https://github.com/interep-project/interep.js/blob/main/LICENSE">
+        <img alt="Github license" src="https://img.shields.io/github/license/interep-project/interep.js.svg?style=flat-square">
     </a>
     <a href="https://www.npmjs.com/package/@interep/reputation">
         <img alt="NPM version" src="https://img.shields.io/npm/v/@interep/reputation?style=flat-square" />

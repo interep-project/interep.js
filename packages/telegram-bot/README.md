@@ -6,11 +6,11 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/interep">
+    <a href="https://github.com/interep-project">
         <img src="https://img.shields.io/badge/project-Interep-blue.svg?style=flat-square">
     </a>
-    <a href="https://github.com/interep/interep.js/blob/main/LICENSE">
-        <img alt="Github license" src="https://img.shields.io/github/license/interep/interep.js.svg?style=flat-square">
+    <a href="https://github.com/interep-project/interep.js/blob/main/LICENSE">
+        <img alt="Github license" src="https://img.shields.io/github/license/interep-project/interep.js.svg?style=flat-square">
     </a>
     <a href="https://www.npmjs.com/package/@interep/telegram-bot">
         <img alt="NPM version" src="https://img.shields.io/npm/v/@interep/telegram-bot?style=flat-square" />
@@ -87,13 +87,13 @@ yarn start
 
 ### API
 
-\# **new interepBot**(token: _string_, mongodbUrl: _string_, appURL: _string_): _interepBot_
+\# **new InterepBot**(token: _string_, mongodbUrl: _string_, appURL: _string_): _InterepBot_
 
 ```typescript
-import { interepBot } from "@interep/telegram-bot"
+import { InterepBot } from "@interep/telegram-bot"
 
 const { TELEGRAM_BOT_TOKEN, MONGO_URL, APP_URL } = process.env
-const bot = new interepBot(TELEGRAM_BOT_TOKEN, MONGO_URL, APP_URL)
+const bot = new InterepBot(TELEGRAM_BOT_TOKEN, MONGO_URL, APP_URL)
 
 await bot.start()
 ```

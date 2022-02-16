@@ -6,17 +6,17 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/interep">
+    <a href="https://github.com/interep-project">
         <img src="https://img.shields.io/badge/project-Interep-blue.svg?style=flat-square">
     </a>
-    <a href="https://github.com/interep/interep.js/blob/main/LICENSE">
-        <img alt="Github license" src="https://img.shields.io/github/license/interep/interep.js.svg?style=flat-square">
+    <a href="https://github.com/interep-project/interep.js/blob/main/LICENSE">
+        <img alt="Github license" src="https://img.shields.io/github/license/interep-project/interep.js.svg?style=flat-square">
     </a>
-    <a href="https://github.com/interep/interep.js/actions?query=workflow%3Atest">
-        <img alt="GitHub Workflow test" src="https://img.shields.io/github/workflow/status/interep/interep.js/test?label=test&style=flat-square&logo=github">
+    <a href="https://github.com/interep-project/interep.js/actions?query=workflow%3Atest">
+        <img alt="GitHub Workflow test" src="https://img.shields.io/github/workflow/status/interep-project/interep.js/test?label=test&style=flat-square&logo=github">
     </a>
-    <a href="https://coveralls.io/github/interep/interep.js">
-        <img alt="Coveralls" src="https://img.shields.io/coveralls/github/interep/interep.js?style=flat-square&logo=coveralls">
+    <a href="https://coveralls.io/github/interep-project/interep.js">
+        <img alt="Coveralls" src="https://img.shields.io/coveralls/github/interep-project/interep.js?style=flat-square&logo=coveralls">
     </a>
     <a href="https://deepscan.io/dashboard#view=project&tid=16502&pid=19838&bid=520522">
         <img alt="DeepScan grade" src="https://deepscan.io/api/teams/16502/projects/19838/branches/520522/badge/grade.svg">
@@ -60,7 +60,7 @@
     <tbody>
         <tr>
             <td>
-                <a href="https://github.com/Interep/interep.js/tree/main/packages/identity">
+                <a href="https://github.com/interep-project/interep.js/tree/main/packages/identity">
                     @interep/identity
                 </a>
                 <a href="https://js.interep.link/identity/">
@@ -88,7 +88,7 @@
         </tr>
         <tr>
             <td>
-                <a href="https://github.com/Interep/interep.js/tree/main/packages/reputation">
+                <a href="https://github.com/interep-project/interep.js/tree/main/packages/reputation">
                     @interep/reputation
                 </a>
             </td>
@@ -113,7 +113,7 @@
         </tr>
         <tr>
             <td>
-                <a href="https://github.com/interep/interep.js/tree/main/packages/api">
+                <a href="https://github.com/interep-project/interep.js/tree/main/packages/api">
                     @interep/api
                 </a>
             </td>
@@ -138,7 +138,7 @@
         </tr>
         <tr>
             <td>
-                <a href="https://github.com/interep/interep.js/tree/main/packages/telegram-bot">
+                <a href="https://github.com/interep-project/interep.js/tree/main/packages/telegram-bot">
                     @interep/telegram-bot
                 </a>
             </td>
@@ -163,7 +163,7 @@
         </tr>
         <tr>
             <td>
-                <a href="https://github.com/interep/interep.js/tree/main/packages/db">
+                <a href="https://github.com/interep-project/interep.js/tree/main/packages/db">
                     @interep/db
                 </a>
             </td>
@@ -194,7 +194,7 @@
 Clone this repository and install the dependencies:
 
 ```bash
-$ git clone https://github.com/interep/interep.js.git
+$ git clone https://github.com/interep-project/interep.js.git
 $ cd interep.js && yarn
 ```
 
