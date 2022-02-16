@@ -5,7 +5,7 @@ import leave from "./commands/leave"
 import showHelpMessage from "./commands/showHelpMessage"
 import showStartMessage from "./commands/showStartMessage"
 
-export default class InterRepBot {
+export default class InterepBot {
     readonly mongodbUrl: string
     readonly appURL: string
 

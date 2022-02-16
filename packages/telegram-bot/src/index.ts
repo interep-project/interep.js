@@ -1,5 +1,5 @@
-import InterRepBot from "./bot"
+import InterepBot from "./bot"
 import getTelegramGroups from "./getTelegramGroups"
 import TelegramGroup from "./telegramGroup"
 
-export { InterRepBot, getTelegramGroups, TelegramGroup }
+export { InterepBot, getTelegramGroups, TelegramGroup }
