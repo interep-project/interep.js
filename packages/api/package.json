@@ -39,7 +39,7 @@
         "rollup-plugin-terser": "^7.0.2"
     },
     "dependencies": {
-        "@interep/reputation": "^0.13.0",
+        "@interep/reputation": "^0.1.0",
         "axios": "^0.23.0"
     }
 }

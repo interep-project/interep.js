@@ -35,7 +35,7 @@
         "mongodb-memory-server": "^8.0.0"
     },
     "dependencies": {
-        "@interep/reputation": "^0.13.0",
+        "@interep/reputation": "^0.1.0",
         "mongoose": "^5.12.1"
     }
 }
