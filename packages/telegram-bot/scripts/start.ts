@@ -1,9 +1,9 @@
-import { InterRepBot } from "../src"
+import { InterepBot } from "../src"
 
 async function main() {
     const { TELEGRAM_BOT_TOKEN, MONGO_URL, APP_URL } = process.env
 
-    const bot = new InterRepBot(TELEGRAM_BOT_TOKEN as string, MONGO_URL as string, APP_URL as string)
+    const bot = new InterepBot(TELEGRAM_BOT_TOKEN as string, MONGO_URL as string, APP_URL as string)
 
     return bot.start()
 }
