@@ -1,25 +1,25 @@
 <p align="center">
     <h1 align="center">
-        InterRep API
+        Interep API
     </h1>
-    <p align="center">A JS library to wrap the InterRep REST APIs.</p>
+    <p align="center">A JS library to wrap the Interep REST APIs.</p>
 </p>
 
 <p align="center">
-    <a href="https://github.com/InterRep">
-        <img src="https://img.shields.io/badge/project-InterRep-blue.svg?style=flat-square">
+    <a href="https://github.com/interep">
+        <img src="https://img.shields.io/badge/project-Interep-blue.svg?style=flat-square">
     </a>
-    <a href="https://github.com/interrep/interrep.js/blob/main/LICENSE">
-        <img alt="Github license" src="https://img.shields.io/github/license/interrep/interrep.js.svg?style=flat-square">
+    <a href="https://github.com/interep/interep.js/blob/main/LICENSE">
+        <img alt="Github license" src="https://img.shields.io/github/license/interep/interep.js.svg?style=flat-square">
     </a>
-    <a href="https://www.npmjs.com/package/@interrep/api">
-        <img alt="NPM version" src="https://img.shields.io/npm/v/@interrep/api?style=flat-square" />
+    <a href="https://www.npmjs.com/package/@interep/api">
+        <img alt="NPM version" src="https://img.shields.io/npm/v/@interep/api?style=flat-square" />
     </a>
-    <a href="https://npmjs.org/package/@interrep/api">
-        <img alt="Downloads" src="https://img.shields.io/npm/dm/@interrep/api.svg?style=flat-square" />
+    <a href="https://npmjs.org/package/@interep/api">
+        <img alt="Downloads" src="https://img.shields.io/npm/dm/@interep/api.svg?style=flat-square" />
     </a>
-    <a href="https://bundlephobia.com/package/@interrep/api">
-        <img alt="npm bundle size (scoped)" src="https://img.shields.io/bundlephobia/minzip/@interrep/api" />
+    <a href="https://bundlephobia.com/package/@interep/api">
+        <img alt="npm bundle size (scoped)" src="https://img.shields.io/bundlephobia/minzip/@interep/api" />
     </a>
     <a href="https://eslint.org/">
         <img alt="Linter eslint" src="https://img.shields.io/badge/linter-eslint-8080f2?style=flat-square&logo=eslint" />
@@ -31,15 +31,15 @@
 
 <div align="center">
     <h4>
-        <a href="https://docs.interrep.link/contributing">
+        <a href="https://docs.interep.link/contributing">
             👥 Contributing
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://docs.interrep.link/code-of-conduct">
+        <a href="https://docs.interep.link/code-of-conduct">
             🤝 Code of conduct
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://t.me/interrep">
+        <a href="https://t.me/interep">
             🗣️ Chat &amp; Support
         </a>
     </h4>
@@ -51,16 +51,16 @@
 
 ### NPM or Yarn
 
-Install the `@interrep/api` package with npm:
+Install the `@interep/api` package with npm:
 
 ```bash
-npm i @interrep/api --save
+npm i @interep/api --save
 ```
 
 or yarn:
 
 ```bash
-yarn add @interrep/api
+yarn add @interep/api
 ```
 
 ### CDN
@@ -69,14 +69,14 @@ You can also load it using a `script` tag using [unpkg](https://unpkg.com/):
 
 ```html
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://unpkg.com/@interrep/api/"></script>
+<script src="https://unpkg.com/@interep/api/"></script>
 ```
 
 or [JSDelivr](https://www.jsdelivr.com/):
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@interrep/api/"></script>
+<script src="https://cdn.jsdelivr.net/npm/@interep/api/"></script>
 ```
 
 ## 📜 Usage
@@ -84,12 +84,12 @@ or [JSDelivr](https://www.jsdelivr.com/):
 \# **new API**(environment: _Environment_): _API_
 
 ```typescript
-import { API } from "@interrep/api"
+import { API } from "@interep/api"
 
 const api = new API()
 const devApi = new API("development")
 
-console.log(api.url) // "https://kovan.interrep.link/api"
+console.log(api.url) // "https://kovan.interep.link/api"
 console.log(devApi.url) // "http://localhost:3000/api"
 ```
 
@@ -99,7 +99,7 @@ console.log(devApi.url) // "http://localhost:3000/api"
 const providers = await api.getProviders()
 ```
 
-> API: [api/providers](https://docs.interrep.link/api#apiproviders)
+> API: [api/providers](https://docs.interep.link/api#apiproviders)
 
 \# **api.getGroups**(): _Promise<any[]>_
 
@@ -107,7 +107,7 @@ const providers = await api.getProviders()
 const groups = await api.getGroups()
 ```
 
-> API: [api/groups](https://docs.interrep.link/api#apigroups)
+> API: [api/groups](https://docs.interep.link/api#apigroups)
 
 \# **api.getGroup**(parameters: _GetGroupRequest_): _Promise<any\>_
 
@@ -118,7 +118,7 @@ const group = await api.getGroup({
 })
 ```
 
-> API: [/api/groups/:provider/:name](https://docs.interrep.link/api#apigroupsprovidername)
+> API: [/api/groups/:provider/:name](https://docs.interep.link/api#apigroupsprovidername)
 
 \# **api.hasIdentityCommitment**(parameters: _HasIdentityCommitmentRequest_): _Promise<boolean\>_
 
@@ -130,7 +130,7 @@ const hasIdentityCommitment = await api.hasIdentityCommitment({
 })
 ```
 
-> API: [/api/providers/:provider/:identityCommitment](https://docs.interrep.link/api#apiprovidersprovideridentitycommitment)
+> API: [/api/providers/:provider/:identityCommitment](https://docs.interep.link/api#apiprovidersprovideridentitycommitment)
 
 ```typescript
 // For specific group.
@@ -141,7 +141,7 @@ const hasIdentityCommitment = await api.hasIdentityCommitment({
 })
 ```
 
-> API (method: get): [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
+> API (method: get): [/api/groups/:provider/:name/:identityCommitment](https://docs.interep.link/api#apigroupsprovidernameidentitycommitment)
 
 \# **api.addIdentityCommitment**(parameters: _AddIdentityCommitmentRequest_): _Promise<boolean\>_
 
@@ -166,7 +166,7 @@ await api.addIdentityCommitment({
 })
 ```
 
-> API (method: post): [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
+> API (method: post): [/api/groups/:provider/:name/:identityCommitment](https://docs.interep.link/api#apigroupsprovidernameidentitycommitment)
 
 \# **api.deleteIdentityCommitment**(parameters: _DeleteIdentityCommitmentRequest_): _Promise<boolean\>_
 
@@ -191,7 +191,7 @@ await api.deleteIdentityCommitment({
 })
 ```
 
-> API (method: delete): [/api/groups/:provider/:name/:identityCommitment](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitment)
+> API (method: delete): [/api/groups/:provider/:name/:identityCommitment](https://docs.interep.link/api#apigroupsprovidernameidentitycommitment)
 
 \# **api.getMerkleTreeProof**(parameters: _GetMerkleTreeProofRequest_): _Promise<any\>_
 
@@ -203,7 +203,7 @@ const proof = await api.getMerkleTreeProof({
 })
 ```
 
-> API: [/api/groups/:provider/:name/:identityCommitment/proof](https://docs.interrep.link/api#apigroupsprovidernameidentitycommitmentproof)
+> API: [/api/groups/:provider/:name/:identityCommitment/proof](https://docs.interep.link/api#apigroupsprovidernameidentitycommitmentproof)
 
 \# **api.getMerkleTreeLeaves**(parameters: _GetMerkleTreeLeavesRequest_, options: _RequestOptions_): _Promise<string[]\>_
 
@@ -218,7 +218,7 @@ const leaves = await api.getMerkleTreeLeaves(
 )
 ```
 
-> API: [/api/trees/:rootHash](https://docs.interrep.link/api#apitreesroothash)
+> API: [/api/trees/:rootHash](https://docs.interep.link/api#apitreesroothash)
 
 \# **api.hasMerkleTreeLeaf**(parameters: _HasMerkleTreeLeafRequest_): _Promise<boolean\>_
 
@@ -229,7 +229,7 @@ const hasMerkleTreeLeaf = await api.hasMerkleTreeLeaf({
 })
 ```
 
-> API: [/api/trees/:rootHash/:leafHash](https://docs.interrep.link/api#apitreesroothashleafhash)
+> API: [/api/trees/:rootHash/:leafHash](https://docs.interep.link/api#apitreesroothashleafhash)
 
 \# **api.getMerkleTreeRootBatches**(): _Promise<any[]\>_
 
@@ -237,7 +237,7 @@ const hasMerkleTreeLeaf = await api.hasMerkleTreeLeaf({
 const rootBatches = await api.getMerkleTreeRootBatches()
 ```
 
-> API: [/api/trees/batches](https://docs.interrep.link/api#apitreesbatches)
+> API: [/api/trees/batches](https://docs.interep.link/api#apitreesbatches)
 
 \# **api.getMerkleTreeRootBatch**(parameters: _GetMerkleTreeRootBatchRequest_): _Promise<any\>_
 
@@ -247,4 +247,4 @@ const rootBatch = await api.getMerkleTreeRootBatch({
 })
 ```
 
-> API: [/api/trees/batches/:rootHash](https://docs.interrep.link/api#apitreesbatchesroothash)
+> API: [/api/trees/batches/:rootHash](https://docs.interep.link/api#apitreesbatchesroothash)

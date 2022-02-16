@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { OAuthProvider } from "@interrep/reputation"
+import { OAuthProvider } from "@interep/reputation"
 import { Provider, Web3Provider } from "./types/requestParameters"
 
 export default function checkProvider(provider: Provider) {

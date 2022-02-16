@@ -8,9 +8,9 @@ export default function getURL(environment: Environment): string {
         case "development":
             return "http://localhost:3000/api"
         case "staging":
-            return "https://kovan.interrep.link/api"
+            return "https://kovan.interep.link/api"
         case "production":
-            return "https://interrep.link/api"
+            return "https://interep.link/api"
         default:
             throw new TypeError(`Environment '${environment}' is not supported`)
     }

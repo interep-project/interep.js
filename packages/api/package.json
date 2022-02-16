@@ -1,7 +1,7 @@
 {
-    "name": "@interrep/api",
-    "version": "0.4.0",
-    "description": "A JS library to wrap the InterRep REST APIs.",
+    "name": "@interep/api",
+    "version": "0.1.0",
+    "description": "A JS library to wrap the Interep REST APIs.",
     "iife": "dist/index.js",
     "unpkg": "dist/index.min.js",
     "jsdelivr": "dist/index.min.js",
@@ -17,8 +17,8 @@
         "LICENSE",
         "README.md"
     ],
-    "repository": "git@github.com:InterRep/interrep.js.git",
-    "homepage": "https://github.com/InterRep/interrep.js/tree/main/packages/api",
+    "repository": "git@github.com:interep/interep.js.git",
+    "homepage": "https://github.com/interep/interep.js/tree/main/packages/api",
     "author": {
         "name": "Omar Desogus",
         "email": "me@cedoor.dev",
@@ -39,7 +39,7 @@
         "rollup-plugin-terser": "^7.0.2"
     },
     "dependencies": {
-        "@interrep/reputation": "^0.13.0",
+        "@interep/reputation": "^0.13.0",
         "axios": "^0.23.0"
     }
 }

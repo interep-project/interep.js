@@ -1,7 +1,7 @@
 {
-    "name": "@interrep/db",
-    "version": "0.9.0",
-    "description": "DB utility functions, schemas and models used by InterRep.",
+    "name": "@interep/db",
+    "version": "0.1.0",
+    "description": "DB utility functions, schemas and models used by Interep.",
     "main": "dist/index.node.js",
     "exports": {
         "import": "./dist/index.mjs",
@@ -14,8 +14,8 @@
         "LICENSE",
         "README.md"
     ],
-    "repository": "git@github.com:InterRep/interrep.js.git",
-    "homepage": "https://github.com/InterRep/interrep.js/tree/main/packages/db",
+    "repository": "git@github.com:interep/interep.js.git",
+    "homepage": "https://github.com/interep/interep.js/tree/main/packages/db",
     "author": {
         "name": "Omar Desogus",
         "email": "me@cedoor.dev",
@@ -35,7 +35,7 @@
         "mongodb-memory-server": "^8.0.0"
     },
     "dependencies": {
-        "@interrep/reputation": "^0.13.0",
+        "@interep/reputation": "^0.13.0",
         "mongoose": "^5.12.1"
     }
 }

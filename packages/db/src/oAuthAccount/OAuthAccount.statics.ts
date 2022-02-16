@@ -1,4 +1,4 @@
-import type { OAuthProvider } from "@interrep/reputation"
+import type { OAuthProvider } from "@interep/reputation"
 import type OAuthAccount from "./OAuthAccount.model"
 import type { OAuthAccountDocument } from "./OAuthAccount.types"
 

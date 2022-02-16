@@ -1,25 +1,25 @@
 <p align="center">
     <h1 align="center">
-        InterRep db
+        Interep db
     </h1>
-    <p align="center">DB utility functions, schemas and models used by InterRep.</p>
+    <p align="center">DB utility functions, schemas and models used by Interep.</p>
 </p>
 
 <p align="center">
-    <a href="https://github.com/InterRep">
-        <img src="https://img.shields.io/badge/project-InterRep-blue.svg?style=flat-square">
+    <a href="https://github.com/interep">
+        <img src="https://img.shields.io/badge/project-Interep-blue.svg?style=flat-square">
     </a>
-    <a href="https://github.com/interrep/interrep.js/blob/main/LICENSE">
-        <img alt="Github license" src="https://img.shields.io/github/license/interrep/interrep.js.svg?style=flat-square">
+    <a href="https://github.com/interep/interep.js/blob/main/LICENSE">
+        <img alt="Github license" src="https://img.shields.io/github/license/interep/interep.js.svg?style=flat-square">
     </a>
-    <a href="https://www.npmjs.com/package/@interrep/db">
-        <img alt="NPM version" src="https://img.shields.io/npm/v/@interrep/db?style=flat-square" />
+    <a href="https://www.npmjs.com/package/@interep/db">
+        <img alt="NPM version" src="https://img.shields.io/npm/v/@interep/db?style=flat-square" />
     </a>
-    <a href="https://npmjs.org/package/@interrep/db">
-        <img alt="Downloads" src="https://img.shields.io/npm/dm/@interrep/db.svg?style=flat-square" />
+    <a href="https://npmjs.org/package/@interep/db">
+        <img alt="Downloads" src="https://img.shields.io/npm/dm/@interep/db.svg?style=flat-square" />
     </a>
-    <a href="https://bundlephobia.com/package/@interrep/db">
-        <img alt="npm bundle size (scoped)" src="https://img.shields.io/bundlephobia/minzip/@interrep/db" />
+    <a href="https://bundlephobia.com/package/@interep/db">
+        <img alt="npm bundle size (scoped)" src="https://img.shields.io/bundlephobia/minzip/@interep/db" />
     </a>
     <a href="https://eslint.org/">
         <img alt="Linter eslint" src="https://img.shields.io/badge/linter-eslint-8080f2?style=flat-square&logo=eslint" />
@@ -31,21 +31,21 @@
 
 <div align="center">
     <h4>
-        <a href="https://docs.interrep.link/contributing">
+        <a href="https://docs.interep.link/contributing">
             👥 Contributing
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://docs.interrep.link/code-of-conduct">
+        <a href="https://docs.interep.link/code-of-conduct">
             🤝 Code of conduct
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://t.me/interrep">
+        <a href="https://t.me/interep">
             🗣️ Chat &amp; Support
         </a>
     </h4>
 </div>
 
-The `@interrep/db` package is an internal package that contains utility functions, models and methods used in the system to interact with persistent data, and its purpose is to make InterRep more database-agnostic. InterRep currently uses MongoDB and Mongoose.
+The `@interep/db` package is an internal package that contains utility functions, models and methods used in the system to interact with persistent data, and its purpose is to make Interep more database-agnostic. Interep currently uses MongoDB and Mongoose.
 
 ---
 
@@ -53,16 +53,16 @@ The `@interrep/db` package is an internal package that contains utility function
 
 ### npm or yarn
 
-Install the `@interrep/db` package with npm:
+Install the `@interep/db` package with npm:
 
 ```bash
-npm i @interrep/db --save
+npm i @interep/db --save
 ```
 
 or yarn:
 
 ```bash
-yarn add @interrep/db
+yarn add @interep/db
 ```
 
 ## 📜 Usage
@@ -70,7 +70,7 @@ yarn add @interrep/db
 \# **connect**(mongoUrl: _string_, errorListener?: (...args: _any[]_) => _void_): _Promise<boolean\>_
 
 ```typescript
-import { connect } from "@interrep/db"
+import { connect } from "@interep/db"
 
 const { MONGO_URL } = process.env
 
@@ -81,7 +81,7 @@ await connect(MONGO_URL)
 \# **disconnect**(): _Promise<boolean\>_
 
 ```typescript
-import { disconnect } from "@interrep/db"
+import { disconnect } from "@interep/db"
 
 await disconnect()
 ```
@@ -89,7 +89,7 @@ await disconnect()
 \# **clear**(): _Promise<boolean\>_
 
 ```typescript
-import { clear } from "@interrep/db"
+import { clear } from "@interep/db"
 
 await clear() // Delete all the db entries.
 ```
@@ -97,7 +97,7 @@ await clear() // Delete all the db entries.
 \# **drop**(): _Promise<boolean\>_
 
 ```typescript
-import { drop } from "@interrep/db"
+import { drop } from "@interep/db"
 
 await drop() // Drop the db.
 ```
@@ -105,7 +105,7 @@ await drop() // Drop the db.
 \# **getState**(): _number_
 
 ```typescript
-import { getState } from "@interrep/db"
+import { getState } from "@interep/db"
 
 const state = getState()
 /*
@@ -118,4 +118,4 @@ Connection ready state:
 */
 ```
 
-You can find the model of each entity on `src/<entityName>/<EntityName.model.ts>`. Each model has predefined functions and some custom static functions defined on `src/<entityName>/<EntityName>.statics.ts`. The `@interrep/db` package also exports types and models of each entity.
+You can find the model of each entity on `src/<entityName>/<EntityName.model.ts>`. Each model has predefined functions and some custom static functions defined on `src/<entityName>/<EntityName>.statics.ts`. The `@interep/db` package also exports types and models of each entity.

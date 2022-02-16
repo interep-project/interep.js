@@ -1,7 +1,7 @@
 {
-    "name": "@interrep/telegram-bot",
-    "version": "0.6.0",
-    "description": "InterRep Telegram bot to allow users to join Semaphore Telegram groups.",
+    "name": "@interep/telegram-bot",
+    "version": "0.1.0",
+    "description": "Interep Telegram bot to allow users to join Semaphore Telegram groups.",
     "main": "dist/index.node.js",
     "exports": {
         "import": "./dist/index.mjs",
@@ -14,8 +14,8 @@
         "LICENSE",
         "README.md"
     ],
-    "repository": "git@github.com:InterRep/interrep.js.git",
-    "homepage": "https://github.com/InterRep/interrep.js/tree/main/packages/telegram-bot",
+    "repository": "git@github.com:interep/interep.js.git",
+    "homepage": "https://github.com/interep/interep.js/tree/main/packages/telegram-bot",
     "author": {
         "name": "Omar Desogus",
         "email": "me@cedoor.dev",
@@ -36,7 +36,7 @@
         "dotenv": "^10.0.0"
     },
     "dependencies": {
-        "@interrep/db": "^0.6.4",
+        "@interep/db": "^0.6.4",
         "grammy": "^1.3.4",
         "js-sha256": "^0.9.0"
     }

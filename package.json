@@ -1,9 +1,9 @@
 {
-    "name": "@interrep/monorepo-js",
-    "description": "A monorepo of InterRep JavaScript libraries.",
+    "name": "@interep/monorepo-js",
+    "description": "A monorepo of Interep JavaScript libraries.",
     "license": "MIT",
-    "repository": "git@github.com:InterRep/interrep.js.git",
-    "homepage": "https://github.com/InterRep/interrep.js",
+    "repository": "git@github.com:interep/interep.js.git",
+    "homepage": "https://github.com/interep/interep.js",
     "private": true,
     "scripts": {
         "install": "yarn bootstrap && yarn build",
@@ -15,7 +15,7 @@
         "test:prod": "yarn lint && yarn test",
         "build": "lerna run build",
         "build:watch": "lerna run --parallel build:watch -- -- --watch",
-        "gh-pages": "lerna run --scope @interrep/identity gh-pages",
+        "gh-pages": "lerna run --scope @interep/identity gh-pages",
         "publish:fp": "yarn test:prod && lerna publish from-package",
         "commit": "cz",
         "precommit": "lint-staged"

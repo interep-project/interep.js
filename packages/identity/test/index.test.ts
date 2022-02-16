@@ -1,13 +1,13 @@
 import { ZkIdentity } from "@libsem/identity"
 import createIdentity from "../src"
 
-describe("InterRep identity", () => {
+describe("Interep identity", () => {
     function sign(message: string) {
         return Promise.resolve(message)
     }
 
     describe("Create identity", () => {
-        it("Should not create an InterRep identity if the parameters do not have the right types", async () => {
+        it("Should not create an Interep identity if the parameters do not have the right types", async () => {
             const web2Provider = "twitter"
 
             const fun1 = () => createIdentity(1 as any, web2Provider)
@@ -21,7 +21,7 @@ describe("InterRep identity", () => {
             await expect(fun4).rejects.toThrow("Parameter 'provider' is not defined")
         })
 
-        it("Should create an InterRep identity", async () => {
+        it("Should create an Interep identity", async () => {
             const web2Provider = "twitter"
 
             const expectedValue = await createIdentity(sign, web2Provider)
@@ -29,7 +29,7 @@ describe("InterRep identity", () => {
             expect(expectedValue).toBeInstanceOf(ZkIdentity)
         })
 
-        it("Should create an InterRep identity with a nonce", async () => {
+        it("Should create an Interep identity with a nonce", async () => {
             const web2Provider = "twitter"
 
             const expectedValue = await createIdentity(sign, web2Provider, 1)

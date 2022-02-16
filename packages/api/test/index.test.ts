@@ -1,4 +1,4 @@
-import { OAuthProvider, ReputationLevel } from "@interrep/reputation"
+import { OAuthProvider, ReputationLevel } from "@interep/reputation"
 import { API, Web3Provider } from "../src"
 import request from "../src/request"
 
@@ -9,7 +9,7 @@ jest.mock("../src/request", () => ({
 
 const requestMocked = request as jest.MockedFunction<typeof request>
 
-describe("InterRep API", () => {
+describe("Interep API", () => {
     let api: API
 
     describe("API class", () => {
@@ -18,8 +18,8 @@ describe("InterRep API", () => {
             const productionAPI = new API("production")
             const developmentAPI = new API("development")
 
-            expect(api.url).toEqual("https://kovan.interrep.link/api")
-            expect(productionAPI.url).toEqual("https://interrep.link/api")
+            expect(api.url).toEqual("https://kovan.interep.link/api")
+            expect(productionAPI.url).toEqual("https://interep.link/api")
             expect(developmentAPI.url).toEqual("http://localhost:3000/api")
         })
 

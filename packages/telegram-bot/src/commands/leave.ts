@@ -1,4 +1,4 @@
-import { TelegramUser } from "@interrep/db"
+import { TelegramUser } from "@interep/db"
 import { Bot } from "grammy"
 import { Chat, Message, User } from "grammy/out/platform.node"
 import getTelegramGroups from "../getTelegramGroups"

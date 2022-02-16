@@ -1,6 +1,6 @@
 import { calculateReputation, getOAuthProviders, getReputationLevels, OAuthProvider } from "../src"
 
-describe("InterRep reputation criteria", () => {
+describe("Interep reputation criteria", () => {
     describe("Get all providers", () => {
         it("Should return all the existing supported providers", () => {
             const expectedValue = getOAuthProviders()

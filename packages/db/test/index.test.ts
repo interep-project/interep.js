@@ -1,4 +1,4 @@
-import { OAuthProvider, ReputationLevel } from "@interrep/reputation"
+import { OAuthProvider, ReputationLevel } from "@interep/reputation"
 import { MongoMemoryServer } from "mongodb-memory-server"
 import {
     clear,
@@ -13,7 +13,7 @@ import {
     TelegramUser
 } from "../src"
 
-describe("InterRep db", () => {
+describe("Interep db", () => {
     let mms: MongoMemoryServer
 
     beforeAll(async () => {

@@ -1,7 +1,7 @@
 {
-    "name": "@interrep/reputation",
-    "version": "0.13.0",
-    "description": "Definitions and utility functions of InterRep reputation.",
+    "name": "@interep/reputation",
+    "version": "0.1.0",
+    "description": "Definitions and utility functions of Interep reputation.",
     "iife": "dist/index.js",
     "unpkg": "dist/index.min.js",
     "jsdelivr": "dist/index.min.js",
@@ -17,8 +17,8 @@
         "LICENSE",
         "README.md"
     ],
-    "repository": "git@github.com:InterRep/interrep.js.git",
-    "homepage": "https://github.com/InterRep/interrep.js/tree/main/packages/reputation",
+    "repository": "git@github.com:interep/interep.js.git",
+    "homepage": "https://github.com/interep/interep.js/tree/main/packages/reputation",
     "author": {
         "name": "Omar Desogus",
         "email": "me@cedoor.dev",

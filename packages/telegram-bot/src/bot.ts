@@ -1,4 +1,4 @@
-import { connect } from "@interrep/db"
+import { connect } from "@interep/db"
 import { Bot, PollingOptions } from "grammy"
 import join from "./commands/join"
 import leave from "./commands/leave"

@@ -2,10 +2,10 @@ import { ZkIdentity, Strategy } from "@libsem/identity"
 import checkParameter from "./checkParameter"
 
 /**
- * Create an InterRep identity by deriving it from a signed message.
- * The signed message should contain an InterRep provider and a nonce.
+ * Create an Interep identity by deriving it from a signed message.
+ * The signed message should contain an Interep provider and a nonce.
  * @param sign The function to sign the message.
- * @param provider The InterRep provider of the message (e.g. twitter).
+ * @param provider The Interep provider of the message (e.g. twitter).
  * @param nonce The nonce of the message.
  * @returns A Semaphore identity class.
  */

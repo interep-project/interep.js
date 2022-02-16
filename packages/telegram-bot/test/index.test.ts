@@ -3,7 +3,7 @@ import showHelpMessage from "../src/commands/showHelpMessage"
 import showStartMessage from "../src/commands/showStartMessage"
 import sha256 from "../src/sha256"
 
-describe("InterRep Telegram bot", () => {
+describe("Interep Telegram bot", () => {
     describe("Show help message", () => {
         const bot = { api: { sendMessage: jest.fn() } }
         const user: User = { id: 1, is_bot: false, first_name: "User" }
