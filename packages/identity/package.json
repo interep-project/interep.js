@@ -35,6 +35,6 @@
         "@rollup/plugin-typescript": "^8.3.0"
     },
     "dependencies": {
-        "@libsem/identity": "^1.0.19"
+        "@zk-kit/identity": "^1.4.1"
     }
 }

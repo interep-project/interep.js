@@ -1,4 +1,4 @@
-import { ZkIdentity, Strategy } from "@libsem/identity"
+import { ZkIdentity, Strategy } from "@zk-kit/identity"
 import checkParameter from "./checkParameter"
 
 /**

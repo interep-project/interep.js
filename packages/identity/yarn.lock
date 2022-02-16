@@ -139,6 +139,14 @@
   dependencies:
     "@ethersproject/logger" "^5.5.0"
 
+"@ethersproject/random@^5.5.1":
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/@ethersproject/random/-/random-5.5.1.tgz#7cdf38ea93dc0b1ed1d8e480ccdaf3535c555415"
+  integrity sha512-YaU2dQ7DuhL5Au7KbcQLHxcRHfgyNgvFV4sQOo0HrtW3Zkrc9ctWNz8wXQ4uCSfSDsqX2vcjhroxU5RQRV0nqA==
+  dependencies:
+    "@ethersproject/bytes" "^5.5.0"
+    "@ethersproject/logger" "^5.5.0"
+
 "@ethersproject/rlp@^5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/rlp/-/rlp-5.5.0.tgz#530f4f608f9ca9d4f89c24ab95db58ab56ab99a0"
@@ -193,27 +201,6 @@
     "@ethersproject/logger" "^5.5.0"
     "@ethersproject/properties" "^5.5.0"
     "@ethersproject/strings" "^5.5.0"
-
-"@juanelas/base64@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@juanelas/base64/-/base64-1.0.1.tgz#aaede00ffdca595741fc69d0008b4cfc8f08293a"
-  integrity sha512-ZK/wWrjMrrMcprtOV72iilC1M/HfZcF2JeUJPHOL0tMm1TZrh9UhHDQEdPny/MmmT7tO4w47ycuy0YTnBrS5fg==
-
-"@libsem/identity@^1.0.19":
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/@libsem/identity/-/identity-1.0.19.tgz#8a2373e2d392ec7ebad3b491482e474632442ec4"
-  integrity sha512-U0q6MHb910qKT8n7j+nALv8NNAXVGXNSNoOolil0VnOv40OpuEUH7zroK91Vxz1wJYhiXFOa+od3ixC6JifeFQ==
-  dependencies:
-    "@libsem/types" "^1.0.7"
-    bigint-conversion "^2.1.12"
-    circomlibjs "^0.0.8"
-    crypto "^1.0.1"
-    js-sha256 "^0.9.0"
-
-"@libsem/types@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@libsem/types/-/types-1.0.7.tgz#abdee9ff16d6b1e6d283d34374e44d62843eb44a"
-  integrity sha512-M/mfMf8zzgWUssolx/3itE5h3hCt2PAQxclEt0YAWQIgE1UZM10jHfCwy1rYmTduAGfKzsYlIiSENOqthH2biw==
 
 "@rollup/plugin-typescript@^8.3.0":
   version "8.3.0"
@@ -286,6 +273,16 @@
   integrity sha512-Da66lEIFeIz9ltsdMZcpQvmrmmoqrfju8pm1BH8WbYjZSwUgCwXLb9C+9XYogwBITnbsSaMdVPb2ekf7TV+03w==
   dependencies:
     "@types/node" "*"
+
+"@zk-kit/identity@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@zk-kit/identity/-/identity-1.4.1.tgz#4bb31ba9d2aff64c80a9be92f743a95795b63300"
+  integrity sha512-M+R0npTMAwXr1GkuCUr/jV25D7CnQWOGLS+8ClNu6Y3MAIGOOKllz6pnwLbItoezlQgDxUqCWdQKIwOw2v+RYQ==
+  dependencies:
+    "@ethersproject/bignumber" "^5.5.0"
+    "@ethersproject/random" "^5.5.1"
+    circomlibjs "0.0.8"
+    js-sha256 "^0.9.0"
 
 accepts@~1.3.7:
   version "1.3.7"
@@ -380,13 +377,6 @@ big-integer@^1.6.42, big-integer@^1.6.48:
   version "1.6.50"
   resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.50.tgz#299a4be8bd441c73dcc492ed46b7169c34e92e70"
   integrity sha512-+O2uoQWFRo8ysZNo/rjtri2jIwjr3XfeAgRjAUADRqGG+ZITvyn8J1kvXLTaKVr3hhGXk+f23tKfdzmklVM9vQ==
-
-bigint-conversion@^2.1.12:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/bigint-conversion/-/bigint-conversion-2.2.1.tgz#08c9f17a826943c7e56d4bfa9f0fc7fe8050a940"
-  integrity sha512-9TvqpV+VZ04fPKv4KPLQRk5ZAFhgHX4F7bYQY263/BbJBFzEGbtBeTQV9oNuAGaqj88PXdov1OcSNQtq9K9MPA==
-  dependencies:
-    "@juanelas/base64" "^1.0.1"
 
 bignumber.js@^9.0.0:
   version "9.0.1"
@@ -613,7 +603,7 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-circomlibjs@^0.0.8:
+circomlibjs@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/circomlibjs/-/circomlibjs-0.0.8.tgz#c2d1130d2d99fbb22f3d40ac19f347d768eace76"
   integrity sha512-oZFYapLO0mfiA+i2GU/V7bRNEEPjVcwV4M444nU5lNsdSJpqLwD57m9zxTD5m/KeY7WQ3lEAC9NNKEPQHu7s1w==
@@ -747,11 +737,6 @@ crypto-browserify@3.12.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
-
-crypto@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
-  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
 
 d@1, d@^1.0.1:
   version "1.0.1"

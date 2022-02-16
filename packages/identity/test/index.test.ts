@@ -1,4 +1,4 @@
-import { ZkIdentity } from "@libsem/identity"
+import { ZkIdentity } from "@zk-kit/identity"
 import createIdentity from "../src"
 
 describe("Interep identity", () => {
