@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "scripts": {
         "start": "parcel serve --open --no-cache index.html",
-        "build": "parcel build --public-url https://js.interrep.link/identity --dist-dir ../../../gh-pages/identity index.html"
+        "build": "parcel build --public-url https://js.interep.link/identity --dist-dir ../../../gh-pages/identity index.html"
     },
     "dependencies": {
         "@material-ui/core": "^4.12.3",
