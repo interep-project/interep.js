@@ -138,7 +138,8 @@ function App() {
         const signer = ethersProvider.getSigner()
         const identity = await createIdentity((message: string) => signer.signMessage(message), _oAuthProvider)
 
-        const { identityTrapdoor, identityNullifier } = identity.getIdentity()
+        const identityTrapdoor = identity.getTrapdoor()
+        const identityNullifier = identity.getNullifier()
         const identityCommitment = identity.genIdentityCommitment()
 
         setIdentityTrapdoor(identityTrapdoor.toString())
@@ -151,7 +152,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <Box className={classes.container}>
-                <Typography variant="h4">InterRep identity</Typography>
+                <Typography variant="h4">Interep identity</Typography>
 
                 <Stepper activeStep={_activeStep} orientation="vertical">
                     <Step>
@@ -165,12 +166,13 @@ function App() {
                     <Step>
                         <StepLabel>Enter a provider</StepLabel>
                         <StepContent style={{ width: 400 }}>
-                            <Paper component="form" className={classes.inputPaper}>
+                            <Paper component="form" className={classes.inputPaper} onSubmit={(e) => e.preventDefault()}>
                                 <InputBase
                                     className={classes.input}
                                     placeholder="Twitter"
                                     onChange={(event) => setOAuthProvider(event.target.value)}
                                     value={_oAuthProvider}
+                                    onKeyPress={(e) => {if(e.key === 'Enter') handleNext()}}
                                 />
                                 <Divider className={classes.divider} orientation="vertical" />
                                 <IconButton
