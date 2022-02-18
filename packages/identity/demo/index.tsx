@@ -166,12 +166,13 @@ function App() {
                     <Step>
                         <StepLabel>Enter a provider</StepLabel>
                         <StepContent style={{ width: 400 }}>
-                            <Paper component="form" className={classes.inputPaper}>
+                            <Paper component="form" className={classes.inputPaper} onSubmit={(e) => e.preventDefault()}>
                                 <InputBase
                                     className={classes.input}
                                     placeholder="Twitter"
                                     onChange={(event) => setOAuthProvider(event.target.value)}
                                     value={_oAuthProvider}
+                                    onKeyPress={(e) => {if(e.key === 'Enter') handleNext()}}
                                 />
                                 <Divider className={classes.divider} orientation="vertical" />
                                 <IconButton
