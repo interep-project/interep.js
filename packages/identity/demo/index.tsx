@@ -138,7 +138,8 @@ function App() {
         const signer = ethersProvider.getSigner()
         const identity = await createIdentity((message: string) => signer.signMessage(message), _oAuthProvider)
 
-        const { identityTrapdoor, identityNullifier } = identity.getIdentity()
+        const identityTrapdoor = identity.getTrapdoor()
+        const identityNullifier = identity.getNullifier()
         const identityCommitment = identity.genIdentityCommitment()
 
         setIdentityTrapdoor(identityTrapdoor.toString())
