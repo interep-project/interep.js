@@ -152,7 +152,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <Box className={classes.container}>
-                <Typography variant="h4">InterRep identity</Typography>
+                <Typography variant="h4">Interep identity</Typography>
 
                 <Stepper activeStep={_activeStep} orientation="vertical">
                     <Step>
