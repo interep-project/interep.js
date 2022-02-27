@@ -59,7 +59,7 @@ const MerkleTreeRootBatchSchemaFields: Record<keyof MerkleTreeRootBatchData, any
         },
         required: true
     },
-    rootHashes: { type: [String], default: [] },
+    roots: { type: [String], default: [] },
     transaction: {
         hash: String,
         blockNumber: Number

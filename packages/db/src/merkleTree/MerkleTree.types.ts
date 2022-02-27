@@ -49,7 +49,7 @@ type Transaction = {
 
 export type MerkleTreeRootBatchData = {
     group: Group
-    rootHashes: string[]
+    roots: string[]
     transaction?: Transaction
 }
 
