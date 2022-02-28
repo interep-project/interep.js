@@ -1,5 +1,6 @@
-import API from "./api"
+import OffchainAPI from "./offchainAPI"
+import OnchainAPI from "./onchainAPI"
 
-export { API }
+export { OffchainAPI, OnchainAPI }
 export * from "./types/config"
 export * from "./types/requestParameters"

@@ -6,19 +6,9 @@ import checkProvider from "./checkProvider"
 import getURL from "./getURL"
 import request from "./request"
 import { Environment } from "./types/config"
-import {
-    AddIdentityCommitmentRequest,
-    DeleteIdentityCommitmentRequest,
-    GetGroupRequest,
-    GetMerkleTreeLeavesRequest,
-    GetMerkleTreeProofRequest,
-    GetMerkleTreeRootBatchRequest,
-    HasIdentityCommitmentRequest,
-    HasMerkleTreeLeafRequest,
-    RequestOptions
-} from "./types/requestParameters"
+import { Offchain } from "./types/requestParameters"
 
-export default class API {
+export default class offchainAPI {
     url: string
 
     constructor(environment: Environment = "staging") {
@@ -33,7 +23,7 @@ export default class API {
         return request(`${this.url}/groups`)
     }
 
-    async getGroup(parameters: GetGroupRequest): Promise<any> {
+    async getGroup(parameters: Offchain.GetGroupRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name } = parameters
@@ -44,7 +34,7 @@ export default class API {
         return request(`${this.url}/groups/${provider}/${name}`)
     }
 
-    async hasIdentityCommitment(parameters: HasIdentityCommitmentRequest): Promise<boolean> {
+    async hasMember(parameters: Offchain.HasMemberRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name, identityCommitment } = parameters
@@ -62,7 +52,7 @@ export default class API {
         return request(`${this.url}/providers/${provider}/${identityCommitment}`)
     }
 
-    async addIdentityCommitment(parameters: AddIdentityCommitmentRequest): Promise<boolean> {
+    async addMember(parameters: Offchain.AddMemberRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name, identityCommitment, authenticationHeader, userAddress, userSignature } = parameters
@@ -90,7 +80,7 @@ export default class API {
         return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
     }
 
-    async deleteIdentityCommitment(parameters: DeleteIdentityCommitmentRequest): Promise<boolean> {
+    async removeMember(parameters: Offchain.RemoveMemberRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name, identityCommitment, authenticationHeader, userAddress, userSignature } = parameters
@@ -118,7 +108,7 @@ export default class API {
         return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
     }
 
-    async getMerkleTreeProof(parameters: GetMerkleTreeProofRequest): Promise<any> {
+    async getMerkleTreeProof(parameters: Offchain.GetMerkleTreeProofRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name, identityCommitment } = parameters
@@ -131,23 +121,27 @@ export default class API {
         return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}/proof`)
     }
 
-    async getMerkleTreeLeaves(parameters: GetMerkleTreeLeavesRequest, options: RequestOptions): Promise<string[]> {
+    async getMerkleTreeLeaves(
+        parameters: Offchain.GetMerkleTreeLeavesRequest,
+        options: Offchain.RequestOptions
+    ): Promise<string[]> {
         checkParameter(parameters, "request", "object")
         checkParameter(options, "options", "object")
 
-        const { rootHash } = parameters
-        const { limit = 0 } = options
+        const { root: rootHash } = parameters
+        const { limit = 0, offset = 0 } = options
 
         checkParameter(rootHash, "root hash", "string")
         checkParameter(limit, "limit", "number")
+        checkParameter(offset, "offset", "number")
 
-        return request(`${this.url}/trees/${rootHash}?limit=${limit}`)
+        return request(`${this.url}/trees/${rootHash}?limit=${limit}&offset=${offset}`)
     }
 
-    async hasMerkleTreeLeaf(parameters: HasMerkleTreeLeafRequest): Promise<boolean> {
+    async hasMerkleTreeLeaf(parameters: Offchain.HasMerkleTreeLeafRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
-        const { rootHash, leafHash } = parameters
+        const { root: rootHash, leaf: leafHash } = parameters
 
         checkParameter(rootHash, "root hash", "string")
         checkParameter(leafHash, "leaf hash", "string")
@@ -159,10 +153,10 @@ export default class API {
         return request(`${this.url}/trees/batches`)
     }
 
-    async getMerkleTreeRootBatch(parameters: GetMerkleTreeRootBatchRequest): Promise<any> {
+    async getMerkleTreeRootBatch(parameters: Offchain.GetMerkleTreeRootBatchRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
-        const { rootHash } = parameters
+        const { root: rootHash } = parameters
 
         checkParameter(rootHash, "root hash", "string")
 
