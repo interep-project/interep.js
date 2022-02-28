@@ -88,6 +88,28 @@
         </tr>
         <tr>
             <td>
+                <a href="https://github.com/interep-project/interep.js/tree/main/packages/proof">
+                    @interep/proof
+                </a>
+            </td>
+            <td>
+                <!-- NPM version -->
+                <a href="https://npmjs.org/package/@interep/proof">
+                    <img src="https://img.shields.io/npm/v/@interep/proof.svg?style=flat-square" alt="NPM version" />
+                </a>
+            </td>
+            <td>
+                <!-- Downloads -->
+                <a href="https://npmjs.org/package/@interep/proof">
+                    <img src="https://img.shields.io/npm/dm/@interep/proof.svg?style=flat-square" alt="Downloads" />
+                </a>
+            </td>
+            <td>
+                <!-- Size -->
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <a href="https://github.com/interep-project/interep.js/tree/main/packages/reputation">
                     @interep/reputation
                 </a>
