@@ -64,15 +64,15 @@ export default class onchainAPI {
     async getMembers(parameters: Onchain.GetMembersRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
-        const { id } = parameters
+        const { groupId } = parameters
 
-        checkParameter(id, "id", "string")
+        checkParameter(groupId, "groupId", "string")
 
         const config: AxiosRequestConfig = {
             method: "post",
             data: JSON.stringify({
                 query: `{
-                    members(where: { group: "${id}" }, orderBy: index) {
+                    members(where: { group: "${groupId}" }, orderBy: index) {
                         id
                         identityCommitment
                         index

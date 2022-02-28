@@ -47,5 +47,7 @@ export namespace Onchain {
         id: string
     }
 
-    export type GetMembersRequest = GetGroupRequest
+    export type GetMembersRequest = {
+        groupId: string
+    }
 }

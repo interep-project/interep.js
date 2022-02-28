@@ -287,7 +287,7 @@ const group = await api.getGroup({
 
 ```typescript
 const members = await api.getMembers({
-    id: "1"
+    groupId: "1"
 })
 ```
 

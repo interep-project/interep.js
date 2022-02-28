@@ -104,7 +104,7 @@ describe("Interep onchain API", () => {
             )
 
             const expectedValue = await api.getMembers({
-                id: "1"
+                groupId: "1"
             })
 
             expect(expectedValue).not.toBeUndefined()
