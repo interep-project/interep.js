@@ -2,10 +2,10 @@ import { ZkIdentity, Strategy } from "@zk-kit/identity"
 import checkParameter from "./checkParameter"
 
 /**
- * Create an Interep identity by deriving it from a signed message.
+ * Create a Semaphore identity by deriving it from a signed message.
  * The signed message should contain an Interep provider and a nonce.
  * @param sign The function to sign the message.
- * @param provider The Interep provider of the message (e.g. twitter).
+ * @param provider The Interep provider of the message (e.g. Twitter).
  * @param nonce The nonce of the message.
  * @returns A Semaphore identity class.
  */

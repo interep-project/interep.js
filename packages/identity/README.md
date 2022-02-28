@@ -2,7 +2,7 @@
     <h1 align="center">
         Interep identities
     </h1>
-    <p align="center">A simple JS function to create Interep identities.</p>
+    <p align="center">A simple JS function to create Semaphore identities.</p>
 </p>
 
 <p align="center">
@@ -71,11 +71,10 @@ yarn add @interep/identity
 
 ## 📜 Usage
 
-\# **identity**(sign: _(message: string) => Promise\<string\>_, provider: _string_, nonce?: _number_): _ZKIdentity_
+\# **createIdentity**(sign: _(message: string) => Promise\<string\>_, provider: _string_, nonce?: _number_): _ZKIdentity_
 
 ```typescript
 import createIdentity from "@interep/identity"
-import { ZkIdentity } from "@libsem/identity"
 import detectEthereumProvider from "@metamask/detect-provider"
 import { ethers } from "ethers"
 
@@ -83,5 +82,5 @@ const ethereumProvider = (await detectEthereumProvider()) as any
 const provider = new ethers.providers.Web3Provider(ethereumProvider)
 const signer = provider.getSigner()
 
-const identity: ZkIdentity = await createIdentity((message) => signer.signMessage(message), "twitter")
+const identity = await createIdentity((message) => signer.signMessage(message), "Twitter")
 ```
