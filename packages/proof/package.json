@@ -32,11 +32,13 @@
         "access": "public"
     },
     "devDependencies": {
+        "@ethersproject/strings": "^5.5.0",
         "@rollup/plugin-typescript": "^8.3.0"
     },
     "dependencies": {
         "@ethersproject/solidity": "^5.5.0",
         "@interep/api": "^0.2.0",
+        "@zk-kit/identity": "^1.4.1",
         "@zk-kit/protocols": "^1.10.0"
     }
 }

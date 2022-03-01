@@ -1,51 +1,46 @@
 import { keccak256 } from "@ethersproject/solidity"
 import { OffchainAPI, OnchainAPI } from "@interep/api"
+import type { ZkIdentity } from "@zk-kit/identity"
 import { generateMerkleProof, Semaphore } from "@zk-kit/protocols"
 import checkParameter from "./checkParameter"
+import { BigNumber, GroupId, ZKFiles } from "./types"
 
 /**
- * Create a Semaphore proof.
+ * Creates a Merkle proof using the Interep APIs and generates a Semaphore proof
+ * to be used in the Interep contract.
  * @param identity The Semaphore identity.
- * @param group The group id parameters (id or provider/name).
+ * @param groupId The group id parameters (id or provider/name).
  * @param externalNullifier The external nullifier.
- * @param signal .
- * @param zkProofFiles .
+ * @param signal The Semaphore signal.
+ * @param zkFiles The zero-knowledge files (SnarkJS outputs).
  * @returns The Solidity parameters for the 'verifyProof' onchain function.
  */
 export default async function createProof(
-    identity: any,
-    group: {
-        provider?: string
-        name?: string
-        id?: number | bigint | string
-    },
-    externalNullifier: number | bigint | string,
+    identity: ZkIdentity,
+    groupId: GroupId,
+    externalNullifier: BigNumber,
     signal: string,
-    zkProofFiles: {
-        wasm: string
-        zkey: string
-    }
-): Promise<any> {
+    zkFiles: ZKFiles
+): Promise<any[]> {
     checkParameter(identity, "identity", "object")
-    checkParameter(group, "group", "object")
+    checkParameter(groupId, "groupId", ["number", "bigint", "string", "object"])
 
-    const identityCommitment = identity.genIdentityCommitment()
+    const identityCommitment = identity.genIdentityCommitment().toString()
 
-    let groupId = group.id as string
     let merkleProof: any
 
-    if (!groupId) {
-        const { provider, name } = group as any
+    if (typeof groupId === "object") {
+        const { provider, name } = groupId as any
 
-        checkParameter(name, "group.name", "string")
-        checkParameter(provider, "group.provider", "string")
+        checkParameter(name, "groupId.name", "string")
+        checkParameter(provider, "groupId.provider", "string")
 
         const api = new OffchainAPI()
 
         merkleProof = await api.getMerkleTreeProof({ provider, name, identityCommitment })
         groupId = keccak256(["string", "string"], [provider, name])
     } else {
-        checkParameter(groupId, "group.id", ["number", "bigint", "string"])
+        groupId = groupId.toString()
 
         const api = new OnchainAPI()
         const { depth } = await api.getGroup({ id: groupId })
@@ -57,6 +52,9 @@ export default async function createProof(
 
     checkParameter(externalNullifier, "externalNullifier", ["number", "bigint", "string"])
     checkParameter(signal, "signal", "string")
+    checkParameter(zkFiles, "zkFiles", "object")
+    checkParameter(zkFiles.wasmFilePath, "zkFiles.wasmFilePath", "string")
+    checkParameter(zkFiles.zkeyFilePath, "zkFiles.zkeyFilePath", "string")
 
     const witness = Semaphore.genWitness(
         identity.getTrapdoor(),
@@ -66,7 +64,7 @@ export default async function createProof(
         signal
     )
 
-    const { publicSignals, proof } = await Semaphore.genProof(witness, zkProofFiles.wasm, zkProofFiles.zkey)
+    const { publicSignals, proof } = await Semaphore.genProof(witness, zkFiles.wasmFilePath, zkFiles.zkeyFilePath)
     const solidityProof = Semaphore.packToSolidityProof(proof)
 
     return [groupId, signal, publicSignals.nullifierHash, externalNullifier, solidityProof]
