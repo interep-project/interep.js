@@ -28,7 +28,6 @@
 
 <div align="center">
     <h4>
-        <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <a href="https://docs.interep.link/contributing">
             👥 Contributing
         </a>
@@ -62,3 +61,28 @@ yarn add @interep/proof
 ```
 
 ## 📜 Usage
+
+\# **createProof**(identity: _ZKIdentity_, groupId: _GroupId_, externalNullifier: _BigNumber_, signal: _string_, zkFiles: _zkFiles_): _any\[]_
+
+```typescript
+import createIdentity from "@interep/identity"
+import createProof from "@interep/proof"
+import detectEthereumProvider from "@metamask/detect-provider"
+import { ethers } from "ethers"
+
+const ethereumProvider = (await detectEthereumProvider()) as any
+const provider = new ethers.providers.Web3Provider(ethereumProvider)
+const signer = provider.getSigner()
+
+const identity = await createIdentity((message) => signer.signMessage(message), "<group-id>") // or <group-provider> for offchain groups.
+
+const groupId = BigInt(formatBytes32String("<group-id>")) // or { provider: "<group-provider>", name: "<group-name>" } for offchain groups.
+const externalNullifier = 1
+const signal = "Hello World"
+const zkFiles = {
+    wasmFilePath: "./semaphore.wasm",
+    zkeyFilePath: "./semaphore_final.zkey"
+}
+
+const proof = await createProof(identity, groupId, externalNullifier, signal, zkFiles)
+```
