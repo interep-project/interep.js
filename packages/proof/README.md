@@ -42,6 +42,8 @@
     </h4>
 </div>
 
+The `@interep/proof` package allow you to create all the Semaphore proof parameters needed for onchain verification with our [Interep contracts](https://github.com/interep-project/contracts).
+
 ---
 
 ## 🛠 Install
