@@ -7,7 +7,7 @@ describe("Interep identity", () => {
     }
 
     describe("Create identity", () => {
-        it("Should not create an Interep identity if the parameters do not have the right types", async () => {
+        it("Should not create a Semaphore identity if the parameters do not have the right types", async () => {
             const web2Provider = "twitter"
 
             const fun1 = () => createIdentity(1 as any, web2Provider)
@@ -21,7 +21,7 @@ describe("Interep identity", () => {
             await expect(fun4).rejects.toThrow("Parameter 'provider' is not defined")
         })
 
-        it("Should create an Interep identity", async () => {
+        it("Should create a Semaphore identity", async () => {
             const web2Provider = "twitter"
 
             const expectedValue = await createIdentity(sign, web2Provider)
@@ -29,7 +29,7 @@ describe("Interep identity", () => {
             expect(expectedValue).toBeInstanceOf(ZkIdentity)
         })
 
-        it("Should create an Interep identity with a nonce", async () => {
+        it("Should create a Semaphore identity with a nonce", async () => {
             const web2Provider = "twitter"
 
             const expectedValue = await createIdentity(sign, web2Provider, 1)
