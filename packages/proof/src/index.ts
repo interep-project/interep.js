@@ -38,7 +38,7 @@ export default async function createProof(
         const api = new OffchainAPI()
 
         merkleProof = await api.getMerkleTreeProof({ provider, name, identityCommitment })
-        groupId = keccak256(["string", "string"], [provider, name])
+        groupId = BigInt(keccak256(["string", "string"], [provider, name]))
     } else {
         groupId = groupId.toString()
 
@@ -67,5 +67,5 @@ export default async function createProof(
     const { publicSignals, proof } = await Semaphore.genProof(witness, zkFiles.wasmFilePath, zkFiles.zkeyFilePath)
     const solidityProof = Semaphore.packToSolidityProof(proof)
 
-    return [groupId, signal, publicSignals.nullifierHash, externalNullifier, solidityProof]
+    return [groupId, signal, publicSignals.nullifierHash, publicSignals.externalNullifier, solidityProof]
 }

@@ -39,6 +39,6 @@
         "@ethersproject/solidity": "^5.5.0",
         "@interep/api": "^0.2.0",
         "@zk-kit/identity": "^1.4.1",
-        "@zk-kit/protocols": "^1.10.0"
+        "@zk-kit/protocols": "^1.11.0"
     }
 }
