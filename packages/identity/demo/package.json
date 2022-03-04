@@ -1,5 +1,5 @@
 {
-    "name": "interrep-identity-demo",
+    "name": "interep-identity-demo",
     "version": "0.1.0",
     "scripts": {
         "start": "parcel serve --open --no-cache index.html",
