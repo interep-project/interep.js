@@ -103,7 +103,7 @@ console.log(devApi.url) // "http://localhost:3000/api"
 const providers = await api.getProviders()
 ```
 
-> API: [api/providers](https://docs.interep.link/api#apiproviders)
+> API: [api/v1/providers](https://docs.interep.link/api#apiv1providers)
 
 \# **api.getGroups**(): _Promise<any[]>_
 
@@ -111,7 +111,7 @@ const providers = await api.getProviders()
 const groups = await api.getGroups()
 ```
 
-> API: [api/groups](https://docs.interep.link/api#apigroups)
+> API: [api/v1/groups](https://docs.interep.link/api#apiv1groups)
 
 \# **api.getGroup**(parameters: _Offchain.GetGroupRequest_): _Promise<any\>_
 
@@ -120,9 +120,19 @@ const group = await api.getGroup({
     provider: "twitter",
     name: "gold"
 })
+
+// If you want also group members:
+
+const group2 = await api.getGroup({
+    provider: "twitter",
+    name: "gold",
+    members: true,
+    limit: 1,
+    offset: 1
+})
 ```
 
-> API: [/api/groups/:provider/:name](https://docs.interep.link/api#apigroupsprovidername)
+> API: [/api/v1/groups/:provider/:name](https://docs.interep.link/api#apiv1groupsprovidername)
 
 \# **api.hasMember**(parameters: _Offchain.HasMemberRequest_): _Promise<boolean\>_
 
@@ -130,22 +140,22 @@ const group = await api.getGroup({
 // For any provider group.
 const hasMember = await api.hasMember({
     provider: "twitter",
-    identityCommitment: "1231231..."
+    member: "1231231..."
 })
 ```
 
-> API: [/api/providers/:provider/:identityCommitment](https://docs.interep.link/api#apiprovidersprovideridentitycommitment)
+> API: [/api/v1/providers/:provider/:member](https://docs.interep.link/api#apiv1providersprovidermember)
 
 ```typescript
 // For specific group.
 const hasMember = await api.hasMember({
     provider: "twitter",
     name: "gold",
-    identityCommitment: "1231231..."
+    member: "1231231..."
 })
 ```
 
-> API (method: get): [/api/groups/:provider/:name/:identityCommitment](https://docs.interep.link/api#apigroupsprovidernameidentitycommitment)
+> API (method: get): [/api/v1/groups/:provider/:name/:member](https://docs.interep.link/api#apiv1groupsprovidernamemember)
 
 \# **api.addMember**(parameters: _Offchain.AddMemberRequest_): _Promise<boolean\>_
 
@@ -154,7 +164,7 @@ const hasMember = await api.hasMember({
 await api.addMember({
     provider: "twitter",
     name: "gold",
-    identityCommitment: "1231231...",
+    member: "1231231...",
     authenticationHeader: "token <OAuth-token>"
 })
 ```
@@ -164,13 +174,13 @@ await api.addMember({
 await api.addMember({
     provider: "poap",
     name: "devcon4",
-    identityCommitment: "1231231...",
+    member: "1231231...",
     userAddress: "0xueaoueao",
     userSignature: "aueouaoe"
 })
 ```
 
-> API (method: post): [/api/groups/:provider/:name/:identityCommitment](https://docs.interep.link/api#apigroupsprovidernameidentitycommitment)
+> API (method: post): [/api/v1/groups/:provider/:name/:member](https://docs.interep.link/api#apiv1groupsprovidernamemember)
 
 \# **api.removeMember**(parameters: _Offchain.RemoveMemberRequest_): _Promise<boolean\>_
 
@@ -179,7 +189,7 @@ await api.addMember({
 await api.removeMember({
     provider: "twitter",
     name: "gold",
-    identityCommitment: "1231231...",
+    member: "1231231...",
     authenticationHeader: "token <OAuth-token>"
 })
 ```
@@ -189,13 +199,13 @@ await api.removeMember({
 await api.removeMember({
     provider: "poap",
     name: "devcon4",
-    identityCommitment: "1231231...",
+    member: "1231231...",
     userAddress: "0xueaoueao",
     userSignature: "aueouaoe"
 })
 ```
 
-> API (method: delete): [/api/groups/:provider/:name/:identityCommitment](https://docs.interep.link/api#apigroupsprovidernameidentitycommitment)
+> API (method: delete): [/api/v1/groups/:provider/:name/:member](https://docs.interep.link/api#apiv1groupsprovidernamemember)
 
 \# **api.getMerkleTreeProof**(parameters: _Offchain.GetMerkleTreeProofRequest_): _Promise<any\>_
 
@@ -203,37 +213,11 @@ await api.removeMember({
 const proof = await api.getMerkleTreeProof({
     provider: "twitter",
     name: "gold",
-    identityCommitment: "1231231..."
+    member: "1231231..."
 })
 ```
 
-> API: [/api/groups/:provider/:name/:identityCommitment/proof](https://docs.interep.link/api#apigroupsprovidernameidentitycommitmentproof)
-
-\# **api.getMerkleTreeLeaves**(parameters: _Offchain.GetMerkleTreeLeavesRequest_, options: _RequestOptions_): _Promise<string[]\>_
-
-```typescript
-const leaves = await api.getMerkleTreeLeaves(
-    {
-        root: "1212121..."
-    },
-    {
-        limit: 10
-    }
-)
-```
-
-> API: [/api/trees/:root](https://docs.interep.link/api#apitreesroot)
-
-\# **api.hasMerkleTreeLeaf**(parameters: _Offchain.HasMerkleTreeLeafRequest_): _Promise<boolean\>_
-
-```typescript
-const hasMerkleTreeLeaf = await api.hasMerkleTreeLeaf({
-    root: "1212121...",
-    leaf: "2122131..."
-})
-```
-
-> API: [/api/trees/:root/:leaf](https://docs.interep.link/api#apitreesrootleaf)
+> API: [/api/v1/groups/:provider/:name/:member/proof](https://docs.interep.link/api#apiv1groupsprovidernamememberproof)
 
 \# **api.getMerkleTreeRootBatches**(): _Promise<any[]\>_
 
@@ -241,7 +225,7 @@ const hasMerkleTreeLeaf = await api.hasMerkleTreeLeaf({
 const rootBatches = await api.getMerkleTreeRootBatches()
 ```
 
-> API: [/api/trees/batches](https://docs.interep.link/api#apitreesbatches)
+> API: [/api/v1/batches](https://docs.interep.link/api#apiv1batches)
 
 \# **api.getMerkleTreeRootBatch**(parameters: _Offchain.GetMerkleTreeRootBatchRequest_): _Promise<any\>_
 
@@ -251,7 +235,7 @@ const rootBatch = await api.getMerkleTreeRootBatch({
 })
 ```
 
-> API: [/api/trees/batches/:root](https://docs.interep.link/api#apitreesbatchesroot)
+> API: [/api/v1/batches/:root](https://docs.interep.link/api#apiv1batchesroot)
 
 ### Onchain APIs
 
@@ -279,16 +263,13 @@ const groups = await api.getGroups()
 const group = await api.getGroup({
     id: "1"
 })
-```
 
-> Subgraph entity: [OnchainGroup](https://docs.interep.link/api#onchaingroup)
+// If you want also group members:
 
-\# **api.getMembers**(parameters: _Onchain.GetMembersRequest_): _Promise<any[]>_
-
-```typescript
-const members = await api.getMembers({
-    groupId: "1"
+const group2 = await api.getGroup({
+    id: "2",
+    members: true
 })
 ```
 
-> Subgraph entity: [Member](https://docs.interep.link/api#member)
+> Subgraph entity: [OnchainGroup](https://docs.interep.link/api#onchaingroup)
