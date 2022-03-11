@@ -5,11 +5,10 @@ import createProof from "../src"
 jest.mock("@interep/api", () => ({
     __esModule: true,
     OffchainAPI: jest.fn(() => ({
-        getMerkleTreeProof: () => ({})
+        getGroup: () => ({ depth: 20, members: ["1", "2"] })
     })),
     OnchainAPI: jest.fn(() => ({
-        getGroup: () => ({}),
-        getMembers: () => []
+        getGroup: () => ({ depth: 20, members: ["1", "2"] })
     }))
 }))
 
