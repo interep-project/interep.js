@@ -26,40 +26,43 @@ export default class offchainAPI {
     async getGroup(parameters: Offchain.GetGroupRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
-        const { provider, name } = parameters
+        const { provider, name, members = false, limit = 0, offset = 0 } = parameters
 
         checkParameter(provider, "provider", "string")
         checkParameter(name, "name", "string")
+        checkParameter(members, "members", "boolean")
+        checkParameter(limit, "limit", "number")
+        checkParameter(offset, "offset", "number")
 
-        return request(`${this.url}/groups/${provider}/${name}`)
+        return request(`${this.url}/groups/${provider}/${name}?members=${members}&limit=${limit}&offset=${offset}`)
     }
 
     async hasMember(parameters: Offchain.HasMemberRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
-        const { provider, name, identityCommitment } = parameters
+        const { provider, name, member } = parameters
 
         checkParameter(provider, "provider", "string")
-        checkParameter(identityCommitment, "identity commitment", "string")
+        checkParameter(member, "member", "string")
         checkProvider(provider)
 
         if (name) {
             checkParameter(name, "name", "string")
 
-            return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`)
+            return request(`${this.url}/groups/${provider}/${name}/${member}`)
         }
 
-        return request(`${this.url}/providers/${provider}/${identityCommitment}`)
+        return request(`${this.url}/providers/${provider}/${member}`)
     }
 
     async addMember(parameters: Offchain.AddMemberRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
-        const { provider, name, identityCommitment, authenticationHeader, userAddress, userSignature } = parameters
+        const { provider, name, member, authenticationHeader, userAddress, userSignature } = parameters
 
         checkParameter(provider, "provider", "string")
         checkParameter(name, "name", "string")
-        checkParameter(identityCommitment, "identity commitment", "string")
+        checkParameter(member, "member", "string")
         checkProvider(provider)
 
         const config: AxiosRequestConfig = { method: "post" }
@@ -69,7 +72,7 @@ export default class offchainAPI {
 
             config.headers = { Authentication: authenticationHeader as string }
 
-            return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
+            return request(`${this.url}/groups/${provider}/${name}/${member}`, config)
         }
 
         checkParameter(userAddress, "user address", "string")
@@ -77,17 +80,17 @@ export default class offchainAPI {
 
         config.data = { userAddress, userSignature }
 
-        return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
+        return request(`${this.url}/groups/${provider}/${name}/${member}`, config)
     }
 
     async removeMember(parameters: Offchain.RemoveMemberRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
-        const { provider, name, identityCommitment, authenticationHeader, userAddress, userSignature } = parameters
+        const { provider, name, member, authenticationHeader, userAddress, userSignature } = parameters
 
         checkParameter(provider, "provider", "string")
         checkParameter(name, "name", "string")
-        checkParameter(identityCommitment, "identity commitment", "string")
+        checkParameter(member, "member", "string")
         checkProvider(provider)
 
         const config: AxiosRequestConfig = { method: "delete" }
@@ -97,7 +100,7 @@ export default class offchainAPI {
 
             config.headers = { Authentication: authenticationHeader as string }
 
-            return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
+            return request(`${this.url}/groups/${provider}/${name}/${member}`, config)
         }
 
         checkParameter(userAddress, "user address", "string")
@@ -105,61 +108,33 @@ export default class offchainAPI {
 
         config.data = { userAddress, userSignature }
 
-        return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}`, config)
+        return request(`${this.url}/groups/${provider}/${name}/${member}`, config)
     }
 
     async getMerkleTreeProof(parameters: Offchain.GetMerkleTreeProofRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
-        const { provider, name, identityCommitment } = parameters
+        const { provider, name, member } = parameters
 
         checkParameter(provider, "provider", "string")
         checkParameter(name, "name", "string")
-        checkParameter(identityCommitment, "identity commitment", "string")
+        checkParameter(member, "member", "string")
         checkProvider(provider)
 
-        return request(`${this.url}/groups/${provider}/${name}/${identityCommitment}/proof`)
-    }
-
-    async getMerkleTreeLeaves(
-        parameters: Offchain.GetMerkleTreeLeavesRequest,
-        options: Offchain.RequestOptions
-    ): Promise<string[]> {
-        checkParameter(parameters, "request", "object")
-        checkParameter(options, "options", "object")
-
-        const { root: rootHash } = parameters
-        const { limit = 0, offset = 0 } = options
-
-        checkParameter(rootHash, "root hash", "string")
-        checkParameter(limit, "limit", "number")
-        checkParameter(offset, "offset", "number")
-
-        return request(`${this.url}/trees/${rootHash}?limit=${limit}&offset=${offset}`)
-    }
-
-    async hasMerkleTreeLeaf(parameters: Offchain.HasMerkleTreeLeafRequest): Promise<boolean> {
-        checkParameter(parameters, "request", "object")
-
-        const { root: rootHash, leaf: leafHash } = parameters
-
-        checkParameter(rootHash, "root hash", "string")
-        checkParameter(leafHash, "leaf hash", "string")
-
-        return request(`${this.url}/trees/${rootHash}/${leafHash}`)
+        return request(`${this.url}/groups/${provider}/${name}/${member}/proof`)
     }
 
     async getMerkleTreeRootBatches(): Promise<any[]> {
-        return request(`${this.url}/trees/batches`)
+        return request(`${this.url}/batches`)
     }
 
     async getMerkleTreeRootBatch(parameters: Offchain.GetMerkleTreeRootBatchRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
-        const { root: rootHash } = parameters
+        const { root } = parameters
 
-        checkParameter(rootHash, "root hash", "string")
+        checkParameter(root, "root", "string")
 
-        return request(`${this.url}/trees/batches/${rootHash}`)
+        return request(`${this.url}/batches/${root}`)
     }
 }

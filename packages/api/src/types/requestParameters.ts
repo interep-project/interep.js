@@ -3,20 +3,18 @@ import type { OAuthProvider } from "@interep/reputation"
 export type Provider = OAuthProvider | "poap" | "telegram" | "email"
 
 export namespace Offchain {
-    export type RequestOptions = {
-        limit?: number
-        offset?: number
-    }
-
     export type GetGroupRequest = {
         provider: Provider
         name: string
+        members?: boolean
+        limit?: number
+        offset?: number
     }
 
     export type HasMemberRequest = {
         provider: Provider
         name?: string
-        identityCommitment: string
+        member: string
     }
 
     export type GetMerkleTreeProofRequest = HasMemberRequest & {
@@ -45,9 +43,6 @@ export namespace Offchain {
 export namespace Onchain {
     export type GetGroupRequest = {
         id: string
-    }
-
-    export type GetMembersRequest = {
-        groupId: string
+        members?: boolean
     }
 }

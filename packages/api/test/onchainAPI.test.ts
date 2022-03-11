@@ -19,7 +19,7 @@ describe("Interep onchain API", () => {
         })
     })
 
-    describe("Get groups", () => {
+    describe("# getGroups", () => {
         it("Should return all the existing groups", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve({
@@ -51,7 +51,7 @@ describe("Interep onchain API", () => {
         })
     })
 
-    describe("Get group", () => {
+    describe("# getGroup", () => {
         it("Should return a specific group", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve({
@@ -82,37 +82,60 @@ describe("Interep onchain API", () => {
                 admin: "0x7bcd6f009471e9974a77086a69289d16eadba286"
             })
         })
-    })
 
-    describe("Get members", () => {
         it("Should get the members of a group", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve({
-                    members: [
+                    onchainGroups: [
                         {
-                            id: "0x1",
-                            identityCommitment: "1",
-                            index: 0
-                        },
-                        {
-                            id: "0x2",
-                            identityCommitment: "2",
-                            index: 1
+                            id: "1",
+                            depth: 20,
+                            size: 2,
+                            numberOfLeaves: 2,
+                            root: "2",
+                            admin: "0x7bcd6f009471e9974a77086a69289d16eadba286",
+                            members: [
+                                {
+                                    id: "0x1",
+                                    identityCommitment: "1",
+                                    index: 0
+                                },
+                                {
+                                    id: "0x2",
+                                    identityCommitment: "2",
+                                    index: 1
+                                }
+                            ]
                         }
                     ]
                 })
             )
 
-            const expectedValue = await api.getMembers({
-                groupId: "1"
+            const expectedValue = await api.getGroup({
+                id: "1",
+                members: true
             })
 
             expect(expectedValue).not.toBeUndefined()
-            expect(Array.isArray(expectedValue)).toBeTruthy()
-            expect(expectedValue).toContainEqual({
-                id: "0x1",
-                identityCommitment: "1",
-                index: 0
+            expect(expectedValue).toEqual({
+                id: "1",
+                depth: 20,
+                size: 2,
+                numberOfLeaves: 2,
+                root: "2",
+                admin: "0x7bcd6f009471e9974a77086a69289d16eadba286",
+                members: [
+                    {
+                        id: "0x1",
+                        identityCommitment: "1",
+                        index: 0
+                    },
+                    {
+                        id: "0x2",
+                        identityCommitment: "2",
+                        index: 1
+                    }
+                ]
             })
         })
     })

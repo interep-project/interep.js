@@ -8,11 +8,11 @@ export default function getURL(environment: Environment, onchain = false): strin
     if (!onchain) {
         switch (environment) {
             case "development":
-                return "http://localhost:3000/api"
+                return "http://localhost:3000/api/v1"
             case "staging":
-                return "https://kovan.interep.link/api"
+                return "https://kovan.interep.link/api/v1"
             case "production":
-                return "https://interep.link/api"
+                return "https://interep.link/api/v1"
             default:
                 throw new TypeError(`Environment '${environment}' is not supported`)
         }

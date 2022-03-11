@@ -18,9 +18,9 @@ describe("Interep offchain API", () => {
             const productionAPI = new OffchainAPI("production")
             const developmentAPI = new OffchainAPI("development")
 
-            expect(api.url).toEqual("https://kovan.interep.link/api")
-            expect(productionAPI.url).toEqual("https://interep.link/api")
-            expect(developmentAPI.url).toEqual("http://localhost:3000/api")
+            expect(api.url).toEqual("https://kovan.interep.link/api/v1")
+            expect(productionAPI.url).toEqual("https://interep.link/api/v1")
+            expect(developmentAPI.url).toEqual("http://localhost:3000/api/v1")
         })
 
         it("Should throw an error if the environment is not a string", () => {
@@ -36,7 +36,7 @@ describe("Interep offchain API", () => {
         })
     })
 
-    describe("Get providers", () => {
+    describe("# getProviders", () => {
         it("Should return all the supported providers", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve(["twitter", "github", "reddit", "telegram", "email"])
@@ -50,7 +50,7 @@ describe("Interep offchain API", () => {
         })
     })
 
-    describe("Get groups", () => {
+    describe("# getGroups", () => {
         it("Should return all the existing groups", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve([{ name: "gold", provider: "twitter", size: 1, numberOfLeaves: 1, root: "1" }])
@@ -70,7 +70,7 @@ describe("Interep offchain API", () => {
         })
     })
 
-    describe("Get group", () => {
+    describe("# getGroup", () => {
         it("Should return a specific group", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve({ name: "gold", provider: "twitter", size: 1, numberOfLeaves: 1, root: "1" })
@@ -81,15 +81,46 @@ describe("Interep offchain API", () => {
             expect(expectedValue).not.toBeUndefined()
             expect(expectedValue).toEqual({ name: "gold", provider: "twitter", size: 1, numberOfLeaves: 1, root: "1" })
         })
+
+        it("Should return a specific group with its members", async () => {
+            requestMocked.mockImplementationOnce(() =>
+                Promise.resolve({
+                    name: "gold",
+                    provider: "twitter",
+                    size: 1,
+                    numberOfLeaves: 1,
+                    root: "1",
+                    members: ["1"]
+                })
+            )
+
+            const expectedValue = await api.getGroup({
+                provider: OAuthProvider.TWITTER,
+                name: "gold",
+                members: true,
+                limit: 1
+            })
+
+            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toEqual({
+                name: "gold",
+                provider: "twitter",
+                size: 1,
+                numberOfLeaves: 1,
+                root: "1",
+                members: ["1"]
+            })
+            expect(expectedValue.members).toContainEqual("1")
+        })
     })
 
-    describe("Check identity commitment", () => {
+    describe("# hasMember", () => {
         it("Should throw an error if request parameters are not correct", async () => {
             const fun1 = () => api.hasMember(undefined as any)
             const fun2 = () => api.hasMember(12 as any)
             const fun3 = () => api.hasMember({ provider: undefined } as any)
             const fun4 = () => api.hasMember({ provider: 12 } as any)
-            const fun5 = () => api.hasMember({ provider: "facebook", identityCommitment: "1231" } as any)
+            const fun5 = () => api.hasMember({ provider: "facebook", member: "1231" } as any)
 
             await expect(fun1).rejects.toThrow("Parameter 'request' is not defined")
             await expect(fun2).rejects.toThrow("Parameter 'request' is not an object")
@@ -98,25 +129,25 @@ describe("Interep offchain API", () => {
             await expect(fun5).rejects.toThrow("Provider 'facebook' not supported")
         })
 
-        it("Should return false if the identity commitment does not belong to any provider group", async () => {
+        it("Should return false if the member does not belong to any provider group", async () => {
             requestMocked.mockImplementationOnce(() => Promise.resolve(false))
 
             const expectedValue = await api.hasMember({
                 provider: OAuthProvider.TWITTER,
-                identityCommitment: "23131231231"
+                member: "23131231231"
             })
 
             expect(expectedValue).not.toBeUndefined()
             expect(expectedValue).toEqual(false)
         })
 
-        it("Should return false if the identity commitment does not belong to a specific group", async () => {
+        it("Should return false if the member does not belong to a specific group", async () => {
             requestMocked.mockImplementationOnce(() => Promise.resolve(false))
 
             const expectedValue = await api.hasMember({
                 provider: OAuthProvider.TWITTER,
                 name: "gold",
-                identityCommitment: "23131231231"
+                member: "23131231231"
             })
 
             expect(expectedValue).not.toBeUndefined()
@@ -124,14 +155,14 @@ describe("Interep offchain API", () => {
         })
     })
 
-    describe("Add identity commitment", () => {
-        it("Should add an identity commitment for a OAuth group", async () => {
+    describe("# addMember", () => {
+        it("Should add a member for a OAuth group", async () => {
             requestMocked.mockImplementationOnce(() => Promise.resolve(true))
 
             const expectedValue = await api.addMember({
                 provider: OAuthProvider.TWITTER,
                 name: "gold",
-                identityCommitment: "23131231231",
+                member: "23131231231",
                 authenticationHeader: "token 3ao32423"
             })
 
@@ -139,13 +170,13 @@ describe("Interep offchain API", () => {
             expect(expectedValue).toEqual(true)
         })
 
-        it("Should add an identity commitment for a Web3 group", async () => {
+        it("Should add a member for a Web3 group", async () => {
             requestMocked.mockImplementationOnce(() => Promise.resolve(true))
 
             const expectedValue = await api.addMember({
                 provider: "poap",
                 name: "devcon5",
-                identityCommitment: "23131231231",
+                member: "23131231231",
                 userAddress: "0xueaoueao",
                 userSignature: "aueouaoe"
             })
@@ -155,14 +186,14 @@ describe("Interep offchain API", () => {
         })
     })
 
-    describe("Delete identity commitment", () => {
-        it("Should delete an identity commitment for a OAuth group", async () => {
+    describe("# removeMember", () => {
+        it("Should remove a member for a OAuth group", async () => {
             requestMocked.mockImplementationOnce(() => Promise.resolve(true))
 
             const expectedValue = await api.removeMember({
                 provider: OAuthProvider.TWITTER,
                 name: "gold",
-                identityCommitment: "23131231231",
+                member: "23131231231",
                 authenticationHeader: "token 3ao32423"
             })
 
@@ -170,13 +201,13 @@ describe("Interep offchain API", () => {
             expect(expectedValue).toEqual(true)
         })
 
-        it("Should delete an identity commitment for a Web3 group", async () => {
+        it("Should remove a member for a Web3 group", async () => {
             requestMocked.mockImplementationOnce(() => Promise.resolve(true))
 
             const expectedValue = await api.removeMember({
                 provider: "poap",
                 name: "devcon5",
-                identityCommitment: "23131231231",
+                member: "23131231231",
                 userAddress: "0xueaoueao",
                 userSignature: "aueouaoe"
             })
@@ -186,7 +217,7 @@ describe("Interep offchain API", () => {
         })
     })
 
-    describe("Get Merkle tree proof", () => {
+    describe("# getMerkleTreeProof", () => {
         it("Should get a valid Merkle tree proof", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve({ siblingNodes: ["0"], path: [0], root: "1123123" })
@@ -195,41 +226,13 @@ describe("Interep offchain API", () => {
             const expectedValue = await api.getMerkleTreeProof({
                 provider: OAuthProvider.TWITTER,
                 name: ReputationLevel.GOLD,
-                identityCommitment: "23131231231"
+                member: "23131231231"
             })
 
             expect(expectedValue).not.toBeUndefined()
             expect(expectedValue).toHaveProperty("siblingNodes")
             expect(expectedValue).toHaveProperty("path")
             expect(expectedValue).toHaveProperty("root")
-        })
-    })
-
-    describe("Get Merkle tree leaves", () => {
-        it("Should get the leaves of a Merkle tree", async () => {
-            requestMocked.mockImplementationOnce(() => Promise.resolve(["0", "1"]))
-
-            const expectedValue = await api.getMerkleTreeLeaves(
-                {
-                    root: "1"
-                },
-                { limit: 1 }
-            )
-
-            expect(expectedValue).not.toBeUndefined()
-            expect(Array.isArray(expectedValue)).toBeTruthy()
-            expect(expectedValue).toContainEqual("1")
-        })
-    })
-
-    describe("Has Merkle tree leaf", () => {
-        it("Should return true if a Merkle tree has a leaf", async () => {
-            requestMocked.mockImplementationOnce(() => Promise.resolve(true))
-
-            const expectedValue = await api.hasMerkleTreeLeaf({ root: "1", leaf: "1" })
-
-            expect(expectedValue).not.toBeUndefined()
-            expect(expectedValue).toEqual(true)
         })
     })
 

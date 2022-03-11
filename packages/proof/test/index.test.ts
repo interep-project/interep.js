@@ -1,5 +1,5 @@
-import { Strategy, ZkIdentity } from "@zk-kit/identity"
 import { formatBytes32String } from "@ethersproject/strings"
+import { Strategy, ZkIdentity } from "@zk-kit/identity"
 import createProof from "../src"
 
 jest.mock("@interep/api", () => ({
