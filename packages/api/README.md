@@ -273,3 +273,21 @@ const group2 = await api.getGroup({
 ```
 
 > Subgraph entity: [OnchainGroup](https://docs.interep.link/api#onchaingroup)
+
+\# **api.getOffchainGroups**(): _Promise<any[]>_
+
+```typescript
+const groups = await api.getOffchainGroups()
+```
+
+> Subgraph entity: [OffchainGroup](https://docs.interep.link/api#offchaingroup)
+
+\# **api.getOffchainGroup**(parameters: _Onchain.GetOffchainGroupRequest_): _Promise<any[]>_
+
+```typescript
+const group = await api.getOffchainGroup({
+    id: "1"
+})
+```
+
+> Subgraph entity: [OffchainGroup](https://docs.interep.link/api#offchaingroup)
