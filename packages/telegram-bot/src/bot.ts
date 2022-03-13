@@ -5,6 +5,7 @@ import leave from "./commands/leave"
 import showHelpMessage from "./commands/showHelpMessage"
 import showStartMessage from "./commands/showStartMessage"
 
+/* istanbul ignore next */
 export default class InterepBot {
     readonly mongodbUrl: string
     readonly appURL: string

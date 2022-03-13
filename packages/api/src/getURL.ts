@@ -17,6 +17,7 @@ export default function getURL(environment: Environment, onchain = false): strin
                 throw new TypeError(`Environment '${environment}' is not supported`)
         }
     } else {
+        /* istanbul ignore next */
         switch (environment) {
             case "staging":
                 return "https://api.thegraph.com/subgraphs/name/interep-project/interep-groups-kovan"

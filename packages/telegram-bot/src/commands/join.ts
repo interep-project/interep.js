@@ -6,6 +6,7 @@ import sha256 from "../sha256"
 import TelegramGroup from "../telegramGroup"
 import showConnectButton from "./showConnectButton"
 
+/* istanbul ignore next */
 export default async function join(bot: Bot, appURL: string, chat: Chat, msg: Message, user?: User) {
     if (chat.type === "private") {
         bot.api.sendMessage(

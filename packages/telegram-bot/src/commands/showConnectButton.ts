@@ -1,6 +1,7 @@
 import { Bot, InlineKeyboard } from "grammy"
 import { Chat, Message } from "grammy/out/platform.node"
 
+/* istanbul ignore next */
 export default async function showConnectButton(bot: Bot, chat: Chat, msg: Message, command: string) {
     const inlineKeyboard = new InlineKeyboard().url(
         "Connect",
