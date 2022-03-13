@@ -15,12 +15,12 @@ describe("Interep onchain API", () => {
         it("Should return an api object", () => {
             api = new OnchainAPI()
 
-            expect(api.url).toEqual("https://api.thegraph.com/subgraphs/name/interep-project/interep-groups-kovan")
+            expect(api.url).toBe("https://api.thegraph.com/subgraphs/name/interep-project/interep-groups-kovan")
         })
     })
 
     describe("# getGroups", () => {
-        it("Should return all the existing groups", async () => {
+        it("Should return all the existing onchain groups", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve({
                     onchainGroups: [
@@ -38,7 +38,7 @@ describe("Interep onchain API", () => {
 
             const expectedValue = await api.getGroups()
 
-            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toBeDefined()
             expect(Array.isArray(expectedValue)).toBeTruthy()
             expect(expectedValue).toContainEqual({
                 id: "1",
@@ -52,7 +52,7 @@ describe("Interep onchain API", () => {
     })
 
     describe("# getGroup", () => {
-        it("Should return a specific group", async () => {
+        it("Should return a specific onchain group", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve({
                     onchainGroups: [
@@ -72,7 +72,7 @@ describe("Interep onchain API", () => {
                 id: "1"
             })
 
-            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toBeDefined()
             expect(expectedValue).toEqual({
                 id: "1",
                 depth: 20,
@@ -83,7 +83,7 @@ describe("Interep onchain API", () => {
             })
         })
 
-        it("Should get the members of a group", async () => {
+        it("Should return a specific onchain group with its members", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve({
                     onchainGroups: [
@@ -116,7 +116,7 @@ describe("Interep onchain API", () => {
                 members: true
             })
 
-            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toBeDefined()
             expect(expectedValue).toEqual({
                 id: "1",
                 depth: 20,
@@ -136,6 +136,59 @@ describe("Interep onchain API", () => {
                         index: 1
                     }
                 ]
+            })
+        })
+    })
+
+    describe("# getOffchainGroups", () => {
+        it("Should return all the existing offchain groups", async () => {
+            requestMocked.mockImplementationOnce(() =>
+                Promise.resolve({
+                    offchainGroups: [
+                        {
+                            id: "1",
+                            depth: 20,
+                            root: "2"
+                        }
+                    ]
+                })
+            )
+
+            const expectedValue = await api.getOffchainGroups()
+
+            expect(expectedValue).toBeDefined()
+            expect(Array.isArray(expectedValue)).toBeTruthy()
+            expect(expectedValue).toContainEqual({
+                id: "1",
+                depth: 20,
+                root: "2"
+            })
+        })
+    })
+
+    describe("# getOffchainGroup", () => {
+        it("Should return a specific offchain group", async () => {
+            requestMocked.mockImplementationOnce(() =>
+                Promise.resolve({
+                    offchainGroups: [
+                        {
+                            id: "1",
+                            depth: 20,
+                            root: "2"
+                        }
+                    ]
+                })
+            )
+
+            const expectedValue = await api.getOffchainGroup({
+                id: "1"
+            })
+
+            expect(expectedValue).toBeDefined()
+            expect(expectedValue).toEqual({
+                id: "1",
+                depth: 20,
+                root: "2"
             })
         })
     })

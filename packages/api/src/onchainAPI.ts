@@ -70,4 +70,48 @@ export default class onchainAPI {
 
         return onchainGroups[0]
     }
+
+    async getOffchainGroups(): Promise<any[]> {
+        const config: AxiosRequestConfig = {
+            method: "post",
+            data: JSON.stringify({
+                query: `{
+                    offchainGroups {
+                        id
+                        depth
+                        root
+                    }
+                }`
+            })
+        }
+
+        const { offchainGroups } = await request(this.url, config)
+
+        return offchainGroups
+    }
+
+    async getOffchainGroup(parameters: Onchain.GetOffchainGroupRequest): Promise<any> {
+        checkParameter(parameters, "request", "object")
+
+        const { id } = parameters
+
+        checkParameter(id, "id", "string")
+
+        const config: AxiosRequestConfig = {
+            method: "post",
+            data: JSON.stringify({
+                query: `{
+                    offchainGroups(where: { id: "${id}" }) {
+                        id
+                        depth
+                        root
+                    }
+                }`
+            })
+        }
+
+        const { offchainGroups } = await request(this.url, config)
+
+        return offchainGroups[0]
+    }
 }

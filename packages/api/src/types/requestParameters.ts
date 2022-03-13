@@ -45,4 +45,8 @@ export namespace Onchain {
         id: string
         members?: boolean
     }
+
+    export type GetOffchainGroupRequest = {
+        id: string
+    }
 }
