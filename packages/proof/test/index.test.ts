@@ -5,10 +5,17 @@ import createProof from "../src"
 jest.mock("@interep/api", () => ({
     __esModule: true,
     OffchainAPI: jest.fn(() => ({
-        getGroup: () => ({ depth: 20, members: ["1", "2"] })
+        getGroup: () => ({
+            depth: 20,
+            members: ["19657177971873866758926013815619594809290030316713851870574761013161589495516"]
+        })
     })),
     OnchainAPI: jest.fn(() => ({
-        getGroup: () => ({ depth: 20, members: ["1", "2"] })
+        getGroup: () => ({
+            depth: 20,
+            members: ["19657177971873866758926013815619594809290030316713851870574761013161589495516"]
+        }),
+        getOffchainGroup: () => ({ root: 20 })
     }))
 }))
 
@@ -72,11 +79,11 @@ describe("Interep proof", () => {
         it("Should create a Semaphore proof of an onchain group", async () => {
             const expectedValue = await createProof(identity, groupId, externalNullifier, signal, zkFiles)
 
-            expect(expectedValue).toHaveLength(5)
-            expect(expectedValue[4]).toHaveLength(8)
+            expect(typeof expectedValue).toBe("object")
+            expect(Object.values(expectedValue)).toHaveLength(5)
         })
 
-        it("Should create a Semaphore proof", async () => {
+        it("Should create a Semaphore proof of an offchain group", async () => {
             const expectedValue = await createProof(
                 identity,
                 { name: groupName, provider: groupProvider },
@@ -85,8 +92,8 @@ describe("Interep proof", () => {
                 zkFiles
             )
 
-            expect(expectedValue).toHaveLength(5)
-            expect(expectedValue[4]).toHaveLength(8)
+            expect(typeof expectedValue).toBe("object")
+            expect(Object.values(expectedValue)).toHaveLength(5)
         })
     })
 })

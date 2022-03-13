@@ -3,7 +3,8 @@ import type { ZkIdentity } from "@zk-kit/identity"
 import { generateMerkleProof, Semaphore } from "@zk-kit/protocols"
 import { createOffchainGroupId } from "."
 import checkParameter from "./checkParameter"
-import { BigNumber, GroupId, ZKFiles } from "./types"
+import createOffchainMerkleTree from "./createOffchainMerkleTree"
+import { BigNumber, GroupId, InterepProof, ZKFiles } from "./types"
 
 /**
  * Creates a Merkle proof using the Interep APIs and generates a Semaphore proof
@@ -21,7 +22,7 @@ export default async function createProof(
     externalNullifier: BigNumber,
     signal: string,
     zkFiles: ZKFiles
-): Promise<any[]> {
+): Promise<InterepProof> {
     checkParameter(identity, "identity", "object")
     checkParameter(groupId, "groupId", ["number", "bigint", "string", "object"])
 
@@ -36,11 +37,18 @@ export default async function createProof(
         checkParameter(provider, "groupId.provider", "string")
 
         const api = new OffchainAPI()
-        const { depth, members: identityCommitments } = await api.getGroup({ provider, name, members: true })
+        const { depth, members } = await api.getGroup({ provider, name, members: true })
 
-        merkleProof = generateMerkleProof(depth, BigInt(0), identityCommitments, identityCommitment)
+        groupId = createOffchainGroupId(provider, name).toString()
 
-        groupId = createOffchainGroupId(provider, name)
+        const tree = await createOffchainMerkleTree(groupId, depth, members)
+        const leafIndex = tree.leaves.indexOf(BigInt(identityCommitment))
+
+        if (leafIndex === -1) {
+            throw new Error("Identity integrity is not yet verifiable")
+        }
+
+        merkleProof = tree.createProof(leafIndex)
     } else {
         groupId = groupId.toString()
 
@@ -68,5 +76,5 @@ export default async function createProof(
     const { publicSignals, proof } = await Semaphore.genProof(witness, zkFiles.wasmFilePath, zkFiles.zkeyFilePath)
     const solidityProof = Semaphore.packToSolidityProof(proof)
 
-    return [groupId, signal, publicSignals.nullifierHash, publicSignals.externalNullifier, solidityProof]
+    return { groupId, signal, publicSignals, proof, solidityProof }
 }
