@@ -1,7 +1,7 @@
-import typescript from "@rollup/plugin-typescript"
-import { terser } from "rollup-plugin-terser"
 import { nodeResolve } from "@rollup/plugin-node-resolve"
 import fs from "fs"
+import { terser } from "rollup-plugin-terser"
+import typescript from "rollup-plugin-typescript2"
 
 const pkg = JSON.parse(fs.readFileSync("./package.json", "utf8"))
 const banner = `/**
@@ -35,5 +35,5 @@ export default {
         { file: pkg.exports.import, format: "es", banner }
     ],
     external: Object.keys(pkg.dependencies),
-    plugins: [typescript({ tsconfig: "./build.tsconfig.json" }), nodeResolve()]
+    plugins: [typescript({ tsconfig: "./build.tsconfig.json", useTsconfigDeclarationDir: true }), nodeResolve()]
 }

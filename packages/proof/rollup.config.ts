@@ -1,4 +1,4 @@
-import typescript from "@rollup/plugin-typescript"
+import typescript from "rollup-plugin-typescript2"
 import fs from "fs"
 
 const pkg = JSON.parse(fs.readFileSync("./package.json", "utf8"))
@@ -18,5 +18,5 @@ export default {
         { file: pkg.exports.import, format: "es", banner }
     ],
     external: Object.keys(pkg.dependencies),
-    plugins: [typescript({ tsconfig: "./build.tsconfig.json" })]
+    plugins: [typescript({ tsconfig: "./build.tsconfig.json", useTsconfigDeclarationDir: true })]
 }
