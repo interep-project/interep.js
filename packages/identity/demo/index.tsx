@@ -25,6 +25,7 @@ import detectEthereumProvider from "@metamask/detect-provider"
 import { ethers } from "ethers"
 import React from "react"
 import ReactDOM from "react-dom"
+// eslint-disable-next-line import/no-relative-packages
 import createIdentity from "../src"
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -172,7 +173,9 @@ function App() {
                                     placeholder="Twitter"
                                     onChange={(event) => setOAuthProvider(event.target.value)}
                                     value={_oAuthProvider}
-                                    onKeyPress={(e) => {if(e.key === 'Enter') handleNext()}}
+                                    onKeyPress={(e) => {
+                                        if (e.key === "Enter") handleNext()
+                                    }}
                                 />
                                 <Divider className={classes.divider} orientation="vertical" />
                                 <IconButton

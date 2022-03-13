@@ -18,9 +18,9 @@ describe("Interep offchain API", () => {
             const productionAPI = new OffchainAPI("production")
             const developmentAPI = new OffchainAPI("development")
 
-            expect(api.url).toEqual("https://kovan.interep.link/api/v1")
-            expect(productionAPI.url).toEqual("https://interep.link/api/v1")
-            expect(developmentAPI.url).toEqual("http://localhost:3000/api/v1")
+            expect(api.url).toBe("https://kovan.interep.link/api/v1")
+            expect(productionAPI.url).toBe("https://interep.link/api/v1")
+            expect(developmentAPI.url).toBe("http://localhost:3000/api/v1")
         })
 
         it("Should throw an error if the environment is not a string", () => {
@@ -44,7 +44,7 @@ describe("Interep offchain API", () => {
 
             const expectedValue = await api.getProviders()
 
-            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toBeDefined()
             expect(Array.isArray(expectedValue)).toBeTruthy()
             expect(expectedValue).toContainEqual("twitter")
         })
@@ -58,7 +58,7 @@ describe("Interep offchain API", () => {
 
             const expectedValue = await api.getGroups()
 
-            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toBeDefined()
             expect(Array.isArray(expectedValue)).toBeTruthy()
             expect(expectedValue).toContainEqual({
                 name: "gold",
@@ -78,7 +78,7 @@ describe("Interep offchain API", () => {
 
             const expectedValue = await api.getGroup({ provider: OAuthProvider.TWITTER, name: "gold" })
 
-            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toBeDefined()
             expect(expectedValue).toEqual({ name: "gold", provider: "twitter", size: 1, numberOfLeaves: 1, root: "1" })
         })
 
@@ -101,7 +101,7 @@ describe("Interep offchain API", () => {
                 limit: 1
             })
 
-            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toBeDefined()
             expect(expectedValue).toEqual({
                 name: "gold",
                 provider: "twitter",
@@ -137,8 +137,8 @@ describe("Interep offchain API", () => {
                 member: "23131231231"
             })
 
-            expect(expectedValue).not.toBeUndefined()
-            expect(expectedValue).toEqual(false)
+            expect(expectedValue).toBeDefined()
+            expect(expectedValue).toBe(false)
         })
 
         it("Should return false if the member does not belong to a specific group", async () => {
@@ -150,8 +150,8 @@ describe("Interep offchain API", () => {
                 member: "23131231231"
             })
 
-            expect(expectedValue).not.toBeUndefined()
-            expect(expectedValue).toEqual(false)
+            expect(expectedValue).toBeDefined()
+            expect(expectedValue).toBe(false)
         })
     })
 
@@ -166,8 +166,8 @@ describe("Interep offchain API", () => {
                 authenticationHeader: "token 3ao32423"
             })
 
-            expect(expectedValue).not.toBeUndefined()
-            expect(expectedValue).toEqual(true)
+            expect(expectedValue).toBeDefined()
+            expect(expectedValue).toBe(true)
         })
 
         it("Should add a member for a Web3 group", async () => {
@@ -181,8 +181,8 @@ describe("Interep offchain API", () => {
                 userSignature: "aueouaoe"
             })
 
-            expect(expectedValue).not.toBeUndefined()
-            expect(expectedValue).toEqual(true)
+            expect(expectedValue).toBeDefined()
+            expect(expectedValue).toBe(true)
         })
     })
 
@@ -197,8 +197,8 @@ describe("Interep offchain API", () => {
                 authenticationHeader: "token 3ao32423"
             })
 
-            expect(expectedValue).not.toBeUndefined()
-            expect(expectedValue).toEqual(true)
+            expect(expectedValue).toBeDefined()
+            expect(expectedValue).toBe(true)
         })
 
         it("Should remove a member for a Web3 group", async () => {
@@ -212,8 +212,8 @@ describe("Interep offchain API", () => {
                 userSignature: "aueouaoe"
             })
 
-            expect(expectedValue).not.toBeUndefined()
-            expect(expectedValue).toEqual(true)
+            expect(expectedValue).toBeDefined()
+            expect(expectedValue).toBe(true)
         })
     })
 
@@ -229,7 +229,7 @@ describe("Interep offchain API", () => {
                 member: "23131231231"
             })
 
-            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toBeDefined()
             expect(expectedValue).toHaveProperty("siblingNodes")
             expect(expectedValue).toHaveProperty("path")
             expect(expectedValue).toHaveProperty("root")
@@ -253,7 +253,7 @@ describe("Interep offchain API", () => {
 
             const expectedValue = await api.getMerkleTreeRootBatches()
 
-            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toBeDefined()
             expect(Array.isArray(expectedValue)).toBeTruthy()
             expect(expectedValue).toContainEqual({
                 group: { provider: "github", name: "gold" },
@@ -283,7 +283,7 @@ describe("Interep offchain API", () => {
                 root: "1"
             })
 
-            expect(expectedValue).not.toBeUndefined()
+            expect(expectedValue).toBeDefined()
             expect(expectedValue).toEqual({
                 group: { provider: "github", name: "gold" },
                 roots: ["14273848199791178467311820318933280591305571798471599149384455313172966875782"],

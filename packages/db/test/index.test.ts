@@ -28,7 +28,7 @@ describe("Interep db", () => {
         it("Should return a disconnected state", async () => {
             const expectedValue = getState()
 
-            expect(expectedValue).toEqual(0)
+            expect(expectedValue).toBe(0)
         })
     })
 
