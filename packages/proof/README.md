@@ -64,7 +64,7 @@ yarn add @interep/proof
 
 ## 📜 Usage
 
-\# **createProof**(identity: _ZKIdentity_, groupId: _GroupId_, externalNullifier: _BigNumber_, signal: _string_, zkFiles: _zkFiles_): _any\[]_
+\# **createProof**(identity: _ZKIdentity_, groupId: _GroupId_, externalNullifier: _BigNumber_, signal: _string_, zkFiles: _zkFiles_): _InterepProof_
 
 ```typescript
 import createIdentity from "@interep/identity"
