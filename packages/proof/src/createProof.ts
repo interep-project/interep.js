@@ -1,7 +1,7 @@
 import { OffchainAPI, OnchainAPI } from "@interep/api"
 import type { ZkIdentity } from "@zk-kit/identity"
 import { generateMerkleProof, Semaphore } from "@zk-kit/protocols"
-import { createOffchainGroupId } from "."
+import createOffchainGroupId from "./createOffchainGroupId"
 import checkParameter from "./checkParameter"
 import createOffchainMerkleTree from "./createOffchainMerkleTree"
 import { BigNumber, GroupId, InterepProof, ZKFiles } from "./types"
