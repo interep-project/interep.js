@@ -1,34 +1,33 @@
+import detectEthereumProvider from "@metamask/detect-provider"
+import CheckIcon from "@mui/icons-material/Check"
+import ContentCopyIcon from "@mui/icons-material/ContentCopy"
+import ReplayIcon from "@mui/icons-material/Replay"
 import {
     Box,
     Button,
-    createStyles,
-    createTheme,
     Divider,
     IconButton,
     InputBase,
     List,
     ListItem,
+    ListItemSecondaryAction,
     ListItemText,
-    makeStyles,
     Paper,
     Step,
     StepContent,
     StepLabel,
     Stepper,
-    Theme,
-    ThemeProvider,
     Typography
-} from "@material-ui/core"
-import CheckIcon from "@material-ui/icons/Check"
-import ReplayIcon from "@material-ui/icons/Replay"
-import detectEthereumProvider from "@metamask/detect-provider"
+} from "@mui/material"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
+import { createStyles, makeStyles } from "@mui/styles"
 import { ethers } from "ethers"
 import React from "react"
 import ReactDOM from "react-dom"
 // eslint-disable-next-line import/no-relative-packages
 import createIdentity from "../src"
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
     createStyles({
         container: {
             display: "flex",
@@ -41,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: "center"
         },
         input: {
-            marginLeft: theme.spacing(1),
+            marginLeft: 4,
             flex: 1
         },
         iconButton: {
@@ -53,11 +52,12 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         results: {
             position: "relative",
-            width: 530
+            width: 530,
+            marginTop: 20,
+            paddingRight: 10
         },
         resetButton: {
             zIndex: 1,
-            position: "absolute",
             right: 5,
             top: 5
         },
@@ -127,6 +127,8 @@ function App() {
     function resetSteps() {
         setActiveStep(1)
         setIdentityCommitment("")
+        setIdentityTrapdoor("")
+        setIdentityNullifier("")
     }
 
     async function connect() {
@@ -148,6 +150,10 @@ function App() {
         setIdentityCommitment(identityCommitment.toString())
 
         setActiveStep(3)
+    }
+
+    function copyIdentityCommitment() {
+        navigator.clipboard.writeText(_identityCommitment)
     }
 
     return (
@@ -198,9 +204,15 @@ function App() {
                         </StepContent>
                     </Step>
                 </Stepper>
+
                 <Paper className={classes.results}>
                     {_identityCommitment && (
-                        <IconButton onClick={() => resetSteps()} className={classes.resetButton} color="secondary">
+                        <IconButton
+                            onClick={() => resetSteps()}
+                            className={classes.resetButton}
+                            style={{ position: "absolute" }}
+                            color="secondary"
+                        >
                             <ReplayIcon />
                         </IconButton>
                     )}
@@ -232,6 +244,11 @@ function App() {
                                     primary="Identity commitment"
                                     secondary={`${_identityCommitment.substr(0, 50)}...`}
                                 />
+                                <ListItemSecondaryAction>
+                                    <IconButton onClick={() => copyIdentityCommitment()} edge="end" color="secondary">
+                                        <ContentCopyIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
                             </ListItem>
                         )}
                     </List>

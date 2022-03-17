@@ -6,8 +6,11 @@
         "build": "parcel build --public-url https://js.interep.link/identity --dist-dir ../../../gh-pages/identity index.html"
     },
     "dependencies": {
-        "@material-ui/core": "^4.12.3",
-        "@material-ui/icons": "^4.11.2",
+        "@emotion/react": "^11.8.1",
+        "@emotion/styled": "^11.8.1",
+        "@mui/icons-material": "^5.4.4",
+        "@mui/material": "^5.4.4",
+        "@mui/styles": "^5.4.4",
         "@metamask/detect-provider": "^1.2.0",
         "ethers": "^5.4.6",
         "react": "^17.0.2",
