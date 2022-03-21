@@ -19,6 +19,7 @@ export default class onchainAPI {
                     onchainGroups {
                         id
                         depth
+                        zeroValue
                         size
                         numberOfLeaves
                         root
@@ -48,6 +49,7 @@ export default class onchainAPI {
                     onchainGroups(where: { id: "${id}" }) {
                         id
                         depth
+                        zeroValue
                         size
                         numberOfLeaves
                         root

@@ -27,6 +27,7 @@ describe("Interep onchain API", () => {
                         {
                             id: "1",
                             depth: 20,
+                            zeroValue: 0,
                             size: 2,
                             numberOfLeaves: 2,
                             root: "2",
@@ -43,6 +44,7 @@ describe("Interep onchain API", () => {
             expect(expectedValue).toContainEqual({
                 id: "1",
                 depth: 20,
+                zeroValue: 0,
                 size: 2,
                 numberOfLeaves: 2,
                 root: "2",
@@ -59,6 +61,7 @@ describe("Interep onchain API", () => {
                         {
                             id: "1",
                             depth: 20,
+                            zeroValue: 0,
                             size: 2,
                             numberOfLeaves: 2,
                             root: "2",
@@ -76,6 +79,7 @@ describe("Interep onchain API", () => {
             expect(expectedValue).toEqual({
                 id: "1",
                 depth: 20,
+                zeroValue: 0,
                 size: 2,
                 numberOfLeaves: 2,
                 root: "2",
@@ -90,6 +94,7 @@ describe("Interep onchain API", () => {
                         {
                             id: "1",
                             depth: 20,
+                            zeroValue: 0,
                             size: 2,
                             numberOfLeaves: 2,
                             root: "2",
@@ -120,6 +125,7 @@ describe("Interep onchain API", () => {
             expect(expectedValue).toEqual({
                 id: "1",
                 depth: 20,
+                zeroValue: 0,
                 size: 2,
                 numberOfLeaves: 2,
                 root: "2",
