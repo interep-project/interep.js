@@ -1,4 +1,4 @@
-import { Criteria } from "../types/criteria"
+import { ReputationCriteria } from "../types/criteria"
 
 export default {
     provider: "github",
@@ -64,4 +64,4 @@ export default {
             ]
         }
     ]
-} as Criteria
+} as ReputationCriteria

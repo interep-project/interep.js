@@ -1,4 +1,4 @@
-import { Criteria } from "../types/criteria"
+import { ReputationCriteria } from "../types/criteria"
 
 export default {
     provider: "reddit",
@@ -77,4 +77,4 @@ export default {
             ]
         }
     ]
-} as Criteria
+} as ReputationCriteria
