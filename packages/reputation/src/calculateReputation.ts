@@ -1,30 +1,15 @@
-import githubCriteria from "./criteria/github"
-import redditCriteria from "./criteria/reddit"
-import twitterCriteria from "./criteria/twitter"
-import getOAuthProviders from "./getOAuthProviders"
-import { Criteria, ReputationLevel, OAuthProvider } from "./types/criteria"
+import getReputationCriteria from "./getReputationCriteria"
+import { OAuthProvider, ReputationLevel } from "./types/criteria"
 import { ProviderParameters } from "./types/providerParameters"
 
 /**
- * Returns the reputation based on the paramaters.
+ * Returns the reputation based on the parameters.
  * @param provider The provider.
  * @param paramaters The provider parameters to check.
  * @returns The reputation level found.
  */
 export default function calculateReputation(provider: OAuthProvider, paramaters: ProviderParameters): ReputationLevel {
-    if (!getOAuthProviders().includes(provider)) {
-        throw new Error(`Provider '${provider}' is not supported`)
-    }
-
-    let criteria: Criteria
-
-    if (provider === OAuthProvider.TWITTER) {
-        criteria = twitterCriteria
-    } else if (provider === OAuthProvider.GITHUB) {
-        criteria = githubCriteria
-    } else {
-        criteria = redditCriteria
-    }
+    const criteria = getReputationCriteria(provider)
     const providerParameterNames = criteria.parameters.map((parameter: any) => parameter.name)
     const providerParameterTypes = criteria.parameters.map((parameter: any) => parameter.type)
 
@@ -65,5 +50,5 @@ export default function calculateReputation(provider: OAuthProvider, paramaters:
         }
     }
 
-    return ReputationLevel.NOT_SUFFICIENT
+    throw new Error("Parameters do not meet any reputation criteria")
 }

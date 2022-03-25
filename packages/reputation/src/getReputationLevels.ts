@@ -1,38 +1,9 @@
-import twitterCriteria from "./criteria/twitter"
-import githubCriteria from "./criteria/github"
-import redditCriteria from "./criteria/reddit"
-import { Criteria, ReputationLevel, OAuthProvider } from "./types/criteria"
-import getOAuthProviders from "./getOAuthProviders"
+import { ReputationLevel } from "./types/criteria"
 
 /**
- * Returns all possible reputation levels of a provider or
- * all existing reputation levels. It is important to return
- * this value in order of importance (gold, silver, bronze, ...).
- * @param provider The provider.
+ * Returns all the reputation levels (gold, silver, bronze).
  * @returns A list of reputation levels.
  */
-export default function getReputationLevels(provider?: OAuthProvider): ReputationLevel[] {
-    if (provider === undefined) {
-        return Object.values(ReputationLevel)
-    }
-
-    if (!getOAuthProviders().includes(provider)) {
-        throw new Error(`Provider '${provider}' is not supported`)
-    }
-
-    let criteria: Criteria
-
-    if (provider === OAuthProvider.TWITTER) {
-        criteria = twitterCriteria
-    } else if (provider === OAuthProvider.GITHUB) {
-        criteria = githubCriteria
-    } else {
-        criteria = redditCriteria
-    }
-
-    const reputationLevels = criteria.reputationLevels.map((reputation) => reputation.name)
-
-    reputationLevels.push(ReputationLevel.NOT_SUFFICIENT)
-
-    return reputationLevels
+export default function getReputationLevels(): ReputationLevel[] {
+    return Object.values(ReputationLevel)
 }

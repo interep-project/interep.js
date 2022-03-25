@@ -4,28 +4,27 @@ export enum OAuthProvider {
     REDDIT = "reddit"
 }
 
-export type ParameterName = string
-export type ParameterType = "number" | "boolean"
-export type ParameterValue = number | boolean | { max?: number; min?: number }
+export type ReputationParameterName = string
+export type ReputationParameterType = "number" | "boolean"
+export type ReputationParameterValue = number | boolean | { max?: number; min?: number }
 
-export type Parameters = { name: ParameterName; type: ParameterType }[]
+export type ReputationParameters = { name: ReputationParameterName; type: ReputationParameterType }[]
 
 export enum ReputationLevel {
     GOLD = "gold",
     SILVER = "silver",
-    BRONZE = "bronze",
-    NOT_SUFFICIENT = "not_sufficient"
+    BRONZE = "bronze"
 }
 
-export type Rule = { parameter: ParameterName; value: ParameterValue }
+export type ReputationRule = { parameter: ReputationParameterName; value: ReputationParameterValue }
 
 export type ReputationLevels = {
     name: ReputationLevel
-    rules: Rule[]
+    rules: ReputationRule[]
 }[]
 
-export type Criteria = {
+export type ReputationCriteria = {
     provider: OAuthProvider
-    parameters: Parameters
+    parameters: ReputationParameters
     reputationLevels: ReputationLevels
 }
