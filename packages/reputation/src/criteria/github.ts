@@ -22,6 +22,10 @@ export default {
                     value: {
                         min: 200
                     }
+                },
+                {
+                    parameter: "proPlan",
+                    value: null
                 }
             ]
         },
@@ -39,16 +43,16 @@ export default {
                     value: {
                         min: 80
                     }
+                },
+                {
+                    parameter: "proPlan",
+                    value: null
                 }
             ]
         },
         {
             name: "bronze",
             rules: [
-                {
-                    parameter: "proPlan",
-                    value: true
-                },
                 {
                     parameter: "followers",
                     value: {
@@ -60,6 +64,10 @@ export default {
                     value: {
                         min: 40
                     }
+                },
+                {
+                    parameter: "proPlan",
+                    value: true
                 }
             ]
         }

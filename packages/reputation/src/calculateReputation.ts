@@ -32,19 +32,21 @@ export default function calculateReputation(provider: OAuthProvider, paramaters:
 
     for (const reputation of criteria.reputationLevels) {
         for (const rule of reputation.rules) {
-            const parameterValue = paramaters[rule.parameter as keyof ProviderParameters]
+            if (rule.value !== null) {
+                const parameterValue = paramaters[rule.parameter as keyof ProviderParameters]
 
-            if (parameterValue !== undefined) {
-                if (typeof rule.value !== "object") {
-                    if (parameterValue === rule.value) {
+                if (parameterValue !== undefined) {
+                    if (typeof rule.value !== "object") {
+                        if (parameterValue === rule.value) {
+                            return reputation.name
+                        }
+                    } else if (
+                        (rule.value.max !== undefined || rule.value.min !== undefined) &&
+                        (rule.value.max === undefined || parameterValue <= rule.value.max) &&
+                        (rule.value.min === undefined || parameterValue >= rule.value.min)
+                    ) {
                         return reputation.name
                     }
-                } else if (
-                    (rule.value.max !== undefined || rule.value.min !== undefined) &&
-                    (rule.value.max === undefined || parameterValue <= rule.value.max) &&
-                    (rule.value.min === undefined || parameterValue >= rule.value.min)
-                ) {
-                    return reputation.name
                 }
             }
         }

@@ -40,6 +40,10 @@ export default {
             name: "silver",
             rules: [
                 {
+                    parameter: "premiumSubscription",
+                    value: null
+                },
+                {
                     parameter: "karma",
                     value: {
                         min: 5000
@@ -63,6 +67,10 @@ export default {
             name: "bronze",
             rules: [
                 {
+                    parameter: "premiumSubscription",
+                    value: null
+                },
+                {
                     parameter: "karma",
                     value: {
                         min: 1000
@@ -73,6 +81,10 @@ export default {
                     value: {
                         min: 500
                     }
+                },
+                {
+                    parameter: "linkedIdentities",
+                    value: null
                 }
             ]
         }

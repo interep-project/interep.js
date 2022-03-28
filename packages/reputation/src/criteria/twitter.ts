@@ -12,10 +12,6 @@ export default {
             name: "gold",
             rules: [
                 {
-                    parameter: "verifiedProfile",
-                    value: true
-                },
-                {
                     parameter: "followers",
                     value: {
                         min: 7000
@@ -26,6 +22,10 @@ export default {
                     value: {
                         max: 1
                     }
+                },
+                {
+                    parameter: "verifiedProfile",
+                    value: true
                 }
             ]
         },
@@ -43,6 +43,10 @@ export default {
                     value: {
                         max: 1.5
                     }
+                },
+                {
+                    parameter: "verifiedProfile",
+                    value: null
                 }
             ]
         },
@@ -60,6 +64,10 @@ export default {
                     value: {
                         max: 2
                     }
+                },
+                {
+                    parameter: "verifiedProfile",
+                    value: null
                 }
             ]
         }
