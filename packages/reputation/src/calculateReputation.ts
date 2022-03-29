@@ -41,9 +41,9 @@ export default function calculateReputation(provider: OAuthProvider, paramaters:
                             return reputation.name
                         }
                     } else if (
-                        (rule.value.max !== undefined || rule.value.min !== undefined) &&
-                        (rule.value.max === undefined || parameterValue <= rule.value.max) &&
-                        (rule.value.min === undefined || parameterValue >= rule.value.min)
+                        (rule.value["<"] !== undefined || rule.value[">"] !== undefined) &&
+                        (rule.value["<"] === undefined || parameterValue < rule.value["<"]) &&
+                        (rule.value[">"] === undefined || parameterValue > rule.value[">"])
                     ) {
                         return reputation.name
                     }

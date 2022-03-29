@@ -19,19 +19,19 @@ export default {
                 {
                     parameter: "karma",
                     value: {
-                        min: 10000
+                        ">": 10000
                     }
                 },
                 {
                     parameter: "coins",
                     value: {
-                        min: 5000
+                        ">": 5000
                     }
                 },
                 {
                     parameter: "linkedIdentities",
                     value: {
-                        min: 3
+                        ">": 3
                     }
                 }
             ]
@@ -46,19 +46,19 @@ export default {
                 {
                     parameter: "karma",
                     value: {
-                        min: 5000
+                        ">": 5000
                     }
                 },
                 {
                     parameter: "coins",
                     value: {
-                        min: 2000
+                        ">": 2000
                     }
                 },
                 {
                     parameter: "linkedIdentities",
                     value: {
-                        min: 2
+                        ">": 2
                     }
                 }
             ]
@@ -73,13 +73,13 @@ export default {
                 {
                     parameter: "karma",
                     value: {
-                        min: 1000
+                        ">": 1000
                     }
                 },
                 {
                     parameter: "coins",
                     value: {
-                        min: 500
+                        ">": 500
                     }
                 },
                 {

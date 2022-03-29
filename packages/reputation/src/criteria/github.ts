@@ -14,13 +14,13 @@ export default {
                 {
                     parameter: "followers",
                     value: {
-                        min: 500
+                        ">": 500
                     }
                 },
                 {
                     parameter: "receivedStars",
                     value: {
-                        min: 200
+                        ">": 200
                     }
                 },
                 {
@@ -35,13 +35,13 @@ export default {
                 {
                     parameter: "followers",
                     value: {
-                        min: 100
+                        ">": 100
                     }
                 },
                 {
                     parameter: "receivedStars",
                     value: {
-                        min: 80
+                        ">": 80
                     }
                 },
                 {
@@ -56,13 +56,13 @@ export default {
                 {
                     parameter: "followers",
                     value: {
-                        min: 50
+                        ">": 50
                     }
                 },
                 {
                     parameter: "receivedStars",
                     value: {
-                        min: 40
+                        ">": 40
                     }
                 },
                 {

@@ -49,31 +49,31 @@ describe("Interep reputation criteria", () => {
         })
 
         it("Should return a 'gold' Reddit reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { karma: 10000 })
+            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { karma: 11000 })
 
             expect(expectedValue).toBe("gold")
         })
 
         it("Should return a 'silver' Twitter reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.TWITTER, { botometerOverallScore: 1.5 })
+            const expectedValue = calculateReputation(OAuthProvider.TWITTER, { botometerOverallScore: 1.4 })
 
             expect(expectedValue).toBe("silver")
         })
 
         it("Should return a 'silver' Github reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.GITHUB, { receivedStars: 80 })
+            const expectedValue = calculateReputation(OAuthProvider.GITHUB, { receivedStars: 90 })
 
             expect(expectedValue).toBe("silver")
         })
 
         it("Should return a 'silver' Reddit reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { linkedIdentities: 2 })
+            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { linkedIdentities: 3 })
 
             expect(expectedValue).toBe("silver")
         })
 
         it("Should return a 'bronze' Twitter reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.TWITTER, { followers: 500 })
+            const expectedValue = calculateReputation(OAuthProvider.TWITTER, { followers: 600 })
 
             expect(expectedValue).toBe("bronze")
         })
@@ -85,7 +85,7 @@ describe("Interep reputation criteria", () => {
         })
 
         it("Should return a 'bronze' Reddit reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { coins: 500 })
+            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { coins: 600 })
 
             expect(expectedValue).toBe("bronze")
         })
@@ -99,7 +99,7 @@ describe("Interep reputation criteria", () => {
         it("Should return 'gold' if at least one parameter matches the gold reputation rules", () => {
             const expectedValue = calculateReputation(OAuthProvider.TWITTER, {
                 botometerOverallScore: 2,
-                followers: 7000
+                followers: 8000
             })
 
             expect(expectedValue).toBe("gold")

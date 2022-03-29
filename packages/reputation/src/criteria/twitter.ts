@@ -14,13 +14,13 @@ export default {
                 {
                     parameter: "followers",
                     value: {
-                        min: 7000
+                        ">": 7000
                     }
                 },
                 {
                     parameter: "botometerOverallScore",
                     value: {
-                        max: 1
+                        "<": 1
                     }
                 },
                 {
@@ -35,13 +35,13 @@ export default {
                 {
                     parameter: "followers",
                     value: {
-                        min: 2000
+                        ">": 2000
                     }
                 },
                 {
                     parameter: "botometerOverallScore",
                     value: {
-                        max: 1.5
+                        "<": 1.5
                     }
                 },
                 {
@@ -56,13 +56,13 @@ export default {
                 {
                     parameter: "followers",
                     value: {
-                        min: 500
+                        ">": 500
                     }
                 },
                 {
                     parameter: "botometerOverallScore",
                     value: {
-                        max: 2
+                        "<": 2
                     }
                 },
                 {

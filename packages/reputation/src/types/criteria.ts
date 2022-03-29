@@ -6,7 +6,7 @@ export enum OAuthProvider {
 
 export type ReputationParameterName = string
 export type ReputationParameterType = "number" | "boolean"
-export type ReputationParameterValue = number | boolean | { max?: number; min?: number }
+export type ReputationParameterValue = number | boolean | { "<"?: number; ">"?: number }
 
 export type ReputationParameters = { name: ReputationParameterName; type: ReputationParameterType }[]
 
