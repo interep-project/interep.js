@@ -6,7 +6,9 @@ export namespace Offchain {
     export type GetGroupRequest = {
         provider: Provider
         name: string
-        members?: boolean
+    }
+
+    export type GetGroupMembersRequest = GetGroupRequest & {
         limit?: number
         offset?: number
     }

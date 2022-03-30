@@ -81,36 +81,21 @@ describe("Interep offchain API", () => {
             expect(expectedValue).toBeDefined()
             expect(expectedValue).toEqual({ name: "gold", provider: "twitter", size: 1, numberOfLeaves: 1, root: "1" })
         })
+    })
 
-        it("Should return a specific group with its members", async () => {
-            requestMocked.mockImplementationOnce(() =>
-                Promise.resolve({
-                    name: "gold",
-                    provider: "twitter",
-                    size: 1,
-                    numberOfLeaves: 1,
-                    root: "1",
-                    members: ["1"]
-                })
-            )
+    describe("# getGroupMembers", () => {
+        it("Should return the group members", async () => {
+            requestMocked.mockImplementationOnce(() => Promise.resolve(["1"]))
 
-            const expectedValue = await api.getGroup({
+            const expectedValue = await api.getGroupMembers({
                 provider: OAuthProvider.TWITTER,
                 name: "gold",
-                members: true,
                 limit: 1
             })
 
             expect(expectedValue).toBeDefined()
-            expect(expectedValue).toEqual({
-                name: "gold",
-                provider: "twitter",
-                size: 1,
-                numberOfLeaves: 1,
-                root: "1",
-                members: ["1"]
-            })
-            expect(expectedValue.members).toContainEqual("1")
+            expect(Array.isArray(expectedValue)).toBeTruthy()
+            expect(expectedValue).toContainEqual("1")
         })
     })
 

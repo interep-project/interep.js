@@ -26,15 +26,25 @@ export default class offchainAPI {
     async getGroup(parameters: Offchain.GetGroupRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
-        const { provider, name, members = false, limit = 0, offset = 0 } = parameters
+        const { provider, name } = parameters
 
         checkParameter(provider, "provider", "string")
         checkParameter(name, "name", "string")
-        checkParameter(members, "members", "boolean")
+
+        return request(`${this.url}/groups/${provider}/${name}`)
+    }
+
+    async getGroupMembers(parameters: Offchain.GetGroupMembersRequest): Promise<any> {
+        checkParameter(parameters, "request", "object")
+
+        const { provider, name, limit = 0, offset = 0 } = parameters
+
+        checkParameter(provider, "provider", "string")
+        checkParameter(name, "name", "string")
         checkParameter(limit, "limit", "number")
         checkParameter(offset, "offset", "number")
 
-        return request(`${this.url}/groups/${provider}/${name}?members=${members}&limit=${limit}&offset=${offset}`)
+        return request(`${this.url}/groups/${provider}/${name}/members?limit=${limit}&offset=${offset}`)
     }
 
     async hasMember(parameters: Offchain.HasMemberRequest): Promise<boolean> {
