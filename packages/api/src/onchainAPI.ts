@@ -37,10 +37,9 @@ export default class onchainAPI {
     async getGroup(parameters: Onchain.GetGroupRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
-        const { id, members = false } = parameters
+        const { id } = parameters
 
         checkParameter(id, "id", "string")
-        checkParameter(members, "members", "boolean")
 
         const config: AxiosRequestConfig = {
             method: "post",
@@ -54,15 +53,6 @@ export default class onchainAPI {
                         numberOfLeaves
                         root
                         admin
-                        ${
-                            members === true
-                                ? `members(orderBy: index) {
-                            id
-                            identityCommitment
-                            index
-                        }`
-                                : ""
-                        }
                     }
                 }`
             })
@@ -71,6 +61,31 @@ export default class onchainAPI {
         const { onchainGroups } = await request(this.url, config)
 
         return onchainGroups[0]
+    }
+
+    async getGroupMembers(parameters: Onchain.GetGroupMembersRequest): Promise<any> {
+        checkParameter(parameters, "request", "object")
+
+        const { groupId } = parameters
+
+        checkParameter(groupId, "groupId", "string")
+
+        const config: AxiosRequestConfig = {
+            method: "post",
+            data: JSON.stringify({
+                query: `{
+                    members(where: { group: "${groupId}" }) {
+                        id
+                        identityCommitment
+                        index
+                    }
+                }`
+            })
+        }
+
+        const { members } = await request(this.url, config)
+
+        return members
     }
 
     async getOffchainGroups(): Promise<any[]> {

@@ -86,62 +86,37 @@ describe("Interep onchain API", () => {
                 admin: "0x7bcd6f009471e9974a77086a69289d16eadba286"
             })
         })
+    })
 
-        it("Should return a specific onchain group with its members", async () => {
+    describe("# getGroupMembers", () => {
+        it("Should return the members of a group", async () => {
             requestMocked.mockImplementationOnce(() =>
                 Promise.resolve({
-                    onchainGroups: [
+                    members: [
                         {
-                            id: "1",
-                            depth: 20,
-                            zeroValue: 0,
-                            size: 2,
-                            numberOfLeaves: 2,
-                            root: "2",
-                            admin: "0x7bcd6f009471e9974a77086a69289d16eadba286",
-                            members: [
-                                {
-                                    id: "0x1",
-                                    identityCommitment: "1",
-                                    index: 0
-                                },
-                                {
-                                    id: "0x2",
-                                    identityCommitment: "2",
-                                    index: 1
-                                }
-                            ]
+                            id: "0x1",
+                            identityCommitment: "1",
+                            index: 0
+                        },
+                        {
+                            id: "0x2",
+                            identityCommitment: "2",
+                            index: 1
                         }
                     ]
                 })
             )
 
-            const expectedValue = await api.getGroup({
-                id: "1",
-                members: true
+            const expectedValue = await api.getGroupMembers({
+                groupId: "1"
             })
 
             expect(expectedValue).toBeDefined()
-            expect(expectedValue).toEqual({
-                id: "1",
-                depth: 20,
-                zeroValue: 0,
-                size: 2,
-                numberOfLeaves: 2,
-                root: "2",
-                admin: "0x7bcd6f009471e9974a77086a69289d16eadba286",
-                members: [
-                    {
-                        id: "0x1",
-                        identityCommitment: "1",
-                        index: 0
-                    },
-                    {
-                        id: "0x2",
-                        identityCommitment: "2",
-                        index: 1
-                    }
-                ]
+            expect(Array.isArray(expectedValue)).toBeTruthy()
+            expect(expectedValue).toContainEqual({
+                id: "0x1",
+                identityCommitment: "1",
+                index: 0
             })
         })
     })

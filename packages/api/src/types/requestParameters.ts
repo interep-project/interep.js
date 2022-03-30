@@ -43,7 +43,10 @@ export namespace Offchain {
 export namespace Onchain {
     export type GetGroupRequest = {
         id: string
-        members?: boolean
+    }
+
+    export type GetGroupMembersRequest = {
+        groupId: string
     }
 
     export type GetOffchainGroupRequest = {
