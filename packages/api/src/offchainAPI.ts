@@ -83,34 +83,6 @@ export default class offchainAPI {
         return request(`${this.url}/groups/${provider}/${name}/${member}`, config)
     }
 
-    async removeMember(parameters: Offchain.RemoveMemberRequest): Promise<boolean> {
-        checkParameter(parameters, "request", "object")
-
-        const { provider, name, member, authenticationHeader, userAddress, userSignature } = parameters
-
-        checkParameter(provider, "provider", "string")
-        checkParameter(name, "name", "string")
-        checkParameter(member, "member", "string")
-        checkProvider(provider)
-
-        const config: AxiosRequestConfig = { method: "delete" }
-
-        if (Object.values(OAuthProvider).includes(provider as OAuthProvider)) {
-            checkParameter(authenticationHeader, "authentication header", "string")
-
-            config.headers = { Authentication: authenticationHeader as string }
-
-            return request(`${this.url}/groups/${provider}/${name}/${member}`, config)
-        }
-
-        checkParameter(userAddress, "user address", "string")
-        checkParameter(userSignature, "user signature", "string")
-
-        config.data = { userAddress, userSignature }
-
-        return request(`${this.url}/groups/${provider}/${name}/${member}`, config)
-    }
-
     async getMerkleTreeProof(parameters: Offchain.GetMerkleTreeProofRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 

@@ -186,37 +186,6 @@ describe("Interep offchain API", () => {
         })
     })
 
-    describe("# removeMember", () => {
-        it("Should remove a member for a OAuth group", async () => {
-            requestMocked.mockImplementationOnce(() => Promise.resolve(true))
-
-            const expectedValue = await api.removeMember({
-                provider: OAuthProvider.TWITTER,
-                name: "gold",
-                member: "23131231231",
-                authenticationHeader: "token 3ao32423"
-            })
-
-            expect(expectedValue).toBeDefined()
-            expect(expectedValue).toBe(true)
-        })
-
-        it("Should remove a member for a Web3 group", async () => {
-            requestMocked.mockImplementationOnce(() => Promise.resolve(true))
-
-            const expectedValue = await api.removeMember({
-                provider: "poap",
-                name: "devcon5",
-                member: "23131231231",
-                userAddress: "0xueaoueao",
-                userSignature: "aueouaoe"
-            })
-
-            expect(expectedValue).toBeDefined()
-            expect(expectedValue).toBe(true)
-        })
-    })
-
     describe("# getMerkleTreeProof", () => {
         it("Should get a valid Merkle tree proof", async () => {
             requestMocked.mockImplementationOnce(() =>

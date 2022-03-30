@@ -27,8 +27,6 @@ export namespace Offchain {
         userSignature?: string
     }
 
-    export type RemoveMemberRequest = AddMemberRequest
-
     export type GetMerkleTreeLeavesRequest = {
         root: string
     }
