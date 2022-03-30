@@ -106,6 +106,29 @@ export default class offchainAPI {
         return request(`${this.url}/groups/${provider}/${name}/${member}/proof`)
     }
 
+    async getMerkleTreeLeaves(parameters: Offchain.GetMerkleTreeLeavesRequest): Promise<string[]> {
+        checkParameter(parameters, "request", "object")
+
+        const { root, limit = 0, offset = 0 } = parameters
+
+        checkParameter(root, "root hash", "string")
+        checkParameter(limit, "limit", "number")
+        checkParameter(offset, "offset", "number")
+
+        return request(`${this.url}/trees/${root}?limit=${limit}&offset=${offset}`)
+    }
+
+    async hasMerkleTreeLeaf(parameters: Offchain.HasMerkleTreeLeafRequest): Promise<boolean> {
+        checkParameter(parameters, "request", "object")
+
+        const { root, leaf } = parameters
+
+        checkParameter(root, "root", "string")
+        checkParameter(leaf, "leaf", "string")
+
+        return request(`${this.url}/trees/${root}/${leaf}`)
+    }
+
     async getMerkleTreeRootBatches(): Promise<any[]> {
         return request(`${this.url}/batches`)
     }

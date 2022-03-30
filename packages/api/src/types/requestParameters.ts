@@ -31,9 +31,12 @@ export namespace Offchain {
 
     export type GetMerkleTreeLeavesRequest = {
         root: string
+        limit?: number
+        offset?: number
     }
 
-    export type HasMerkleTreeLeafRequest = GetMerkleTreeLeavesRequest & {
+    export type HasMerkleTreeLeafRequest = {
+        root: string
         leaf: string
     }
 

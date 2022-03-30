@@ -190,6 +190,32 @@ describe("Interep offchain API", () => {
         })
     })
 
+    describe("# getMerkleTreeLeaves", () => {
+        it("Should get the leaves of a Merkle tree", async () => {
+            requestMocked.mockImplementationOnce(() => Promise.resolve(["0", "1"]))
+
+            const expectedValue = await api.getMerkleTreeLeaves({
+                root: "1",
+                limit: 1
+            })
+
+            expect(expectedValue).toBeDefined()
+            expect(Array.isArray(expectedValue)).toBeTruthy()
+            expect(expectedValue).toContainEqual("1")
+        })
+    })
+
+    describe("# hasMerkleTreeLeaf", () => {
+        it("Should return true if a Merkle tree has a leaf", async () => {
+            requestMocked.mockImplementationOnce(() => Promise.resolve(true))
+
+            const expectedValue = await api.hasMerkleTreeLeaf({ root: "1", leaf: "1" })
+
+            expect(expectedValue).toBeDefined()
+            expect(expectedValue).toBe(true)
+        })
+    })
+
     describe("Get Merkle tree root batches", () => {
         it("Should get the root batches of a Merkle tree", async () => {
             requestMocked.mockImplementationOnce(() =>
