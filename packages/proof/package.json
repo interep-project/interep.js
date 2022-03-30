@@ -37,7 +37,7 @@
     "dependencies": {
         "@ethersproject/solidity": "^5.5.0",
         "@ethersproject/strings": "^5.5.0",
-        "@interep/api": "^0.4.1",
+        "@interep/api": "^0.6.0",
         "@zk-kit/identity": "^1.4.1",
         "@zk-kit/incremental-merkle-tree": "^0.4.3",
         "@zk-kit/protocols": "^1.11.0",

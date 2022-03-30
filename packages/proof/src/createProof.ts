@@ -37,7 +37,8 @@ export default async function createProof(
         checkParameter(provider, "groupId.provider", "string")
 
         const api = new OffchainAPI()
-        const { depth, members } = await api.getGroup({ provider, name, members: true })
+        const { depth } = await api.getGroup({ provider, name })
+        const members = await api.getGroupMembers({ provider, name })
 
         groupId = createOffchainGroupId(provider, name).toString()
 
@@ -53,7 +54,8 @@ export default async function createProof(
         groupId = groupId.toString()
 
         const api = new OnchainAPI()
-        const { depth, members } = await api.getGroup({ id: groupId, members: true })
+        const { depth } = await api.getGroup({ id: groupId })
+        const members = await api.getGroupMembers({ groupId })
         const identityCommitments = members.map((member: any) => member.identityCommitment)
 
         merkleProof = generateMerkleProof(depth, BigInt(0), identityCommitments, identityCommitment)
