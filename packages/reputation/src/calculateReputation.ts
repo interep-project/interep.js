@@ -52,5 +52,5 @@ export default function calculateReputation(provider: OAuthProvider, paramaters:
         }
     }
 
-    throw new Error("Parameters do not meet any reputation criteria")
+    return ReputationLevel.UNRATED
 }

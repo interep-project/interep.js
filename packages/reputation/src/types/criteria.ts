@@ -13,7 +13,8 @@ export type ReputationParameters = { name: ReputationParameterName; type: Reputa
 export enum ReputationLevel {
     GOLD = "gold",
     SILVER = "silver",
-    BRONZE = "bronze"
+    BRONZE = "bronze",
+    UNRATED = "unrated"
 }
 
 export type ReputationRule = { parameter: ReputationParameterName; value: ReputationParameterValue }

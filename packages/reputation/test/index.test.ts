@@ -13,7 +13,7 @@ describe("Interep reputation criteria", () => {
         it("Should return all the existing reputation levels", () => {
             const expectedvalue = getReputationLevels()
 
-            expect(expectedvalue).toStrictEqual(["gold", "silver", "bronze"])
+            expect(expectedvalue).toStrictEqual(["gold", "silver", "bronze", "unrated"])
         })
     })
 
@@ -91,9 +91,9 @@ describe("Interep reputation criteria", () => {
         })
 
         it("Should fail if no parameter meet any reputation criteria", () => {
-            const fun = () => calculateReputation(OAuthProvider.REDDIT, { coins: 0 })
+            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { coins: 0 })
 
-            expect(fun).toThrow("Parameters do not meet any reputation criteria")
+            expect(expectedValue).toBe("unrated")
         })
 
         it("Should return 'gold' if at least one parameter matches the gold reputation rules", () => {
