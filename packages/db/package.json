@@ -31,8 +31,8 @@
         "access": "public"
     },
     "devDependencies": {
-        "@rollup/plugin-typescript": "^8.3.0",
-        "mongodb-memory-server": "^8.0.0"
+        "mongodb-memory-server": "^8.0.0",
+        "rollup-plugin-typescript2": "^0.31.2"
     },
     "dependencies": {
         "@interep/reputation": "^0.4.0",
