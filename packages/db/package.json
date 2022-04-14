@@ -1,6 +1,6 @@
 {
     "name": "@interep/db",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "DB utility functions, schemas and models used by Interep.",
     "main": "dist/index.node.js",
     "exports": {
