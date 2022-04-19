@@ -74,7 +74,7 @@ export default class onchainAPI {
             method: "post",
             data: JSON.stringify({
                 query: `{
-                    members(where: { group: "${groupId}" }) {
+                    members(where: { group: "${groupId}" }, orderBy: index) {
                         id
                         identityCommitment
                         index
