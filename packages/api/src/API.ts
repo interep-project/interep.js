@@ -5,14 +5,23 @@ import checkParameter from "./checkParameter"
 import checkProvider from "./checkProvider"
 import getURL from "./getURL"
 import request from "./request"
-import { Environment } from "./types/config"
-import { Offchain } from "./types/requestParameters"
+import { Network } from "./types/config"
+import {
+    AddMemberRequest,
+    GetGroupMembersRequest,
+    GetGroupRequest,
+    GetMerkleTreeLeavesRequest,
+    GetMerkleTreeProofRequest,
+    GetMerkleTreeRootBatchRequest,
+    HasMemberRequest,
+    HasMerkleTreeLeafRequest
+} from "./types/requestParameters"
 
-export default class offchainAPI {
+export default class API {
     url: string
 
-    constructor(environment: Environment = "staging") {
-        this.url = getURL(environment)
+    constructor(network: Network = "goerli") {
+        this.url = getURL(network)
     }
 
     async getProviders(): Promise<string[]> {
@@ -23,7 +32,7 @@ export default class offchainAPI {
         return request(`${this.url}/groups`)
     }
 
-    async getGroup(parameters: Offchain.GetGroupRequest): Promise<any> {
+    async getGroup(parameters: GetGroupRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name } = parameters
@@ -34,7 +43,7 @@ export default class offchainAPI {
         return request(`${this.url}/groups/${provider}/${name}`)
     }
 
-    async getGroupMembers(parameters: Offchain.GetGroupMembersRequest): Promise<any> {
+    async getGroupMembers(parameters: GetGroupMembersRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name, limit = 0, offset = 0 } = parameters
@@ -47,7 +56,7 @@ export default class offchainAPI {
         return request(`${this.url}/groups/${provider}/${name}/members?limit=${limit}&offset=${offset}`)
     }
 
-    async hasMember(parameters: Offchain.HasMemberRequest): Promise<boolean> {
+    async hasMember(parameters: HasMemberRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name, member } = parameters
@@ -65,7 +74,7 @@ export default class offchainAPI {
         return request(`${this.url}/providers/${provider}/${member}`)
     }
 
-    async addMember(parameters: Offchain.AddMemberRequest): Promise<boolean> {
+    async addMember(parameters: AddMemberRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name, member, authenticationHeader, userAddress, userSignature } = parameters
@@ -93,7 +102,7 @@ export default class offchainAPI {
         return request(`${this.url}/groups/${provider}/${name}/${member}`, config)
     }
 
-    async getMerkleTreeProof(parameters: Offchain.GetMerkleTreeProofRequest): Promise<any> {
+    async getMerkleTreeProof(parameters: GetMerkleTreeProofRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
         const { provider, name, member } = parameters
@@ -106,7 +115,7 @@ export default class offchainAPI {
         return request(`${this.url}/groups/${provider}/${name}/${member}/proof`)
     }
 
-    async getMerkleTreeLeaves(parameters: Offchain.GetMerkleTreeLeavesRequest): Promise<string[]> {
+    async getMerkleTreeLeaves(parameters: GetMerkleTreeLeavesRequest): Promise<string[]> {
         checkParameter(parameters, "request", "object")
 
         const { root, limit = 0, offset = 0 } = parameters
@@ -118,7 +127,7 @@ export default class offchainAPI {
         return request(`${this.url}/trees/${root}?limit=${limit}&offset=${offset}`)
     }
 
-    async hasMerkleTreeLeaf(parameters: Offchain.HasMerkleTreeLeafRequest): Promise<boolean> {
+    async hasMerkleTreeLeaf(parameters: HasMerkleTreeLeafRequest): Promise<boolean> {
         checkParameter(parameters, "request", "object")
 
         const { root, leaf } = parameters
@@ -133,7 +142,7 @@ export default class offchainAPI {
         return request(`${this.url}/batches`)
     }
 
-    async getMerkleTreeRootBatch(parameters: Offchain.GetMerkleTreeRootBatchRequest): Promise<any> {
+    async getMerkleTreeRootBatch(parameters: GetMerkleTreeRootBatchRequest): Promise<any> {
         checkParameter(parameters, "request", "object")
 
         const { root } = parameters

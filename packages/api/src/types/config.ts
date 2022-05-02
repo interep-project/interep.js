@@ -1,1 +1,1 @@
-export type Environment = "development" | "staging" | "production"
+export type Network = "local" | "kovan" | "goerli" | "arbitrum"

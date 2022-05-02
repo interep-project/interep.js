@@ -1,5 +1,5 @@
 import { OAuthProvider, ReputationLevel } from "@interep/reputation"
-import { OffchainAPI } from "../src"
+import { API } from "../src"
 import request from "../src/request"
 
 jest.mock("../src/request", () => ({
@@ -9,30 +9,32 @@ jest.mock("../src/request", () => ({
 
 const requestMocked = request as jest.MockedFunction<typeof request>
 
-describe("Interep offchain API", () => {
-    let api: OffchainAPI
+describe("Interep API", () => {
+    let api: API
 
     describe("API class", () => {
         it("Should return an api object", () => {
-            api = new OffchainAPI()
-            const productionAPI = new OffchainAPI("production")
-            const developmentAPI = new OffchainAPI("development")
+            api = new API()
+            const localAPI = new API("local")
+            const kovanAPI = new API("kovan")
+            const arbitrumAPI = new API("arbitrum")
 
-            expect(api.url).toBe("https://kovan.interep.link/api/v1")
-            expect(productionAPI.url).toBe("https://interep.link/api/v1")
-            expect(developmentAPI.url).toBe("http://localhost:3000/api/v1")
+            expect(api.url).toBe("https://goerli.interep.link/api/v1")
+            expect(localAPI.url).toBe("http://localhost:3000/api/v1")
+            expect(kovanAPI.url).toBe("https://kovan.interep.link/api/v1")
+            expect(arbitrumAPI.url).toBe("https://app.interep.link/api/v1")
         })
 
-        it("Should throw an error if the environment is not a string", () => {
-            const fun = () => new OffchainAPI(1 as any)
+        it("Should throw an error if the network is not a string", () => {
+            const fun = () => new API(1 as any)
 
-            expect(fun).toThrow("Parameter 'environment' is not a string")
+            expect(fun).toThrow("Parameter 'network' is not a string")
         })
 
-        it("Should throw an error if the environment is not supported", () => {
-            const fun = () => new OffchainAPI("testing" as any)
+        it("Should throw an error if the network is not supported", () => {
+            const fun = () => new API("testing" as any)
 
-            expect(fun).toThrow("Environment 'testing' is not supported")
+            expect(fun).toThrow("Network 'testing' is not supported")
         })
     })
 

@@ -1,28 +1,19 @@
 import checkParameter from "./checkParameter"
-import { Environment } from "./types/config"
+import { Network } from "./types/config"
 
-export default function getURL(environment: Environment, onchain = false): string {
-    checkParameter(environment, "environment", "string")
-    checkParameter(onchain, "onchain", "boolean")
+export default function getURL(network: Network): string {
+    checkParameter(network, "network", "string")
 
-    if (!onchain) {
-        switch (environment) {
-            case "development":
-                return "http://localhost:3000/api/v1"
-            case "staging":
-                return "https://kovan.interep.link/api/v1"
-            case "production":
-                return "https://interep.link/api/v1"
-            default:
-                throw new TypeError(`Environment '${environment}' is not supported`)
-        }
-    } else {
-        /* istanbul ignore next */
-        switch (environment) {
-            case "staging":
-                return "https://api.thegraph.com/subgraphs/name/interep-project/interep-groups-kovan"
-            default:
-                throw new TypeError(`Environment '${environment}' is not supported`)
-        }
+    switch (network) {
+        case "local":
+            return "http://localhost:3000/api/v1"
+        case "kovan":
+            return "https://kovan.interep.link/api/v1"
+        case "goerli":
+            return "https://goerli.interep.link/api/v1"
+        case "arbitrum":
+            return "https://app.interep.link/api/v1"
+        default:
+            throw new TypeError(`Network '${network}' is not supported`)
     }
 }
