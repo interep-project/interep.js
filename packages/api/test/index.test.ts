@@ -17,12 +17,12 @@ describe("Interep API", () => {
             api = new API()
             const localAPI = new API("local")
             const kovanAPI = new API("kovan")
-            const arbitrumAPI = new API("arbitrum")
+            const goerliAPI = new API("goerli")
 
-            expect(api.url).toBe("https://goerli.interep.link/api/v1")
+            expect(api.url).toBe("https://app.interep.link/api/v1")
             expect(localAPI.url).toBe("http://localhost:3000/api/v1")
             expect(kovanAPI.url).toBe("https://kovan.interep.link/api/v1")
-            expect(arbitrumAPI.url).toBe("https://app.interep.link/api/v1")
+            expect(goerliAPI.url).toBe("https://goerli.interep.link/api/v1")
         })
 
         it("Should throw an error if the network is not a string", () => {

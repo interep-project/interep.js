@@ -20,7 +20,7 @@ import {
 export default class API {
     url: string
 
-    constructor(network: Network = "goerli") {
+    constructor(network: Network = "arbitrum") {
         this.url = getURL(network)
     }
 
