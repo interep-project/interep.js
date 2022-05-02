@@ -202,12 +202,10 @@ const proof = await api.getMerkleTreeProof({
 \# **api.getMerkleTreeLeaves**(parameters: _GetMerkleTreeLeavesRequest_): _Promise<string[]>_
 
 ```typescript
-const leaves = await api.getMerkleTreeLeaves(
-    {
-        root: "1212121...",
-        limit: 10
-    }
-)
+const leaves = await api.getMerkleTreeLeaves({
+    root: "1212121...",
+    limit: 10
+})
 ```
 
 > API: [/api/v1/trees/:root](https://docs.interep.link/api#apiv1treesroot)
