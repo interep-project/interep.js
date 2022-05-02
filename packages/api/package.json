@@ -1,7 +1,7 @@
 {
     "name": "@interep/api",
     "version": "0.7.0",
-    "description": "A JS library to wrap the APIs from the Interep reputation service and subgraph.",
+    "description": "A JS library to wrap the APIs from the Interep reputation service.",
     "iife": "dist/index.js",
     "unpkg": "dist/index.min.js",
     "jsdelivr": "dist/index.min.js",

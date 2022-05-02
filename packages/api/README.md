@@ -2,7 +2,7 @@
     <h1 align="center">
         Interep API
     </h1>
-    <p align="center">A JS library to wrap the APIs from the Interep reputation service and subgraph.</p>
+    <p align="center">A JS library to wrap the APIs from the Interep reputation service.</p>
 </p>
 
 <p align="center">
@@ -45,7 +45,7 @@
     </h4>
 </div>
 
-Interep provides [HTTP endpoints](https://docs.interep.link/api#reputation-service) to interact with our reputation service and [HTTP/WS endpoints](https://docs.interep.link/api#subgraph) to access onchain data with our subgraph. This library allows you to use these APIs in a simple way.
+Interep provides [HTTP endpoints](https://docs.interep.link/api#reputation-service) to interact with the reputation service. This library allows you to use those APIs with a simple JavaScript library.
 
 ---
 
@@ -83,18 +83,20 @@ or [JSDelivr](https://www.jsdelivr.com/):
 
 ## 📜 Usage
 
-### Offchain APIs
-
-\# **new OffchainAPI**(environment: _Environment_): _OffchainAPI_
+\# **new API**(network: _Network_): _API_
 
 ```typescript
-import { OffchainAPI } from "@interep/api"
+import { API } from "@interep/api"
 
-const api = new OffchainAPI()
-const devApi = new OffchainAPI("development")
+const api = new API()
+const goerliApi = new API("goerli")
+const kovanApi = new API("kovan")
+const localApi = new API("local")
 
-console.log(api.url) // "https://kovan.interep.link/api"
-console.log(devApi.url) // "http://localhost:3000/api"
+console.log(api.url) // "https://app.interep.link/api/v1"
+console.log(goerliApi.url) // "https://goerli.interep.link/api/v1"
+console.log(kovanApi.url) // "https://kovan.interep.link/api/v1"
+console.log(localApi.url) // "http://localhost:3000/api/v1"
 ```
 
 \# **api.getProviders**(): _Promise<string[]>_
@@ -113,7 +115,7 @@ const groups = await api.getGroups()
 
 > API: [api/v1/groups](https://docs.interep.link/api#apiv1groups)
 
-\# **api.getGroup**(parameters: _Offchain.GetGroupRequest_): _Promise<any\>_
+\# **api.getGroup**(parameters: _GetGroupRequest_): _Promise<any\>_
 
 ```typescript
 const group = await api.getGroup({
@@ -124,7 +126,7 @@ const group = await api.getGroup({
 
 > API: [/api/v1/groups/:provider/:name](https://docs.interep.link/api#apiv1groupsprovidername)
 
-\# **api.getGroupMembers**(parameters: _Offchain.GetGroupMembersRequest_): _Promise<string[]>_
+\# **api.getGroupMembers**(parameters: _GetGroupMembersRequest_): _Promise<string[]>_
 
 ```typescript
 const members = await api.getGroupMembers({
@@ -137,7 +139,7 @@ const members = await api.getGroupMembers({
 
 > API: [/api/v1/groups/:provider/:name/members](https://docs.interep.link/api#apiv1groupsprovidernamememberslimit0offset0)
 
-\# **api.hasMember**(parameters: _Offchain.HasMemberRequest_): _Promise<boolean\>_
+\# **api.hasMember**(parameters: _HasMemberRequest_): _Promise<boolean\>_
 
 ```typescript
 // For any provider group.
@@ -160,7 +162,7 @@ const hasMember = await api.hasMember({
 
 > API (method: get): [/api/v1/groups/:provider/:name/:member](https://docs.interep.link/api#apiv1groupsprovidernamemember)
 
-\# **api.addMember**(parameters: _Offchain.AddMemberRequest_): _Promise<boolean\>_
+\# **api.addMember**(parameters: _AddMemberRequest_): _Promise<boolean\>_
 
 ```typescript
 // For Web2 providers.
@@ -185,7 +187,7 @@ await api.addMember({
 
 > API (method: post): [/api/v1/groups/:provider/:name/:member](https://docs.interep.link/api#apiv1groupsprovidernamemember)
 
-\# **api.getMerkleTreeProof**(parameters: _Offchain.GetMerkleTreeProofRequest_): _Promise<any\>_
+\# **api.getMerkleTreeProof**(parameters: _GetMerkleTreeProofRequest_): _Promise<any\>_
 
 ```typescript
 const proof = await api.getMerkleTreeProof({
@@ -197,7 +199,7 @@ const proof = await api.getMerkleTreeProof({
 
 > API: [/api/v1/groups/:provider/:name/:member/proof](https://docs.interep.link/api#apiv1groupsprovidernamememberproof)
 
-\# **api.getMerkleTreeLeaves**(parameters: _Offchain.GetMerkleTreeLeavesRequest_): _Promise<string[]>_
+\# **api.getMerkleTreeLeaves**(parameters: _GetMerkleTreeLeavesRequest_): _Promise<string[]>_
 
 ```typescript
 const leaves = await api.getMerkleTreeLeaves(
@@ -210,7 +212,7 @@ const leaves = await api.getMerkleTreeLeaves(
 
 > API: [/api/v1/trees/:root](https://docs.interep.link/api#apiv1treesroot)
 
-\# **api.hasMerkleTreeLeaf**(parameters: _Offchain.HasMerkleTreeLeafRequest_): _Promise<boolean\>_
+\# **api.hasMerkleTreeLeaf**(parameters: _HasMerkleTreeLeafRequest_): _Promise<boolean\>_
 
 ```typescript
 const hasMerkleTreeLeaf = await api.hasMerkleTreeLeaf({
@@ -229,7 +231,7 @@ const rootBatches = await api.getMerkleTreeRootBatches()
 
 > API: [/api/v1/batches](https://docs.interep.link/api#apiv1batches)
 
-\# **api.getMerkleTreeRootBatch**(parameters: _Offchain.GetMerkleTreeRootBatchRequest_): _Promise<any\>_
+\# **api.getMerkleTreeRootBatch**(parameters: _GetMerkleTreeRootBatchRequest_): _Promise<any\>_
 
 ```typescript
 const rootBatch = await api.getMerkleTreeRootBatch({
@@ -238,61 +240,3 @@ const rootBatch = await api.getMerkleTreeRootBatch({
 ```
 
 > API: [/api/v1/batches/:root](https://docs.interep.link/api#apiv1batchesroot)
-
-### Onchain APIs
-
-\# **new OnchainAPI**(): _OnchainAPI_
-
-```typescript
-import { OnchainAPI } from "@interep/api"
-
-const api = new OnchainAPI()
-
-console.log(api.url) // "https://api.thegraph.com/subgraphs/name/interep-project/interep-groups-kovan"
-```
-
-\# **api.getGroups**(): _Promise<any[]>_
-
-```typescript
-const groups = await api.getGroups()
-```
-
-> Subgraph entity: [OnchainGroup](https://docs.interep.link/api#onchaingroup)
-
-\# **api.getGroup**(parameters: _Onchain.GetGroupRequest_): _Promise<any\>_
-
-```typescript
-const group = await api.getGroup({
-    id: "1"
-})
-```
-
-> Subgraph entity: [OnchainGroup](https://docs.interep.link/api#onchaingroup)
-
-\# **api.getGroupMembers**(parameters: _Onchain.GetGroupMembersRequest_): _Promise<any[]>_
-
-```typescript
-const members = await api.getGroupMembers({
-    groupId: "1"
-})
-```
-
-> Subgraph entity: [Member](https://docs.interep.link/api#member)
-
-\# **api.getOffchainGroups**(): _Promise<any[]>_
-
-```typescript
-const groups = await api.getOffchainGroups()
-```
-
-> Subgraph entity: [OffchainGroup](https://docs.interep.link/api#offchaingroup)
-
-\# **api.getOffchainGroup**(parameters: _Onchain.GetOffchainGroupRequest_): _Promise<any[]>_
-
-```typescript
-const group = await api.getOffchainGroup({
-    id: "1"
-})
-```
-
-> Subgraph entity: [OffchainGroup](https://docs.interep.link/api#offchaingroup)
