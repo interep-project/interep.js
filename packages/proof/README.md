@@ -64,7 +64,7 @@ yarn add @interep/proof
 
 ## 📜 Usage
 
-\# **createProof**(identity: _ZKIdentity_, groupId: _GroupId_, externalNullifier: _BigNumber_, signal: _string_, zkFiles: _zkFiles_): _InterepProof_
+\# **createProof**(identity: _ZKIdentity_, group: _Group_, externalNullifier: _BigNumber_, signal: _string_, zkFiles: _zkFiles_): _InterepProof_
 
 ```typescript
 import createIdentity from "@interep/identity"
@@ -76,9 +76,9 @@ const ethereumProvider = (await detectEthereumProvider()) as any
 const provider = new ethers.providers.Web3Provider(ethereumProvider)
 const signer = provider.getSigner()
 
-const identity = await createIdentity((message) => signer.signMessage(message), "<group-id>") // or <group-provider> for offchain groups.
+const identity = await createIdentity((message) => signer.signMessage(message), "github")
 
-const groupId = BigInt(formatBytes32String("<group-id>")) // or { provider: "<group-provider>", name: "<group-name>" } for offchain groups.
+const groupId = { provider: "github", name: "gold" }
 const externalNullifier = 1
 const signal = "Hello World"
 const zkFiles = {
