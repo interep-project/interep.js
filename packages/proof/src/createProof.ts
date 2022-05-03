@@ -1,65 +1,62 @@
-import { OffchainAPI, OnchainAPI } from "@interep/api"
+import { API, Network } from "@interep/api"
 import type { ZkIdentity } from "@zk-kit/identity"
-import { generateMerkleProof, Semaphore } from "@zk-kit/protocols"
-import createOffchainGroupId from "./createOffchainGroupId"
+import { IncrementalMerkleTree } from "@zk-kit/incremental-merkle-tree"
+import { Semaphore } from "@zk-kit/protocols"
+import { poseidon } from "circomlibjs"
 import checkParameter from "./checkParameter"
-import createOffchainMerkleTree from "./createOffchainMerkleTree"
-import { BigNumber, GroupId, InterepProof, ZKFiles } from "./types"
+import createGroupId from "./createGroupId"
+import { BigNumber, Group, InterepProof, ZKFiles } from "./types"
 
 /**
  * Creates a Merkle proof using the Interep APIs and generates a Semaphore proof
  * to be used in the Interep contract.
  * @param identity The Semaphore identity.
- * @param groupId The group id parameters (id or provider/name).
+ * @param group The group id parameters (id or provider/name).
  * @param externalNullifier The external nullifier.
  * @param signal The Semaphore signal.
  * @param zkFiles The zero-knowledge files (SnarkJS outputs).
+ * @param network The Interep network.
  * @returns The Solidity parameters for the 'verifyProof' onchain function.
  */
 export default async function createProof(
     identity: ZkIdentity,
-    groupId: GroupId,
+    group: Group,
     externalNullifier: BigNumber,
     signal: string,
-    zkFiles: ZKFiles
+    zkFiles: ZKFiles,
+    network?: Network
 ): Promise<InterepProof> {
     checkParameter(identity, "identity", "object")
-    checkParameter(groupId, "groupId", ["number", "bigint", "string", "object"])
+    checkParameter(group, "group", "object")
 
     const identityCommitment = identity.genIdentityCommitment().toString()
 
-    let merkleProof: any
+    const { provider, name } = group as any
 
-    if (typeof groupId === "object") {
-        const { provider, name } = groupId as any
+    checkParameter(name, "group.name", "string")
+    checkParameter(provider, "group.provider", "string")
 
-        checkParameter(name, "groupId.name", "string")
-        checkParameter(provider, "groupId.provider", "string")
+    const api = new API(network)
+    const { depth, onchainRoot } = await api.getGroup({ provider, name })
+    const members = await api.getGroupMembers({ provider, name })
 
-        const api = new OffchainAPI()
-        const { depth } = await api.getGroup({ provider, name })
-        const members = await api.getGroupMembers({ provider, name })
-
-        groupId = createOffchainGroupId(provider, name).toString()
-
-        const tree = await createOffchainMerkleTree(groupId, depth, members)
-        const leafIndex = tree.leaves.indexOf(BigInt(identityCommitment))
-
-        if (leafIndex === -1) {
-            throw new Error("Identity integrity is not yet verifiable")
-        }
-
-        merkleProof = tree.createProof(leafIndex)
-    } else {
-        groupId = groupId.toString()
-
-        const api = new OnchainAPI()
-        const { depth } = await api.getGroup({ id: groupId })
-        const members = await api.getGroupMembers({ groupId })
-        const identityCommitments = members.map((member: any) => member.identityCommitment)
-
-        merkleProof = generateMerkleProof(depth, BigInt(0), identityCommitments, identityCommitment)
+    if (!onchainRoot) {
+        throw new Error("Group has no Merkle tree root onchain")
     }
+
+    const tree = new IncrementalMerkleTree(poseidon, depth, BigInt(0), 2)
+
+    for (let i = 0; i < members.length && tree.root !== onchainRoot; i += 1) {
+        tree.insert(BigInt(members[i]))
+    }
+
+    const leafIndex = tree.leaves.indexOf(BigInt(identityCommitment))
+
+    if (leafIndex === -1) {
+        throw new Error("Semaphore identity is not yet verifiable onchain")
+    }
+
+    const merkleProof = tree.createProof(leafIndex)
 
     checkParameter(externalNullifier, "externalNullifier", ["number", "bigint", "string"])
     checkParameter(signal, "signal", "string")
@@ -77,6 +74,8 @@ export default async function createProof(
 
     const { publicSignals, proof } = await Semaphore.genProof(witness, zkFiles.wasmFilePath, zkFiles.zkeyFilePath)
     const solidityProof = Semaphore.packToSolidityProof(proof)
+
+    const groupId = createGroupId(provider, name).toString()
 
     return { groupId, signal, publicSignals, proof, solidityProof }
 }

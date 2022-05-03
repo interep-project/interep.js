@@ -1,5 +1,5 @@
 import createProof from "./createProof"
-import createOffchainGroupId from "./createOffchainGroupId"
+import createGroupId from "./createGroupId"
 
 export default createProof
-export { createOffchainGroupId }
+export { createGroupId as createOffchainGroupId }
