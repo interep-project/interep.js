@@ -1,4 +1,4 @@
-import { ZkIdentity } from "@zk-kit/identity"
+import { Identity } from "@semaphore-protocol/identity"
 import createIdentity from "../src"
 
 describe("Interep identity", () => {
@@ -26,7 +26,7 @@ describe("Interep identity", () => {
 
             const expectedValue = await createIdentity(sign, web2Provider)
 
-            expect(expectedValue).toBeInstanceOf(ZkIdentity)
+            expect(expectedValue).toBeInstanceOf(Identity)
         })
 
         it("Should create a Semaphore identity with a nonce", async () => {
@@ -34,7 +34,7 @@ describe("Interep identity", () => {
 
             const expectedValue = await createIdentity(sign, web2Provider, 1)
 
-            expect(expectedValue).toBeInstanceOf(ZkIdentity)
+            expect(expectedValue).toBeInstanceOf(Identity)
         })
     })
 })

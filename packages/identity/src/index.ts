@@ -1,4 +1,4 @@
-import { ZkIdentity, Strategy } from "@zk-kit/identity"
+import { Identity } from "@semaphore-protocol/identity"
 import checkParameter from "./checkParameter"
 
 /**
@@ -13,7 +13,7 @@ export default async function createIdentity(
     sign: (message: string) => Promise<string>,
     provider: string,
     nonce = 0
-): Promise<ZkIdentity> {
+): Promise<Identity> {
     checkParameter(sign, "sign", "function")
     checkParameter(provider, "provider", "string")
     checkParameter(nonce, "nonce", "number")
@@ -22,5 +22,5 @@ export default async function createIdentity(
         `Sign this message to generate your ${provider} Semaphore identity with key nonce: ${nonce}.`
     )
 
-    return new ZkIdentity(Strategy.MESSAGE, message)
+    return new Identity(message)
 }

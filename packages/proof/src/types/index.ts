@@ -1,13 +1,8 @@
-import { Proof, SemaphorePublicSignals, SemaphoreSolidityProof } from "@zk-kit/protocols"
+import { Proof, PublicSignals, SolidityProof } from "@semaphore-protocol/proof"
 
 export type BigNumber = number | bigint | string
 
-export type Group = {
-    provider?: string
-    name?: string
-}
-
-export type ZKFiles = {
+export type SnarkArtifacts = {
     wasmFilePath: string
     zkeyFilePath: string
 }
@@ -15,7 +10,7 @@ export type ZKFiles = {
 export type InterepProof = {
     groupId: string
     signal: string
-    publicSignals: SemaphorePublicSignals
+    publicSignals: PublicSignals
     proof: Proof
-    solidityProof: SemaphoreSolidityProof
+    solidityProof: SolidityProof
 }

@@ -38,9 +38,8 @@
         "@ethersproject/solidity": "^5.5.0",
         "@ethersproject/strings": "^5.5.0",
         "@interep/api": "^0.7.0",
-        "@zk-kit/identity": "^1.4.1",
-        "@zk-kit/incremental-merkle-tree": "^0.4.3",
-        "@zk-kit/protocols": "^1.11.0",
-        "circomlibjs": "0.0.8"
+        "@semaphore-protocol/group": "2.0.0",
+        "@semaphore-protocol/identity": "2.0.0",
+        "@semaphore-protocol/proof": "2.2.0"
     }
 }

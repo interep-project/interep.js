@@ -1,81 +1,74 @@
-import { API, Network } from "@interep/api"
-import type { ZkIdentity } from "@zk-kit/identity"
-import { IncrementalMerkleTree } from "@zk-kit/incremental-merkle-tree"
-import { Semaphore } from "@zk-kit/protocols"
-import { poseidon } from "circomlibjs"
+import { API, Network, Provider } from "@interep/api"
+import { Group } from "@semaphore-protocol/group"
+import type { Identity } from "@semaphore-protocol/identity"
+import { generateProof, packToSolidityProof } from "@semaphore-protocol/proof"
 import checkParameter from "./checkParameter"
 import createGroupId from "./createGroupId"
-import { BigNumber, Group, InterepProof, ZKFiles } from "./types"
+import { BigNumber, InterepProof, SnarkArtifacts } from "./types"
 
 /**
  * Creates a Merkle proof using the Interep APIs and generates a Semaphore proof
  * to be used in the Interep contract.
  * @param identity The Semaphore identity.
- * @param group The group id parameters (id or provider/name).
+ * @param groupProvider The group provider.
+ * @param groupName The group name.
  * @param externalNullifier The external nullifier.
  * @param signal The Semaphore signal.
- * @param zkFiles The zero-knowledge files (SnarkJS outputs).
+ * @param snarkArtifacts The Snark artifacts.
  * @param network The Interep network.
  * @returns The Solidity parameters for the 'verifyProof' onchain function.
  */
 export default async function createProof(
-    identity: ZkIdentity,
-    group: Group,
+    identity: Identity,
+    groupProvider: string,
+    groupName: string,
     externalNullifier: BigNumber,
     signal: string,
-    zkFiles: ZKFiles,
+    snarkArtifacts: SnarkArtifacts,
     network?: Network
 ): Promise<InterepProof> {
     checkParameter(identity, "identity", "object")
-    checkParameter(group, "group", "object")
+    checkParameter(groupProvider, "groupProvider", "string")
+    checkParameter(groupName, "groupName", "string")
 
-    const identityCommitment = identity.genIdentityCommitment().toString()
-
-    const { provider, name } = group as any
-
-    checkParameter(name, "group.name", "string")
-    checkParameter(provider, "group.provider", "string")
+    const identityCommitment = identity.generateCommitment()
 
     const api = new API(network)
-    const { depth, onchainRoot } = await api.getGroup({ provider, name })
-    const members = await api.getGroupMembers({ provider, name })
+    const { depth, onchainRoot } = await api.getGroup({ provider: groupProvider as Provider, name: groupName })
+    const members = await api.getGroupMembers({ provider: groupProvider as Provider, name: groupName })
 
     if (!onchainRoot) {
-        throw new Error("Group has no Merkle tree root onchain")
+        throw new Error("The group has no Merkle tree root onchain")
     }
 
-    const tree = new IncrementalMerkleTree(poseidon, depth, BigInt(0), 2)
+    const group = new Group(depth)
 
-    for (let i = 0; i < members.length && tree.root !== onchainRoot; i += 1) {
-        tree.insert(BigInt(members[i]))
+    group.addMembers(members)
+
+    const memberIndex = group.indexOf(identityCommitment)
+
+    if (memberIndex === -1) {
+        throw new Error("The semaphore identity is not yet verifiable onchain")
     }
 
-    const leafIndex = tree.leaves.indexOf(BigInt(identityCommitment))
-
-    if (leafIndex === -1) {
-        throw new Error("Semaphore identity is not yet verifiable onchain")
-    }
-
-    const merkleProof = tree.createProof(leafIndex)
+    const merkleProof = group.generateProofOfMembership(memberIndex)
 
     checkParameter(externalNullifier, "externalNullifier", ["number", "bigint", "string"])
     checkParameter(signal, "signal", "string")
-    checkParameter(zkFiles, "zkFiles", "object")
-    checkParameter(zkFiles.wasmFilePath, "zkFiles.wasmFilePath", "string")
-    checkParameter(zkFiles.zkeyFilePath, "zkFiles.zkeyFilePath", "string")
+    checkParameter(snarkArtifacts, "snarkArtifacts", "object")
+    checkParameter(snarkArtifacts.wasmFilePath, "snarkArtifacts.wasmFilePath", "string")
+    checkParameter(snarkArtifacts.zkeyFilePath, "snarkArtifacts.zkeyFilePath", "string")
 
-    const witness = Semaphore.genWitness(
-        identity.getTrapdoor(),
-        identity.getNullifier(),
+    const { publicSignals, proof } = await generateProof(
+        identity,
         merkleProof,
         BigInt(externalNullifier),
-        signal
+        signal,
+        snarkArtifacts
     )
+    const solidityProof = packToSolidityProof(proof)
 
-    const { publicSignals, proof } = await Semaphore.genProof(witness, zkFiles.wasmFilePath, zkFiles.zkeyFilePath)
-    const solidityProof = Semaphore.packToSolidityProof(proof)
-
-    const groupId = createGroupId(provider, name).toString()
+    const groupId = createGroupId(groupProvider, groupName).toString()
 
     return { groupId, signal, publicSignals, proof, solidityProof }
 }

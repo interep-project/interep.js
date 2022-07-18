@@ -78,13 +78,14 @@ const signer = provider.getSigner()
 
 const identity = await createIdentity((message) => signer.signMessage(message), "Github")
 
-const groupId = { provider: "github", name: "gold" }
+const groupProvider = "github"
+const groupName = "gold"
 const externalNullifier = 1
 const signal = "Hello World"
-const zkFiles = {
+const snarkArtifacts = {
     wasmFilePath: "./semaphore.wasm",
     zkeyFilePath: "./semaphore_final.zkey"
 }
 
-const proof = await createProof(identity, groupId, externalNullifier, signal, zkFiles)
+const proof = await createProof(identity, groupProvider, groupName, externalNullifier, signal, snarkArtifacts)
 ```
