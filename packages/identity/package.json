@@ -1,6 +1,6 @@
 {
     "name": "@interep/identity",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "A simple JS function to create Semaphore identities.",
     "main": "dist/index.node.js",
     "exports": {
