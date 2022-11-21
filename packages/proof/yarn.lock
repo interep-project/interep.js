@@ -107,6 +107,13 @@
   dependencies:
     "@ethersproject/logger" "^5.6.0"
 
+"@ethersproject/bytes@^5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@ethersproject/bytes/-/bytes-5.7.0.tgz#a00f6ea8d7e7534d6d87f47188af1148d71f155d"
+  integrity sha512-nsbxwgFXWh9NyYWo+U8atvmMsSdKJprTcICAkvbBffT75qDocbuggBU0SJiVK2MuTrp0q+xvLkTnGMPK1+uA9A==
+  dependencies:
+    "@ethersproject/logger" "^5.7.0"
+
 "@ethersproject/constants@^5.0.4", "@ethersproject/constants@^5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/constants/-/constants-5.5.0.tgz#d2a2cd7d94bd1d58377d1d66c4f53c9be4d0a45e"
@@ -152,6 +159,11 @@
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/logger/-/logger-5.6.0.tgz#d7db1bfcc22fd2e4ab574cba0bb6ad779a9a3e7a"
   integrity sha512-BiBWllUROH9w+P21RzoxJKzqoqpkyM1pRnEKG69bulE9TSQD8SAIvTQqIMZmmCO8pUNkgLP1wndX1gKghSpBmg==
+
+"@ethersproject/logger@^5.7.0":
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/@ethersproject/logger/-/logger-5.7.0.tgz#6ce9ae168e74fecf287be17062b590852c311892"
+  integrity sha512-0odtFdXu/XHtjQXJYA3u9G0G8btm0ND5Cu8M7i5vhEcE8/HmF4Lbdqanwyv4uQTr2tx6b7fQRmgLrsnpQlmnig==
 
 "@ethersproject/networks@^5.5.0":
   version "5.5.0"
@@ -303,18 +315,18 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@semaphore-protocol/group@2.0.0", "@semaphore-protocol/group@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@semaphore-protocol/group/-/group-2.0.0.tgz#9e7bfad7ee04882bcf07f13437fb53c1053690db"
-  integrity sha512-WFe8QWz8m6kBUR3WKfeiVbKUqXZsdyOylA6O6AlrqqS8jC8D1BjV4ufz0sD4ZjkRVjRwmIppXjgdxw8OVtZrug==
+"@semaphore-protocol/group@2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@semaphore-protocol/group/-/group-2.6.1.tgz#6df225aa70604b5ae8900388bb032fdbd195f583"
+  integrity sha512-OgTZijyFBP8i+AIKNPNC2q6Ks98pSJXVSStHXrNPDkcOlCjNBt2beya/pJ0GvZCb+Cdj/bxunOoXnA7iaxXoug==
   dependencies:
-    "@zk-kit/incremental-merkle-tree" "0.4.3"
+    "@zk-kit/incremental-merkle-tree" "1.0.0"
     circomlibjs "0.0.8"
 
-"@semaphore-protocol/identity@2.0.0", "@semaphore-protocol/identity@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@semaphore-protocol/identity/-/identity-2.0.0.tgz#45d9dc98978217102e887d070b48cc125e2c3c42"
-  integrity sha512-S67x+7CBYWZVDvmfO3OX7H1M8s7ZGVjTH5ipaFsLbQsm/1AM31OurEY11wR2b8tDociMTOCjRtO9BsHvHU3O/A==
+"@semaphore-protocol/identity@2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@semaphore-protocol/identity/-/identity-2.6.1.tgz#49385c1004261ca2e192c43aa04005ce6ef82d83"
+  integrity sha512-pS3+p1Oer0P+S2AyRPrZcLqrWvelgVmweUuMC2hodRF5yEBUmLwXI/kez4qw8zOqwCXiAFpLTevaGlpp2EhsWg==
   dependencies:
     "@ethersproject/bignumber" "^5.5.0"
     "@ethersproject/random" "^5.5.1"
@@ -322,16 +334,14 @@
     "@ethersproject/strings" "^5.6.1"
     circomlibjs "0.0.8"
 
-"@semaphore-protocol/proof@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@semaphore-protocol/proof/-/proof-2.2.0.tgz#e24adbbdd6cf9b3d7d77fcbdd7bfd6a5758d5289"
-  integrity sha512-sLTBpbW8MVI0/+P2wWas2fe62xQPTcFskG3oU81nZpQFIMRC4cqu7InwRqM6xjW3gOryibsvSlGhQ9x9VV4kyA==
+"@semaphore-protocol/proof@2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@semaphore-protocol/proof/-/proof-2.6.1.tgz#4632fa8c5ec06ae97a823ebea6913c39f651b317"
+  integrity sha512-Bsz7OlytL3avgOqBBVMjwPF4G1IDmaNOJbFc1ewmuqRmYI/9Ao5l9GB6FzTKuBAkKGueIlptn3hPiZtKzAKfOg==
   dependencies:
-    "@ethersproject/bytes" "^5.5.0"
+    "@ethersproject/bytes" "^5.7.0"
     "@ethersproject/solidity" "^5.5.0"
     "@ethersproject/strings" "^5.5.0"
-    "@semaphore-protocol/group" "2.0.0"
-    "@semaphore-protocol/identity" "2.0.0"
     "@zk-kit/incremental-merkle-tree" "0.4.3"
     circomlibjs "0.0.8"
     snarkjs "^0.4.13"
@@ -399,6 +409,11 @@
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@zk-kit/incremental-merkle-tree/-/incremental-merkle-tree-0.4.3.tgz#197f72102d35dd9c546a6a432896d6d6f6de05f4"
   integrity sha512-2qHfrJXtPx8/UmF0wFAUr4VqCLr3J/P859fk/e3fwKLUnf3baeIUAO6inY4wrh0NGy4bzpKUWYjDph0yTbPz6A==
+
+"@zk-kit/incremental-merkle-tree@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@zk-kit/incremental-merkle-tree/-/incremental-merkle-tree-1.0.0.tgz#5a9ec2a2ebcb00972035b175c58906651ef6aa39"
+  integrity sha512-2iRLZfHnZ6wKE+oZN2CnpkKYCE5f5dpv6YRIwLDCz0xwJZrIMQ81AamFBdxPesQSYMMP0GkC0iv1rm6gxAL2Ow==
 
 accepts@~1.3.7:
   version "1.3.7"
@@ -1398,9 +1413,9 @@ find-up@^5.0.0:
     path-exists "^4.0.0"
 
 follow-redirects@^1.14.4:
-  version "1.15.1"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"
-  integrity sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
+  integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
 
 foreach@^2.0.5:
   version "2.0.5"
