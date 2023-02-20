@@ -1,4 +1,4 @@
-import { calculateReputation, getOAuthProviders, getReputationLevels, OAuthProvider } from "../src"
+import { calculateReputation, getOAuthProviders, getReputationLevels, OAuthProvider, ReputationLevel } from "../src"
 
 describe("Interep reputation criteria", () => {
     describe("Get all providers", () => {
@@ -11,9 +11,9 @@ describe("Interep reputation criteria", () => {
 
     describe("Get reputation levels", () => {
         it("Should return all the existing reputation levels", () => {
-            const expectedvalue = getReputationLevels()
+            const expectedValue = getReputationLevels()
 
-            expect(expectedvalue).toStrictEqual(["gold", "silver", "bronze", "unrated"])
+            expect(expectedValue).toStrictEqual(["commoner", "up-and-coming", "established", "star", "icon"])
         })
     })
 
@@ -21,88 +21,172 @@ describe("Interep reputation criteria", () => {
         it("Should throw an error if the provider is not supported", () => {
             const fun = () => calculateReputation("facebook" as any, { posts: 100 } as any)
 
-            expect(fun).toThrow("Provider 'facebook' is not supported")
+            expect(fun).toThrowErrorMatchingInlineSnapshot(`"Provider 'facebook' is not supported"`)
         })
 
-        it("Should throw an error if a parameter is not supported", () => {
-            const fun = () => calculateReputation(OAuthProvider.TWITTER, { posts: 100 } as any)
+        describe("Twitter", () => {
+            it("Should throw an error if a parameter is not supported", () => {
+                const fun = () => calculateReputation(OAuthProvider.TWITTER, { posts: 100 } as any)
 
-            expect(fun).toThrow("Parameter 'posts' is not supported")
-        })
-
-        it("Should throw an error if a parameter type is not correct", () => {
-            const fun = () => calculateReputation(OAuthProvider.TWITTER, { followers: true } as any)
-
-            expect(fun).toThrow("Parameter 'followers' is not a number")
-        })
-
-        it("Should return a 'gold' Twitter reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.TWITTER, { verifiedProfile: true })
-
-            expect(expectedValue).toBe("gold")
-        })
-
-        it("Should return a 'gold' Github reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.GITHUB, { followers: 600 })
-
-            expect(expectedValue).toBe("gold")
-        })
-
-        it("Should return a 'gold' Reddit reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { karma: 11000 })
-
-            expect(expectedValue).toBe("gold")
-        })
-
-        it("Should return a 'silver' Twitter reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.TWITTER, { botometerOverallScore: 1.4 })
-
-            expect(expectedValue).toBe("silver")
-        })
-
-        it("Should return a 'silver' Github reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.GITHUB, { receivedStars: 90 })
-
-            expect(expectedValue).toBe("silver")
-        })
-
-        it("Should return a 'silver' Reddit reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { linkedIdentities: 3 })
-
-            expect(expectedValue).toBe("silver")
-        })
-
-        it("Should return a 'bronze' Twitter reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.TWITTER, { followers: 600 })
-
-            expect(expectedValue).toBe("bronze")
-        })
-
-        it("Should return a 'bronze' Github reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.GITHUB, { proPlan: true })
-
-            expect(expectedValue).toBe("bronze")
-        })
-
-        it("Should return a 'bronze' Reddit reputation", () => {
-            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { coins: 600 })
-
-            expect(expectedValue).toBe("bronze")
-        })
-
-        it("Should fail if no parameter meet any reputation criteria", () => {
-            const expectedValue = calculateReputation(OAuthProvider.REDDIT, { coins: 0 })
-
-            expect(expectedValue).toBe("unrated")
-        })
-
-        it("Should return 'gold' if at least one parameter matches the gold reputation rules", () => {
-            const expectedValue = calculateReputation(OAuthProvider.TWITTER, {
-                botometerOverallScore: 2,
-                followers: 8000
+                expect(fun).toThrowErrorMatchingInlineSnapshot(
+                    `"At path: followers -- Expected a number, but received: undefined"`
+                )
             })
 
-            expect(expectedValue).toBe("gold")
+            it("Should throw an error if a parameter type is not correct", () => {
+                const fun = () => calculateReputation(OAuthProvider.TWITTER, { followers: true } as any)
+
+                expect(fun).toThrowErrorMatchingInlineSnapshot(
+                    `"At path: followers -- Expected a number, but received: true"`
+                )
+            })
+
+            it.each([
+                { followers: 1, verifiedProfile: false, botometerOverallScore: 0.7, level: ReputationLevel.Commoner },
+                {
+                    followers: 200,
+                    verifiedProfile: false,
+                    botometerOverallScore: 0.7,
+                    level: ReputationLevel.UpAndComing
+                },
+                {
+                    followers: 2_000,
+                    verifiedProfile: false,
+                    botometerOverallScore: 0.7,
+                    level: ReputationLevel.Established
+                },
+                { followers: 20_000, verifiedProfile: false, botometerOverallScore: 0.7, level: ReputationLevel.Star },
+                { followers: 200_000, verifiedProfile: false, botometerOverallScore: 0.7, level: ReputationLevel.Icon }
+            ])(
+                "should return a(n) $level Twitter reputation",
+                ({ followers, verifiedProfile, botometerOverallScore, level }) => {
+                    expect(
+                        calculateReputation(OAuthProvider.TWITTER, {
+                            followers,
+                            verifiedProfile,
+                            botometerOverallScore
+                        })
+                    ).toBe(level)
+                }
+            )
+
+            it("verified accounts have at least established reputation", () => {
+                expect(
+                    calculateReputation(OAuthProvider.TWITTER, {
+                        followers: 1,
+                        verifiedProfile: true,
+                        botometerOverallScore: 0.7
+                    })
+                ).toBe(ReputationLevel.Established)
+            })
+
+            it("throws if botometerOverallScore (cap universal) is higher than 0.95", () => {
+                const fun = () =>
+                    calculateReputation(OAuthProvider.TWITTER, {
+                        followers: 1,
+                        verifiedProfile: false,
+                        botometerOverallScore: 0.96
+                    })
+
+                expect(fun).toThrowErrorMatchingInlineSnapshot(`"You are a bot!"`)
+            })
+        })
+
+        describe("Github", () => {
+            it("Should throw an error if a parameter is not supported", () => {
+                const fun = () => calculateReputation(OAuthProvider.GITHUB, { posts: 100 } as any)
+
+                expect(fun).toThrowErrorMatchingInlineSnapshot(
+                    `"At path: receivedStars -- Expected a number, but received: undefined"`
+                )
+            })
+
+            it("Should throw an error if a parameter type is not correct", () => {
+                const fun = () => calculateReputation(OAuthProvider.GITHUB, { receivedStars: true } as any)
+
+                expect(fun).toThrowErrorMatchingInlineSnapshot(
+                    `"At path: receivedStars -- Expected a number, but received: true"`
+                )
+            })
+
+            it.each([
+                { receivedStars: 0, sponsorsCount: 0, sponsoringCount: 0, level: ReputationLevel.Commoner },
+                { receivedStars: 2, sponsorsCount: 0, sponsoringCount: 0, level: ReputationLevel.UpAndComing },
+                { receivedStars: 20, sponsorsCount: 0, sponsoringCount: 0, level: ReputationLevel.Established },
+                { receivedStars: 200, sponsorsCount: 0, sponsoringCount: 0, level: ReputationLevel.Star },
+                { receivedStars: 2_000, sponsorsCount: 0, sponsoringCount: 0, level: ReputationLevel.Icon }
+            ])(
+                "should return a(n) $level Github reputation",
+                ({ receivedStars, sponsorsCount, sponsoringCount, level }) => {
+                    expect(
+                        calculateReputation(OAuthProvider.GITHUB, {
+                            receivedStars,
+                            sponsorsCount,
+                            sponsoringCount
+                        })
+                    ).toBe(level)
+                }
+            )
+
+            it("sponsoring or being sponsored grants at least established reputation", () => {
+                expect(
+                    calculateReputation(OAuthProvider.GITHUB, {
+                        receivedStars: 0,
+                        sponsorsCount: 1,
+                        sponsoringCount: 0
+                    })
+                ).toBe(ReputationLevel.Established)
+
+                expect(
+                    calculateReputation(OAuthProvider.GITHUB, {
+                        receivedStars: 0,
+                        sponsorsCount: 0,
+                        sponsoringCount: 1
+                    })
+                ).toBe(ReputationLevel.Established)
+            })
+        })
+
+        describe("Reddit", () => {
+            it("Should throw an error if a parameter is not supported", () => {
+                const fun = () => calculateReputation(OAuthProvider.REDDIT, { posts: 100 } as any)
+
+                expect(fun).toThrowErrorMatchingInlineSnapshot(
+                    `"At path: totalKarma -- Expected a number, but received: undefined"`
+                )
+            })
+
+            it("Should throw an error if a parameter type is not correct", () => {
+                const fun = () => calculateReputation(OAuthProvider.REDDIT, { totalKarma: true } as any)
+
+                expect(fun).toThrowErrorMatchingInlineSnapshot(
+                    `"At path: totalKarma -- Expected a number, but received: true"`
+                )
+            })
+
+            it.each([
+                { totalKarma: 200, isGold: false, level: ReputationLevel.Commoner },
+                { totalKarma: 5_000, isGold: false, level: ReputationLevel.UpAndComing },
+                { totalKarma: 30_000, isGold: false, level: ReputationLevel.Established },
+                { totalKarma: 110_000, isGold: false, level: ReputationLevel.Star },
+                { totalKarma: 300_000, isGold: false, level: ReputationLevel.Icon }
+            ])("should return a(n) $level Reddit reputation", ({ totalKarma, isGold, level }) => {
+                expect(
+                    calculateReputation(OAuthProvider.REDDIT, {
+                        totalKarma,
+                        isGold
+                    })
+                ).toBe(level)
+            })
+
+            it("gold users have at least up-and-coming reputation", () => {
+                expect(
+                    calculateReputation(OAuthProvider.REDDIT, {
+                        totalKarma: 200,
+                        isGold: true
+                    })
+                ).toBe(ReputationLevel.UpAndComing)
+            })
         })
     })
 })

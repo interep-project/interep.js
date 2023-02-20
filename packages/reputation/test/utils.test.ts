@@ -1,4 +1,4 @@
-import getBin from "../src/utils"
+import getBin from "../src/criteria/utils"
 
 describe("getBin", () => {
     const bins: [number, number][] = [
