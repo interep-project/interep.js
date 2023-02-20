@@ -1,4 +1,4 @@
-import { OAuthProvider } from "./types/criteria"
+import { OAuthProvider } from "./types"
 
 /**
  * Returns all supported OAuth providers.

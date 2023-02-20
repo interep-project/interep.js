@@ -1,4 +1,4 @@
-import { ReputationLevel } from "./types/criteria"
+import { ReputationLevel } from "./types"
 
 /**
  * Returns all the reputation levels (gold, silver, bronze).
