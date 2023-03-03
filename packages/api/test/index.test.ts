@@ -181,7 +181,7 @@ describe("Interep API", () => {
 
             const expectedValue = await api.getMerkleTreeProof({
                 provider: OAuthProvider.TWITTER,
-                name: ReputationLevel.GOLD,
+                name: ReputationLevel.Star,
                 member: "23131231231"
             })
 

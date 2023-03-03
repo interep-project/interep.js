@@ -137,7 +137,7 @@ describe("Interep db", () => {
             const expectedValue1 = await OAuthAccount.create({
                 provider: OAuthProvider.TWITTER,
                 providerAccountId: "12321",
-                reputation: ReputationLevel.GOLD
+                reputation: ReputationLevel.Star
             })
             const expectedValue2 = await OAuthAccount.countDocuments()
 
